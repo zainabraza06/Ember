@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"span confirms the 1 % higher O₂ extinction threshold but does not specify material or microgravity conditions\"}",
+ "created": "2026-11-14T17:40:22",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-21236bd10e",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-9d6a0039-95ee-4adc-ba5f-9648a4648a5c",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 136,
+  "prompt_tokens": 681,
+  "total_tokens": 817
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span gives the 13.5% O2 minimum but does not specify the microgravity condition required by the claim\"}",
+ "created": "2026-11-14T17:43:11",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-b29b263d04",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-94d0fdaa-91e1-4f28-b512-66b0cde42ed6",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 125,
+  "prompt_tokens": 849,
+  "total_tokens": 974
+ }
+}

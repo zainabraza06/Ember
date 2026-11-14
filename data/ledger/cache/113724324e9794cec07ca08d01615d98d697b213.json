@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span states that increasing opposed-flow velocity leads to blowoff extinction, matching the claim\"}",
+ "created": "2026-11-14T17:35:11",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-db61f51eae",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-df0bae30-fa27-4f48-8afa-f860781ff5cd",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 72,
+  "prompt_tokens": 796,
+  "total_tokens": 868
+ }
+}

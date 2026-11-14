@@ -44,6 +44,7 @@ svg.map text{fill:var(--ink);font:11px system-ui,sans-serif}svg.map .ax{stroke:v
 #caption.on{display:flex;gap:12px;align-items:center;justify-content:space-between}#caption p{margin:0;max-width:78ch}
 .brief{max-width:780px;margin:0 auto}.brief ol{padding-left:1.2em}.brief li{margin:6px 0}.brief sup a{text-decoration:none}
 footer{max-width:1120px;margin:0 auto;padding:16px;color:var(--muted);font-size:.85rem}
+@media (max-width:640px){svg.map{min-width:640px}}
 @media (max-width:480px){main,header,#tabs{padding-left:12px;padding-right:12px}h1{font-size:1.2rem}}
 @media print{body{background:#fff;color:#000;font-size:10.5pt}nav,header,footer,#caption,.noprint,.skip{display:none!important}section[role=tabpanel]{display:none!important}
 #s-brief{display:block!important}.brief{max-width:none}.card{border:1px solid #999;background:#fff}a{color:#000}@page{size:A4;margin:14mm}}
@@ -56,9 +57,9 @@ footer{max-width:1120px;margin:0 auto;padding:16px;color:var(--muted);font-size:
 <div class="row noprint"><button id="storyBtn" class="primary" onclick="playStory()">Play the story (90 s)</button><button id="themeBtn" onclick="toggleTheme()" aria-label="Switch between dark and light theme">Light theme</button></div></header>
 <nav aria-label="Sections"><div id="tabs" role="tablist"></div></nav>
 <main id="main" tabindex="-1">
-<section id="s-map" role="tabpanel"></section><section id="s-inv" role="tabpanel"></section><section id="s-cmp" role="tabpanel"></section><section id="s-rank" role="tabpanel"></section>
-<section id="s-interp" role="tabpanel"></section><section id="s-ask" role="tabpanel"></section><section id="s-brief" role="tabpanel"></section><section id="s-mis" role="tabpanel"></section>
-<section id="s-grav" role="tabpanel"></section><section id="s-earth" role="tabpanel"></section><section id="s-about" role="tabpanel"></section>
+<section id="s-map" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-inv" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-cmp" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-rank" role="tabpanel"><div class="state" role="status">Loading…</div></section>
+<section id="s-interp" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-ask" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-brief" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-mis" role="tabpanel"><div class="state" role="status">Loading…</div></section>
+<section id="s-grav" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-earth" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-about" role="tabpanel"><div class="state" role="status">Loading…</div></section>
 </main>
 <footer>Ember explorer. Built from NASA PSI records, NASA technical reports and a reproducible pipeline. No model runs on this page; its text is quoted from NASA records, counted from the data, or taken from the claim ledger and labelled with its review status.</footer>
 <div id="caption" role="status" aria-live="polite"><p id="capText"></p><div class="row"><button onclick="storyPause()" id="pauseBtn">Pause</button><button onclick="stopStory()">Stop</button></div></div>
@@ -127,7 +128,7 @@ function renderMap(){
   <div class="row noprint" role="group" aria-label="Gravity level"><span class="small muted">Gravity:</span>
    ${[['0','0 g (microgravity)'],['1','1 g'],['0.165','0.165 g (Moon)'],['0.38','0.38 g (Mars)']].map(([g,l]) => `<button aria-pressed="${ST.grav===g}" onclick="ST.grav='${g}';renderMap()">${l} (${D.points.filter(p=>p.g===g).length})</button>`).join('')}</div>
   <p class="warn small" style="margin-top:8px"><b>No partial-gravity tests in PSI.</b> The official text says PSI holds no partial-gravity combustion data. At 0.165 g (Moon) and 0.38 g (Mars) the map shows only three oxygen-limit bars each, transcribed from one NASA report (NTRS 20130010991) and marked <b>outside PSI</b>; no lunar or Martian flame test can be drawn.</p>
-  <div class="map-wrap"><div>
+  <div class="map-wrap"><div><div class="scroll">
   <svg class="map" viewBox="0 0 ${MAP.W} ${MAP.H}" role="img" aria-label="Scatter of ${shown.length} tests by pressure and oxygen share, with the lunar base zone, spacesuit, Earth sea level and CFI-G maximum marked. Equivalent data is in the table on this tab.">
    <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="var(--muted)" stroke-width="1" opacity=".45"/></pattern></defs>
    ${xt.join('')}${yt.join('')}${fog}
@@ -139,7 +140,7 @@ function renderMap(){
    <g><circle cx="${mx(cmax.p)}" cy="${my(cmax.o)}" r="9" fill="none" stroke="var(--accent)" stroke-width="2"/><text x="${mx(cmax.p)+12}" y="${my(cmax.o)-8}">CFI-G maximum: ${(cmax.o*100).toFixed(0)}% O2</text></g>
    <text x="${MAP.L+8}" y="${MAP.T+MAP.PH-8}" class="mut">Hatched: no test here (${nfog} of ${(MAP.XMAX/20)*20} cells)</text>
    <text x="${MAP.L+MAP.PW/2}" y="${MAP.H-6}" text-anchor="middle">Total pressure (kPa; psi below)</text>
-  </svg>
+  </svg></div>
   <div class="leg noprint" role="group" aria-label="Outcome classes">${Object.entries(CLS).map(([k,[lab,col]]) => `<button aria-pressed="${!ST.hide.has(k)}" onclick="toggleCls('${k}')"><svg width="14" height="14" viewBox="-7 -7 14 14" aria-hidden="true" style="vertical-align:-2px">${mark(k,0,0).replace(/<(circle|rect|path)/,'<$1')}</svg> ${lab} (${counts[k]||0})</button>`).join('')}</div>
   </div><div id="zonePanel" class="card" aria-live="polite"><h3 style="margin-top:0">Lunar base / rover zone</h3><p class="muted">Select the shaded zone (click or press Enter on it) to see which tests fall inside, what is nearby, which conditions are untested and where the numbers come from.</p><button onclick="showZone()">Show the zone details</button></div></div>
   <details class="noprint"><summary>The same data as a table (first 60 tests shown)</summary><div class="scroll"><table><tr><th>test</th><th>oxygen %</th><th>pressure kPa</th><th>outcome</th></tr>${shown.slice(0,60).map(p => `<tr><td>${esc(p.id)}</td><td>${(p.o*100).toFixed(1)}</td><td>${p.p.toFixed(1)}</td><td>${esc(CLS[p.c][0])}</td></tr>`).join('')}</table></div></details>`;
@@ -248,7 +249,7 @@ function renderInterp(){
 const STOP = new Set('the a an of in at to and or for with was were is are by on as that this it its from be been than then which when what how does do did can could should would will not no into over under between about'.split(' '));
 const toks = s => (s.toLowerCase().match(/[a-z0-9.]+/g) || []).filter(t => t.length>1 && !STOP.has(t));
 const ALIAS = {moon:'lunar', martian:'mars', microgravity:'microgravity', weightless:'microgravity', extinguish:'extinction', extinguished:'extinction', 'o2':'oxygen'};
-function claimHtml(c){ const lab = c.review_label==='unreviewed' ? '<span class="tag unrev" title="Passed the span and number checks; no independent verifier ran and no person reviewed it">unreviewed</span>' : '<span class="tag ver">verified</span>';
+function claimHtml(c){ const lab = c.review_label==='unreviewed' ? '<span class="tag unrev" title="Passed the span and number checks; no independent verifier ran and no person reviewed it">unreviewed</span>' : '<span class="tag ver" title="Passed code checks against the report text and the second model check; no person has reviewed it">' + (c.review_label==='human-approved' ? 'human-approved' : 'auto-verified') + '</span>';
   return `<div class="card"><div class="row">${lab} <span class="tag">${esc(c.gravity_class)}</span> <span class="tag">${esc(c.evidence_type)}</span>${c.independent_sources>1 ? `<span class="tag">${c.independent_sources} independent sources</span>`:''}</div>
   <p style="margin:6px 0">${esc(c.statement)}</p>${c.span ? `<blockquote class="small muted" style="margin:6px 0">"${esc(c.span)}"</blockquote>` : '<p class="src">Quotation not shown (the source is not a US Government work).</p>'}
   <div class="src">${esc(c.citation)} | ${link(c.source_url,'NTRS record')} | claim ${esc(c.claim_id)}</div></div>`; }
@@ -264,7 +265,7 @@ function search(query){
 }
 function renderAsk(){
   const st = D.ledger_stats, n = D.claims.length;
-  $('#s-ask').innerHTML = `<h2>Ask the evidence</h2><p class="muted">Answers come only from claims in the evidence ledger: statements extracted from NASA reports, each checked by code against the report text (the quoted span must exist and its numbers must match). ${n} claims are available${st.verified_auto ? '' : ', all <b>unreviewed</b> (no independent verifier ran and no person has reviewed them)'}. If nothing relevant exists, this page says so instead of guessing.</p>
+  $('#s-ask').innerHTML = `<h2>Ask the evidence</h2><p class="muted">Answers come only from claims in the evidence ledger: statements extracted from NASA reports, each checked by code against the report text (the quoted span must exist and its numbers must match) and then by a second model. ${n} claims are shown, labelled <b>auto-verified</b> (passed both checks) or <b>unreviewed</b> (no second check); <b>no person has reviewed any of them yet</b>. If nothing relevant exists, this page says so instead of guessing.</p>
   <form class="row" onsubmit="runAsk();return false" role="search"><input type="search" id="askq" size="40" placeholder="e.g. what happens to flames at lunar gravity" aria-label="Question" style="flex:1;min-width:200px"><button class="primary">Search claims</button></form>
   <div class="row small" style="margin-top:6px">Try: ${['lunar gravity flammability','oxygen concentration extinction','Mars gravity','flame spread rate','smoke detection','helium suppression'].map(x => `<button type="button" onclick="$('#askq').value='${x}';runAsk()">${x}</button>`).join('')}</div>
   <div id="askOut" aria-live="polite" style="margin-top:12px">${n ? '' : '<div class="state">The claim ledger has no claims yet, so there is nothing to retrieve.</div>'}</div>`;
@@ -273,7 +274,7 @@ function runAsk(){
   const v = $('#askq').value.trim(), out = $('#askOut'); if (!v) { out.innerHTML = '<div class="state">Type a question first.</div>'; return; }
   const r = search(v);
   if (!r.hits.length) { out.innerHTML = `<div class="card" role="alert" style="border-color:var(--accent)"><h3 style="margin-top:0">No answer: the evidence ledger has nothing relevant</h3>
-    <p>No verified or unreviewed claim matches ${r.terms.map(t=>'<b>'+esc(t)+'</b>').join(', ') || 'this question'}${r.gwant.length ? ' at that gravity level' : ''}. Ember will not answer from general knowledge.</p>
+    <p>No claim in the ledger matches ${r.terms.map(t=>'<b>'+esc(t)+'</b>').join(', ') || 'this question'}${r.gwant.length ? ' at that gravity level' : ''}. Ember will not answer from general knowledge.</p>
     <p class="small">The ledger holds ${D.claims.length} claims from ${new Set(D.claims.map(c=>c.doc)).size} reports. Gravity levels covered: ${[...new Set(D.claims.map(c=>c.gravity_class))].join(', ') || 'none'}. Try the Atmosphere map for tested conditions, or the Investigations tab for what each experiment covered.</p></div>`; return; }
   out.innerHTML = (r.relaxed ? '' : '') + `<p class="small muted">${r.hits.length} matching claim${r.hits.length===1?'':'s'}; showing up to 8, best first.</p>` + r.hits.slice(0,8).map(h => claimHtml(h.c)).join('');
 }
@@ -304,7 +305,7 @@ function renderBrief(){
   $('#s-brief').innerHTML = `<div class="brief"><div class="row noprint"><button class="primary" onclick="window.print()">Print this brief</button><span class="small muted">One page, generated from the data; every sentence carries a source number.</span></div>
   <h2>Mission brief: lunar base fire-safety evidence</h2><p class="small muted">Prepared from the Ember data build. Not a safety assessment.</p>
   <ol>${S.map(s => `<li>${s}</li>`).join('')}</ol><h3>Sources</h3><ol class="small">${src.map((s,i) => `<li id="ref${i+1}" value="${i+1}">${s.html}</li>`).join('')}</ol>
-  <p class="small muted">Review status: claims from the ledger are labelled verified or unreviewed. Human review of the data and claims: <b>[TEAM TO CONFIRM]</b>.</p></div>`;
+  <p class="small muted">Review status: claims from the ledger are labelled auto-verified or unreviewed. Human review of the data and claims: <b>[TEAM TO CONFIRM]</b>.</p></div>`;
 }
 
 /* ---------- Atmospheres, partial gravity, Earth, About ---------- */

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states insignificant/no significant difference between the two geometries\"}",
+ "created": "2026-11-14T17:22:15",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "C-f89589a019",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-fdd1f033-281c-4ffa-9a4e-2abde2f8b3ce",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 119,
+  "prompt_tokens": 796,
+  "total_tokens": 915
+ }
+}

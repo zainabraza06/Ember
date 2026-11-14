@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states flame spread rate increases with opposed-flow velocity for PMMA rods in microgravity\"}",
+ "created": "2026-11-14T17:39:03",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-704ecbad44",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-2299c67a-6eee-469c-8dfc-87a6b2120188",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 73,
+  "prompt_tokens": 797,
+  "total_tokens": 870
+ }
+}

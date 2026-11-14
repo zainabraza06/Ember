@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states extinction velocity ~2.6 cm/s at 16% O2 for 100 μm thickness\"}",
+ "created": "2026-11-14T17:33:35",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-ecbdf2afe0",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-64cc1227-809a-4fe3-81ce-49ab0e6f62d5",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 104,
+  "prompt_tokens": 817,
+  "total_tokens": 921
+ }
+}

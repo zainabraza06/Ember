@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"span confirms the effect but does not specify microgravity condition\"}",
+ "created": "2026-11-14T17:43:28",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-7c0f65404b",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-2edc06d1-ab1e-4ff3-9c45-c8293bdf0b9b",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 75,
+  "prompt_tokens": 751,
+  "total_tokens": 826
+ }
+}

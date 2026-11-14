@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span confirms the fluctuation frequency and stabilization time, but does not state the material, geometry, or microgravity condition\"}",
+ "created": "2026-11-14T17:25:40",
+ "doc_checksum": "e38ec36f54817aa97e0c01a05f12b212521d6320ce3f4cb7a38bb7c837cfea8d",
+ "finish_reason": "stop",
+ "item_id": "C-6b7ea209e9",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-6fbd3501-2711-48d0-a02e-352c23d5edb4",
+ "tag": "NTRS-20170008805",
+ "usage": {
+  "completion_tokens": 137,
+  "prompt_tokens": 722,
+  "total_tokens": 859
+ }
+}

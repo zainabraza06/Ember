@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span gives the velocity range and trend but does not specify microgravity condition\"}",
+ "created": "2026-11-14T17:46:40",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-6a61f42d0f",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-b368584d-be22-43d5-8839-0be2d5e8a388",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 85,
+  "prompt_tokens": 797,
+  "total_tokens": 882
+ }
+}

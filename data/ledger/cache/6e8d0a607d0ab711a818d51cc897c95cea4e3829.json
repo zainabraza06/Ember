@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly gives the sample thickness of ~0.32 mm and area density of 18.2 mg/cm2\"}",
+ "created": "2026-11-14T17:46:02",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-d5a27d3862",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-e9f9647a-d4fb-4af9-8256-3a4d9430207a",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 73,
+  "prompt_tokens": 778,
+  "total_tokens": 851
+ }
+}

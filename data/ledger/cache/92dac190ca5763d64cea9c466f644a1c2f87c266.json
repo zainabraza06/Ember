@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states flames survived to final O2 as low as 13.6% matching the claim\"}",
+ "created": "2026-11-14T17:42:15",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-039317109c",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-6f5b4803-a1f0-4dd5-b079-7a22dab4211d",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 90,
+  "prompt_tokens": 809,
+  "total_tokens": 899
+ }
+}

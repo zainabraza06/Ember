@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span shows flame length drops with reduced flow speed, but does not state the microgravity condition or fabric material\"}",
+ "created": "2026-11-14T17:46:34",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-2e0a8e1f8d",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-e5aa649b-7b23-463f-a418-02a65806e579",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 102,
+  "prompt_tokens": 763,
+  "total_tokens": 865
+ }
+}

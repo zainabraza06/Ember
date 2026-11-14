@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span states Nomex HT90-40 burns on Earth only at 24‑25% oxygen, matching the claim\"}",
+ "created": "2026-11-14T17:26:30",
+ "doc_checksum": "e38ec36f54817aa97e0c01a05f12b212521d6320ce3f4cb7a38bb7c837cfea8d",
+ "finish_reason": "stop",
+ "item_id": "C-d4455b6a17",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-8fb13103-abcc-4daa-a376-b780b6bebb41",
+ "tag": "NTRS-20170008805",
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 688,
+  "total_tokens": 743
+ }
+}

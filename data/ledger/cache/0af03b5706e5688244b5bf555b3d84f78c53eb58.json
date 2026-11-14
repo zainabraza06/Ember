@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states higher oxygen concentration increases fire risk, matching the claim\"}",
+ "created": "2026-11-14T17:50:34",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "C-7d9913cee6",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-57a97f72-97ab-4797-815f-f351706d75e7",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 65,
+  "prompt_tokens": 700,
+  "total_tokens": 765
+ }
+}

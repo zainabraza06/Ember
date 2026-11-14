@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states that lower O2 concentrations produce higher CO per CO2 for concurrent rods\"}",
+ "created": "2026-11-14T17:29:32",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-0a51cad807",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-7af57eff-c640-4df3-8b1b-bb4cff923bb0",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 77,
+  "prompt_tokens": 688,
+  "total_tokens": 765
+ }
+}

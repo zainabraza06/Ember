@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the speed range and higher speeds at lower O2, and context confirms microgravity condition\"}",
+ "created": "2026-11-14T17:45:32",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-72dcd2f47e",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-35543d5d-3a4c-48d9-af93-5ff6b9921425",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 82,
+  "prompt_tokens": 773,
+  "total_tokens": 855
+ }
+}

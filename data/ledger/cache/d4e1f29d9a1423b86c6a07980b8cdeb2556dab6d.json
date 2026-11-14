@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the 0.37 mm silicone burned completely and 0.61 mm did not in normal‑gravity downward tests\"}",
+ "created": "2026-11-14T17:25:26",
+ "doc_checksum": "e38ec36f54817aa97e0c01a05f12b212521d6320ce3f4cb7a38bb7c837cfea8d",
+ "finish_reason": "stop",
+ "item_id": "C-226397717e",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-b44e36a3-c53f-4a50-8244-250b376a0c7c",
+ "tag": "NTRS-20170008805",
+ "usage": {
+  "completion_tokens": 102,
+  "prompt_tokens": 785,
+  "total_tokens": 887
+ }
+}

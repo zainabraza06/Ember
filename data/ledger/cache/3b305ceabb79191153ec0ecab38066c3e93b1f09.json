@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states that ½‑in samples reduced oxygen flammability thresholds except PET, matching the claim\"}",
+ "created": "2026-11-14T17:21:26",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "C-ef7dcba4a5",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-0b0dc95c-1bf6-47bf-90c4-906e144e51d4",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 72,
+  "prompt_tokens": 947,
+  "total_tokens": 1019
+ }
+}

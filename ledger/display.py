@@ -36,7 +36,7 @@ def public_view(claim, source):
             'conditions': claim['conditions'], 'effect_direction': claim['effect_direction'], 'evidence_type': claim['evidence_type'],
             'group_id': claim.get('group_id'), 'independent_sources': claim.get('independent_sources', 0),
             'citation': citation(claim, source), 'source_url': source['url'], 'page': claim['page'],
-            'review_label': 'unreviewed' if claim['status'] == 'pending_verification' else 'verified',
+            'review_label': 'unreviewed' if claim['status'] == 'pending_verification' else ('human-approved' if claim['status'] == 'approved' else 'auto-verified'),
             'span': claim['span'] if allowed else None, 'span_hidden_reason': None if allowed else 'source is not a US Government work (copyright)'}
 
 

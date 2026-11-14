@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states that higher oxygen concentrations or partial pressures increase flammability risk\"}",
+ "created": "2026-11-14T17:50:42",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "C-cd63a44487",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-84add081-1394-4bf4-ba88-ea4dd986505f",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 59,
+  "prompt_tokens": 733,
+  "total_tokens": 792
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states 1‑g extinction occurs ~45 s sooner than partial‑g extinction\"}",
+ "created": "2026-11-14T17:50:12",
+ "doc_checksum": "bb0aadd2f9543483467b86796e6aa19f4e13c3f8169eec96134015f95ed61d79",
+ "finish_reason": "stop",
+ "item_id": "C-80fa68165a",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-3d880bfd-093a-4de3-8172-7bc653fdbf66",
+ "tag": "NTRS-20250010653",
+ "usage": {
+  "completion_tokens": 114,
+  "prompt_tokens": 557,
+  "total_tokens": 671
+ }
+}

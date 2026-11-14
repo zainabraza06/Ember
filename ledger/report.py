@@ -40,11 +40,12 @@ def write_report(stats=None):
     L += ['## 1. Documents and claims', '',
           f"{len(srcs)} documents in `data/ledger/sources.csv`; {sum(1 for c in allc)} claims extracted (after parsing); "
           f"**{status['verified_auto']} verified_auto, {status['approved']} approved, {status['pending_verification']} pending_verification (unreviewed; passed the code checks, no independent verifier ran), {status['needs_review']} needs_review, {status['rejected']} rejected.**", '',
-          '| document | scope (PDF pages) | claims | verified_auto | needs_review | rejected | verbatim display |', '|---|---|---|---|---|---|---|']
+          '| document | scope (PDF pages) | processed in the run | claims | verified_auto | needs_review | rejected | verbatim display |', '|---|---|---|---|---|---|---|---|']
+    processed = {u.get('tag') for u in read_usage() if u['kind'] == 'extract'}
     for s in srcs:
         cs = [c for c in allc if c['doc_id'] == s['doc_id']]
         n = collections.Counter(c['status'] for c in cs)
-        L.append(f"| {s['doc_id']} {s['title'][:60]} | {s['scope_pages'] or 'all'} | {len(cs)} | {n['verified_auto'] + n['approved']} | {n['needs_review']} | {n['rejected']} | {s['display_verbatim']} |")
+        L.append(f"| {s['doc_id']} {s['title'][:60]} | {s['scope_pages'] or 'all'} | {'yes' if s['doc_id'] in processed else 'no (not on the priority list)'} | {len(cs)} | {n['verified_auto'] + n['approved']} | {n['needs_review']} | {n['rejected']} | {s['display_verbatim']} |")
     L += ['', '## 2. Results per check', '',
           'Counts over all extracted claims. A claim can fail more than one check.', '',
           '| check | pass | fail / flagged | note |', '|---|---|---|---|']
@@ -82,7 +83,10 @@ def write_report(stats=None):
             L.append(f"| {p['prompt_version']} | {p['verify_prompt']} | {p['claims']} | {p['failed']} | {p['fail_rate']:.1%} | {'yes' if p['passed'] else 'no'} | {', '.join(p['model_versions'])} |")
         L += ['', 'Failure here means a claim rejected or flagged by the span, number, condition, gravity or LLM support check (low extraction confidence alone is not a failure). Prompt changes between versions are described in `prompts/CHANGELOG.md`.', '']
     else:
-        L += ['Not run yet.', '']
+        code_fail = sum(1 for c in allc if c['verification']['numbers']['result'] == 'fail' or c['verification']['conditions']['result'] == 'fail' or c['verification']['gravity']['result'] == 'fail' or c['verification']['span']['result'] != 'exact')
+        any_fail = sum(1 for c in allc if c['verification']['support']['result'] in ('partial', 'unsupported', 'error') or c['verification']['numbers']['result'] == 'fail' or c['verification']['conditions']['result'] == 'fail' or c['verification']['gravity']['result'] == 'fail' or c['verification']['span']['result'] != 'exact')
+        L += ['The two-document pilot (FLEX and BASS-II, new prompt version if more than 30% fail) was skipped on instruction: extraction ran directly on the priority list with `extract_v1`.',
+              f"Over the whole run, {code_fail} of {len(allc)} claims ({code_fail / max(len(allc), 1):.0%}) failed a code check (span, numbers, conditions or gravity word) and {any_fail} ({any_fail / max(len(allc), 1):.0%}) failed any check including the second model's `partial` verdict. No claim failed the span check. No new prompt version was written.", '']
     tokens, requests = usage_totals()
     usage = read_usage()
     by_prov = collections.defaultdict(lambda: {'requests': 0, 'tokens': 0, 'models': set(), 'kinds': collections.Counter()})
@@ -93,15 +97,15 @@ def write_report(stats=None):
         d['models'].add(u.get('model_version', ''))
         d['kinds'][u['kind']] += 1
     L += ['## 6. Models and usage (decisions D31, D32)', '',
-          'Extraction and verification use **two different model families** (Google Gemini for extraction, Meta Llama 3.3 70B served by Groq for the support check and the BASS-II second rater), '
+          'Extraction and verification use **two different model families** (Google Gemini for extraction, the open-weight model gpt-oss-120b (OpenAI) served by Groq for the support check; the planned Llama 3.3 70B is not available on the Groq account, and the BASS-II second rater has not been run), '
           'so the model that wrote a claim is not the model that checks it. Both are LLM judgements; the span and number checks are plain code.', '',
           '| provider | role | requested model | exact version(s) returned | requests | tokens |', '|---|---|---|---|---|---|']
-    roles = {'gemini': 'extraction', 'groq': 'support check, BASS-II second rater'}
+    roles = {'gemini': 'extraction', 'groq': 'support check'}
     for prov in ('gemini', 'groq'):
         d = by_prov.get(prov)
         L.append(f"| {prov} | {roles[prov]} | `{config.PROVIDERS[prov]['model'] or 'not chosen'}` | " + (', '.join('`' + m + '`' for m in sorted(d['models'])) if d else 'none yet')
                  + f" | {d['requests'] if d else 0} | {d['tokens'] if d else 0:,} |")
-    L += ['', f"Total **{tokens:,} tokens in {requests} requests** (cap LEDGER_MAX_TOKENS {config.MAX_TOKENS:,}). Per-provider limits used by the client (requests/minute, requests/day): "
+    L += ['', f"Total **{tokens:,} tokens in {requests} requests** (cap LEDGER_MAX_TOKENS {config.MAX_TOKENS:,}). Gemini free-tier quota seen in API errors: 20 requests per day per model, so the client moved down a chain of models; each claim records its model. Per-provider limits used by the client (requests/minute, requests/day): "
           + '; '.join(f"{k} {int(v['rpm'])}/min, {int(v['rpd'])}/day" for k, v in config.PROVIDERS.items())
           + ' (placeholders unless overwritten from the account limits pages; see SI_USAGE.md). The exact versions are also pinned in every cache entry (`data/ledger/cache/`).', '']
     ev = read_jsonl(RUN_LOG)

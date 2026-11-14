@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span lists the exact opposed-flow velocities at the specified times matching the claim\"}",
+ "created": "2026-11-14T17:32:51",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-9a60a0bc18",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-2c89d556-ebe0-4674-8262-73ab5b7a4889",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 65,
+  "prompt_tokens": 795,
+  "total_tokens": 860
+ }
+}

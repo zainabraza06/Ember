@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span explicitly states that the narrow sample has a smaller flammable domain, matching the claim under microgravity conditions\"}",
+ "created": "2026-11-14T17:47:01",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-bacede66c0",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-a779e7f7-ef9f-40b1-8a13-dbf7b4b3f591",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 105,
+  "prompt_tokens": 690,
+  "total_tokens": 795
+ }
+}

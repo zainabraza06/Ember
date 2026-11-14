@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span supports the increase in final flame length with more oxygen, but does not specify material PMMA or microgravity conditions\"}",
+ "created": "2026-11-14T17:47:39",
+ "doc_checksum": "d25b394f43774ee79a3223b53e90571be299c8996d1cff2512c76e3308e107f5",
+ "finish_reason": "stop",
+ "item_id": "C-dc08111531",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-baf52f6c-4e38-47b8-9ec2-b7b8e72001de",
+ "tag": "NTRS-20210011521",
+ "usage": {
+  "completion_tokens": 107,
+  "prompt_tokens": 789,
+  "total_tokens": 896
+ }
+}

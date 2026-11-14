@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span confirms extinction at 17% O2 and context provides Mylar, 10.2 psi, Martian gravity\"}",
+ "created": "2026-11-14T17:22:25",
+ "doc_checksum": "2b0cabdfe7942f56bad38967e9c870dd1c73f3cb52f614a1873a93f8cc51436e",
+ "finish_reason": "stop",
+ "item_id": "C-9494f38314",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-4e852d81-3a2b-4458-baf2-959c75b7eea1",
+ "tag": "NTRS-20130010991",
+ "usage": {
+  "completion_tokens": 143,
+  "prompt_tokens": 782,
+  "total_tokens": 925
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states that high cabin airflow can extinguish a flame due to insufficient reaction time\"}",
+ "created": "2026-11-14T17:51:08",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "C-f203690b43",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-77b70a17-a972-48a0-be43-d8ba303a377f",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 92,
+  "prompt_tokens": 748,
+  "total_tokens": 840
+ }
+}

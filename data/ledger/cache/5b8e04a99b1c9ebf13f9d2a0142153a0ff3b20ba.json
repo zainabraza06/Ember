@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span confirms the 19% O2 threshold for loss of spread on two‑sided fuel, but does not specify the material (PMMA) or gravity condition\"}",
+ "created": "2026-11-14T17:40:24",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-2e4041411e",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-9ed5516e-1c04-45d2-9831-50afda3a143d",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 136,
+  "prompt_tokens": 810,
+  "total_tokens": 946
+ }
+}

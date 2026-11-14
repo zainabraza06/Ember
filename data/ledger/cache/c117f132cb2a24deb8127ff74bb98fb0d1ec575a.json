@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states boundary layer development is an important parameter for blowoff extinction velocity, matching the claim\"}",
+ "created": "2026-11-14T17:33:53",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-b99b8f7006",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-f2745f62-a043-497a-bf73-85225eed07a3",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 94,
+  "prompt_tokens": 707,
+  "total_tokens": 801
+ }
+}

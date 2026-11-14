@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly defines ULOI as the oxygen concentration with ~50% extinction probability\"}",
+ "created": "2026-11-14T17:24:25",
+ "doc_checksum": "0a8c1da4af61697ca09fa3f7c58807e88981870ed63f024bad2577f577623c93",
+ "finish_reason": "stop",
+ "item_id": "C-3c1ef27637",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-3699e504-a88b-4783-91b1-30c6b43259d5",
+ "tag": "NTRS-20170004702",
+ "usage": {
+  "completion_tokens": 46,
+  "prompt_tokens": 774,
+  "total_tokens": 820
+ }
+}

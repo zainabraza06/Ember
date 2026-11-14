@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span confirms heat release rates below 100 W but does not state the microgravity condition\"}",
+ "created": "2026-11-14T17:26:42",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-af51023295",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-73d8332c-bcad-4d2f-aed0-f581b4aa61f7",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 67,
+  "prompt_tokens": 675,
+  "total_tokens": 742
+ }
+}

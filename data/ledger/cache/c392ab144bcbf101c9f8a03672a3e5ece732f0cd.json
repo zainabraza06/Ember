@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states silicone flammability is reduced in microgravity versus normal gravity\"}",
+ "created": "2026-11-14T17:26:34",
+ "doc_checksum": "e38ec36f54817aa97e0c01a05f12b212521d6320ce3f4cb7a38bb7c837cfea8d",
+ "finish_reason": "stop",
+ "item_id": "C-8c4946ce67",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-216d0c15-db34-4d15-911c-b143b9344e41",
+ "tag": "NTRS-20170008805",
+ "usage": {
+  "completion_tokens": 98,
+  "prompt_tokens": 729,
+  "total_tokens": 827
+ }
+}

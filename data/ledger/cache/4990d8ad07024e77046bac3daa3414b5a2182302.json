@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span states both suit pressures matching the claim\"}",
+ "created": "2026-11-14T17:51:14",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "C-0c79cacb94",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-ab33ea3e-e5ba-4ed7-a0b3-88c21a7e4fe4",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 58,
+  "prompt_tokens": 877,
+  "total_tokens": 935
+ }
+}

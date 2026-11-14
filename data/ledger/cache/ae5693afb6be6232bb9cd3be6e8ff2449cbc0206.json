@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the minimum heat flux at stretch rate 1 is 1.57 W/cm² for PMMA\"}",
+ "created": "2026-11-14T17:44:20",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-2d2167a8d4",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-53bc5c48-292a-4c3c-a55a-519d0a470216",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 134,
+  "prompt_tokens": 788,
+  "total_tokens": 922
+ }
+}

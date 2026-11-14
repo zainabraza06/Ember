@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states the HRR magnitude is modest for these small flames under the tested conditions\"}",
+ "created": "2026-11-14T17:29:46",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-b9c14a3e47",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-6f88c4b6-32ba-4099-a589-cb18fba9aa7a",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 81,
+  "prompt_tokens": 689,
+  "total_tokens": 770
+ }
+}

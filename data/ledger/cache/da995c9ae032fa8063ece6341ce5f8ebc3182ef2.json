@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states that some materials burned at lower oxygen concentrations in microgravity and lunar gravity compared to normal gravity\"}",
+ "created": "2026-11-14T17:22:21",
+ "doc_checksum": "2b0cabdfe7942f56bad38967e9c870dd1c73f3cb52f614a1873a93f8cc51436e",
+ "finish_reason": "stop",
+ "item_id": "C-d9633695a4",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-82bc9a76-35d7-4d32-a181-977fa517fe61",
+ "tag": "NTRS-20130010991",
+ "usage": {
+  "completion_tokens": 133,
+  "prompt_tokens": 763,
+  "total_tokens": 896
+ }
+}

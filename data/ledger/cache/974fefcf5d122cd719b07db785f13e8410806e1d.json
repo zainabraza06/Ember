@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span supports the decrease effect but does not specify microgravity condition\"}",
+ "created": "2026-11-14T17:48:02",
+ "doc_checksum": "d25b394f43774ee79a3223b53e90571be299c8996d1cff2512c76e3308e107f5",
+ "finish_reason": "stop",
+ "item_id": "C-aff4bc0482",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-5ed5c53b-a8cd-4f0b-9ec4-5f357d788d50",
+ "tag": "NTRS-20210011521",
+ "usage": {
+  "completion_tokens": 92,
+  "prompt_tokens": 777,
+  "total_tokens": 869
+ }
+}

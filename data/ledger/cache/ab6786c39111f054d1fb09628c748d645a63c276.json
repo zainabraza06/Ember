@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span states MOC has approx linear dependence on total pressure, matching the claim\"}",
+ "created": "2026-11-14T17:20:29",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "C-3bb0ceb1d2",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-31146e44-b586-4d04-9b62-f83c28cb5fe7",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 132,
+  "prompt_tokens": 796,
+  "total_tokens": 928
+ }
+}

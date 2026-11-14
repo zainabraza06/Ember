@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the flow velocity at extinction was about 1.1 cm/s\"}",
+ "created": "2026-11-14T17:36:10",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-31c7eb2af3",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-33ee75c6-76c6-43ea-8d11-188f0093640a",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 85,
+  "prompt_tokens": 746,
+  "total_tokens": 831
+ }
+}

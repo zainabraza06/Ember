@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the equivalence ratio estimate and fuel‑rich, low‑velocity forced‑flow condition\"}",
+ "created": "2026-11-14T17:30:57",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-686eb6b8ff",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-ee5d1804-9c00-461a-b03a-2be63e522987",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 817,
+  "total_tokens": 878
+ }
+}

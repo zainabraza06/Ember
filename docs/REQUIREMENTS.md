@@ -44,6 +44,6 @@ Challenge wording note: the page title says "**AI**-Powered" while the summary s
 | O6 | Official: partial-gravity bounds (no PSI data; LUCI, FM2, E-FIELD; 0 g and 1 g bound) | official Potential Considerations | G4 | Partial-gravity tab; literature rows labelled outside PSI | met |
 | O7 | Official: applications to fire safety on Earth (three spinoffs) | official Objectives / Resources | G5 | Earth applications tab: links only, no analysis | partly met |
 | O8 | Official: scope note and the ten resources | official Objectives / Resources | G6 | About tab | met |
-| O9 | Official: SI-powered dashboard that summarizes, ranks and interprets | official Objectives | M4-M8 | Summaries are quoted PSI text; no ranking, interpretation, Q&A or SI at runtime | not met |
+| O9 | Official: SI-powered dashboard that summarizes, ranks and interprets | official Objectives | M3-M9 | Ranking (formula, RANKING.md), computed interpretation summaries, claim retrieval (Ask) and a cited mission brief are built; no language model runs on the page; claims are verified or labelled unreviewed | partly met |
 | O10 | Official: extract data supporting predictive modeling | official Objectives | M2 | tests.csv / tests.parquet in the repository, not offered on the site | partly met |
 | O11 | Islamabad local Google Form by Sun 15 Nov 2026, 3:30 PM PKT, plus the website submission | local event | M13 | Section 2 of SUBMISSION_DRAFT.md (names and contacts are placeholders) | in progress |

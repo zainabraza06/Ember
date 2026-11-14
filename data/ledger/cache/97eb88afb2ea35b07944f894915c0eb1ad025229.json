@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states F=4.76 for 21% O2/79% N2 mixture\"}",
+ "created": "2026-11-14T17:38:45",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-b0a81612d1",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-690e3417-8dd7-4ab2-972a-fa07ff177f36",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 74,
+  "prompt_tokens": 691,
+  "total_tokens": 765
+ }
+}

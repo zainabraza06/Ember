@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span states preheating PTFE to 200 °F lowered ULOI from 49 to 40.8, matching the claim\"}",
+ "created": "2026-11-14T17:20:26",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "C-10f1993e3a",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-428b8d05-e889-4d49-add6-995f28964c42",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 792,
+  "total_tokens": 847
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the thickness, burn length, and condition matching the claim\"}",
+ "created": "2026-11-14T17:25:21",
+ "doc_checksum": "e38ec36f54817aa97e0c01a05f12b212521d6320ce3f4cb7a38bb7c837cfea8d",
+ "finish_reason": "stop",
+ "item_id": "C-1e43fc3253",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-59ff73ce-687f-4d18-ae6f-14a627c66c87",
+ "tag": "NTRS-20170008805",
+ "usage": {
+  "completion_tokens": 111,
+  "prompt_tokens": 761,
+  "total_tokens": 872
+ }
+}

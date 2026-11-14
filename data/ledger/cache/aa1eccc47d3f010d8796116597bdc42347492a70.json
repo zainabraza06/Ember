@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the sudden decrease at ~24 s and extinction within 4 s for SIBAL fabric in 1‑g\"}",
+ "created": "2026-11-14T17:49:40",
+ "doc_checksum": "bb0aadd2f9543483467b86796e6aa19f4e13c3f8169eec96134015f95ed61d79",
+ "finish_reason": "stop",
+ "item_id": "C-02500f147f",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-773ecaf1-ed1d-405e-a1b0-e73ca9587251",
+ "tag": "NTRS-20250010653",
+ "usage": {
+  "completion_tokens": 138,
+  "prompt_tokens": 582,
+  "total_tokens": 720
+ }
+}

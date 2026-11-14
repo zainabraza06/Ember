@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"span states space-based tests confirm the prediction and validates the formula, and context indicates microgravity conditions\"}",
+ "created": "2026-11-14T17:34:00",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-7b0421c51a",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-d429700b-f89d-4245-a339-a1d3d6f25122",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 177,
+  "prompt_tokens": 789,
+  "total_tokens": 966
+ }
+}

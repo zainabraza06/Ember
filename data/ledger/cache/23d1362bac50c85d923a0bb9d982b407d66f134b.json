@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states the CO/CO2 ratio is an order of magnitude higher and flames are not efficient, matching the claim\"}",
+ "created": "2026-11-14T17:31:43",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-f397f48db7",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-b1180026-09d1-426c-9a83-ab589b8431a8",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 784,
+  "total_tokens": 846
+ }
+}

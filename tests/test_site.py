@@ -1,6 +1,9 @@
 """Tests for the mission profiles and the static site data (no network)."""
 import json
 import re
+import shutil
+import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -78,6 +81,18 @@ class RankingAndInterpretation(unittest.TestCase):
         flex = items['flex_o2_diluent']
         self.assertEqual(flex['n'], 280)
         self.assertEqual(sum(r['n'] for r in flex['tables'][0]['rows']), 280)
+
+
+class SiteScript(unittest.TestCase):
+    @unittest.skipUnless(shutil.which('node'), 'node is not installed')
+    def test_page_script_parses(self):
+        html = (ROOT / 'site' / 'index.html').read_text(encoding='utf-8')
+        js = re.findall(r'<script>(.*?)</script>', html, re.S)[0]
+        with tempfile.TemporaryDirectory() as d:
+            f = Path(d) / 'page.js'
+            f.write_text(js, encoding='utf-8')
+            r = subprocess.run(['node', '--check', str(f)], capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stderr[:500])
 
 
 class NoSecretsOrNetwork(unittest.TestCase):

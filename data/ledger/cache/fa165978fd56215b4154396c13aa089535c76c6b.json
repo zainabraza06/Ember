@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span states the 1.03 mm silicone sample would not burn, matching the claim under normal‑gravity upward‑burning\"}",
+ "created": "2026-11-14T17:25:27",
+ "doc_checksum": "e38ec36f54817aa97e0c01a05f12b212521d6320ce3f4cb7a38bb7c837cfea8d",
+ "finish_reason": "stop",
+ "item_id": "C-3151be7dfd",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-fa37d1d1-96e6-4ab0-9c9c-96038418959d",
+ "tag": "NTRS-20170008805",
+ "usage": {
+  "completion_tokens": 101,
+  "prompt_tokens": 738,
+  "total_tokens": 839
+ }
+}

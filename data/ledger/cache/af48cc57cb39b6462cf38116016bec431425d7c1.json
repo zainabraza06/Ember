@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states that >30% O2 makes some materials less likely to pass\"}",
+ "created": "2026-11-14T17:50:27",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "C-630ee1b57f",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-d907c3f4-f2bb-499a-bc9c-2b190d8c1e39",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 102,
+  "prompt_tokens": 686,
+  "total_tokens": 788
+ }
+}

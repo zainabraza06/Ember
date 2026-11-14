@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states a steady increase in burn length with oxygen concentration\"}",
+ "created": "2026-11-14T17:24:42",
+ "doc_checksum": "0a8c1da4af61697ca09fa3f7c58807e88981870ed63f024bad2577f577623c93",
+ "finish_reason": "stop",
+ "item_id": "C-b555c318fc",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-44521cd3-6c0c-4b45-8780-9d3fbf1f5d36",
+ "tag": "NTRS-20170004702",
+ "usage": {
+  "completion_tokens": 74,
+  "prompt_tokens": 791,
+  "total_tokens": 865
+ }
+}

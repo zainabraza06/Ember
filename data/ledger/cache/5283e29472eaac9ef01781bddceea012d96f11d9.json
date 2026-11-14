@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the minimum burn length is ~2 in, matching the claim\"}",
+ "created": "2026-11-14T17:24:18",
+ "doc_checksum": "0a8c1da4af61697ca09fa3f7c58807e88981870ed63f024bad2577f577623c93",
+ "finish_reason": "stop",
+ "item_id": "C-2481b6d0f4",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-8a15e955-72d8-49e5-9e6f-37e834d7fd1f",
+ "tag": "NTRS-20170004702",
+ "usage": {
+  "completion_tokens": 63,
+  "prompt_tokens": 748,
+  "total_tokens": 811
+ }
+}

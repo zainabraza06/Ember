@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states the radiometer signal decreases around t=27 s, indicating cooling and shrinking flame\"}",
+ "created": "2026-11-14T17:31:49",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-0ded645289",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-7b05a8e5-57c9-4a32-be86-ec9a9bc78e77",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 57,
+  "prompt_tokens": 815,
+  "total_tokens": 872
+ }
+}

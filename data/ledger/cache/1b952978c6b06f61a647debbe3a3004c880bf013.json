@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states the data are the first extensive data on stoichiometry and toxicity in microgravity\"}",
+ "created": "2026-11-14T17:26:48",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-4cedb5149f",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-c68a911e-e67b-4d24-85a7-8c073b78d3b6",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 48,
+  "prompt_tokens": 761,
+  "total_tokens": 809
+ }
+}

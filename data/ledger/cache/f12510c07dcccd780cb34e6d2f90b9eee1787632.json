@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states the extinction velocities for the specified thicknesses matching the claim\"}",
+ "created": "2026-11-14T17:32:45",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-f8596f56f3",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-ba9a0cea-97c8-45fe-a4c5-f5110cfb953e",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 127,
+  "prompt_tokens": 850,
+  "total_tokens": 977
+ }
+}

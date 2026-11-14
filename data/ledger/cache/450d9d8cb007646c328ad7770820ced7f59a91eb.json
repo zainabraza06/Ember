@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states the increasing HRR with increasing ambient O2 concentration\"}",
+ "created": "2026-11-14T17:29:28",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-f8d07c4587",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-7893370a-ede4-445d-a970-7657fb25c87b",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 53,
+  "prompt_tokens": 727,
+  "total_tokens": 780
+ }
+}

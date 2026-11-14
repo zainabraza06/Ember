@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states the observed propensity for droplets to burn disruptively and not exhibit flame extinction at a finite droplet size\"}",
+ "created": "2026-11-14T17:23:26",
+ "doc_checksum": "b4f6ca983e2792c33a0b92220a791a818f426bb635b94f7fd33dc8c9c471e79d",
+ "finish_reason": "stop",
+ "item_id": "C-2e8c38193e",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-a8bd694c-9f88-4d4f-bf9b-a100e6996a25",
+ "tag": "NTRS-20150023456",
+ "usage": {
+  "completion_tokens": 82,
+  "prompt_tokens": 908,
+  "total_tokens": 990
+ }
+}

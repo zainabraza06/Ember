@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span states the same thresholds for flame spread in microgravity (17.5%) and normal gravity (19%).\"}",
+ "created": "2026-11-14T17:39:13",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-bbd8bd5a85",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-ed3771a7-ce49-44ba-87dc-fb9cdd63d7a0",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 71,
+  "prompt_tokens": 725,
+  "total_tokens": 796
+ }
+}

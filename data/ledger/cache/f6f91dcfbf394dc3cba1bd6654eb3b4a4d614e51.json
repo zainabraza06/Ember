@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span confirms flames on PMMA, POM, HDPE rods survived at airflow <1 cm/s in microgravity\"}",
+ "created": "2026-11-14T17:42:02",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-7c1f1b928d",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-b525a14d-1f01-4127-9397-339806e6227c",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 129,
+  "prompt_tokens": 754,
+  "total_tokens": 883
+ }
+}

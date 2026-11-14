@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span explicitly states that the flames were under‑ventilated and did not burn all vaporized fuel, matching the claim.\"}",
+ "created": "2026-11-14T17:30:41",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-212d7b87b3",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-a094b7f3-1e93-430b-b4c5-fabe8b2af19f",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 66,
+  "prompt_tokens": 829,
+  "total_tokens": 895
+ }
+}

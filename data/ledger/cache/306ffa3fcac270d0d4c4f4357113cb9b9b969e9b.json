@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states thresholds decreased with decreasing thickness for MQ\"}",
+ "created": "2026-11-14T17:20:33",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "C-4762791339",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-2a71058a-9077-4bbf-b9cb-a50ee90ec322",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 67,
+  "prompt_tokens": 638,
+  "total_tokens": 705
+ }
+}

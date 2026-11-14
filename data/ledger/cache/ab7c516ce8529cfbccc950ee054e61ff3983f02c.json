@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"The span confirms the fire size and volume but does not state the microgravity condition\"}",
+ "created": "2026-11-14T17:49:04",
+ "doc_checksum": "7f875da1d6abeeeeac64aeba67d3f160074cf98430e714fe7606b34b37e0aa59",
+ "finish_reason": "stop",
+ "item_id": "C-93ae8672b7",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-37ba3704-a93e-43ff-b587-09cdafad487a",
+ "tag": "NTRS-20240002981",
+ "usage": {
+  "completion_tokens": 67,
+  "prompt_tokens": 683,
+  "total_tokens": 750
+ }
+}

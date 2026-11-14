@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span confirms PMMA samples 1–5 mm thick were studied in opposed flow under microgravity\"}",
+ "created": "2026-11-14T17:39:52",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-660533c4f5",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-3609943a-b5f0-4c40-9766-59575c5451d2",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 89,
+  "prompt_tokens": 742,
+  "total_tokens": 831
+ }
+}

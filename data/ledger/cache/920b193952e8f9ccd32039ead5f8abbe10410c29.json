@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span gives the rates and flow speed but does not specify material or microgravity condition\"}",
+ "created": "2026-11-14T17:26:27",
+ "doc_checksum": "e38ec36f54817aa97e0c01a05f12b212521d6320ce3f4cb7a38bb7c837cfea8d",
+ "finish_reason": "stop",
+ "item_id": "C-d46357f38e",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-83c4260e-f130-4f03-a5c3-c45620924711",
+ "tag": "NTRS-20170008805",
+ "usage": {
+  "completion_tokens": 65,
+  "prompt_tokens": 812,
+  "total_tokens": 877
+ }
+}

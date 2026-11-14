@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span confirms width decreases with lower flow speed, but does not specify fabric material or microgravity conditions\"}",
+ "created": "2026-11-14T17:46:37",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-2e0a8e1f8d-b",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-b6a8231f-a20f-4566-a28a-8c04d2468866",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 105,
+  "prompt_tokens": 763,
+  "total_tokens": 868
+ }
+}

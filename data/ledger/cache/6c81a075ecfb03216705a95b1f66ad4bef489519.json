@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the 0.27 mm silicone samples were almost always completely consumed in normal‑gravity upward‑burning tests\"}",
+ "created": "2026-11-14T17:25:30",
+ "doc_checksum": "e38ec36f54817aa97e0c01a05f12b212521d6320ce3f4cb7a38bb7c837cfea8d",
+ "finish_reason": "stop",
+ "item_id": "C-67f6ceaaa0",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-1747f114-c5d2-413a-9956-76f88ef026c0",
+ "tag": "NTRS-20170008805",
+ "usage": {
+  "completion_tokens": 92,
+  "prompt_tokens": 741,
+  "total_tokens": 833
+ }
+}

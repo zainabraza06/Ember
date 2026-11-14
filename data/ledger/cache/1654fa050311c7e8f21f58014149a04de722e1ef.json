@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states the claim about the ULOI representing oxygen concentration with 50% probability of failure\"}",
+ "created": "2026-11-14T17:24:45",
+ "doc_checksum": "0a8c1da4af61697ca09fa3f7c58807e88981870ed63f024bad2577f577623c93",
+ "finish_reason": "stop",
+ "item_id": "C-c06496fedf",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-6b8abaac-5f86-4042-a45c-e4c4e75426b4",
+ "tag": "NTRS-20170004702",
+ "usage": {
+  "completion_tokens": 57,
+  "prompt_tokens": 711,
+  "total_tokens": 768
+ }
+}

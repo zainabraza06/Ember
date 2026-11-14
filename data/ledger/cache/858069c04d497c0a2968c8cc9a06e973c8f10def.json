@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the effective buoyancy velocity for thick PMMA is 1.9 cm/s, matching the claim\"}",
+ "created": "2026-11-14T17:38:20",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-991dedb3ca",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-adb88528-dd89-4b86-9318-226a1521a9e6",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 100,
+  "prompt_tokens": 776,
+  "total_tokens": 876
+ }
+}

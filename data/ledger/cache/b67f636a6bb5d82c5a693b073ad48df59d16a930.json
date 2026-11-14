@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states that flammability thresholds decrease with decreasing thickness for MQ\"}",
+ "created": "2026-11-14T17:21:29",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "C-2ebcf92a1f",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-12f64975-ad9e-48c8-9139-b76d76125710",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 79,
+  "prompt_tokens": 700,
+  "total_tokens": 779
+ }
+}

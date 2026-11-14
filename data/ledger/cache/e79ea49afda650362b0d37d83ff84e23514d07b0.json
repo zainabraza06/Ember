@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span confirms Nomex did not ignite, but does not state the microgravity condition\"}",
+ "created": "2026-11-14T17:48:41",
+ "doc_checksum": "7f875da1d6abeeeeac64aeba67d3f160074cf98430e714fe7606b34b37e0aa59",
+ "finish_reason": "stop",
+ "item_id": "C-f2f824e6e3",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-77ceb527-5c19-4e40-ac3e-b38a23fdb18a",
+ "tag": "NTRS-20240002981",
+ "usage": {
+  "completion_tokens": 96,
+  "prompt_tokens": 767,
+  "total_tokens": 863
+ }
+}

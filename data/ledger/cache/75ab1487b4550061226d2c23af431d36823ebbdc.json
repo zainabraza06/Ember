@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states extinction velocity does not depend on fuel thickness, matching the claim\"}",
+ "created": "2026-11-14T17:32:58",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-7b817b205f",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-67aac6c3-8c11-45ef-8fa9-91b83cc5d3cf",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 57,
+  "prompt_tokens": 704,
+  "total_tokens": 761
+ }
+}

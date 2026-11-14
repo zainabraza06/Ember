@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the transition thickness is 5.19 mm for downward flame spread in ambient air\"}",
+ "created": "2026-11-14T17:38:16",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-d63a1d6943",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-f7bfdc60-c6a8-43a3-b63c-ccd01a1375b1",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 120,
+  "prompt_tokens": 796,
+  "total_tokens": 916
+ }
+}

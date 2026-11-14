@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span confirms the flame jump and PMMA ignition, but does not explicitly state the microgravity condition required by the claim\"}",
+ "created": "2026-11-14T17:48:08",
+ "doc_checksum": "d25b394f43774ee79a3223b53e90571be299c8996d1cff2512c76e3308e107f5",
+ "finish_reason": "stop",
+ "item_id": "C-07bd65fb16",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-0a28a04e-beae-4939-98c2-bd78c250aff1",
+ "tag": "NTRS-20210011521",
+ "usage": {
+  "completion_tokens": 145,
+  "prompt_tokens": 747,
+  "total_tokens": 892
+ }
+}

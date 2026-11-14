@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Rates match but microgravity condition is not stated\"}",
+ "created": "2026-11-14T17:26:22",
+ "doc_checksum": "e38ec36f54817aa97e0c01a05f12b212521d6320ce3f4cb7a38bb7c837cfea8d",
+ "finish_reason": "stop",
+ "item_id": "C-1e9af60ce6",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-ba12e0c0-ff92-43d6-a16c-1d583335d103",
+ "tag": "NTRS-20170008805",
+ "usage": {
+  "completion_tokens": 58,
+  "prompt_tokens": 758,
+  "total_tokens": 816
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span states that near the entrance, undeveloped boundary layer makes flame sizes initially 30% larger than with developed flow\"}",
+ "created": "2026-11-14T17:48:23",
+ "doc_checksum": "d25b394f43774ee79a3223b53e90571be299c8996d1cff2512c76e3308e107f5",
+ "finish_reason": "stop",
+ "item_id": "C-3222545126",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-b76731e9-74d3-46cd-be1c-8a94fce4fa18",
+ "tag": "NTRS-20210011521",
+ "usage": {
+  "completion_tokens": 68,
+  "prompt_tokens": 800,
+  "total_tokens": 868
+ }
+}

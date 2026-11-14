@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states the observed transient phenomena, ignition attempts, near extinction, and blowoff extinctions used to outline the U-shaped flammability boundary\"}",
+ "created": "2026-11-14T17:31:31",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-a43dc7782e",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-d96d8a57-5aee-4851-b06a-9dd04108b218",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 71,
+  "prompt_tokens": 735,
+  "total_tokens": 806
+ }
+}

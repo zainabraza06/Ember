@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the pressure of 25.8 kPa and 100% oxygen for Apollo suits\"}",
+ "created": "2026-11-14T17:51:29",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "C-d756ae1e1d",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-1a04a41e-5290-4ae9-80d8-69f3fd3c6457",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 79,
+  "prompt_tokens": 770,
+  "total_tokens": 849
+ }
+}

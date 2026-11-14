@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span confirms 10 kW heat release and no unacceptable conditions, but does not state the microgravity condition\"}",
+ "created": "2026-11-14T17:47:14",
+ "doc_checksum": "d25b394f43774ee79a3223b53e90571be299c8996d1cff2512c76e3308e107f5",
+ "finish_reason": "stop",
+ "item_id": "C-2eef8a9583",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-8de53340-d5a4-4c3f-9881-990c12be9a38",
+ "tag": "NTRS-20210011521",
+ "usage": {
+  "completion_tokens": 125,
+  "prompt_tokens": 764,
+  "total_tokens": 889
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span shows linear increase to ~0.6 mm/s but does not specify partial (lunar) gravity condition\"}",
+ "created": "2026-11-14T17:50:19",
+ "doc_checksum": "bb0aadd2f9543483467b86796e6aa19f4e13c3f8169eec96134015f95ed61d79",
+ "finish_reason": "stop",
+ "item_id": "C-fa0a7b71dc",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-ce99f757-b123-4b6e-9cc7-5a4ce27db673",
+ "tag": "NTRS-20250010653",
+ "usage": {
+  "completion_tokens": 112,
+  "prompt_tokens": 637,
+  "total_tokens": 749
+ }
+}

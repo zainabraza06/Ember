@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span states pressure varied from 99.2 to 99.5 kPa and context confirms microgravity conditions\"}",
+ "created": "2026-11-14T17:37:15",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-9ffa5d7d83",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-a8a53078-f39d-45b9-bb91-7ea1909770a2",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 94,
+  "prompt_tokens": 706,
+  "total_tokens": 800
+ }
+}

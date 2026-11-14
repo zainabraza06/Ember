@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states insignificant difference for those geometries\"}",
+ "created": "2026-11-14T17:21:23",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "C-e67509287a",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-59712668-0572-4976-bfb5-5c62706cd381",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 100,
+  "prompt_tokens": 880,
+  "total_tokens": 980
+ }
+}

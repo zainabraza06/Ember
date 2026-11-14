@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states that higher oxygen concentration increases material flammability\"}",
+ "created": "2026-11-14T17:22:18",
+ "doc_checksum": "2b0cabdfe7942f56bad38967e9c870dd1c73f3cb52f614a1873a93f8cc51436e",
+ "finish_reason": "stop",
+ "item_id": "C-317b4bcc8b",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-a19f4e02-2daa-4133-ba0c-41d9d4b1b41a",
+ "tag": "NTRS-20130010991",
+ "usage": {
+  "completion_tokens": 69,
+  "prompt_tokens": 766,
+  "total_tokens": 835
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states materials for 34% O2 are tested up to 37% O2\"}",
+ "created": "2026-11-14T17:50:45",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "C-05a72fd3ea",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-17d5f128-dd10-449d-9912-80bf09ac667c",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 670,
+  "total_tokens": 731
+ }
+}

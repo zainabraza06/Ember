@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states variable sample lengths have minimal impact, matching the claim's no-effect assertion\"}",
+ "created": "2026-11-14T17:24:22",
+ "doc_checksum": "0a8c1da4af61697ca09fa3f7c58807e88981870ed63f024bad2577f577623c93",
+ "finish_reason": "stop",
+ "item_id": "C-cf01a5ce34",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-893f68fb-9dd3-4257-a39d-3dcb6ea7336c",
+ "tag": "NTRS-20170004702",
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 814,
+  "total_tokens": 875
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span supports the direction but does not state the microgravity condition\"}",
+ "created": "2026-11-14T17:47:21",
+ "doc_checksum": "d25b394f43774ee79a3223b53e90571be299c8996d1cff2512c76e3308e107f5",
+ "finish_reason": "stop",
+ "item_id": "C-92cff6d7c2",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-ea686c9c-a66e-4c92-843b-073febdaba3e",
+ "tag": "NTRS-20210011521",
+ "usage": {
+  "completion_tokens": 95,
+  "prompt_tokens": 757,
+  "total_tokens": 852
+ }
+}

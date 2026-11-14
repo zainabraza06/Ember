@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the flame spread rate, sample thickness, and extinction time after flow cut off\"}",
+ "created": "2026-11-14T17:31:56",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-9a7d83c25c",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-e75bcfd3-083d-4ecc-b757-fd766d0e94a6",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 84,
+  "prompt_tokens": 935,
+  "total_tokens": 1019
+ }
+}

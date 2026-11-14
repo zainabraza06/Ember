@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span shows the seven-fold increase with two‑order reduction but does not specify microgravity condition\"}",
+ "created": "2026-11-14T17:43:31",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-970dc9a8b4",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-be7a8817-56c9-43ff-8275-aca309b15a52",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 157,
+  "prompt_tokens": 673,
+  "total_tokens": 830
+ }
+}

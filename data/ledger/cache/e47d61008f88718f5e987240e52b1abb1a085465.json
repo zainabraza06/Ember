@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span gives the rate but does not specify lunar gravity condition\"}",
+ "created": "2026-11-14T17:49:18",
+ "doc_checksum": "bb0aadd2f9543483467b86796e6aa19f4e13c3f8169eec96134015f95ed61d79",
+ "finish_reason": "stop",
+ "item_id": "C-6a444e61aa",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-7c25335e-c196-4f0b-a7a2-c2ea91cb749f",
+ "tag": "NTRS-20250010653",
+ "usage": {
+  "completion_tokens": 91,
+  "prompt_tokens": 582,
+  "total_tokens": 673
+ }
+}

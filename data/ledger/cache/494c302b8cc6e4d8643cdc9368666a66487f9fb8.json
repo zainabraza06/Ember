@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span states limiting oxygen levels at Martian gravity are up to 5.75% lower than normal gravity\"}",
+ "created": "2026-11-14T17:23:17",
+ "doc_checksum": "2b0cabdfe7942f56bad38967e9c870dd1c73f3cb52f614a1873a93f8cc51436e",
+ "finish_reason": "stop",
+ "item_id": "C-62ef41d72e",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-641a941a-2a7d-4e67-8192-841397651549",
+ "tag": "NTRS-20130010991",
+ "usage": {
+  "completion_tokens": 90,
+  "prompt_tokens": 787,
+  "total_tokens": 877
+ }
+}

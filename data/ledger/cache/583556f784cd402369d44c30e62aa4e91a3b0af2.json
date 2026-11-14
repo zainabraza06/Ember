@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states that smaller oxygen concentration excursions could decrease flammability testing boundaries, allowing more materials to pass\"}",
+ "created": "2026-11-14T17:51:43",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "C-f9e2fda130",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-0b81b0a0-c7d6-4b7b-9aaf-ad6cc707c213",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 81,
+  "prompt_tokens": 767,
+  "total_tokens": 848
+ }
+}

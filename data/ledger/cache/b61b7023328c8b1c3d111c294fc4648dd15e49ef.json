@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span reports no durometer effect generally, but does not specify it for material MQ\"}",
+ "created": "2026-11-14T17:21:13",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "C-cbca12ebcd",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-c73bdcaf-e3bb-4c08-8e20-e0ba0ffefbcf",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 104,
+  "prompt_tokens": 741,
+  "total_tokens": 845
+ }
+}

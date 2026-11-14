@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span confirms the 1.4 Hz variation and 90 s stabilization, but does not address flame temperature as claimed\"}",
+ "created": "2026-11-14T17:25:46",
+ "doc_checksum": "e38ec36f54817aa97e0c01a05f12b212521d6320ce3f4cb7a38bb7c837cfea8d",
+ "finish_reason": "stop",
+ "item_id": "C-4a6d85ec2f",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-70365ca6-5c46-4e36-8165-d4087ad5a3bd",
+ "tag": "NTRS-20170008805",
+ "usage": {
+  "completion_tokens": 156,
+  "prompt_tokens": 714,
+  "total_tokens": 870
+ }
+}

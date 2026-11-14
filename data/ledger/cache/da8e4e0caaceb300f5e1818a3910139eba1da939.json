@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states that concurrent rod geometry produced the most CO per CO2\"}",
+ "created": "2026-11-14T17:28:31",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-1d8030cd8f",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-388846c3-a711-40af-a286-b06cf6bf6380",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 668,
+  "total_tokens": 729
+ }
+}

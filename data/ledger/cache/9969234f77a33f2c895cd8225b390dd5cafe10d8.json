@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span reports a ~100% increase with reduced height duct but does not specify microgravity condition\"}",
+ "created": "2026-11-14T17:47:26",
+ "doc_checksum": "d25b394f43774ee79a3223b53e90571be299c8996d1cff2512c76e3308e107f5",
+ "finish_reason": "stop",
+ "item_id": "C-b3f459a833",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-c5f86775-a8a7-4118-84fe-62770d4b1a90",
+ "tag": "NTRS-20210011521",
+ "usage": {
+  "completion_tokens": 109,
+  "prompt_tokens": 692,
+  "total_tokens": 801
+ }
+}

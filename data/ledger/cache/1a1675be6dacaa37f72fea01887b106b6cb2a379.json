@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states that in Lunar gravity the oxygen margin of safety for charring fuels is ~2.5% lower than in 1g\"}",
+ "created": "2026-11-14T17:22:31",
+ "doc_checksum": "2b0cabdfe7942f56bad38967e9c870dd1c73f3cb52f614a1873a93f8cc51436e",
+ "finish_reason": "stop",
+ "item_id": "C-7fcdf18537",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-145c0d60-54b5-4e49-8eff-5311d4dfda45",
+ "tag": "NTRS-20130010991",
+ "usage": {
+  "completion_tokens": 57,
+  "prompt_tokens": 791,
+  "total_tokens": 848
+ }
+}

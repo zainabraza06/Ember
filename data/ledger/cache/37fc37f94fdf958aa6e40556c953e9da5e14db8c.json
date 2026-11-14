@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states MOC increased from 35 to 39 when switching from standard to exposed edge\"}",
+ "created": "2026-11-14T17:21:32",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "C-b541dd71a5",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-2afe1be6-56dc-4421-be15-39bec6c6976e",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 102,
+  "prompt_tokens": 749,
+  "total_tokens": 851
+ }
+}

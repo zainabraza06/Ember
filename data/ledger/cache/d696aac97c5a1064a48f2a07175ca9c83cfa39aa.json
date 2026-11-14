@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the 6 in sample has 1% lower MOC than 7, 8, 12 in for TA‑301\"}",
+ "created": "2026-11-14T17:24:32",
+ "doc_checksum": "0a8c1da4af61697ca09fa3f7c58807e88981870ed63f024bad2577f577623c93",
+ "finish_reason": "stop",
+ "item_id": "C-59d272a382",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-ba0b6230-e029-4dd8-899a-4f0e324fe2e2",
+ "tag": "NTRS-20170004702",
+ "usage": {
+  "completion_tokens": 179,
+  "prompt_tokens": 840,
+  "total_tokens": 1019
+ }
+}

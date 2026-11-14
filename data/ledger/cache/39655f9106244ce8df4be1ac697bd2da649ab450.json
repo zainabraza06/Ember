@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span explicitly states that in microgravity the flame spread rate over thin fuels decreases as opposed flow is reduced\"}",
+ "created": "2026-11-14T17:34:03",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-d5383f88dc",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-c5f760c2-76e6-4160-a415-474cc2d4de8c",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 80,
+  "prompt_tokens": 809,
+  "total_tokens": 889
+ }
+}

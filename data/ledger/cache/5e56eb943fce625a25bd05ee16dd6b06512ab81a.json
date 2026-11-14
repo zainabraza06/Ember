@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states a negative oxygen margin of safety ~4-5% for Mylar in Martian, Lunar, and 0g\"}",
+ "created": "2026-11-14T17:22:34",
+ "doc_checksum": "2b0cabdfe7942f56bad38967e9c870dd1c73f3cb52f614a1873a93f8cc51436e",
+ "finish_reason": "stop",
+ "item_id": "C-eaf0616cd8",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-b303d742-b0f1-4f41-b142-4e500f924084",
+ "tag": "NTRS-20130010991",
+ "usage": {
+  "completion_tokens": 138,
+  "prompt_tokens": 874,
+  "total_tokens": 1012
+ }
+}

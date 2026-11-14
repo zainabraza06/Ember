@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states that natural convection destroys spherical symmetry in normal (earth 1g) gravity, matching the claim\"}",
+ "created": "2026-11-14T17:23:20",
+ "doc_checksum": "b4f6ca983e2792c33a0b92220a791a818f426bb635b94f7fd33dc8c9c471e79d",
+ "finish_reason": "stop",
+ "item_id": "C-31870944bf",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-e6f82158-c40a-478b-98d1-8366f8839e3a",
+ "tag": "NTRS-20150023456",
+ "usage": {
+  "completion_tokens": 83,
+  "prompt_tokens": 809,
+  "total_tokens": 892
+ }
+}

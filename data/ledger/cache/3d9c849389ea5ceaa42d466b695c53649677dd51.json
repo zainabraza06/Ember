@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states lower pressures need higher oxygen to avoid hypoxia, raising flammability risk\"}",
+ "created": "2026-11-14T17:51:23",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "C-9f1a439f08",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-088811bc-cefe-4a0b-a87c-eb72c26dd32e",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 95,
+  "prompt_tokens": 711,
+  "total_tokens": 806
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states both diffusive and radiative extinction occurred in lower oxygen mole fraction environments and references the tables as claim says\"}",
+ "created": "2026-11-14T17:23:29",
+ "doc_checksum": "b4f6ca983e2792c33a0b92220a791a818f426bb635b94f7fd33dc8c9c471e79d",
+ "finish_reason": "stop",
+ "item_id": "C-81671928e9",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-9766db8d-9d23-4094-a379-7e72073778ee",
+ "tag": "NTRS-20150023456",
+ "usage": {
+  "completion_tokens": 80,
+  "prompt_tokens": 888,
+  "total_tokens": 968
+ }
+}

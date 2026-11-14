@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span states the oxygen margin of safety in 0g for charring materials is very close to zero, matching the claim\"}",
+ "created": "2026-11-14T17:22:28",
+ "doc_checksum": "2b0cabdfe7942f56bad38967e9c870dd1c73f3cb52f614a1873a93f8cc51436e",
+ "finish_reason": "stop",
+ "item_id": "C-21abfbb402",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-63611025-3981-436f-bbc2-6bb1d8277c1a",
+ "tag": "NTRS-20130010991",
+ "usage": {
+  "completion_tokens": 86,
+  "prompt_tokens": 774,
+  "total_tokens": 860
+ }
+}

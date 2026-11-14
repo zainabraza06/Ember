@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states the average 0g and Martian oxygen margins matching the claim\"}",
+ "created": "2026-11-14T17:22:37",
+ "doc_checksum": "2b0cabdfe7942f56bad38967e9c870dd1c73f3cb52f614a1873a93f8cc51436e",
+ "finish_reason": "stop",
+ "item_id": "C-eea68d247c",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-6a933ea1-4ffa-4347-8b7c-8af2c0199cc2",
+ "tag": "NTRS-20130010991",
+ "usage": {
+  "completion_tokens": 86,
+  "prompt_tokens": 731,
+  "total_tokens": 817
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states that lowering the pass/fail burn length criteria resulted in lower oxygen concentration flammability thresholds\"}",
+ "created": "2026-11-14T17:21:16",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "C-85fccb7954",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-03a1a3b1-35b0-4b33-a3a5-9bc03bf0ae86",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 76,
+  "prompt_tokens": 767,
+  "total_tokens": 843
+ }
+}

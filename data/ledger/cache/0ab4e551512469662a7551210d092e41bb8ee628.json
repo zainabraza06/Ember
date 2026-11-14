@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span gives the 3.95 mm/s rate for PMMA and the surrounding page title indicates 1‑g conditions\"}",
+ "created": "2026-11-14T17:49:50",
+ "doc_checksum": "bb0aadd2f9543483467b86796e6aa19f4e13c3f8169eec96134015f95ed61d79",
+ "finish_reason": "stop",
+ "item_id": "C-8fcadabed7",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-84502952-10f9-4167-9b70-d938f77efbdb",
+ "tag": "NTRS-20250010653",
+ "usage": {
+  "completion_tokens": 121,
+  "prompt_tokens": 625,
+  "total_tokens": 746
+ }
+}

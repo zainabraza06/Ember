@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states most data is well above 0.004 CO/CO2 ratio, indicating microgravity flames are inefficient\"}",
+ "created": "2026-11-14T17:28:49",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-b58d0b48b6",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-75b737ab-c9ab-41d3-8a37-10e4b7a3dbb1",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 116,
+  "prompt_tokens": 771,
+  "total_tokens": 887
+ }
+}

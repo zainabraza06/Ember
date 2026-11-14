@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span gives the exact shrink rate and context indicates partial gravity condition\"}",
+ "created": "2026-11-14T17:50:15",
+ "doc_checksum": "bb0aadd2f9543483467b86796e6aa19f4e13c3f8169eec96134015f95ed61d79",
+ "finish_reason": "stop",
+ "item_id": "C-41d4bddb09",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-32c2f270-6846-4fd9-b5ef-4f7ce1ba6f6d",
+ "tag": "NTRS-20250010653",
+ "usage": {
+  "completion_tokens": 133,
+  "prompt_tokens": 581,
+  "total_tokens": 714
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"The span directly states that some fuel ended up as soot, CO, and unburned hydrocarbons, matching the claim.\"}",
+ "created": "2026-11-14T17:30:54",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-469b05fda0",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-aff3e7f6-bfd0-4d72-9333-c27a5b186978",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 102,
+  "prompt_tokens": 803,
+  "total_tokens": 905
+ }
+}

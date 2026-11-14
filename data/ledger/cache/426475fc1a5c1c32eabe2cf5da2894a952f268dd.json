@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span confirms the increase but does not specify microgravity conditions\"}",
+ "created": "2026-11-14T17:30:29",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-73b5e1eeac",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-a11cea6f-4a3d-4605-89c5-da2c4a5a4168",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 99,
+  "prompt_tokens": 715,
+  "total_tokens": 814
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span states 13.5% O2 minimum in microgravity and 15.4% limit in normal gravity, matching the claim\"}",
+ "created": "2026-11-14T17:43:17",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-1df7f72b7d",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-6f227168-b78a-4996-8a2c-e3896464b9c1",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 160,
+  "prompt_tokens": 896,
+  "total_tokens": 1056
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span states the data agrees very well with stoichiometric ratios over a wide range of test conditions, matching the claim\"}",
+ "created": "2026-11-14T17:27:39",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-9287ab6aa6",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-6677399d-04bc-434a-9f30-9b4cb6b21d3f",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 134,
+  "prompt_tokens": 771,
+  "total_tokens": 905
+ }
+}

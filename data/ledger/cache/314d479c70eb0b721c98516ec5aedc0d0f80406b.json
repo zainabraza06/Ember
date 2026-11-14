@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states that reducing a (stretch rate) decreases the solid-phase conductive loss ratio\"}",
+ "created": "2026-11-14T17:44:36",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-d001d8777b",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-e363026d-9a8e-449f-b55f-c4cee563b008",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 89,
+  "prompt_tokens": 755,
+  "total_tokens": 844
+ }
+}

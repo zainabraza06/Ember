@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span gives the rates but does not state the microgravity condition required by the claim\"}",
+ "created": "2026-11-14T17:25:44",
+ "doc_checksum": "e38ec36f54817aa97e0c01a05f12b212521d6320ce3f4cb7a38bb7c837cfea8d",
+ "finish_reason": "stop",
+ "item_id": "C-b0dcad8095",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-a758707e-e1b5-423b-bada-b9667cfe31a1",
+ "tag": "NTRS-20170008805",
+ "usage": {
+  "completion_tokens": 184,
+  "prompt_tokens": 607,
+  "total_tokens": 791
+ }
+}

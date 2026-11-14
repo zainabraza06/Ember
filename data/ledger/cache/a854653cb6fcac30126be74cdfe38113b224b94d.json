@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span states extinction at 0.10 G and 0.12 atm, matching the claim\"}",
+ "created": "2026-11-14T17:20:13",
+ "doc_checksum": "fe2a32283bdf5161535f78a9e21b70d1bf4cb9e15a5e1081ea8eeab53c3bedfe",
+ "finish_reason": "stop",
+ "item_id": "C-f4d3c81aef",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-a4df26ec-8f77-4c4b-877d-41ac074332a1",
+ "tag": "NTRS-20010059376",
+ "usage": {
+  "completion_tokens": 129,
+  "prompt_tokens": 742,
+  "total_tokens": 871
+ }
+}

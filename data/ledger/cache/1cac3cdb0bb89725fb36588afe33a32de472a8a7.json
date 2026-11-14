@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span and context state the tip spread rate is ~double the base rate for SIBAL fabric in 1‑g\"}",
+ "created": "2026-11-14T17:49:43",
+ "doc_checksum": "bb0aadd2f9543483467b86796e6aa19f4e13c3f8169eec96134015f95ed61d79",
+ "finish_reason": "stop",
+ "item_id": "C-9ba619935b",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-4d9b3e3f-bbba-4ab2-a51f-ca58815545e4",
+ "tag": "NTRS-20250010653",
+ "usage": {
+  "completion_tokens": 109,
+  "prompt_tokens": 569,
+  "total_tokens": 678
+ }
+}

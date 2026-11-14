@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the equivalence ratio 1.3, fuel‑rich, using slope 0.4582 and PMMA molecular weight 100\"}",
+ "created": "2026-11-14T17:30:47",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "C-2e8f0b8dc8",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-f551d63d-6036-4e99-96cc-582b55976783",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 101,
+  "prompt_tokens": 958,
+  "total_tokens": 1059
+ }
+}

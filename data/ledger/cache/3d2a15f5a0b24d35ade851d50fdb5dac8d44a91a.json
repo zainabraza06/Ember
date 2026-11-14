@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span states higher gravity leads to higher flow velocities and more readily extinction, matching claim\"}",
+ "created": "2026-11-14T17:50:53",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "C-6f8d6b4ffd",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-c8099a0f-fa41-43ab-a983-14416a696d51",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 121,
+  "prompt_tokens": 724,
+  "total_tokens": 845
+ }
+}

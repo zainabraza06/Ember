@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"partial\",\"reason\":\"Span reports no silicone samples burned but does not explicitly state the microgravity condition\"}",
+ "created": "2026-11-14T17:25:33",
+ "doc_checksum": "e38ec36f54817aa97e0c01a05f12b212521d6320ce3f4cb7a38bb7c837cfea8d",
+ "finish_reason": "stop",
+ "item_id": "C-84c55dcc3f",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-7a89cee1-65d0-4800-8905-f827705cf5c0",
+ "tag": "NTRS-20170008805",
+ "usage": {
+  "completion_tokens": 146,
+  "prompt_tokens": 660,
+  "total_tokens": 806
+ }
+}
