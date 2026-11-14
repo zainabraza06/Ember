@@ -485,10 +485,16 @@ function renderCmp(){
 /* ---------- Ranking ---------- */
 const COMP_LABEL = {atmosphere:'Atmosphere match', safety_area:'Safety area', fuel:'Fuel type', data:'Per-test data', gravity:'Gravity regime'};
 function renderRank(){
-  const R = D.ranking, P = R.profiles[ST.rankProfile], inv = id => D.investigations.find(i => i.id===id);
+  const R = D.ranking, mars = ST.rankProfile==='mars_base', P = R.profiles[mars ? 'lunar_base' : ST.rankProfile], inv = id => D.investigations.find(i => i.id===id);
   $('#s-rank').innerHTML = `<h2>Which investigations matter most for each setting?</h2>
   <p class="muted">A fixed formula scores each of the 24 investigations from facts in the data (documented in docs/RANKING.md). It measures <b>relevance to the chosen atmosphere and safety needs</b>, not the quality of the science. The weights are the team's judgement and are shown below. No model is involved.</p>
-  <div class="row" role="group" aria-label="Mission profile">${['lunar_base','pressurized_rover','spacesuit','iss_cabin'].filter(k => R.profiles[k]).map(k => `<button aria-pressed="${k===ST.rankProfile}" onclick="ST.rankProfile='${k}';renderRank()">${esc(R.profiles[k].name)}</button>`).join('')}</div>
+  <div class="card small"><b>Which profile covers which environment</b><ul>
+   <li>Spacecraft and space station: the <b>${esc((R.profiles.iss_cabin||{}).name || 'ISS-like cabin')}</b> profile.</li>
+   <li>Lunar base and pressurized rover: the <b>${esc(R.profiles.lunar_base.name)}</b> and <b>${esc(R.profiles.pressurized_rover.name)}</b> profiles, which share one envelope (the official text gives the Moon Base and the pressurized rovers a single expected atmosphere).</li>
+   <li>Spacesuit: the <b>${esc(R.profiles.spacesuit.name)}</b> profile.</li>
+   <li>Mars base: <b>assumption</b>. NASA's challenge text gives no Mars-base atmosphere; the <i>Mars base (assumption)</i> button reuses the lunar envelope as an assumption, not as data.</li></ul></div>
+  <div class="row" role="group" aria-label="Mission profile">${['lunar_base','pressurized_rover','spacesuit','iss_cabin'].filter(k => R.profiles[k]).map(k => `<button aria-pressed="${k===ST.rankProfile}" onclick="ST.rankProfile='${k}';renderRank()">${esc(R.profiles[k].name)}</button>`).join('')}<button aria-pressed="${mars}" onclick="ST.rankProfile='mars_base';renderRank()">Mars base (assumption)</button></div>
+  ${mars ? `<p class="warn small"><b>Assumption, not data.</b> NASA's challenge text gives no Mars-base atmosphere; this profile reuses the lunar envelope as an assumption, not as data. The ranking below is therefore the lunar base ranking.</p>` : ''}
   <p class="small">Profile envelope: oxygen ${Math.round(P.envelope.o2_min*100)}-${Math.round(P.envelope.o2_max*100)}%, pressure ${P.envelope.p_min_kpa}-${P.envelope.p_max_kpa} kPa (${esc(P.basis)}).</p>
   <details class="card"><summary>How the score is built (weights)</summary><table><tr><th>Component</th><th>Weight</th><th>Rule</th></tr>${Object.entries(R.weights).map(([k,w]) => `<tr><td>${COMP_LABEL[k]}</td><td>${Math.round(w*100)}</td><td class="small">${esc(R.weight_text[k])}</td></tr>`).join('')}</table></details>
   <ol class="grid" style="list-style:none;padding:0">${P.items.map(it => { const i = inv(it.id); return `<li class="card"><div class="row"><b>#${it.rank}</b> <b>${esc(it.id)}</b> ${esc(i.acronym && i.acronym!=='none' ? i.acronym : '')} <span style="margin-left:auto"><b>${it.score}</b> / 100</span></div>
