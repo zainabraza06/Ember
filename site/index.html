@@ -420,9 +420,24 @@ function showZone(){
 /* ---------- Investigations / compare (G1, G2) ---------- */
 const hwList = [...new Set(D.investigations.map(i => i.hardware))].sort();
 function tagsHtml(i){ return i.tags.length ? i.tags.map(t => `<span class="tag ${t.tag}" title="${esc(t.reason)}">${t.tag}</span>`).join(' ') : `<span class="tag none" title="No basis in the official Background text or the investigation metadata">untagged</span>`; }
+/* ---------- Safety-area summary (prevention, detection, suppression) ---------- */
+const AREA_INFO = {prevention:'Which materials ignite and burn, and under what atmosphere: material selection and ignition control.', detection:'How smoke and aerosol behave in microgravity: smoke detection.', suppression:'How flames extinguish and how dilution (CO2, helium) and flow change that: fire suppression.'};
+const AREA_HEADLINE = {prevention:'C-3bb0ceb1d2', detection:'C-3a58e8c51e', suppression:'C-5cfb9db6ea'};   // existing public claims only; a column shows its headline only if that claim is public
+function openInv(id){ filterTag = ''; filterHw = ''; q = ''; show('inv'); renderInv(); const el = document.getElementById('inv-' + id); if (el) { const d = el.querySelector('details'); if (d) d.open = true; el.scrollIntoView({block:'start'}); } }
+function safetyPanel(){
+  const cols = ['prevention','detection','suppression'].map(a => {
+    const inv = D.investigations.filter(i => i.tags.some(t => t.tag===a)), hc = D.claims.find(c => c.claim_id===AREA_HEADLINE[a]);
+    return `<div class="card"><h3 style="margin-top:0"><span class="tag ${a}">${a}</span> ${inv.length} investigation${inv.length===1?'':'s'}</h3><p class="small">${esc(AREA_INFO[a])}</p>
+    <ul class="small">${inv.map(i => `<li><a href="#" onclick="openInv('${i.id}');return false">${esc(i.id)} ${esc(i.acronym && i.acronym!=='none' ? i.acronym : '')}</a>: ${esc(i.title)}<br><span class="muted">Tagged because: ${esc(i.tags.find(t => t.tag===a).reason)}</span></li>`).join('')}</ul>
+    ${hc ? `<p class="small"><b>Headline finding</b> (from the evidence ledger)</p>${claimHtml(hc)}` : ''}</div>`; }).join('');
+  const un = D.investigations.filter(i => !i.tags.length).length;
+  return `<h3>By safety area</h3><p class="small muted">NASA's challenge text frames spacecraft fire safety as prevention, detection and suppression. Each column lists the investigations carrying that tag (tags follow the official text or the investigation's own record); ${un} investigations carry no tag. Each headline is an approved or auto-verified ledger claim with its citation.</p><div class="grid">${cols}</div>`;
+}
 function renderInv(){
   const list = D.investigations.filter(i => (!filterTag || (filterTag==='untagged' ? !i.tags.length : i.tags.some(t => t.tag===filterTag))) && (!filterHw || i.hardware===filterHw) && (!q || (i.id+' '+i.title+' '+i.acronym+' '+i.objective).toLowerCase().includes(q)));
   $('#s-inv').innerHTML = `<h2>${D.investigations.length} combustion investigations</h2>
+  ${safetyPanel()}
+  <h3>All investigations</h3>
   <p class="muted small">Tags follow the official Background text where it names the investigation, otherwise the investigation's own metadata (hover a tag for the reason). Tick two or three and open Compare.</p>
   <div class="row"><input type="search" id="q" placeholder="Search title, acronym, objective" value="${esc(q)}" aria-label="Search investigations">
   <select id="ft" aria-label="Filter by safety area"><option value="">All safety areas</option>${['prevention','detection','suppression','untagged'].map(t=>`<option ${filterTag===t?'selected':''}>${t}</option>`).join('')}</select>
@@ -433,7 +448,7 @@ function renderInv(){
   $('#ft').onchange = e => { filterTag = e.target.value; renderInv(); }; $('#fh').onchange = e => { filterHw = e.target.value; renderInv(); };
 }
 function card(i){ const t = i.tests_summary;
-  return `<div class="card"><label class="row"><input type="checkbox" ${sel.has(i.id)?'checked':''} onchange="toggle('${i.id}',this)" aria-label="Select ${esc(i.id)} for comparison"> <b>${esc(i.id)}</b> ${esc(i.acronym && i.acronym!=='none' ? i.acronym : '')}</label>
+  return `<div class="card" id="inv-${i.id}"><label class="row"><input type="checkbox" ${sel.has(i.id)?'checked':''} onchange="toggle('${i.id}',this)" aria-label="Select ${esc(i.id)} for comparison"> <b>${esc(i.id)}</b> ${esc(i.acronym && i.acronym!=='none' ? i.acronym : '')}</label>
   <div>${esc(i.title)}</div><div class="row small" style="margin:6px 0">${tagsHtml(i)} <span class="tag">${esc(i.hardware)}</span></div>
   <div class="small muted">${t ? `${t.tests} test rows in the unified table` : 'no rows in the unified table'}${i.approx_tests && i.approx_tests!==ND ? ' | catalog: '+esc(i.approx_tests) : ''}</div>
   <details><summary class="small">Details</summary>${detail(i)}</details></div>`; }
