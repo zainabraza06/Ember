@@ -1,0 +1,13 @@
+claim_id,source,ai_page_check_result,ai_suggested_decision,evidence_note
+C-f4d3c81aef,NTRS 20010059376 p15,confirmed (OCR garbles 0.10 G and atm),approve with correction,"Text: model predicted extinction at 0.12 atm at 0.10 g, lower than experiments indicated; experimental low-g extinction limit 0.272 atm. Keep label 'model prediction'."
+C-9494f38314,NTRS 20130010991 p4,confirmed,approve,"Mylar burning at Martian-g ULOI (18% O2 at 10.2 psi); at 17% the flame goes out."
+C-b58d0b48b6,NTRS 20210011385 p16,confirmed,approve,"'For efficiently burned flue gases ... this ratio is typically less than 0.004.' Number is printed. Say it is a reference value for boilers/furnaces."
+C-56b6b21bc9,NTRS 20210011385 p31,confirmed,approve,"Steady flame on a 100-um sample at 2.2 mm/s; flow cut off; flame extinguished within 2 s."
+C-6a61f42d0f,NTRS 20210011385 p108,confirmed,approve,"SIBAL fabric; six quenching cases; quenching flow velocities 1 to 5 cm/s, higher at lower O2."
+C-2eef8a9583,NTRS 20210011521 p2,partly confirmed,correct,"Abstract says 'despite having heat release rates up to 10 kW'; it does not say measured or predicted. Write 'reported heat release rates up to 10 kW' and do not call it measured."
+C-e8b3564fc1,NTRS 20210011385 p31 (p21 gives only 0.1-0.4 mm),confirmed on p31,correct,"p31: extinction velocity about 1 cm/s for 100, 200 and 300 um and about 1.5 cm/s for 400 um. Change page to 31."
+C-cbca12ebcd,NTRS 20110008636 p5,partly confirmed,correct + human check,"'Limited tests conducted indicate that the material durometer did not significantly affect ... thresholds (Table 4).' Add 'In limited tests'. Material for Table 4 is not named in the sentence; a human must look at Table 4."
+C-84c55dcc3f,NTRS 20170008805 p12,confirmed,approve,"Saffire-2 silicone: none of the samples burned; tiny gas-phase flame did not spread. Microgravity flight test."
+C-d4455b6a17,NTRS 20170008805 p24,confirmed,correct,"Nomex HT90-40 burns on Earth only at 'around 24 to 25%' O2. Write 'around 24 to 25%'."
+C-0f4421dc5a,NTRS 20170004702 p6,confirmed,correct,"'In combination, both of these factors allow ... a double-rolled hem to increase MOC by one percent.' Factors = fire-stop effect (stops flame reaching trailing edge) plus hem at various O2. Add 'In combination'."
+LUCI rows (C-6a444e61aa, C-c6eb6afcd0, C-2171da5d6d, C-9571d561f4, C-02500f147f, C-9ba619935b, C-8fcadabed7, C-6d3837e628, C-41d4bddb09, C-fa0a7b71dc),NTRS 20250010653 slides 19 21 22 24 25 29 31 40 43,checked earlier in this session,see triage file,"Simulated lunar gravity by centrifuge (11 RPM, 1.22 m radius, about 0.165 g). Label as 'simulated partial gravity', not 'on the Moon'."

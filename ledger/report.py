@@ -117,6 +117,19 @@ def write_report(stats=None):
     L += ['## 7. Human audit', '',
           f"CLAIM_AUDIT.md: {done} of 30 sampled claims judged so far; " + (f"{yes} correct ({yes / done:.0%}); target >= 90%." if done else 'none judged yet (target >= 90% correct).'),
           f"Review queue: {status['needs_review']} claims in `data/review/claim_review.csv` await a decision.", '']
+    acc = [c for c in kept if c['status'] == 'approved']
+    corr = [c for c in acc if c.get('review', {}).get('corrected')]
+    hrej = [c for c in rej if 'human_rejected' in c['reasons']]
+    L += ['## 7b. Claim review decisions (AI-assisted page check, accepted by the team reviewer)', '',
+          f"On 2026-11-14 the team reviewer accepted an AI-assisted page check of the 84 claims held back for review (`data/review/claim_review.csv`; AI triage `data/CLAIM_TRIAGE_AI_SUGGESTIONS.csv`, AI page check `data/CLAIM_PAGE_CHECK_AI.csv`). "
+          'This is an AI-assisted page check, accepted by the team reviewer; it is not full human verification.', '',
+          '| outcome | claims |', '|---|---|',
+          f'| approved as extracted | {len(acc) - len(corr)} |', f'| approved with correction (reworded statement or gravity class; span unchanged) | {len(corr)} |',
+          f"| of which approved by manual override of a failed code check (not a passed check) | {sum(1 for c in acc if c.get('review', {}).get('code_check_override'))} |",
+          f'| rejected | {len(hrej)} |', f"| still needs_review | {status['needs_review']} |",
+          f'| claims whose source page a person opened and checked | {config.HUMAN_OPENED_CLAIMS} |', '',
+          'Gravity relabels of claims outside the review queue are listed in `data/review/gravity_relabel.csv`. A reworded statement is re-checked by code against its unchanged span (span, numbers, conditions); a failing wording stays needs_review. '
+          'Only verified_auto and approved claims are public; needs_review and rejected claims are never shown or used to answer.', '']
     if stats and (stats.get('stopped') or stats.get('failed_chunks') or stats.get('pending_chunks')):
         L += ['## 8. Last run did not complete', '', f"Stopped: {stats.get('stopped')}. Pending chunks: {len(stats.get('pending_chunks', []))}; failed chunks: {stats.get('failed_chunks')}. "
               'Rerun `python -m ledger`; finished calls are cached and are not repeated.', '']

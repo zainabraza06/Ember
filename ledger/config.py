@@ -83,3 +83,6 @@ KIND_PROVIDER = {'extract': 'gemini', 'verify': 'groq', 'rate': 'groq'}
 MAX_TOKENS = int(os.environ.get('LEDGER_MAX_TOKENS', 3_000_000))   # total over the whole history, all providers
 MAX_RETRIES = int(os.environ.get('LEDGER_MAX_RETRIES', 8))
 DAILY_RETRY_AFTER_S = 900   # a Retry-After longer than this is treated as a daily limit
+
+# Claims whose source page a person opened and checked by hand. Set by the team; no claim has been opened by a person so far.
+HUMAN_OPENED_CLAIMS = 0

@@ -272,6 +272,24 @@ class Display(Sandbox):
             self.assertIsNone(display.public_view(self.claim('NTRS-1', st), src['NTRS-1']))
         self.assertIsNotNone(display.public_view(self.claim('NTRS-1', 'approved'), src['NTRS-1']))
 
+    def test_review_correction_keeps_span_and_is_not_labelled_human(self):
+        from ledger import build
+        c = good_claim()
+        c.update(doc_id='NTRS-1', status='approved', claim_id='C-x', group_id=None)
+        c['verification'] = {}
+        span = c['span']
+        edit = {'statement': 'A corrected statement.', 'gravity_class': 'partial_other', 'gravity_label': 'simulated partial gravity (centrifuge, about 0.165 g)',
+                'reviewer': 'R (accepted AI-assisted review)', 'reviewed_on': '2026-11-14', 'note': 'AI-assisted check, accepted by reviewer'}
+        build.apply_review(c, edit, {c['page']: span})
+        self.assertEqual(c['span'], span)                                   # the span is never changed
+        self.assertEqual(c['statement'], 'A corrected statement.')
+        self.assertIn('original_statement', c)
+        self.assertEqual(c['conditions']['gravity_class'], 'partial_other')
+        v = display.public_view(c, display.load_sources()['NTRS-1'])
+        self.assertEqual(v['gravity_label'], 'simulated partial gravity (centrifuge, about 0.165 g)')
+        self.assertNotIn('human', v['review_label'].lower())               # nobody opened the PDF: never "human verified"
+        self.assertTrue(v['corrected'])
+
 
 class SecondRater(unittest.TestCase):
     def test_kappa(self):

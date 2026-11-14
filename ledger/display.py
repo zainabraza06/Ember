@@ -34,9 +34,9 @@ def public_view(claim, source):
     allowed = source.get('display_verbatim') == 'yes'
     return {'claim_id': claim['claim_id'], 'statement': claim['statement'], 'status': claim['status'], 'variables': claim['variables'],
             'conditions': claim['conditions'], 'effect_direction': claim['effect_direction'], 'evidence_type': claim['evidence_type'],
-            'group_id': claim.get('group_id'), 'independent_sources': claim.get('independent_sources', 0),
+            'gravity_label': claim.get('gravity_label'), 'corrected': 'original_statement' in claim, 'group_id': claim.get('group_id'), 'independent_sources': claim.get('independent_sources', 0),
             'citation': citation(claim, source), 'source_url': source['url'], 'page': claim['page'],
-            'review_label': 'unreviewed' if claim['status'] == 'pending_verification' else ('human-approved' if claim['status'] == 'approved' else 'auto-verified'),
+            'review_label': 'unreviewed' if claim['status'] == 'pending_verification' else ('reviewer-accepted (AI-assisted check)' if claim['status'] == 'approved' else 'auto-verified'),
             'span': claim['span'] if allowed else None, 'span_hidden_reason': None if allowed else 'source is not a US Government work (copyright)'}
 
 

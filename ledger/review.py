@@ -5,7 +5,7 @@ import re
 
 from . import config
 
-REVIEW_FIELDS = ['claim_id', 'doc_id', 'page', 'reasons', 'gravity_class', 'statement', 'span', 'decision', 'reviewer', 'reviewed_on', 'note']
+REVIEW_FIELDS = ['claim_id', 'doc_id', 'page', 'reasons', 'gravity_class', 'statement', 'span', 'decision', 'reviewer', 'reviewed_on', 'note', 'original_statement', 'gravity_label']
 AUDIT_SEED = 20261019
 
 
@@ -22,7 +22,8 @@ def write_review_csv(claims):
             rows.append({'claim_id': c['claim_id'], 'doc_id': c['doc_id'], 'page': c['page'], 'reasons': ';'.join(c['reasons']),
                          'gravity_class': c['conditions']['gravity_class'], 'statement': c['statement'], 'span': c['span'],
                          'decision': prev.get('decision', ''), 'reviewer': prev.get('reviewer', ''), 'reviewed_on': prev.get('reviewed_on', ''),
-                         'note': prev.get('note', '')})
+                         'note': prev.get('note', ''), 'original_statement': c.get('original_statement', prev.get('original_statement', '')),
+                         'gravity_label': c.get('gravity_label', prev.get('gravity_label', ''))})
     config.REVIEW_CSV.parent.mkdir(parents=True, exist_ok=True)
     with open(config.REVIEW_CSV, 'w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=REVIEW_FIELDS, lineterminator='\n')

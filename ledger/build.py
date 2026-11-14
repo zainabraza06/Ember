@@ -32,6 +32,59 @@ def load_decisions():
     return out
 
 
+def load_review_edits():
+    """Reviewer edits of approved rows in claim_review.csv: claim_id -> {statement, gravity_class, gravity_label, reviewer, reviewed_on, note}."""
+    out = {}
+    if config.REVIEW_CSV.exists():
+        with open(config.REVIEW_CSV, encoding='utf-8') as f:
+            for r in csv.DictReader(f):
+                if (r.get('decision') or '').strip().lower() == 'approved':
+                    out[r['claim_id']] = {k: (r.get(k) or '').strip() for k in ('statement', 'gravity_class', 'gravity_label', 'reviewer', 'reviewed_on', 'note')}
+    return out
+
+
+def load_relabels():
+    """Reviewer relabels of claims outside the review queue: data/review/gravity_relabel.csv (claim_id, gravity_class, gravity_label, reviewer, reviewed_on, note)."""
+    out = {}
+    path = config.REVIEW_CSV.parent / 'gravity_relabel.csv'
+    if path.exists():
+        with open(path, encoding='utf-8') as f:
+            out = {r['claim_id']: r for r in csv.DictReader(f)}
+    return out
+
+
+def apply_relabel(c, r):
+    """Change only the gravity class and label shown for a claim; its status, statement and span stay as they were."""
+    if r['gravity_class'] and r['gravity_class'] != c['conditions']['gravity_class']:
+        c['original_gravity_class'] = c['conditions']['gravity_class']
+        c['conditions']['gravity_class'] = r['gravity_class']
+    c['gravity_label'] = r['gravity_label']
+    c['gravity_relabel'] = {'reviewer': r['reviewer'], 'reviewed_on': r['reviewed_on'], 'note': r['note']}
+
+
+def apply_review(c, edit, pages):
+    """Record the reviewer's acceptance on the claim and apply a corrected statement / gravity class / gravity label.
+    The span is never changed. The code checks (span, numbers, conditions) are re-run on a corrected statement and stored."""
+    c['review'] = {'reviewer': edit['reviewer'], 'reviewed_on': edit['reviewed_on'], 'note': edit['note'], 'basis': 'ai_assisted_page_check_accepted_by_reviewer'}
+    if edit['statement'] and edit['statement'] != c['statement']:
+        c['original_statement'] = c['statement']
+        c['statement'] = edit['statement']
+        c['verification']['review_recheck'] = {
+            'span': check_span(c['span'], c['page'], pages)['result'],
+            'numbers': check_numbers([c['statement'], c['magnitude_text']], c['span'])['result'],
+            'conditions': check_conditions(c['conditions'], c['span'])['result']}
+    if edit['gravity_class'] and edit['gravity_class'] != c['conditions']['gravity_class']:
+        c['original_gravity_class'] = c['conditions']['gravity_class']
+        c['conditions']['gravity_class'] = edit['gravity_class']
+    if edit['gravity_label']:
+        c['gravity_label'] = edit['gravity_label']
+    # an approved claim whose reworded statement fails a code check was approved by manual override of that check
+    rc = c['verification'].get('review_recheck', {})
+    c['review']['code_check_override'] = any(v not in ('exact', 'pass') for v in rc.values())
+    # a correction = reworded statement or corrected gravity class; a gravity label alone (simulated partial gravity) is a relabel, not a correction
+    c['review']['corrected'] = 'original_statement' in c or ('original_gravity_class' in c and not edit['gravity_label'])
+
+
 def verify_claim(client, src, c, doc_pages, vprompt, vversion, use_llm=True):
     pg = c['page']
     c['doc_id'] = src['doc_id']
@@ -115,6 +168,7 @@ def run(client, doc_ids=None, eprompt=None, vprompt=None, quiet=False, verify=Tr
             stats['pending_verifications'] += 1
         out.append(c)
     decisions = load_decisions()
+    edits = load_review_edits()
     for c in out:
         if c['verification']['support']['result'] == 'pending':
             c['status'], c['reasons'] = 'needs_review', ['support_check_pending']
@@ -123,8 +177,14 @@ def run(client, doc_ids=None, eprompt=None, vprompt=None, quiet=False, verify=Tr
         d = decisions.get(c['claim_id'])
         if d == 'approved' and c['status'] in ('needs_review', 'pending_verification'):
             c['status'] = 'approved'
+            if c['claim_id'] in edits:
+                apply_review(c, edits[c['claim_id']], pages[c['doc_id']])
         elif d == 'rejected':
             c['status'], c['reasons'] = 'rejected', c['reasons'] + ['human_rejected']
+    relabels = load_relabels()
+    for c in out:
+        if c['claim_id'] in relabels:
+            apply_relabel(c, relabels[c['claim_id']])
     assign_groups(out, {s['doc_id']: s for s in read_sources()})
     return out, stats
 
