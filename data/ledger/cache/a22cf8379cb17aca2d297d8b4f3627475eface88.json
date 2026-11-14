@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 6, \"locator\": \"\", \"span\": \"In combination, both of these factors allow the implementation of a double-rolled hem to increase MOC by one percent.\", \"statement\": \"The implementation of a double-rolled hem increases the MOC by 1 percent.\", \"variables\": [\"material\", \"oxygen_concentration\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"double-rolled hem\", \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"one percent\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 6, \"locator\": \"\", \"span\": \"When looking at Figure 5 bulk burn length data, it is also observed that a steady increase in burn length as a function of oxygen concentration in addition to periodic erratic longer burn lengths are indicative of the flammability MOC transition zone.\", \"statement\": \"A steady increase in burn length occurs as a function of oxygen concentration.\", \"variables\": [\"flame_spread_rate\", \"oxygen_concentration\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 6, \"locator\": \"\", \"span\": \"The ULOI represents the oxygen concentration with 50 percent probability of failure.\", \"statement\": \"The ULOI represents the oxygen concentration with 50 percent probability of failure.\", \"variables\": [\"oxygen_concentration\", \"extinction\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"threshold\", \"magnitude_text\": \"50 percent\", \"evidence_type\": \"review\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:16:59",
+ "doc_checksum": "0a8c1da4af61697ca09fa3f7c58807e88981870ed63f024bad2577f577623c93",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20170004702:p6-8",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "MlH4arqRLKzMnsEPldvLyAw",
+ "tag": "NTRS-20170004702",
+ "usage": {
+  "completion_tokens": 613,
+  "prompt_tokens": 2899,
+  "total_tokens": 3512
+ }
+}

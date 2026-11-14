@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 5, \"locator\": \"\", \"span\": \"Examination of MOC data in Figure 2  reveals no sample length impact  on MOCs for Ultem, Nomex HT 90-40 (Hemmed), and NX22 45.\", \"statement\": \"For Ultem, Nomex HT 90-40 (Hemmed), and NX2245, the sample length does not affect the Maximum Oxygen Concentration (MOC).\", \"variables\": [\"material\", \"sample_thickness\", \"oxygen_concentration\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"Ultem, Nomex HT 90-40 (Hemmed), NX2245\", \"geometry\": null}, \"effect_direction\": \"no_effect\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 5, \"locator\": \"\", \"span\": \"For material TA-301, the sample length of 6 in. shows a one percent lower MOC than MOC at 7, 8, and 12 in. in Figure 2.\", \"statement\": \"For TA-301, a 6 in. sample length results in a 1 percent lower MOC compared to 7, 8, and 12 in. sample lengths.\", \"variables\": [\"material\", \"sample_thickness\", \"oxygen_concentration\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"TA-301\", \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"1 percent\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:16:49",
+ "doc_checksum": "0a8c1da4af61697ca09fa3f7c58807e88981870ed63f024bad2577f577623c93",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20170004702:p3-5",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "LFH4arXFCcC5kdUPn66ZmQg",
+ "tag": "NTRS-20170004702",
+ "usage": {
+  "completion_tokens": 518,
+  "prompt_tokens": 3368,
+  "total_tokens": 3886
+ }
+}

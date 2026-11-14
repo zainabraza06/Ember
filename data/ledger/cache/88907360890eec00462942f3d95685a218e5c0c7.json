@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 4, \"locator\": \"\", \"span\": \"The computed results suggest that the spread rate and the flame length are approximately proportional to the gravity level.\", \"statement\": \"The flame spread rate and flame length are approximately proportional to the gravity level.\", \"variables\": [\"flame_spread_rate\", \"gravity_level\"], \"conditions\": {\"gravity_class\": \"partial_other\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"model\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:14:26",
+ "doc_checksum": "fe2a32283bdf5161535f78a9e21b70d1bf4cb9e15a5e1081ea8eeab53c3bedfe",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20010059376:p4-5",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "olD4aqWYAZS-vdIPxc61MA",
+ "tag": "NTRS-20010059376",
+ "usage": {
+  "completion_tokens": 197,
+  "prompt_tokens": 3119,
+  "total_tokens": 3316
+ }
+}

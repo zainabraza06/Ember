@@ -1,0 +1,19 @@
+{
+ "content": "{\n  \"claims\": [\n    {\n      \"page\": 32,\n      \"locator\": \"Figure 2.10.\",\n      \"span\": \"Discontinuity at time t = 30 s coincides with disappearance of visible flame.\",\n      \"statement\": \"A discontinuity in the radiometer signal at 30 seconds coincides with the disappearance of the visible flame.\",\n      \"variables\": [\n        \"extinction\",\n        \"other\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"not_stated\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": null,\n        \"flow_cm_s_max\": null,\n        \"material\": null,\n        \"geometry\": null\n      },\n      \"effect_direction\": \"not_applicable\",\n      \"magnitude_text\": \"t = 30 s\",\n      \"evidence_type\": \"observation\",\n      \"extraction_confidence\": \"high\"\n    }\n  ]\n}",
+ "created": "2026-11-14T16:59:07",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011385:p32-32",
+ "kind": "extract",
+ "model_version": "gemini-2.5-flash",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-2.5-flash",
+ "response_id": "B034asDmJbC6kdUP2OXgoAg",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 872,
+  "prompt_tokens": 1244,
+  "total_tokens": 2116
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": []}",
+ "created": "2026-11-14T16:49:48",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011385:p9-9",
+ "kind": "extract",
+ "model_version": "gemini-3-flash-preview",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3-flash-preview",
+ "response_id": "0Er4asTvNvmY3boP2IyKwA0",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 1215,
+  "prompt_tokens": 1615,
+  "total_tokens": 2830
+ }
+}

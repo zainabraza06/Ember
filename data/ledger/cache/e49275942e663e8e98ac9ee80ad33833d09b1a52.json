@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n {\"page\": 34, \"locator\": \"Figure 2.12\", \"span\": \"Figure 2.12.\\u2014Computational spread rate for flame spread over 100-\\u00b5m-thick sheet of polymethylmethacrylate at two different O2 levels. Extinction velocity increases from 1.5 cm/s at 21 percent O2 to 3.5 cm/s at 16 percent, closely matching experimental results.\", \"statement\": \"Extinction velocity increases from 1.5 cm/s at 21 percent O2 to 3.5 cm/s at 16 percent for a 100-\\u00b5m-thick sheet of polymethylmethacrylate.\", \"variables\": [\"oxygen_concentration\", \"extinction\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": 0.16, \"oxygen_fraction_max\": 0.21, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"polymethylmethacrylate\", \"geometry\": \"sheet\"}, \"effect_direction\": \"decreases\", \"magnitude_text\": \"1.5 cm/s at 21",
+ "created": "2026-11-14T17:01:51",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "length",
+ "item_id": "NTRS-20210011385:p34-34",
+ "kind": "extract",
+ "model_version": "gemini-3-flash-preview",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3-flash-preview",
+ "response_id": "lU34aoaVCPavnsEP-qWikAQ",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 7985,
+  "prompt_tokens": 1884,
+  "total_tokens": 9869
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 98, \"locator\": \"\", \"span\": \"At the bottom of the flammability map, heat losses are only 30 percent of the total heating rate to the surface, so the transition from blowoff to quenching occurs when the convective flows become the same order of magnitude as diffusive flows, shifting the critical Damköhler number residence time limitations to diffusive time limitations.\", \"statement\": \"At the bottom of the flammability map, heat losses account for 30 percent of the total heating rate to the surface.\", \"variables\": [\"other\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"30 percent\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:11:58",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011385:p98-100",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "C1D4arWbIOP8vdIP97qQsAg",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 252,
+  "prompt_tokens": 4003,
+  "total_tokens": 4255
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states pyrolysis and flame lengths increase linearly with gravity level\"}",
+ "created": "2026-11-14T17:19:28",
+ "doc_checksum": "fe2a32283bdf5161535f78a9e21b70d1bf4cb9e15a5e1081ea8eeab53c3bedfe",
+ "finish_reason": "stop",
+ "item_id": "C-51c3060ee8",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-8776fb06-7120-4315-bc53-7c7e19b9ab4f",
+ "tag": "NTRS-20010059376",
+ "usage": {
+  "completion_tokens": 85,
+  "prompt_tokens": 758,
+  "total_tokens": 843
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n {\"page\": 41, \"locator\": \"\", \"span\": \"If the buoyancy-generated flow is strong enough or the O2 level is low enough (or both), a competition between the combustion time and residence time may usher in chemical kinetics effect (Ref. 7) on the flame, leading to a reduction of spread rate or even extinction.\", \"statement\": \"Low oxygen levels can lead to a reduction of flame spread rate.\",\n  \"variables\": [\"oxygen_concentration\", \"flame_spread_rate\"],\n  \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null,\n                 \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null,\n                 \"material\": null, \"geometry\": null},\n  \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"review\", \"extraction_confidence\": \"high\"},\n {\"page\": 41, \"locator\": \"\", \"span\": \"If the buoyancy-generated flow is strong enough or the O2 level is low enough (or both), a competition between the combustion time and residence time may usher in chemical kinetics effect (Ref. 7) on the flame, leading to a reduction of spread rate",
+ "created": "2026-11-14T17:05:33",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "length",
+ "item_id": "NTRS-20210011385:p41-42",
+ "kind": "extract",
+ "model_version": "gemini-3-flash-preview",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3-flash-preview",
+ "response_id": "ck74asruOIb8nsEP5aaBoA0",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 7986,
+  "prompt_tokens": 2652,
+  "total_tokens": 10638
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n {\"page\": 44, \"locator\": \"\", \"span\": \"One of the remarkable aspects of these expressions is that the spread rate is independent of opposing flow velocity Vg for thin fuels\", \"statement\": \"The flame spread rate is independent of the opposing flow velocity Vg for thin fuels.\",\n  \"variables\": [\"flow_velocity\", \"flame_spread_rate\", \"material\"],\n  \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null,\n                 \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null,\n                 \"material\": \"thin fuels\", \"geometry\": null},\n  \"effect_direction\": \"no_effect\", \"magnitude_text\": \"\", \"evidence_type\": \"review\", \"extraction_confidence\": \"high\"},\n {\"page\": 44, \"locator\": \"\", \"span\": \"One of the remarkable aspects of these expressions is that the spread rate is independent of opposing flow velocity Vg for thin fuels while it is proportional to Vg for thick fuels.\", \"statement\": \"The flame spread rate is proportional to the opposing flow velocity Vg for thick fuels.\",\n  \"variables\": [\"flow_velocity\", \"flame_spread",
+ "created": "2026-11-14T17:08:55",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "length",
+ "item_id": "NTRS-20210011385:p44-44",
+ "kind": "extract",
+ "model_version": "gemini-3-flash-preview",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3-flash-preview",
+ "response_id": "QE_4aq6VDNe0nsEPkpnT6Ao",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 7985,
+  "prompt_tokens": 2036,
+  "total_tokens": 10021
+ }
+}

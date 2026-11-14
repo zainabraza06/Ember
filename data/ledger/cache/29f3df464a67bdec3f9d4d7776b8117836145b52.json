@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 5, \"locator\": \"\", \"span\": \"The flammability thresholds decreased with decreasing thickness for MQ (Table 3).\", \"statement\": \"The flammability thresholds for MQ decrease as the sample thickness decreases.\", \"variables\": [\"sample_thickness\", \"oxygen_concentration\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"MQ\", \"geometry\": null}, \"effect_direction\": \"decreases\", \"magnitude_text\": \"\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 5, \"locator\": \"\", \"span\": \"Limited tests conducted indicate that the material durometer did not significantly affect the oxygen concentration flammability thresholds (Table 4).\", \"statement\": \"The material durometer does not significantly affect the oxygen concentration flammability thresholds for MQ.\", \"variables\": [\"other\", \"oxygen_concentration\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"MQ\", \"geometry\": null}, \"effect_direction\": \"no_effect\", \"magnitude_text\": \"\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:15:39",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20110008636:p3-5",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "6lD4ao7JLb3wkdUP4srPmAU",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 391,
+  "prompt_tokens": 3844,
+  "total_tokens": 4235
+ }
+}

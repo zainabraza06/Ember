@@ -1,0 +1,19 @@
+{
+ "content": "{\n  \"claims\": [\n    {\n      \"page\": 35,\n      \"locator\": \"\",\n      \"span\": \"Because the gas phase is the only source of heating, the gas-phase length scales are comparable: Lgx ~ Lgy.\",\n      \"statement\": \"Because the gas phase is the only source of heating, the gas-phase length scales Lgx and Lgy are comparable.\",\n      \"variables\": [\n        \"other\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"not_stated\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": null,\n        \"flow_cm_s_max\": null,\n        \"material\": null,\n        \"geometry\": null\n      },\n      \"effect_direction\": \"not_applicable\",\n      \"magnitude_text\": \"Lgx ~ Lgy\",\n      \"evidence_type\": \"model\",\n      \"extraction_confidence\": \"high\"\n    },\n    {\n      \"page\": 35,\n      \"locator\": \"\",\n      \"span\": \"substituting Lsy, the heated layer thickness in Figure 2.",
+ "created": "2026-11-14T17:02:47",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "length",
+ "item_id": "NTRS-20210011385:p35-35",
+ "kind": "extract",
+ "model_version": "gemini-3-flash-preview",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3-flash-preview",
+ "response_id": "y034atemJvyY3boPm4LAYQ",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 7985,
+  "prompt_tokens": 1598,
+  "total_tokens": 9583
+ }
+}

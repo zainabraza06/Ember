@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 76, \"locator\": \"\", \"span\": \"Ignition generally occurred at a forced flow of 5 cm/s, so the ignition delay is plotted in Figure 6.2 against the initial O2 concentration alone.\", \"statement\": \"Ignition generally occurred at a forced flow of 5 cm/s.\", \"variables\": [\"flow_velocity\", \"ignition\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": 5, \"flow_cm_s_max\": 5, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"5 cm/s\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 76, \"locator\": \"\", \"span\": \"Below an initial O2 concentration of 16 percent, the ignition delay time increased significantly.\", \"statement\": \"Below an initial oxygen concentration of 0.16, the ignition delay time increases significantly.\", \"variables\": [\"oxygen_concentration\", \"ignition\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": 0.16, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"16 percent\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 76, \"locator\": \"\", \"span\": \"Below an initial O2 concentration of ~14.5 percent O2, a sustained ignition could not be achieved even though flames were observed when the igniter was on and briefly after the igniter was turned off before extinguishing.\", \"statement\": \"Below an initial oxygen concentration of 0.145, a sustained ignition could not be achieved.\", \"variables\": [\"oxygen_concentration\", \"ignition\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": 0.145, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"threshold\", \"magnitude_text\": \"~14.5 percent\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 76, \"locator\": \"\", \"span\": \"Despite this limiting O2 concentration for ignition, flames ignited at a higher O2 survived to final O2 concentrations as low as 13.6 percent O2\", \"statement\": \"Flames ignited at a higher oxygen concentration survived to final oxygen concentrations as low as 0.136.\", \"variables\": [\"oxygen_concentration\", \"extinction\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": 0.136, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"threshold\", \"magnitude_text\": \"13.6 percent\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:11:19",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011385:p76-79",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "4U_4apD9HoLm7M8P_9XLgQw",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 866,
+  "prompt_tokens": 3037,
+  "total_tokens": 3903
+ }
+}

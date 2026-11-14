@@ -1,0 +1,19 @@
+{
+ "content": "{\n  \"claims\": [\n    {\n      \"page\": 39,\n      \"locator\": \"2.3.1 Abstract\",\n      \"span\": \"The comparison is further complicated by the fact that establishing a thermal regime in a normal-gravity environment is difficult because of the buoyancy-induced flow, which may usher in finite-rate kinetics effect.\",\n      \"statement\": \"Establishing a thermal regime in a normal-gravity environment is difficult because buoyancy-induced flow can cause finite-rate kinetics effects.\",\n      \"variables\": [\n        \"gravity_level\",\n        \"other\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"earth_1g\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": null,\n        \"flow_cm_s_max\": null,\n        \"material\": null,\n        \"geometry\": null\n      },\n      \"effect_direction\": \"not_applicable\",\n      \"magnitude_text\": \"\",\n      \"evidence_type\": \"review\",\n      \"extraction_confidence\": \"high\"\n    },\n    {\n      \"page\": 39,\n      \"locator\": \"2",
+ "created": "2026-11-14T17:04:11",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "length",
+ "item_id": "NTRS-20210011385:p39-40",
+ "kind": "extract",
+ "model_version": "gemini-3-flash-preview",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3-flash-preview",
+ "response_id": "IU74auuWBpGlkdUPzMmwwAk",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 7986,
+  "prompt_tokens": 2189,
+  "total_tokens": 10175
+ }
+}

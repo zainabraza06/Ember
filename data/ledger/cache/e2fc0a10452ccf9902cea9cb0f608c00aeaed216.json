@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 6, \"locator\": \"\", \"span\": \"Practical scale fires ranging from 1.5 to 3.2 kW were tested in unmanned spacecraft with free air volumes of 17 to 19 cubic meters.\", \"statement\": \"Practical scale fires ranging from 1.5 to 3.2 kW were tested in unmanned spacecraft with free air volumes of 17 to 19 cubic meters.\", \"variables\": [\"other\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 6, \"locator\": \"\", \"span\": \"The smoke from the fire event was readily detected by an ionization detector and a light scattering system but a typical alarm threshold was only achieved at 981 seconds.\", \"statement\": \"A typical alarm threshold for smoke detection was achieved at 981 seconds.\", \"variables\": [\"other\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"threshold\", \"magnitude_text\": \"981 seconds\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:14:18",
+ "doc_checksum": "7f875da1d6abeeeeac64aeba67d3f160074cf98430e714fe7606b34b37e0aa59",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20240002981:p6-7",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "d1D4as7fBNCixN8PwL3EsQM",
+ "tag": "NTRS-20240002981",
+ "usage": {
+  "completion_tokens": 422,
+  "prompt_tokens": 2852,
+  "total_tokens": 3274
+ }
+}

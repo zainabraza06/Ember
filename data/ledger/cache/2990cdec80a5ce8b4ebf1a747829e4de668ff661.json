@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 8, \"locator\": \"\", \"span\": \"The flammability thresholds decreased with decreasing thickness for MQ.\", \"statement\": \"For MQ material, flammability thresholds decrease as the material thickness decreases.\", \"variables\": [\"sample_thickness\", \"oxygen_concentration\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"MQ\", \"geometry\": null}, \"effect_direction\": \"decreases\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 8, \"locator\": \"\", \"span\": \"Although the ULOIs for the two configurations were approximately the same, the MOC increased from 35 for the standard test configuration to 39 for the exposed edge.\", \"statement\": \"The MOC increased from 35 to 39 when changing from the standard test configuration to the exposed edge configuration.\", \"variables\": [\"sample_geometry\", \"oxygen_concentration\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"35 to 39\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 8, \"locator\": \"\", \"span\": \"As expected, lowering the pass/fail burn length criteria resulted in lower oxygen concentration flammability thresholds.\", \"statement\": \"Lowering the pass/fail burn length criteria results in lower oxygen concentration flammability thresholds.\", \"variables\": [\"burn_time\", \"oxygen_concentration\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"decreases\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 8, \"locator\": \"\", \"span\": \"The information obtained so far indicates there is insignificant difference in the oxygen concentration flammability thresholds when comparing 1/8-in. dia rods with \\u00bd-in. wide samples.\", \"statement\": \"There is no significant difference in oxygen concentration flammability thresholds between 1/8-in. diameter rods and 1/2-in. wide samples.\", \"variables\": [\"sample_geometry\", \"oxygen_concentration\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"no_effect\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:15:53",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20110008636:p8-9",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "91D4avGhCJ2HnsEPpvKm6As",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 833,
+  "prompt_tokens": 2444,
+  "total_tokens": 3277
+ }
+}

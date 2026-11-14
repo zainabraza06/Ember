@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 3, \"locator\": \"\", \"span\": \"A higher oxygen concentration also increases fire risk (see the discussion of flammability below) therefore spacesuits use special materials and limit ignition sources to mitigate this risk.\", \"statement\": \"Increasing oxygen concentration increases the risk of fire.\", \"variables\": [\"oxygen_concentration\", \"other\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 3, \"locator\": \"\", \"span\": \"Generally, higher oxygen concentrations and/or higher oxygen partial pressures equate to a higher flammability risk.\", \"statement\": \"Higher oxygen concentrations and higher oxygen partial pressures increase flammability risk.\", \"variables\": [\"oxygen_concentration\", \"other\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"review\", \"extraction_confidence\": \"high\"},\n  {\"page\": 3, \"locator\": \"\", \"span\": \"As oxygen concentrations increase beyond 30% (or as partial pressure increases), some materials are less likely to pass\", \"statement\": \"Increasing oxygen concentration above 30% makes some materials less likely to pass flammability tests.\", \"variables\": [\"oxygen_concentration\", \"other\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": 0.3, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"decreases\", \"magnitude_text\": \"30%\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:17:12",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20260002050:p1-3",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "PFH4aofSKNaLvdIP49e28As",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 587,
+  "prompt_tokens": 2800,
+  "total_tokens": 3387
+ }
+}

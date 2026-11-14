@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 49, \"locator\": \"\", \"span\": \"At very high flow velocity, kinetically driven blowoff extinction was observed and at very low velocity (at about 1 cm/s) radiative extinction was observed.\", \"statement\": \"At a very low flow velocity of about 1 cm/s, radiative extinction was observed.\", \"variables\": [\"flow_velocity\", \"extinction\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"threshold\", \"magnitude_text\": \"1 cm/s\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 49, \"locator\": \"\", \"span\": \"The highest spread rate in the microgravity environment, 2.2 mm/s, is about the same as the downward spread rate.\", \"statement\": \"The highest flame spread rate in a microgravity environment is 2.2 mm/s.\", \"variables\": [\"flame_spread_rate\", \"gravity_level\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"2.2 mm/s\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 50, \"locator\": \"\", \"span\": \"Although for thicker fuels, the spread rate is slightly width dependent, a value of 0.042 mm/s for a 10-cm-wide sample (Ref. 23) as opposed to 0.044 mm/s for the 2-cm-wide sample, an average value of 0.044 mm/s is selected as the average spread rate for downward spread over PMMA in the thick limit.\", \"statement\": \"For downward spread over PMMA in the thick limit, the average flame spread rate is 0.044 mm/s.\", \"variables\": [\"flame_spread_rate\", \"sample_geometry\", \"material\"], \"conditions\": {\"gravity_class\": \"earth_1g\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"PMMA\", \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"0.044 mm/s\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 51, \"locator\": \"\", \"span\": \"The transition thickness (2τtransition) can be calculated from this expression as 5.19 mm for downward flame spread in ambient air.\", \"statement\": \"The transition thickness for downward flame spread in ambient air is 5.19 mm.\", \"variables\": [\"sample_thickness\"], \"conditions\": {\"gravity_class\": \"earth_1g\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"5.19 mm\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:10:25",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011385:p49-51",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "q0_4aumwArLOvdIP-LvU0Qs",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 928,
+  "prompt_tokens": 3076,
+  "total_tokens": 4004
+ }
+}

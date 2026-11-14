@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 2, \"locator\": \"\", \"span\": \"For materials with maximum oxygen concentrations (MOCs) at which extinguishment occurs in the range of 25-35% oxygen, the data indicate there is an approximately linear dependence of MOCs on total pressure Pt having the form: MOC = m Pt + b (1)\", \"statement\": \"The maximum oxygen concentration at which a material extinguishes has an approximately linear dependence on total pressure.\", \"variables\": [\"oxygen_concentration\", \"pressure\", \"extinction\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": 0.25, \"oxygen_fraction_max\": 0.35, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 2, \"locator\": \"\", \"span\": \"Pressure flammability thresholds in 99.8% oxygen were determined.3 For the materials tested, the maximum total pressure flammability threshold ranged from 0.4 to 0.9 psia before combustion was sustained.\", \"statement\": \"For materials tested in 99.8% oxygen, the maximum total pressure flammability threshold ranged from 0.4 to 0.9 psia.\", \"variables\": [\"pressure\", \"oxygen_concentration\", \"ignition\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": 0.998, \"oxygen_fraction_max\": 0.998, \"pressure_kpa_min\": 2.7579, \"pressure_kpa_max\": 6.2053, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"0.4 to 0.9 psia\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 2, \"locator\": \"\", \"span\": \"When compared with tests at ambient temperatures, preheating the material to 200 °F resulted in ULOI lowering from 49 to 40.8 for polytetrafluoroethylene.\", \"statement\": \"Preheating polytetrafluoroethylene to 200 °F lowered the limiting oxygen concentration from 49 to 40.8.\", \"variables\": [\"flame_temperature\", \"oxygen_concentration\", \"extinction\", \"material\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"polytetrafluoroethylene\", \"geometry\": null}, \"effect_direction\": \"decreases\", \"magnitude_text\": \"lowering from 49 to 40.8\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:15:37",
+ "doc_checksum": "f66084a447e893c73eeff41ed03ddf443e988df35817ad6501e167ecd77b44f2",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20110008636:p1-2",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "41D4auOvEbmZkdUP8ZzVuQk",
+ "tag": "NTRS-20110008636",
+ "usage": {
+  "completion_tokens": 768,
+  "prompt_tokens": 3084,
+  "total_tokens": 3852
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 4, \"locator\": \"\", \"span\": \"When the oxygen is decreased in another test to 17%, the flame goes out.\", \"statement\": \"For Mylar at 10.2 psi in Martian gravity, the flame extinguishes when the oxygen concentration is 17%.\", \"variables\": [\"oxygen_concentration\", \"extinction\", \"pressure\", \"gravity_level\", \"material\"], \"conditions\": {\"gravity_class\": \"mars\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"Mylar\", \"geometry\": null}, \"effect_direction\": \"threshold\", \"magnitude_text\": \"17%\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:15:03",
+ "doc_checksum": "2b0cabdfe7942f56bad38967e9c870dd1c73f3cb52f614a1873a93f8cc51436e",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20130010991:p3-6",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "xlD4aqb1LuPo7M8PyOiC0Ag",
+ "tag": "NTRS-20130010991",
+ "usage": {
+  "completion_tokens": 218,
+  "prompt_tokens": 3463,
+  "total_tokens": 3681
+ }
+}

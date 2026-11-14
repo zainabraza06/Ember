@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states flames spread faster and were longer with wider samples\"}",
+ "created": "2026-11-14T17:18:07",
+ "doc_checksum": "fe2a32283bdf5161535f78a9e21b70d1bf4cb9e15a5e1081ea8eeab53c3bedfe",
+ "finish_reason": "stop",
+ "item_id": "C-82a727d1d8",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-476d2d7f-1aae-4daa-b44e-89616fd5762c",
+ "tag": "NTRS-20010059376",
+ "usage": {
+  "completion_tokens": 96,
+  "prompt_tokens": 773,
+  "total_tokens": 869
+ }
+}

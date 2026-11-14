@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 2, \"locator\": \"\", \"span\": \"Overall, the temperature and pressure rise in the spacecraft were found to be less significant than the increase in carbon dioxide and carbon monoxide.\", \"statement\": \"In the spacecraft, the increase in carbon dioxide and carbon monoxide was more significant than the rise in temperature and pressure.\", \"variables\": [\"other\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:13:31",
+ "doc_checksum": "7f875da1d6abeeeeac64aeba67d3f160074cf98430e714fe7606b34b37e0aa59",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20240002981:p1-2",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "alD4aue4IoSnkdUP-4ysgQk",
+ "tag": "NTRS-20240002981",
+ "usage": {
+  "completion_tokens": 202,
+  "prompt_tokens": 3339,
+  "total_tokens": 3541
+ }
+}

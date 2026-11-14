@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states that increasing width increases pyrolysis length\"}",
+ "created": "2026-11-14T17:18:26",
+ "doc_checksum": "fe2a32283bdf5161535f78a9e21b70d1bf4cb9e15a5e1081ea8eeab53c3bedfe",
+ "finish_reason": "stop",
+ "item_id": "C-1507b3edf7-b",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-3491e465-d921-4193-af31-b5d76de710e1",
+ "tag": "NTRS-20010059376",
+ "usage": {
+  "completion_tokens": 72,
+  "prompt_tokens": 693,
+  "total_tokens": 765
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\n  \"claims\": [\n    {\n      \"page\": 10,\n      \"locator\": \"\",\n      \"span\": \"The CO versus CO2 followed a linear trend for some datasets, but not for all the different geometries of fuel and flow tested.\",\n      \"statement\": \"The CO versus CO2 followed a linear trend for some datasets, but not for all the different geometries of fuel and flow tested.\",\n      \"variables\": [\n        \"sample_geometry\",\n        \"flow_velocity\",\n        \"other\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"microgravity\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": null,\n        \"flow_cm_s_max\": null,\n        \"material\": null,\n        \"geometry\": null\n      },\n      \"effect_direction\": \"not_applicable\",\n      \"magnitude_text\": \"\",\n      \"evidence_type\": \"measurement\",\n      \"extraction_confidence\": \"high\"\n    },\n    {\n      \"page\": 10,\n      \"locator\": \"\",\n      \"span\": \"The results showed that most of the",
+ "created": "2026-11-14T16:50:50",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "length",
+ "item_id": "NTRS-20210011385:p10-11",
+ "kind": "extract",
+ "model_version": "gemini-3-flash-preview",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3-flash-preview",
+ "response_id": "9kr4aqK_MtSUkdUP1fCm6Aw",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 7986,
+  "prompt_tokens": 2488,
+  "total_tokens": 10474
+ }
+}

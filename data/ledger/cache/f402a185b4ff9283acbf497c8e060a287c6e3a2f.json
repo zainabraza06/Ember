@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 63, \"locator\": \"\", \"span\": \"Combustion of clear cast polymethylmethacrylate (PMMA) samples 10 cm long by either 1 or 2 cm wide with thicknesses ranging from 1 to 5 mm was investigated in opposed flow.\", \"statement\": \"The combustion of PMMA samples with thicknesses between 1 mm and 5 mm was studied in opposed flow.\", \"variables\": [\"material\", \"sample_thickness\", \"flow_direction\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"polymethylmethacrylate\", \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 64, \"locator\": \"\", \"span\": \"Airflow speeds ranging from as low as 3 cm/s up to 20 cm/s were used in the flow duct.\", \"statement\": \"Airflow speeds in the duct ranged from 3 cm/s to 20 cm/s.\", \"variables\": [\"flow_velocity\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": \"3\", \"flow_cm_s_max\": \"20\", \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 65, \"locator\": \"Table 5.1\", \"span\": \"M7 1 1.2 2 10, 6, 5, and 3 0.106, 0.099, 0.083, and 0.07\", \"statement\": \"For test M7, as the opposed-flow velocity decreased from 10 cm/s to 3 cm/s, the flame spread rate decreased from 0.106 mm/s to 0.07 mm/s.\", \"variables\": [\"flow_velocity\", \"flame_spread_rate\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": \"3\", \"flow_cm_s_max\": \"10\", \"material\": \"polymethylmethacrylate\", \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 65, \"locator\": \"Table 5.1\", \"span\": \"M16 1 2.2 2 5, 3, and 2 0.144, 0.1309, and 0.1062\", \"statement\": \"For test M16, as the opposed-flow velocity decreased from 5 cm/s to 2 cm/s, the flame spread rate decreased from 0.144 mm/s to 0.1062 mm/s.\", \"variables\": [\"flow_velocity\", \"flame_spread_rate\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": \"2\", \"flow_cm_s_max\": \"5\", \"material\": \"polymethylmethacrylate\", \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:10:51",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011385:p63-65",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "xU_4atHTB8HjxN8Pqqa_gQ8",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 972,
+  "prompt_tokens": 3695,
+  "total_tokens": 4667
+ }
+}

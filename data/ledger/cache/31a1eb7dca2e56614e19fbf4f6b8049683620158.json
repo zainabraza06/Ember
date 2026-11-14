@@ -1,0 +1,19 @@
+{
+ "content": "{\n  \"claims\": [\n    {\n      \"page\": 1,\n      \"locator\": \"\",\n      \"span\": \"Previous testing at microgravity and Lunar gravity indicated that some materials burned to lower oxygen concentrations in low gravity than in normal gravity\",\n      \"statement\": \"Some materials burn at lower oxygen concentrations in microgravity and lunar gravity than in normal gravity.\",\n      \"variables\": [\n        \"oxygen_concentration\",\n        \"gravity_level\",\n        \"material\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"not_stated\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": null,\n        \"flow_cm_s_max\": null,\n        \"material\": null,\n        \"geometry\": null\n      },\n      \"effect_direction\": \"decreases\",\n      \"magnitude_text\": \"\",\n      \"evidence_type\": \"review\",\n      \"extraction_confidence\": \"high\"\n    },\n    {\n      \"page\": 1,\n      \"locator\": \"\",\n      \"span\": \"Keeping oxygen partial pressure constant while reducing total pressure has the effect of increasing the concentration of oxygen which in turn leads to increased flammability of materials.\",\n      \"statement\": \"Increasing the concentration of oxygen leads to increased flammability of materials.\",\n      \"variables\": [\n        \"oxygen_concentration\",\n        \"material\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"not_stated\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": null,\n        \"flow_cm_s_max\": null,\n        \"material\": null,\n        \"geometry\": null\n      },\n      \"effect_direction\": \"increases\",\n      \"magnitude_text\": \"\",\n      \"evidence_type\": \"observation\",\n      \"extraction_confidence\": \"high\"\n    }\n  ]\n}",
+ "created": "2026-11-14T17:15:01",
+ "doc_checksum": "2b0cabdfe7942f56bad38967e9c870dd1c73f3cb52f614a1873a93f8cc51436e",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20130010991:p1-2",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "wFD4arudLK6b3boP9Jiq2A4",
+ "tag": "NTRS-20130010991",
+ "usage": {
+  "completion_tokens": 519,
+  "prompt_tokens": 2766,
+  "total_tokens": 3285
+ }
+}

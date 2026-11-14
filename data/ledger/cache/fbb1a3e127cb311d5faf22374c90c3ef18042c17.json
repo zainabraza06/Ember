@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n {\"page\": 43, \"locator\": \"\", \"span\": \"If the O2 level is reduced, the fuel consumption rate F\\u2032\\u2032\\u2032\\u03c9\\u02d9 decreases increasing tg,chem and finite-rate chemistry becomes important, leading to flame extinction, when tg,chem becomes comparable to tg,res.\", \"statement\": \"Reducing the O2 level decreases the fuel consumption rate and leads to flame extinction when the chemical time becomes comparable to the residence time.\",\n  \"variables\": [\"oxygen_concentration\", \"extinction\"],\n  \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null,\n                 \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null,\n                 \"material\": null, \"geometry\": null},\n  \"effect_direction\": \"threshold\", \"magnitude_text\": \"\", \"evidence_type\": \"review\", \"extraction_confidence\": \"high\"},\n {\"page\": 43, \"locator\": \"\", \"span\": \"Even if there is sufficient O2, if Vg is high enough, tg,res can decrease to the point that it becomes comparable to",
+ "created": "2026-11-14T17:07:20",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "length",
+ "item_id": "NTRS-20210011385:p43-43",
+ "kind": "extract",
+ "model_version": "gemini-3-flash-preview",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3-flash-preview",
+ "response_id": "3k74ataYGf60xN8PrfulmA8",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 7986,
+  "prompt_tokens": 2214,
+  "total_tokens": 10200
+ }
+}

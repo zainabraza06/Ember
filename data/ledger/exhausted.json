@@ -1,5 +1,7 @@
 {
  "gemini": {
+  "gemini-2.5-flash": "2026-11-14",
+  "gemini-3-flash-preview": "2026-11-14",
   "gemini-3.5-flash": "2026-11-14",
   "gemini-3.6-flash": "2026-11-14"
  }

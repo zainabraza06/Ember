@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": []}",
+ "created": "2026-11-14T17:18:06",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20260002050:p9-9",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "bVH4arGICYfhnsEP8IOO4Qw",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 5,
+  "prompt_tokens": 2205,
+  "total_tokens": 2210
+ }
+}

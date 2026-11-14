@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 3, \"locator\": \"\", \"span\": \"Observed steady flame propagation speeds and pyrolysis lengths were approximately proportional to the gravity level.\", \"statement\": \"Steady flame propagation speeds and pyrolysis lengths are approximately proportional to the gravity level.\", \"variables\": [\"flame_spread_rate\", \"gravity_level\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"thin cellulose fuel\", \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 3, \"locator\": \"\", \"span\": \"Flames spread more quickly and were longer with the wider samples and the variations with gravity and pressure increased with sample width.\", \"statement\": \"Flames spread more quickly and were longer with wider samples.\", \"variables\": [\"flame_spread_rate\", \"sample_geometry\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"thin cellulose fuel\", \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:14:20",
+ "doc_checksum": "fe2a32283bdf5161535f78a9e21b70d1bf4cb9e15a5e1081ea8eeab53c3bedfe",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20010059376:p1-3",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "m1D4aoeRLJfHkdUPgsWNqQk",
+ "tag": "NTRS-20010059376",
+ "usage": {
+  "completion_tokens": 393,
+  "prompt_tokens": 2290,
+  "total_tokens": 2683
+ }
+}

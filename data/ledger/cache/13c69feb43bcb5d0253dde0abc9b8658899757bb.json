@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 1, \"locator\": \"\", \"span\": \"Though additional data need s to be generated to provide statistical confidence, preliminary findings are that use of variable sample lengths has minimal impact on NASA-STD-6001B flammability performance and MOC determination.\", \"statement\": \"Using variable sample lengths has minimal impact on NASA-STD-6001B flammability performance and MOC determination.\", \"variables\": [\"sample_geometry\", \"other\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"no_effect\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 1, \"locator\": \"\", \"span\": \"Due to the chemical ignition method, the minimum igniter affected length is ~2 in. As a result, the minimum burn length for easily ignitable materials is ~2 in.\", \"statement\": \"The minimum burn length for easily ignitable materials is ~2 in.\", \"variables\": [\"ignition\", \"other\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"2 in.\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 2, \"locator\": \"\", \"span\": \"The upward limiting oxygen index (ULOI) is the oxygen concentration where there is ~50 percent probability for a material to extinguish .\", \"statement\": \"The upward limiting oxygen index is the oxygen concentration where there is ~50 percent probability for a material to extinguish.\", \"variables\": [\"oxygen_concentration\", \"extinction\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"threshold\", \"magnitude_text\": \"50 percent\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:16:43",
+ "doc_checksum": "0a8c1da4af61697ca09fa3f7c58807e88981870ed63f024bad2577f577623c93",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20170004702:p1-2",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "_VD4aqz-EovqkdUP2d2HqAk",
+ "tag": "NTRS-20170004702",
+ "usage": {
+  "completion_tokens": 640,
+  "prompt_tokens": 2445,
+  "total_tokens": 3085
+ }
+}

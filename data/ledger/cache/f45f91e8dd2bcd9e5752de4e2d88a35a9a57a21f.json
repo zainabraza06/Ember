@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 11, \"locator\": \"\", \"span\": \"Near the entrance of a flow environment, the undeveloped boundary layer can lead to flame sizes that are initially 30% larger than occur with developed flow until the flame spreads into a region with developed flow.\", \"statement\": \"Near the entrance of a flow environment, the undeveloped boundary layer can lead to flame sizes that are initially 30% larger than occur with developed flow.\", \"variables\": [\"flow_velocity\", \"flame_temperature\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"30%\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 11, \"locator\": \"\", \"span\": \"The steady state size was affected by the oxygen concentration and the flow velocity.\", \"statement\": \"The steady state size of flames was affected by the oxygen concentration and the flow velocity.\", \"variables\": [\"oxygen_concentration\", \"flow_velocity\", \"flame_temperature\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 11, \"locator\": \"\", \"span\": \"In one case, a flame was seen to jump a 4.5 cm gap to ignite a previously warmed PMMA surface.\", \"statement\": \"In one case, a flame was seen to jump a 4.5 cm gap to ignite a previously warmed PMMA surface.\", \"variables\": [\"ignition\", \"material\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"PMMA\", \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"4.5 cm\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:13:26",
+ "doc_checksum": "d25b394f43774ee79a3223b53e90571be299c8996d1cff2512c76e3308e107f5",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011521:p11-12",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "ZFD4apa_FMz8kdUP842ggAM",
+ "tag": "NTRS-20210011521",
+ "usage": {
+  "completion_tokens": 639,
+  "prompt_tokens": 3274,
+  "total_tokens": 3913
+ }
+}

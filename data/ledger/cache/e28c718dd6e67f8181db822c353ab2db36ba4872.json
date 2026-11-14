@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states spread rate and flame length are approximately proportional to gravity level\"}",
+ "created": "2026-11-14T17:18:13",
+ "doc_checksum": "fe2a32283bdf5161535f78a9e21b70d1bf4cb9e15a5e1081ea8eeab53c3bedfe",
+ "finish_reason": "stop",
+ "item_id": "C-056365883d",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-ee32cf5a-6a6d-4da5-bc4c-99cb183ae4ec",
+ "tag": "NTRS-20010059376",
+ "usage": {
+  "completion_tokens": 76,
+  "prompt_tokens": 654,
+  "total_tokens": 730
+ }
+}

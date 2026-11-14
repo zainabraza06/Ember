@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 12, \"locator\": \"\", \"span\": \"The oxygen concentration in the chamber is measured. As the burns progress, the oxygen concentration drops, enabling a limiting value for extinction to be defined.\", \"statement\": \"As burns progress, the oxygen concentration drops, which allows for the definition of a limiting value for extinction.\", \"variables\": [\"oxygen_concentration\", \"extinction\"], \"conditions\": {\"gravity_class\": \"lunar\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"threshold\", \"magnitude_text\": \"\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 19, \"locator\": \"\", \"span\": \"Flame base spread rate = .92 mm/s.\", \"statement\": \"The flame base spread rate for SIBAL fabric is 0.92 mm/s.\", \"variables\": [\"flame_spread_rate\", \"material\"], \"conditions\": {\"gravity_class\": \"lunar\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"SIBAL fabric\", \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"0.92 mm/s\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 19, \"locator\": \"\", \"span\": \"Flame tip spread rate = 1.1 mm/s\", \"statement\": \"The flame tip spread rate for SIBAL fabric is 1.1 mm/s.\", \"variables\": [\"flame_spread_rate\", \"material\"], \"conditions\": {\"gravity_class\": \"lunar\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"SIBAL fabric\", \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"1.1 mm/s\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 21, \"locator\": \"\", \"span\": \"Flame spread rate = 1.5 mm/s.\", \"statement\": \"The flame spread rate for the PMMA rod is 1.5 mm/s.\", \"variables\": [\"flame_spread_rate\", \"material\"], \"conditions\": {\"gravity_class\": \"lunar\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"PMMA\", \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"1.5 mm/s\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 22, \"locator\": \"\", \"span\": \"O2% decreases from 20% to 14.3%.\", \"statement\": \"The oxygen concentration decreased from 20% to 14.3%.\", \"variables\": [\"oxygen_concentration\"], \"conditions\": {\"gravity_class\": \"lunar\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"20% to 14.3%\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:15:22",
+ "doc_checksum": "bb0aadd2f9543483467b86796e6aa19f4e13c3f8169eec96134015f95ed61d79",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20250010653:p1-22",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "1lD4asWcNJmIxN8P8d7U4Qo",
+ "tag": "NTRS-20250010653",
+ "usage": {
+  "completion_tokens": 995,
+  "prompt_tokens": 3328,
+  "total_tokens": 4323
+ }
+}

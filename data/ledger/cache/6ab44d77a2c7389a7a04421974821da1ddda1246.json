@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 13, \"locator\": \"\", \"span\": \"Both model and experiments indicate that flame spread rate increases linearly with gravity level.\", \"statement\": \"The flame spread rate increases linearly as the gravity level increases.\", \"variables\": [\"flame_spread_rate\", \"gravity_level\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 13, \"locator\": \"\", \"span\": \"Both the simulation and experiments show that the pyrolysis and flame lengths increase linearly with gravity level.\", \"statement\": \"Pyrolysis and flame lengths increase linearly as the gravity level increases.\", \"variables\": [\"flame_spread_rate\", \"gravity_level\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 13, \"locator\": \"\", \"span\": \"At a gravity level of 0. I0 G, the model predicted extinction at 0.12 arm pressure, lower than the experiments indicated.\", \"statement\": \"At a gravity level of 0.10 G, the model predicts flame extinction at a pressure of 0.12 atm.\", \"variables\": [\"extinction\", \"gravity_level\", \"pressure\"], \"conditions\": {\"gravity_class\": \"partial_other\", \"gravity_g\": \"0.10\", \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"threshold\", \"magnitude_text\": \"0.12 atm\", \"evidence_type\": \"model\", \"extraction_confidence\": \"high\"},\n  {\"page\": 13, \"locator\": \"\", \"span\": \"A low gravity extinction limit was determined at a pressure of 0.272 alan, where the flame went out at 2.5 x 10 -3 G.\", \"statement\": \"At a pressure of 0.272 atm, the flame extinguishes at a gravity level of 2.5 x 10 -3 G.\", \"variables\": [\"extinction\", \"pressure\", \"gravity_level\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"threshold\", \"magnitude_text\": \"2.5 x 10 -3 G\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:14:46",
+ "doc_checksum": "fe2a32283bdf5161535f78a9e21b70d1bf4cb9e15a5e1081ea8eeab53c3bedfe",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20010059376:p13-15",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "tFD4auWTFYb8nsEP5aaBoA0",
+ "tag": "NTRS-20010059376",
+ "usage": {
+  "completion_tokens": 840,
+  "prompt_tokens": 3477,
+  "total_tokens": 4317
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 56, \"locator\": \"\", \"span\": \"Sustained flame spread for the conditions tested was not observed for opposed-flow velocities below approximately 4 mm/s for the 0.00635- and 0.009525-m-diameter rods.\", \"statement\": \"Sustained flame spread was not observed for PMMA rods with diameters of 0.00635 m and 0.009525 m at opposed-flow velocities below 4 mm/s.\", \"variables\": [\"flow_velocity\", \"extinction\", \"sample_thickness\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"PMMA\", \"geometry\": \"rod\"}, \"effect_direction\": \"threshold\", \"magnitude_text\": \"4 mm/s\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 56, \"locator\": \"\", \"span\": \"As can be seen in Figure 4.1(a), the average flame spread rate increases with opposed-flow velocity, even within the small range of flow velocities tested.\", \"statement\": \"The average flame spread rate increases as the opposed-flow velocity increases.\", \"variables\": [\"flame_spread_rate\", \"flow_velocity\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"PMMA\", \"geometry\": \"rod\"}, \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 56, \"locator\": \"\", \"span\": \"In Figure 4.1(b), the data exhibits an upward trend in spread rate with increasing O2 concentration, which is especially marked in the results of the 6.35-mm-diameter rods.\", \"statement\": \"The flame spread rate increases as the oxygen concentration increases.\", \"variables\": [\"flame_spread_rate\", \"oxygen_concentration\"], \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"PMMA\", \"geometry\": \"rod\"}, \"effect_direction\": \"increases\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:10:36",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011385:p55-57",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "uE_4aumQJ47d7M8Py6XLqQI",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 691,
+  "prompt_tokens": 3307,
+  "total_tokens": 3998
+ }
+}

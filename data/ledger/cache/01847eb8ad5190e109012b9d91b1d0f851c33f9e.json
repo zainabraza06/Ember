@@ -1,0 +1,19 @@
+{
+ "content": "{\n  \"claims\": [\n    {\n      \"page\": 11,\n      \"locator\": \"\",\n      \"span\": \"NASA tests and controls materials from a flammability perspective using an upward burning test in normal gravity, which is considered to be the worst-case geometry for flammability of the material on Earth.\",\n      \"statement\": \"An upward burning test in normal gravity is considered the worst-case geometry for material flammability on Earth.\",\n      \"variables\": [\n        \"sample_geometry\",\n        \"flame_spread_rate\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"earth_1g\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": null,\n        \"flow_cm_s_max\": null,\n        \"material\": null,\n        \"geometry\": \"upward burning\"\n      },\n      \"effect_direction\": \"not_applicable\",\n      \"magnitude_text\": \"\",\n      \"evidence_type\": \"review\",\n      \"extraction_confidence\": \"high\"\n    }\n  ]\n}",
+ "created": "2026-11-14T16:51:36",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011385:p11-11",
+ "kind": "extract",
+ "model_version": "gemini-2.5-flash",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-2.5-flash",
+ "response_id": "QUv4ar2wE9Xp7M8P15XloQc",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 1947,
+  "prompt_tokens": 1905,
+  "total_tokens": 3852
+ }
+}

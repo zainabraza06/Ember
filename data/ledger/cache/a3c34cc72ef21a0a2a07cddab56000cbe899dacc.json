@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span states flame length increased with pressure, matching the claim\"}",
+ "created": "2026-11-14T17:18:19",
+ "doc_checksum": "fe2a32283bdf5161535f78a9e21b70d1bf4cb9e15a5e1081ea8eeab53c3bedfe",
+ "finish_reason": "stop",
+ "item_id": "C-a9852ebe04-b",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-7195e10d-d094-4e01-a203-061502c9aa53",
+ "tag": "NTRS-20010059376",
+ "usage": {
+  "completion_tokens": 92,
+  "prompt_tokens": 709,
+  "total_tokens": 801
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 52, \"locator\": \"\", \"span\": \"formula for the thermal regime was used to determine the de Ris coefficient F as 4.76 for an oxidizing mixture of 21 percent O2 and 79 percent N2.\", \"statement\": \"The de Ris coefficient F is 4.76 for an oxidizing mixture of 0.21 O2 and 0.79 N2.\", \"variables\": [\"other\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": 0.21, \"oxygen_fraction_max\": 0.21, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"4.76\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 52, \"locator\": \"\", \"span\": \"With F evaluated, experimental data for flame spread over thick PMMA is used to determine the effective velocity induced by buoyancy as 1.9 cm/s.\", \"statement\": \"The effective velocity induced by buoyancy for flame spread over thick PMMA is 1.9 cm/s.\", \"variables\": [\"flow_velocity\", \"material\"], \"conditions\": {\"gravity_class\": \"earth_1g\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"PMMA\", \"geometry\": \"thick\"}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"1.9 cm/s\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n  {\"page\": 52, \"locator\": \"\", \"span\": \"For PMMA in ambient air, this transition thickness is evaluated to be 5.2 mm.\", \"statement\": \"The transition thickness for PMMA in ambient air is 5.2 mm.\", \"variables\": [\"sample_thickness\", \"material\"], \"conditions\": {\"gravity_class\": \"earth_1g\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": \"PMMA\", \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"5.2 mm\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:10:28",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011385:p52-54",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "sk_4arShF5qikdUPjLXh0Qk",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 656,
+  "prompt_tokens": 3427,
+  "total_tokens": 4083
+ }
+}

@@ -38,6 +38,10 @@ def parse_diluent(d):
 
 
 def bin_label(lo, hi):
+    if lo <= 0:
+        return f'below {hi:g}'
+    if hi > 1:
+        return f'{lo:g} or more'
     return f'{lo:g} to {hi:g}'
 
 

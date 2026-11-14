@@ -1,0 +1,19 @@
+{
+ "content": "{\n  \"claims\": [\n    {\n      \"page\": 74,\n      \"locator\": \"\",\n      \"span\": \"Flames survived at airflow less than 1 cm/s.\",\n      \"statement\": \"In microgravity, flames on PMMA, POM, and HDPE rods survived at airflow speeds of less than 1 cm/s.\",\n      \"variables\": [\n        \"flow_velocity\",\n        \"extinction\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"microgravity\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": null,\n        \"flow_cm_s_max\": 1,\n        \"material\": \"PMMA, POM, HDPE\",\n        \"geometry\": \"stagnation\"\n      },\n      \"effect_direction\": \"threshold\",\n      \"magnitude_text\": \"1 cm/s\",\n      \"evidence_type\": \"observation\",\n      \"extraction_confidence\": \"high\"\n    },\n    {\n      \"page\": 75,\n      \"locator\": \"\",\n      \"span\": \"A continuously stirred tank reactor (CSTR) model was used to time the N2 flow to obtain the desired initial O2 concentrations down to as low as 13.6 percent O2.\",\n      \"statement\": \"The minimum initial oxygen concentration tested was 13.6 percent.\",\n      \"variables\": [\n        \"oxygen_concentration\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"microgravity\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": 0.136,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": null,\n        \"flow_cm_s_max\": null,\n        \"material\": \"PMMA\",\n        \"geometry\": null\n      },\n      \"effect_direction\": \"threshold\",\n      \"magnitude_text\": \"13.6 percent\",\n      \"evidence_type\": \"measurement\",\n      \"extraction_confidence\": \"high\"\n    }\n  ]\n}",
+ "created": "2026-11-14T17:11:12",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011385:p74-75",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "2U_4atnVIbOykdUP2KfygAk",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 543,
+  "prompt_tokens": 2767,
+  "total_tokens": 3310
+ }
+}

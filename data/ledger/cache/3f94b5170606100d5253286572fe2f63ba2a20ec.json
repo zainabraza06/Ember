@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n  {\"page\": 6, \"locator\": \"\", \"span\": \"Improvements to accuracy and reliability of spacecraft ECLSS sensors and gas injection can result in smaller oxygen concentration excursions which could decrease the boundaries for material flammability testing (i.e., more materials might pass).\", \"statement\": \"Reducing oxygen concentration excursions can decrease the boundaries for material flammability testing, potentially allowing more materials to pass.\", \"variables\": [\"oxygen_concentration\", \"material\"], \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"decreases\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"},\n  {\"page\": 7, \"locator\": \"\", \"span\": \"Flame blow-off factors will be different in martian gravity\", \"statement\": \"Flame blow-off factors are different in Martian gravity.\", \"variables\": [\"blowoff\", \"gravity_level\"], \"conditions\": {\"gravity_class\": \"mars\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null, \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null, \"material\": null, \"geometry\": null}, \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T17:17:48",
+ "doc_checksum": "9ff959d99e6717cc1b4c445b328793fe179e82621eefec03c177c6888539e8e0",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20260002050:p6-8",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "U1H4asjuEcD4kdUPp8egoAg",
+ "tag": "NTRS-20260002050",
+ "usage": {
+  "completion_tokens": 398,
+  "prompt_tokens": 2907,
+  "total_tokens": 3305
+ }
+}

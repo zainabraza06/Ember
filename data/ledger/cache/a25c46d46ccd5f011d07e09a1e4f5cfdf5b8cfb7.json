@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states flame spread rate increases linearly with gravity level, matching the claim\"}",
+ "created": "2026-11-14T17:19:31",
+ "doc_checksum": "fe2a32283bdf5161535f78a9e21b70d1bf4cb9e15a5e1081ea8eeab53c3bedfe",
+ "finish_reason": "stop",
+ "item_id": "C-667f14e0fd",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-2b51e677-8ff7-477c-be58-9e0708369695",
+ "tag": "NTRS-20010059376",
+ "usage": {
+  "completion_tokens": 89,
+  "prompt_tokens": 739,
+  "total_tokens": 828
+ }
+}

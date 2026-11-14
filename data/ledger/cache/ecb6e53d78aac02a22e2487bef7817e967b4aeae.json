@@ -1,0 +1,19 @@
+{
+ "content": "{\"verdict\":\"supported\",\"reason\":\"Span directly states the temperature is fixed at 300K\"}",
+ "created": "2026-11-14T17:19:18",
+ "doc_checksum": "fe2a32283bdf5161535f78a9e21b70d1bf4cb9e15a5e1081ea8eeab53c3bedfe",
+ "finish_reason": "stop",
+ "item_id": "C-c4b8a9e413",
+ "kind": "verify",
+ "model_version": "openai/gpt-oss-120b",
+ "prompt_version": "verify_v1",
+ "provider": "groq",
+ "requested_model": "openai/gpt-oss-120b",
+ "response_id": "chatcmpl-9d4bce5f-ef2c-4720-8b90-b5f78fb5d152",
+ "tag": "NTRS-20010059376",
+ "usage": {
+  "completion_tokens": 56,
+  "prompt_tokens": 738,
+  "total_tokens": 794
+ }
+}

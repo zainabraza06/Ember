@@ -1,0 +1,19 @@
+{
+ "content": "{\n  \"claims\": [\n    {\n      \"page\": 108,\n      \"locator\": \"\",\n      \"span\": \"Quenching flow velocities were found to be between 1 and 5 cm/s with higher velocity at lower O2 percentage.\",\n      \"statement\": \"Quenching flow velocities for SIBAL fabric in microgravity are between 1 and 5 cm/s, with higher velocities required at lower oxygen concentrations.\",\n      \"variables\": [\n        \"flow_velocity\",\n        \"oxygen_concentration\",\n        \"extinction\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"microgravity\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": \"1\",\n        \"flow_cm_s_max\": \"5\",\n        \"material\": \"SIBAL fabric\",\n        \"geometry\": null\n      },\n      \"effect_direction\": \"increases\",\n      \"magnitude_text\": \"1 and 5 cm/s\",\n      \"evidence_type\": \"measurement\",\n      \"extraction_confidence\": \"high\"\n    },\n    {\n      \"page\": 108,\n      \"locator\": \"\",\n      \"span\": \"But it can be seen that the narrow sample has a smaller flammable domain, as expected.\",\n      \"statement\": \"Narrower samples have a smaller flammable domain.\",\n      \"variables\": [\n        \"sample_geometry\",\n        \"extinction\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"microgravity\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": null,\n        \"flow_cm_s_max\": null,\n        \"material\": null,\n        \"geometry\": \"narrow\"\n      },\n      \"effect_direction\": \"decreases\",\n      \"magnitude_text\": \"\",\n      \"evidence_type\": \"observation\",\n      \"extraction_confidence\": \"high\"\n    },\n    {\n      \"page\": 109,\n      \"locator\": \"\",\n      \"span\": \"The quenching velocities are small (between 1 and 5 cm/s), and an accurate determination is necessary to resolve the slope of the quenching boundary.\",\n      \"statement\": \"Quenching velocities for thin flat cotton-fiberglass composite fabric are between 1 and 5 cm/s.\",\n      \"variables\": [\n        \"flow_velocity\",\n        \"extinction\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"microgravity\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": \"1\",\n        \"flow_cm_s_max\": \"5\",\n        \"material\": \"thin flat cotton-fiberglass composite fabric\",\n        \"geometry\": null\n      },\n      \"effect_direction\": \"not_applicable\",\n      \"magnitude_text\": \"1 and 5 cm/s\",\n      \"evidence_type\": \"measurement\",\n      \"extraction_confidence\": \"high\"\n    }\n  ]\n}",
+ "created": "2026-11-14T17:12:39",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011385:p108-109",
+ "kind": "extract",
+ "model_version": "gemini-3.1-flash-lite",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.1-flash-lite",
+ "response_id": "NFD4aqOHG4m4vdIPt--7yQE",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 822,
+  "prompt_tokens": 2659,
+  "total_tokens": 3481
+ }
+}

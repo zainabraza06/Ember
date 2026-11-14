@@ -28,7 +28,7 @@
      ],
      "rows": [
       {
-       "bin": "0 to 0.16",
+       "bin": "below 0.16",
        "counts": {
         "burned_to_completion": 3,
         "other": 0,
@@ -55,7 +55,7 @@
        "n": 105
       },
       {
-       "bin": "0.24 to 1.01",
+       "bin": "0.24 or more",
        "counts": {
         "burned_to_completion": 6,
         "other": 34,
@@ -118,10 +118,10 @@
    "investigation": "PSI-159",
    "n": 333,
    "sentences": [
-    "Oxygen 0 to 0.21: 29 tests; 15 self-extinguished, 5 stopped by the operator or flow cut-off while still burning, 2 did not ignite.",
+    "Oxygen below 0.21: 29 tests; 15 self-extinguished, 5 stopped by the operator or flow cut-off while still burning, 2 did not ignite.",
     "Oxygen 0.21 to 0.3: 74 tests; 31 self-extinguished, 12 stopped by the operator or flow cut-off while still burning, 30 did not ignite.",
     "Oxygen 0.3 to 0.4: 124 tests; 59 self-extinguished, 39 stopped by the operator or flow cut-off while still burning, 23 did not ignite.",
-    "Oxygen 0.4 to 1.01: 106 tests; 68 self-extinguished, 35 stopped by the operator or flow cut-off while still burning, 1 did not ignite.",
+    "Oxygen 0.4 or more: 106 tests; 68 self-extinguished, 35 stopped by the operator or flow cut-off while still burning, 1 did not ignite.",
     "\"Stopped while still burning\" is a censored outcome: the flame had not gone out when the test ended, so it is not counted as an extinction."
    ],
    "strength": "moderate",
@@ -136,7 +136,7 @@
      ],
      "rows": [
       {
-       "bin": "0 to 0.21",
+       "bin": "below 0.21",
        "counts": {
         "externally_terminated": 5,
         "no_ignition": 2,
@@ -169,7 +169,7 @@
        "n": 124
       },
       {
-       "bin": "0.4 to 1.01",
+       "bin": "0.4 or more",
        "counts": {
         "externally_terminated": 35,
         "no_ignition": 1,

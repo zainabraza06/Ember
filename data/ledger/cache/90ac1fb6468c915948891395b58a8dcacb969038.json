@@ -1,0 +1,19 @@
+{
+ "content": "{\n  \"claims\": [\n    {\n      \"page\": 10,\n      \"locator\": \"\",\n      \"span\": \"The results showed that most of the tests had heat release rates well below 100 W.\",\n      \"statement\": \"Most of the tests had heat release rates well below 100 W.\",\n      \"variables\": [\n        \"other\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"microgravity\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": null,\n        \"flow_cm_s_max\": null,\n        \"material\": null,\n        \"geometry\": null\n      },\n      \"effect_direction\": \"not_applicable\",\n      \"magnitude_text\": \"100 W\",\n      \"evidence_type\": \"measurement\",\n      \"extraction_confidence\": \"high\"\n    },\n    {\n      \"page\": 10,\n      \"locator\": \"\",\n      \"span\": \"Lastly, the global equivalence ratio for the tests is estimated to be fuel rich, 1.3 on average using mass loss and O2 consumption data.\",\n      \"statement\": \"The global equivalence ratio for the tests is estimated to be fuel rich, averaging 1.3.\",\n      \"variables\": [\n        \"other\"\n      ],\n      \"conditions\": {\n        \"gravity_class\": \"microgravity\",\n        \"gravity_g\": null,\n        \"oxygen_fraction_min\": null,\n        \"oxygen_fraction_max\": null,\n        \"pressure_kpa_min\": null,\n        \"pressure_kpa_max\": null,\n        \"flow_cm_s_min\": null,\n        \"flow_cm_s_max\": null,\n        \"material\": null,\n        \"geometry\": null\n      },\n      \"effect_direction\": \"not_applicable\",\n      \"magnitude_text\": \"1.3\",\n      \"evidence_type\": \"measurement\",\n      \"extraction_confidence\": \"high\"\n    }\n  ]\n}",
+ "created": "2026-11-14T16:51:28",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20210011385:p10-10",
+ "kind": "extract",
+ "model_version": "gemini-2.5-flash",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-2.5-flash",
+ "response_id": "OUv4aq-6I4fhnsEP8IOO4Qw",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 1659,
+  "prompt_tokens": 1645,
+  "total_tokens": 3304
+ }
+}

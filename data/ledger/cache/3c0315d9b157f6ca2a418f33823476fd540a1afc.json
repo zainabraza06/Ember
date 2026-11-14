@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n {\"page\": 39, \"locator\": \"2.3.1 Abstract\", \"span\": \"This work presents opposed-flow flame spread data over varying thicknesses of polymethylmethacrylate obtained in the International Space Station where the opposing flow velocity can be reduced arbitrarily without any interference from the gravity-induced flow. A comparison between the two datasets allow us to establish the thermal limit for thin fuel for which the spread rate is independent of the opposing flow velocity.\", \"statement\": \"For thin fuel at the thermal limit, the flame spread rate is independent of the opposing flow velocity.\",\n  \"variables\": [\"flow_velocity\", \"flame_spread_rate\"],\n  \"conditions\": {\"gravity_class\": \"microgravity\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null,\n                 \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null,\n                 \"material\": \"polymethylmethacrylate\", \"geometry\": \"thin\"},\n  \"effect_direction\": \"no_effect\", \"magnitude_text\": \"\", \"evidence_type\": \"measurement\", \"extraction_confidence\": \"high\"},\n {\"page\": 39, \"locator\": \"2.3.1 Abstract\", \"span\": \"The classical thin fuel spread rate formula is shown",
+ "created": "2026-11-14T17:03:37",
+ "doc_checksum": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+ "finish_reason": "length",
+ "item_id": "NTRS-20210011385:p37-40",
+ "kind": "extract",
+ "model_version": "gemini-3-flash-preview",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3-flash-preview",
+ "response_id": "AE74avTpG_eCvdIPxuO14A8",
+ "tag": "NTRS-20210011385",
+ "usage": {
+  "completion_tokens": 7986,
+  "prompt_tokens": 3699,
+  "total_tokens": 11685
+ }
+}

@@ -76,7 +76,7 @@ PROVIDERS = {
 # Free-tier daily quotas are per model. When the preferred model's daily quota is used up the client moves to the next one;
 # the model that produced every response is pinned in its cache entry and in each claim (model_version).
 MODEL_CHAIN = {
-    'gemini': [m for m in os.environ.get('LEDGER_GEMINI_MODELS', 'gemini-3.6-flash,gemini-3.7-flash,gemini-3.5-flash,gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-3.5-flash-lite,gemini-2.5-flash-lite').split(',') if m],
+    'gemini': [m for m in os.environ.get('LEDGER_GEMINI_MODELS', 'gemini-3.6-flash,gemini-2.5-flash,gemini-3-flash-preview,gemini-3.1-flash-lite,gemini-3.5-flash-lite,gemini-2.5-flash-lite').split(',') if m],
 }
 KIND_PROVIDER = {'extract': 'gemini', 'verify': 'groq', 'rate': 'groq'}
 
