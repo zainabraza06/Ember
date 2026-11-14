@@ -153,6 +153,16 @@ def main():
         if r['record_type'] == 'limit' and r['moc_vol_pct'] and r['pressure_kpa']:
             points.append({'id': r['test_id'], 'f': r['family'], 'psi': '', 'o': float(r['moc_vol_pct']) / 100.0, 'p': float(r['pressure_kpa']), 'g': r['gravity_level_g'] or '?',
                            'c': 'limit', 's': r['source_ref'], 'org': r['data_origin']})
+    def fl(v):
+        try:
+            return float(v) if v not in ('', None) else None
+        except ValueError:
+            return None
+    # compact copy of the unified table for the Ask page (tests and oxygen-limit rows; limits use the limit oxygen share)
+    ask_rows = [{'i': r['psi_id'] or ('PSI-69' if r['family'] == 'FLEX' else ''), 'f': r['family'], 'm': r['material_or_fuel'],
+                 'o': fl(r['oxygen_fraction']) if r['record_type'] == 'test' else (fl(r['moc_vol_pct']) / 100.0 if fl(r['moc_vol_pct']) is not None else None),
+                 'p': fl(r['pressure_kpa']), 'g': r['gravity_level_g'] or '?', 'c': r['outcome_class'], 's': r['source_ref'], 't': r['record_type'], 'org': r['data_origin']}
+                for r in tests if r['record_type'] in ('test', 'limit')]
     ranking = json.loads((ROOT / 'data/processed/ranking.json').read_text(encoding='utf-8'))
     interp = json.loads((ROOT / 'data/processed/interpretations.json').read_text(encoding='utf-8'))
     claims, ledger_stats, srcs = [], {}, {}
@@ -179,12 +189,13 @@ def main():
     data = {'points': points, 'points_without_atmosphere': no_atm, 'ranking': ranking, 'interpretations': interp, 'claims': claims,
             'ledger_stats': ledger_stats, 'sources': srcs, 'conflicts': [l for l in conflicts_md.splitlines() if l.startswith('| PSI-')],
             'official': OFFICIAL, 'nd': ND, 'investigations': invs, 'pairs': [dict(id=k, **v) for k, v in sorted(pairs.items())], 'literature': lit,
-            'gravity_counts': grav_counts, 'profiles': profiles, 'atmos_reports': atmos, 'bre_quote': quote,
+            'tests': ask_rows, 'gravity_counts': grav_counts, 'profiles': profiles, 'atmos_reports': atmos, 'bre_quote': quote,
             'build': {'tests_rows': len(tests), 'investigations': len(invs)}}
     tpl = (ROOT / 'scripts/site_template.html').read_text(encoding='utf-8')
     out = ROOT / 'site' / 'index.html'
     out.parent.mkdir(exist_ok=True)
-    out.write_text(tpl.replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False).replace('</', '<\\/')), encoding='utf-8')
+    parser_js = (ROOT / 'scripts/ask_parser.js').read_text(encoding='utf-8').replace('</', '<\\/')
+    out.write_text(tpl.replace('/*__ASK_PARSER__*/', parser_js).replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False).replace('</', '<\\/')), encoding='utf-8')
     print('wrote', out, len(invs), 'investigations;', len(pairs), 'pairs;', len(lit), 'literature rows;', quote[:80])
 
 
