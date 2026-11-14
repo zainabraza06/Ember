@@ -39,7 +39,7 @@ def load_review_edits():
         with open(config.REVIEW_CSV, encoding='utf-8') as f:
             for r in csv.DictReader(f):
                 if (r.get('decision') or '').strip().lower() == 'approved':
-                    out[r['claim_id']] = {k: (r.get(k) or '').strip() for k in ('statement', 'gravity_class', 'gravity_label', 'reviewer', 'reviewed_on', 'note')}
+                    out[r['claim_id']] = {k: (r.get(k) or '').strip() for k in ('statement', 'span', 'gravity_class', 'gravity_label', 'reviewer', 'reviewed_on', 'note')}
     return out
 
 
@@ -64,11 +64,19 @@ def apply_relabel(c, r):
 
 def apply_review(c, edit, pages):
     """Record the reviewer's acceptance on the claim and apply a corrected statement / gravity class / gravity label.
-    The span is never changed. The code checks (span, numbers, conditions) are re-run on a corrected statement and stored."""
+    A span is only ever EXTENDED (the new span must start with the old one and be found exactly on the page); it is never replaced by other text.
+    The code checks (span, numbers, conditions) are re-run on a corrected statement or extended span and stored."""
     c['review'] = {'reviewer': edit['reviewer'], 'reviewed_on': edit['reviewed_on'], 'note': edit['note'], 'basis': 'reviewed_and_verified_by_reviewer'}
-    if edit['statement'] and edit['statement'] != c['statement']:
-        c['original_statement'] = c['statement']
-        c['statement'] = edit['statement']
+    new_span, span_changed = (edit.get('span') or '').strip(), False
+    if new_span and norm(new_span) != norm(c['span']) and norm(new_span).startswith(norm(c['span'])) and check_span(new_span, c['page'], pages)['result'] == 'exact':
+        c['original_span'] = c['span']
+        c['span'] = new_span
+        c['verification']['span'] = check_span(new_span, c['page'], pages)
+        span_changed = True
+    if (edit['statement'] and edit['statement'] != c['statement']) or span_changed:
+        if edit['statement'] and edit['statement'] != c['statement']:
+            c['original_statement'] = c['statement']
+            c['statement'] = edit['statement']
         c['verification']['review_recheck'] = {
             'span': check_span(c['span'], c['page'], pages)['result'],
             'numbers': check_numbers([c['statement'], c['magnitude_text']], c['span'])['result'],

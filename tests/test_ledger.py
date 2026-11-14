@@ -290,6 +290,26 @@ class Display(Sandbox):
         self.assertNotIn('human', v['review_label'].lower())               # nobody opened the PDF: never "human verified"
         self.assertTrue(v['corrected'])
 
+    def test_review_may_extend_a_span_but_never_replace_it(self):
+        from ledger import build
+        base = good_claim()['span']
+        page_text = base + ' A following sentence on the same page.'
+        def run(new_span):
+            c = good_claim()
+            c.update(doc_id='NTRS-1', status='approved', claim_id='C-x', group_id=None)
+            c['verification'] = {}
+            edit = {'statement': c['statement'], 'span': new_span, 'gravity_class': '', 'gravity_label': '', 'reviewer': 'R', 'reviewed_on': '2026-11-14', 'note': 'n'}
+            build.apply_review(c, edit, {c['page']: page_text})
+            return c
+        ext = run(base + ' A following sentence on the same page.')
+        self.assertEqual(ext['span'], base + ' A following sentence on the same page.')
+        self.assertEqual(ext['original_span'], base)
+        self.assertEqual(ext['verification']['review_recheck']['span'], 'exact')
+        for bad in ('Some other text that is not on the page.', base + ' Text that the page does not contain.', 'A following sentence on the same page.'):
+            c = run(bad)
+            self.assertEqual(c['span'], base)                    # not an extension found on the page: ignored
+            self.assertNotIn('original_span', c)
+
 
 class SecondRater(unittest.TestCase):
     def test_kappa(self):
