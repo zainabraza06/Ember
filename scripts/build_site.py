@@ -299,6 +299,14 @@ def main():
     out.parent.mkdir(exist_ok=True)
     parser_js = (ROOT / 'scripts/ask_parser.js').read_text(encoding='utf-8').replace('</', '<\\/')
     cube_js = (ROOT / 'scripts/hero_cube.js').read_text(encoding='utf-8').replace('</', '<\\/')
+    import base64
+    def face(fam, fn, lo, hi=None):
+        b = base64.b64encode((ROOT / 'scripts/fonts' / fn).read_bytes()).decode('ascii')
+        wt = f'{lo} {hi}' if hi else str(lo)
+        return "@font-face{font-family:'%s';src:url(data:font/woff2;base64,%s) format('woff2');font-weight:%s;font-display:swap}" % (fam, b, wt)
+    fonts_css = (face('Sora', 'Sora-var.woff2', 100, 800) + face('IBM Plex Sans', 'IBMPlexSans-var.woff2', 100, 700)
+                 + face('IBM Plex Mono', 'IBMPlexMono-400.woff2', 400) + face('IBM Plex Mono', 'IBMPlexMono-500.woff2', 500))
+    tpl = tpl.replace('/*__FONTS__*/', fonts_css)
     out.write_text(tpl.replace('/*__HERO_CUBE__*/', cube_js).replace('/*__ASK_PARSER__*/', parser_js).replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False).replace('</', '<\\/')), encoding='utf-8')
     nt, nc = write_download_files(tests, claims)
     print('wrote site/data: tests.csv', nt, 'rows; data_dictionary.html; ledger_claims.json', nc, 'claims')

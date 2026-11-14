@@ -90,3 +90,59 @@ function initCube(canvas, tipEl, rows, opts) {
   readColors(); resize(); draw(); requestAnimationFrame(loop);
   return { refresh() { readColors(); draw(); }, count: pts.length };
 }
+
+/* 2D "Where fire was tested" plot: pressure (kPa) on x, oxygen share (%) on y, one dot per real test.
+   x is linear to 120 kPa and compressed above it (tests reach 331 kPa); y runs 10 to 100 % (tests reach 12 %).
+   Blue = flame lit (this includes tests stopped while the flame was still burning); grey = no ignition or no recorded outcome. */
+function initScatter(canvas, tipEl, rows, opts) {
+  'use strict';
+  const ctx = canvas.getContext('2d'), pts = rows.filter(r => r.t === 'test' && r.o != null && r.p != null);
+  const XLIN = 120, XMAX = 350, FRAC = 0.86, YMIN = 10, YMAX = 100, M = { l: 44, r: 16, t: 24, b: 34 };
+  let W = 0, H = 0, col = {}, hover = null, drawn = [];
+  const lit = r => r.c !== 'no_ignition' && r.c !== 'unknown';
+  function colors() {
+    const cs = getComputedStyle(document.documentElement), g = n => cs.getPropertyValue(n).trim();
+    col = { lit: g('--blue'), dark: g('--c-ni'), ember: g('--ember'), head: g('--head'), muted: g('--muted'), line: g('--line') };
+  }
+  function size() { const dpr = Math.min(window.devicePixelRatio || 1, 2), b = canvas.getBoundingClientRect(); W = b.width; H = b.height; canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  const pw = () => W - M.l - M.r;
+  const X = p => M.l + (p <= XLIN ? (p / XLIN) * FRAC : FRAC + ((p - XLIN) / (XMAX - XLIN)) * (1 - FRAC)) * pw();
+  const Y = o => M.t + (1 - (o * 100 - YMIN) / (YMAX - YMIN)) * (H - M.t - M.b);
+  const mono = (px, w) => (w || 400) + ' ' + px + 'px "IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace';
+  function draw() {
+    ctx.clearRect(0, 0, W, H); ctx.font = mono(12); ctx.textBaseline = 'middle'; ctx.lineWidth = 1;
+    [20, 40, 60, 80, 100].forEach(v => { const y = Y(v / 100); ctx.strokeStyle = col.line; ctx.globalAlpha = 0.7; ctx.beginPath(); ctx.moveTo(M.l, y); ctx.lineTo(W - M.r, y); ctx.stroke(); ctx.globalAlpha = 1; ctx.fillStyle = col.muted; ctx.textAlign = 'right'; ctx.fillText(v, M.l - 8, y); });
+    ctx.fillStyle = col.muted; ctx.textAlign = 'center';
+    [0, 25, 50, 75, 100].forEach(v => ctx.fillText(v, X(v), H - M.b + 16));
+    ctx.fillText('kPa', X(120) + 18, H - M.b + 16);
+    ctx.strokeStyle = col.muted; ctx.beginPath(); ctx.moveTo(X(XLIN) - 3, H - M.b - 4); ctx.lineTo(X(XLIN) + 3, H - M.b + 4); ctx.stroke();   // axis break
+    ctx.textAlign = 'left'; ctx.fillText('O₂ %', 4, M.t - 12);
+    // lunar-base zone: oxygen 30% or more, pressure 10.2 psi (70.33 kPa) or less
+    const zx = X(0), zy = Y(1), zw = X(opts.zone.pMaxKpa) - X(0), zh = Y(opts.zone.oMin) - Y(1);
+    ctx.fillStyle = col.ember; ctx.globalAlpha = 0.13; ctx.fillRect(zx, zy, zw, zh); ctx.globalAlpha = 1;
+    ctx.strokeStyle = col.ember; ctx.lineWidth = 1.5; ctx.setLineDash([6, 4]); ctx.strokeRect(zx, zy, zw, zh); ctx.setLineDash([]); ctx.lineWidth = 1;
+    ctx.fillStyle = col.ember; ctx.font = mono(12, 500); ctx.textAlign = 'left'; ctx.fillText('LUNAR BASE · ≥30% O₂ · ≤10.2 psi', zx + 10, zy + 22, Math.max(60, zw - 16));
+    // points
+    drawn = [];
+    pts.forEach(r => { const x = X(r.p), y = Y(r.o), hot = hover && hover.r === r; ctx.globalAlpha = hot ? 1 : (lit(r) ? 0.8 : 0.6); ctx.fillStyle = lit(r) ? col.lit : col.dark; ctx.beginPath(); ctx.arc(x, y, hot ? 6.5 : 3.4, 0, 6.2832); ctx.fill(); if (hot) { ctx.strokeStyle = col.head; ctx.lineWidth = 2; ctx.stroke(); ctx.lineWidth = 1; } drawn.push({ r, x, y }); });
+    ctx.globalAlpha = 1;
+    // spacesuit marker (100% oxygen, 4.3 psi): no test exists. Label sits to the right of the box, joined by a dotted leader.
+    const sx = X(opts.suit.p), sy = Y(opts.suit.o), lx = Math.min(zx + zw + 14, W - M.r - 150);
+    ctx.strokeStyle = col.head; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(sx, sy, 6, 0, 6.2832); ctx.stroke(); ctx.lineWidth = 1;
+    ctx.strokeStyle = col.muted; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(sx + 7, sy); ctx.lineTo(lx - 4, sy); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = col.head; ctx.font = mono(12, 500); ctx.textAlign = 'left'; ctx.fillText('SPACESUIT · NO TEST', lx, sy);
+    // Earth air (21% oxygen, 101.3 kPa)
+    const ex = X(101.325), ey = Y(0.2095);
+    ctx.strokeStyle = col.head; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(ex, ey, 6, 0, 6.2832); ctx.stroke(); ctx.lineWidth = 1;
+    ctx.fillStyle = col.head; ctx.font = mono(12, 500); ctx.textAlign = 'right'; ctx.fillText('EARTH AIR 21%', ex - 12, ey - 14);
+  }
+  function pick(x, y) { let b = null, bd = 120; drawn.forEach(d => { const e = (d.x - x) * (d.x - x) + (d.y - y) * (d.y - y); if (e < bd) { bd = e; b = d; } }); return b; }
+  function pos(e) { const b = canvas.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; }
+  function tip(d) { if (!d) { tipEl.style.display = 'none'; return; } const r = d.r; tipEl.style.display = 'block'; tipEl.textContent = (r.i || r.f) + ' | ' + (r.m || '?') + ' | O2 ' + (r.o * 100).toFixed(1) + '% | ' + r.p.toFixed(1) + ' kPa | ' + (r.g === '?' ? 'gravity not stated' : r.g + ' g') + ' | ' + (opts.label[r.c] || r.c); }
+  canvas.addEventListener('pointermove', e => { const p = pos(e); hover = pick(p[0], p[1]); tip(hover); draw(); });
+  canvas.addEventListener('pointerleave', () => { hover = null; tip(null); draw(); });
+  canvas.addEventListener('pointerdown', e => { const p = pos(e); hover = pick(p[0], p[1]); tip(hover); draw(); });
+  window.addEventListener('resize', () => { size(); draw(); });
+  colors(); size(); draw();
+  return { refresh() { colors(); size(); draw(); }, count: pts.length };
+}
