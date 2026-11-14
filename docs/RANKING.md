@@ -48,11 +48,12 @@ A recorded source conflict that touches the analysis lowers the label one step (
 Not a safety judgement and not part of the investigation ranking above: it ranks **untested conditions**, using only the existing coverage grid of the Atmosphere map.
 
 - **Grid.** The microgravity (0 g) coverage grid of the map: cells 20 kPa wide and 5 percentage points of O2 tall (17 x 20 = 340 cells). A cell is **untested** when no test and no oxygen-limit point at 0 g falls in it.
-- **Envelope.** The planned lunar-base atmosphere from the official text: oxygen >= 30% and pressure <= 70.33 kPa (10.2 psi). Design point = (30% O2, 70.33 kPa).
-- **Sort key, in this order, ascending:**
-  1. `d_env` = distance from the cell centre to the envelope, in cells: sqrt( (max(0, p - 70.33) / 20)^2 + (max(0, 0.30 - o) / 0.05)^2 ). Cells inside the envelope have `d_env` = 0.
-  2. `n_nb` = number of **tests** (oxygen-limit rows excluded) in the 8 surrounding cells. Fewer first.
-  3. `d_nom` = distance from the cell centre to the design point, in cells. Nearer first.
-  4. Cell index (pressure column, then oxygen row), only to make the order deterministic.
-- **Card fields.** Oxygen and pressure range of the cell; `n_nb`; the investigation family of the nearest test (distance in cells); one line stating whether the cell is inside the envelope and how many tests are around it.
+- **Envelope and design point.** NASA's own planned lunar-base atmosphere, from the challenge text (docs/CHALLENGE.md): "oxygen likely 30% or greater, pressure 10.2 psi or less". The envelope is O2 >= 30% and pressure <= 70.33 kPa; the **design point** is its corner, 30% O2 at 10.2 psi (70.33 kPa). Only untested cells whose centre is inside the envelope are considered.
+- **Bands.** Untested cells that touch within one 20 kPa pressure column are merged into a band. A band is at most 3 cells (15 percentage points of O2) tall. A full-height run is a stripe up to 70 points tall and would leave only two non-touching candidates; with 4-cell bands only four non-touching bands exist inside the envelope; 3 cells is the tallest cap that yields five. Longer runs are cut into bands of 3 cells from the lowest oxygen upward.
+- **Sort key for bands, in this order, ascending:**
+  1. `d_nom` = distance from the design point to the nearest cell of the band, in cells: sqrt( ((p - 70.33) / 20)^2 + ((o - 0.30) / 0.05)^2 ), using cell centres.
+  2. `n_nb` = number of **tests** (oxygen-limit rows excluded) in the cells surrounding the band (the 8-neighbourhood of every band cell, band cells excluded). Fewer first.
+  3. Lower oxygen first (lowest oxygen row of the band), then lower pressure column, only to make the order deterministic.
+- **Selection.** Bands are taken best-first; a band is skipped if it touches (is within one cell of, including diagonally) a band already selected, so no two cards cover the same stripe or neighbouring cells. The first five that remain are shown.
+- **Card fields.** Oxygen range and pressure range of the band; `n_nb` ("tests nearby"); the investigation family of the test nearest the band centre, with its distance in cells; and one line with the number of merged cells, `d_nom` and `n_nb`. "Show the band on the map" switches the map to 0 g and highlights the whole band.
 - **Limits.** It looks at oxygen and pressure only (not gravity, fuel, flow or sample size), uses 0 g coverage only, and says nothing about how dangerous a condition is.
