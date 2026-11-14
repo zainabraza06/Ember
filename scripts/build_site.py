@@ -256,6 +256,7 @@ def main():
     ranking = json.loads((ROOT / 'data/processed/ranking.json').read_text(encoding='utf-8'))
     interp = json.loads((ROOT / 'data/processed/interpretations.json').read_text(encoding='utf-8'))
     claims, ledger_stats, srcs = [], {}, {}
+    review_counts = {}
     cp = ROOT / 'data/ledger/claims.jsonl'
     if cp.exists():
         import sys
@@ -277,17 +278,24 @@ def main():
             v['confidence'] = cmap[v['claim_id']]
             v['doc'] = next(c['doc_id'] for c in allc if c['claim_id'] == v['claim_id'])
         claims = pub
+        acc = [c for c in allc if c['status'] == 'approved']
+        review_counts = {'auto_verified': sum(1 for c in allc if c['status'] == 'verified_auto'), 'approved': len(acc),
+                         'corrected': sum(1 for c in acc if c.get('review', {}).get('corrected')),
+                         'override': sum(1 for c in acc if c.get('review', {}).get('code_check_override')),
+                         'rejected': sum(1 for line in open(rp, encoding='utf-8') if 'human_rejected' in line) if rp.exists() else 0,
+                         'needs_review': sum(1 for c in allc if c['status'] == 'needs_review')}
     conflicts_md = (ROOT / 'docs/CONFLICTS.md').read_text(encoding='utf-8') if (ROOT / 'docs/CONFLICTS.md').exists() else ''
     data = {'points': points, 'points_without_atmosphere': no_atm, 'ranking': ranking, 'interpretations': interp, 'claims': claims,
             'ledger_stats': ledger_stats, 'sources': srcs, 'conflicts': [l for l in conflicts_md.splitlines() if l.startswith('| PSI-')],
             'official': OFFICIAL, 'nd': ND, 'investigations': invs, 'pairs': [dict(id=k, **v) for k, v in sorted(pairs.items())], 'literature': lit,
-            'tests': ask_rows, 'gravity_counts': grav_counts, 'profiles': profiles, 'atmos_reports': atmos, 'bre_quote': quote,
+            'tests': ask_rows, 'review_counts': review_counts, 'gravity_counts': grav_counts, 'profiles': profiles, 'atmos_reports': atmos, 'bre_quote': quote,
             'build': {'tests_rows': len(tests), 'investigations': len(invs)}}
     tpl = (ROOT / 'scripts/site_template.html').read_text(encoding='utf-8')
     out = ROOT / 'site' / 'index.html'
     out.parent.mkdir(exist_ok=True)
     parser_js = (ROOT / 'scripts/ask_parser.js').read_text(encoding='utf-8').replace('</', '<\\/')
-    out.write_text(tpl.replace('/*__ASK_PARSER__*/', parser_js).replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False).replace('</', '<\\/')), encoding='utf-8')
+    cube_js = (ROOT / 'scripts/hero_cube.js').read_text(encoding='utf-8').replace('</', '<\\/')
+    out.write_text(tpl.replace('/*__HERO_CUBE__*/', cube_js).replace('/*__ASK_PARSER__*/', parser_js).replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False).replace('</', '<\\/')), encoding='utf-8')
     nt, nc = write_download_files(tests, claims)
     print('wrote site/data: tests.csv', nt, 'rows; data_dictionary.html; ledger_claims.json', nc, 'claims')
     print('wrote', out, len(invs), 'investigations;', len(pairs), 'pairs;', len(lit), 'literature rows;', quote[:80])
