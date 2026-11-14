@@ -1,0 +1,31 @@
+# Gravity coverage (feeds the gap map)
+
+Updated 2026-10-19 (build phase) from `data/processed/tests.csv` (885 rows; counts below are reproduced by the pipeline), the downloaded PSI tables (approved families only, decision D1), the transcribed reports in [data/transcribed/](../data/transcribed/README.md), and abstracts of other NTRS reports. **Counts are not comparable across rows:** "tests" are individual runs or table rows, "limit records" are thresholds derived from several runs, "series" are plotted curves of unknown size. Do not add them into one number.
+
+Gravity values are nominal (decision D15): microgravity rows use 0 g with `gravity_source = nominal` (no source states a measured residual acceleration); lunar tests without a printed value use 0.165 g (nominal); Martian 0.38 g is printed.
+
+| Gravity level | Evidence | Count and unit | Sources (ID, page/table) | Conditions covered | Status |
+|---|---|---|---|---|---|
+| **0 g / microgravity** (ISS, Cygnus) | PSI tables, approved families (D1) and the FLEX report | FLEX 280 tests (274 PSI + tests 275-280 from NTRS 20150023456); CFI-G 333 tests (179 normal + 154 inverse populated rows); BASS-II 129 test rows (each may contain several stepped flow conditions); Saffire I-III 14 microgravity rows (2 + 10 + 2; card 2-7 split) = **756 harmonized rows**. BASS (PSI-26, 122 rows) is no longer in the structured table (D13) | PSI-69, report 20150023456, PSI-159, PSI-25, PSI-98/99/100 (data/raw/psi) | FLEX: O2 0.12-0.34, 70-309 kPa; CFI-G: O2 0.12-0.85, 50-331 kPa (gas flames); BASS-II: O2 13.6-22.2 vol%, pressure only for 31 tests (nominal 1 atm); Saffire: 20 and 30 cm/s flow, O2 about 21.5-22.1% | Structured (tests.csv) |
+| 0 g (drop tower or other, forced flow 30 cm/s) | Transcribed limits | 3 limit records (Mylar, Ultem, Nomex) | NTRS 20130010991, PDF p.6 Table I | 10.2 psia (Mylar, Ultem), 14.7 psia (Nomex); flow stated on p.4; platform not stated in the paper | Transcribed |
+| **0.16 g (lunar)** | Aircraft series | 13 plotted series (1, 2, 4 cm wide; 5, 4, 4 pressures); number of individual tests unknown; which series contain 0.16 g unknown | NTRS 20010059376, PDF p.10 Fig. 8-10 | Thin cellulose, air, 0.10-0.41 atm (reduced pressure), upward spread | Conditions transcribed; spread rates not readable |
+| 0.165 g (lunar) | Drop-tower centrifuge (quoted from earlier work) | 3 limit records | NTRS 20130010991, Table I (ref. 8 in the paper) | 10.2 psia (Mylar, Ultem), 14.7 psia (Nomex); lunar g value not printed in the paper | Transcribed |
+| 0.165 g (lunar) | Sounding rocket (LUCI) | 2 tests (SIBAL fabric, PMMA rod) | NTRS 20250010653, slides 12-22, 33-36 | Air at normal pressure, O2 falling from 20% to 14-18% during burns, >25 s; gravity changed at 125 s in the PMMA test | Transcribed (text values) |
+| 0.165 g (lunar) | Planned lunar-surface experiment FM2 | 0 (4 samples planned) | https://www.nasa.gov/flammability-of-materials-on-the-moon-fm2/ | Habitat-type atmospheres; no values given | Gap (no data) |
+| **0.38 g (Martian)** | Aircraft series | same 13 series as above (levels per series unknown) | NTRS 20010059376 | as above | Conditions only |
+| 0.38 g (Martian) | Drop-tower centrifuge | 3 limit records | NTRS 20130010991, Table I | 10.2 / 14.7 psia as above | Transcribed |
+| **Other partial gravity** | 0.10 g | within the 13 series | NTRS 20010059376 | as above | Conditions only |
+| other partial | sub-lunar levels including one at Pluto gravity | 2 extra data points per the text (not read from Fig. 7) | NTRS 20130010991, p.7-8 | Mylar | Not transcribed (figure) |
+| other partial | 0.05-0.6 g, aircraft, thin cellulose, 21% O2 and below, normal pressure | unknown (abstract only) | NTRS 19930040901 (no PDF in NTRS record) | | Not transcribed |
+| other partial | partial-gravity upward/downward spread; 3-D upward spread; lunar/Martian flammability abstract and slides; Fire on the Moon; solid fuel white paper | unknown (not read) | NTRS 20040053567, 20010074003, 20260000646, 20260001966, 20210020516, 20240008623, 20210022402 | | Not transcribed |
+| **1 g (Earth)** | Screening limits (NASA-STD-6001 Test 1 style) | 70 limit records (20110008636) + 18 limit records (20170004702) + 3 (20130010991 1 g rows) | NTRS 20110008636 Tables 2-9; 20170004702 Table 2; 20130010991 Table I | 14.7 or 10.2 psia, various materials (silicone, PET, PEI, PI, PEEK, PMMA, POM, PP, PVC, PA, NBR, epoxy/glass, Nomex, TA-301, NX2245) | Transcribed; **1 g screening data, not microgravity** |
+| 1 g | LUCI comparison burns | 2 tests | NTRS 20250010653, slides 23-31 | air, SIBAL and PMMA | Transcribed |
+| 1 g | Thin cellulose, reduced pressure | 3 statements for 2-cm samples | NTRS 20010059376 text, PDF p.9 | 0.10-0.15 atm transition | Transcribed |
+| 1 g | Saffire-II ground comparison columns | **9 separate 1 g rows**, each linked by `pair_id` to its microgravity row (e.g. "Complete", 7.6 cm, 1.2 mm/s) | PSI-99 table (decision D14) | Same samples as the flight rows; flow and pressure not stated for the 1 g tests | In tests.csv |
+| elevated gravity (above 1 g) | Mentioned only in a publication title for PSI-107 | unknown | PSI-107 record, publication "Scaling of Gas-Jet Flame Lengths in Elevated Gravity" | | Not examined |
+
+## What the gap map should show
+- Structured, per-test flammability data exist at microgravity (756 harmonized rows in the approved PSI families, plus 3 limit records at 0 g from a drop-tower paper) and, at 1 g, as thresholds (91 limit records) plus 9 Saffire-II paired rows, 2 LUCI burns and 3 statements (105 rows at 1 g in all).
+- Partial gravity is evidenced by 3 reports with few or no usable numbers (thin cellulose series, three-material limit table, two LUCI burns) and is **not available at exploration atmospheres** (no row at 8.2 psia with 34% O2 or 10.2 psia with 26.5% O2 under partial gravity). The closest conditions: Table I at 10.2 psia (O2 limits 14-22%) and LUCI at normal pressure.
+- Materials at partial gravity: thin cellulose tissue, Mylar, Ultem, Nomex HT90-40, SIBAL fabric, PMMA rod. No wire insulation, foam or silicone at partial gravity in these sources.
+- Partial gravity must remain flagged as an **evidence gap** (decision D3) even though a small transcribed dataset now exists.

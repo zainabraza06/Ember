@@ -1,0 +1,16 @@
+# Human spot check of transcribed values
+
+Seeded random sample (seed 20261019) of 10 of 489 printed values transcribed by hand from NASA reports. For each row, open the report (NTRS id: https://ntrs.nasa.gov/citations/<id>; the PDFs are in `data/raw/ntrs/<id>/`, the two large ones are git-ignored, see their `info.md`), go to the page and table, and compare the value as printed. Fill in the last two columns (initials and date; OK / mismatch with the value you read). Any mismatch: correct the transcribed CSV and rerun `python -m pipeline`.
+
+| # | file / test | NTRS report | page (PDF page; printed page where known) and table, figure or slide | field | transcribed value | verified by | result |
+|---|---|---|---|---|---|---|---|
+| 1 | `NTRS20150023456_flex_tests_275_280.csv / NTRS20150023456:FLEX-277` | 20150023456 | PDF p.34 (printed p.28), Table IX, row FLEX-277 | pressure as printed | 530.4 mmHg |  |  |
+| 2 | `NTRS20110008636_limits.csv / T08636-045` | 20110008636 | PDF p.6, Table 6 | MOC (vol% O2) | 19 |  |  |
+| 3 | `NTRS20170004702_limits.csv / T04702-16` | 20170004702 | PDF p.3-4 (paper p.3-4), Table 2 (thickness from Table 1) | pressure as printed | 10.2 psia (text: 70.3 kPa) |  |  |
+| 4 | `sidecars/bass2_table5_1.csv / PSI-25:M20` | 20210011385 | PDF p.65 (printed p.57), Table 5.1 | velocity list (cm/s) | 10 |  |  |
+| 5 | `NTRS20110008636_limits.csv / T08636-010` | 20110008636 | PDF p.5, Table 2 | pressure as printed | 14.7 psia (default) |  |  |
+| 6 | `NTRS20110008636_limits.csv / T08636-026` | 20110008636 | PDF p.6, Table 5 | MOC (vol% O2) | 21.0 |  |  |
+| 7 | `NTRS20110008636_limits.csv / T08636-070` | 20110008636 | PDF p.7, Table 9 | MOC (vol% O2) | 35 |  |  |
+| 8 | `NTRS20130010991_tableI_limits.csv / T10991-10` | 20130010991 | PDF p.6 (paper p.6), Table I, row "0g ULOI*/MOC*", column Mylar G | MOC (vol% O2) | 16.0 |  |  |
+| 9 | `NTRS20110008636_limits.csv / T08636-040` | 20110008636 | PDF p.6, Table 6 | ULOI (vol% O2) | 23.5 |  |  |
+| 10 | `NTRS20110008636_limits.csv / T08636-035` | 20110008636 | PDF p.6, Table 6 | pressure as printed | 10.2 psia (footnote a) |  |  |

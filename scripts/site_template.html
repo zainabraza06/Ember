@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember: Fire Safety Evidence Explorer</title>
+<meta name="description" content="NASA combustion investigations compared side by side, with sources for every field.">
+<style>
+:root{--bg:#fbfaf8;--panel:#fff;--ink:#1d1b19;--muted:#6b665f;--line:#e2ddd5;--accent:#b4410c;--same:#e4f1e6;--diff:#fbeccb;--nd:#efece6;--link:#0b5cad}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141211;--panel:#1d1a18;--ink:#efeae3;--muted:#a39d94;--line:#34302c;--accent:#f0925a;--same:#1f3324;--diff:#40331a;--nd:#27231f;--link:#7db7f0}}
+:root[data-theme="dark"]{--bg:#141211;--panel:#1d1a18;--ink:#efeae3;--muted:#a39d94;--line:#34302c;--accent:#f0925a;--same:#1f3324;--diff:#40331a;--nd:#27231f;--link:#7db7f0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--link)}header{padding:20px 16px 8px;max-width:1100px;margin:0 auto}h1{margin:0;font-size:1.5rem}h1 span{color:var(--accent)}
+.sub{color:var(--muted);margin:4px 0 0}nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+nav div{max-width:1100px;margin:0 auto;padding:8px 16px;display:flex;gap:6px;flex-wrap:wrap}
+nav button,.btn{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
+nav button[aria-current="true"]{border-color:var(--accent);color:var(--accent);font-weight:600}
+main{max-width:1100px;margin:0 auto;padding:16px}section{display:none}section.on{display:block}
+h2{font-size:1.25rem;margin:8px 0}h3{font-size:1.05rem;margin:16px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.tag{display:inline-block;border-radius:99px;padding:1px 9px;font-size:.8rem;border:1px solid var(--line);background:var(--nd)}
+.tag.prevention{border-color:#2f7d4a}.tag.detection{border-color:#2d6cb5}.tag.suppression{border-color:#b4410c}.tag.none{color:var(--muted)}
+.muted{color:var(--muted)}.small{font-size:.85rem}.nd{color:var(--muted);font-style:italic}
+input[type=search],select{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
+table{border-collapse:collapse;width:100%}th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}th{background:var(--nd)}
+td.same{background:var(--same)}td.diff{background:var(--diff)}td.nd{background:var(--nd)}.scroll{overflow-x:auto}
+pre.t{white-space:pre-wrap;font:inherit;margin:0;max-height:16em;overflow:auto}
+.src{font-size:.78rem;color:var(--muted)}.warn{border-left:4px solid var(--accent);padding:6px 12px;background:var(--panel)}
+details summary{cursor:pointer}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+@media (max-width:600px){main,header,nav div{padding-left:12px;padding-right:12px}}
+</style>
+</head>
+<body>
+<header><h1><span>Ember</span>: fire safety evidence explorer</h1>
+<p class="sub">NASA combustion investigations from the PSI repository, compared side by side. Every field names its source; what the catalog does not say is shown as "not documented in the catalog".</p></header>
+<nav><div id="tabs"></div></nav>
+<main>
+<section id="s-inv"></section><section id="s-cmp"></section><section id="s-mis"></section><section id="s-grav"></section><section id="s-earth"></section><section id="s-about"></section>
+</main>
+<script id="data" type="application/json">/*__DATA__*/null</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const ND = D.nd;
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const link = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t || u)}</a>`;
+const nd = () => `<span class="nd">${esc(ND)}</span>`;
+const TABS = [['inv','Investigations'],['cmp','Compare'],['mis','Mission atmospheres'],['grav','Partial-gravity bounds'],['earth','Earth applications'],['about','About']];
+const sel = new Set(); let filterTag = '', filterHw = '', q = '';
+
+function show(id){ TABS.forEach(([k]) => { $('#s-'+k).classList.toggle('on', k===id); }); document.querySelectorAll('#tabs button').forEach(b => b.setAttribute('aria-current', b.dataset.k===id)); if(id==='cmp') renderCmp(); window.scrollTo(0,0); }
+$('#tabs').innerHTML = TABS.map(([k,t]) => `<button data-k="${k}" onclick="show('${k}')">${t}</button>`).join('');
+
+/* ---------- G1/G2: investigations list with tag and hardware filters ---------- */
+const hwList = [...new Set(D.investigations.map(i => i.hardware))].sort();
+function tagsHtml(i){ return i.tags.length ? i.tags.map(t => `<span class="tag ${t.tag}" title="${esc(t.reason)}">${t.tag}</span>`).join(' ') : `<span class="tag none" title="No basis in the official Background text or the investigation metadata">untagged</span>`; }
+function renderInv(){
+  const list = D.investigations.filter(i => (!filterTag || (filterTag==='untagged' ? !i.tags.length : i.tags.some(t => t.tag===filterTag))) && (!filterHw || i.hardware===filterHw) &&
+    (!q || (i.id+' '+i.title+' '+i.acronym+' '+i.objective).toLowerCase().includes(q)));
+  $('#s-inv').innerHTML = `<h2>${D.investigations.length} combustion investigations</h2>
+  <p class="muted small">Tags: prevention, detection, suppression follow the official Background text where it names the investigation, otherwise the investigation's own metadata; hover a tag for its reason. Tick two or three cards and open <b>Compare</b>.</p>
+  <div class="row"><input type="search" id="q" placeholder="Search title, acronym, objective" value="${esc(q)}" aria-label="Search">
+  <select id="ft" aria-label="Filter by tag"><option value="">All tags</option>${['prevention','detection','suppression','untagged'].map(t=>`<option ${filterTag===t?'selected':''}>${t}</option>`).join('')}</select>
+  <select id="fh" aria-label="Filter by hardware group"><option value="">All hardware groups</option>${hwList.map(h=>`<option ${filterHw===h?'selected':''}>${esc(h)}</option>`).join('')}</select>
+  <button class="btn" onclick="show('cmp')">Compare selected (${sel.size})</button></div>
+  <p class="small muted">${list.length} shown</p>
+  <div class="grid">${list.map(card).join('')}</div>`;
+  $('#q').oninput = e => { q = e.target.value.toLowerCase(); const p = e.target.selectionStart; renderInv(); const n = $('#q'); n.focus(); n.setSelectionRange(p,p); };
+  $('#ft').onchange = e => { filterTag = e.target.value; renderInv(); };
+  $('#fh').onchange = e => { filterHw = e.target.value; renderInv(); };
+}
+function card(i){
+  const t = i.tests_summary;
+  return `<div class="card"><label class="row"><input type="checkbox" ${sel.has(i.id)?'checked':''} onchange="toggle('${i.id}',this)"> <b>${esc(i.id)}</b> ${esc(i.acronym && i.acronym!=='none' ? i.acronym : '')}</label>
+  <div>${esc(i.title)}</div><div class="row small" style="margin:6px 0">${tagsHtml(i)} <span class="tag">${esc(i.hardware)}</span></div>
+  <div class="small muted">${t ? `${t.tests} test rows in the unified table` : 'no rows in the unified table'}${i.approx_tests && i.approx_tests!==ND ? ' | catalog: '+esc(i.approx_tests) : ''}</div>
+  <details><summary class="small">Details</summary>${detail(i)}</details></div>`;
+}
+function detail(i){
+  const t = i.tests_summary, f = (label, val, src) => `<p><b>${label}</b><br>${val || nd()}<br><span class="src">Source: ${src}</span></p>`;
+  const psi = link(i.psi_url, 'PSI record ' + i.id);
+  return f('Objectives', i.objective && i.objective!==ND ? `<pre class="t">${esc(i.objective)}</pre>` : '', psi) +
+   f('Approach (fuels, hardware, sensors as described in the record)', i.approach && i.approach!==ND ? `<pre class="t">${esc(i.approach)}</pre>` : '', psi) +
+   f('Conditions varied', i.conditions_varied && i.conditions_varied!==ND ? `<pre class="t">${esc(i.conditions_varied)}</pre>` : '', psi + ' and the downloaded table (' + esc(i.table_files.join('; ') || 'none') + ')') +
+   f('Measurements', i.outcomes_measured && i.outcomes_measured!==ND ? `<pre class="t">${esc(i.outcomes_measured)}</pre>` : '', psi) +
+   f('Fuels in the unified table', t ? esc(t.fuels.join('; ') + (t.n_fuels>t.fuels.length ? ` (+${t.n_fuels-t.fuels.length} more)` : '')) + (t.geometry.length ? '<br>shape: '+esc(t.geometry.join(', ')) : '') + (Object.keys(t.sizes).length ? '<br>size: '+esc(Object.entries(t.sizes).map(([k,v])=>k+' '+v).join('; ')) : '') : '', 'data/processed/tests.csv rows for ' + i.id) +
+   f('Hardware group', esc(i.hardware), i.hardware_basis ? esc(i.hardware_basis) + ' | ' + link(D.official,'official challenge page') : '') +
+   `<p class="src">PSI record license: ${esc(i.license || 'not stated')} ${i.doi ? '| DOI '+esc(i.doi) : ''}</p>` + (i.known_problems ? `<p class="small"><b>Known problems with the data:</b> ${esc(i.known_problems)}</p>` : '');
+}
+function toggle(id, el){ if(el.checked){ if(sel.size>=3){ el.checked=false; alert('Compare up to three investigations.'); return; } sel.add(id);} else sel.delete(id); renderInv(); }
+
+/* ---------- G1: comparison view ---------- */
+const FIELDS = [
+  ['Hardware group', i => i.hardware, i => esc(i.hardware), 'official challenge page / catalog platform', 1],
+  ['Platform (PSI record)', i => i.platform, i => esc(i.platform), 'PSI record', 1],
+  ['Safety area', i => i.tags.map(t=>t.tag).sort().join(', ') || 'untagged', i => tagsHtml(i), 'official Background text / investigation metadata', 1],
+  ['Gravity levels in the table', i => i.tests_summary ? i.tests_summary.gravity_g.join(', ') : '', i => i.tests_summary ? esc(i.tests_summary.gravity_g.join(', ')) + ' g' : '', 'unified test table', 1],
+  ['Oxygen (mole fraction)', i => i.tests_summary?.o2 || '', i => i.tests_summary?.o2 ? esc(i.tests_summary.o2) : '', 'unified test table', 1],
+  ['Pressure (kPa)', i => i.tests_summary?.pressure_kpa || '', i => i.tests_summary?.pressure_kpa ? esc(i.tests_summary.pressure_kpa) : '', 'unified test table', 1],
+  ['Flow (cm/s)', i => i.tests_summary?.flow_cm_s || '', i => i.tests_summary?.flow_cm_s ? esc(i.tests_summary.flow_cm_s) : '', 'unified test table', 1],
+  ['Fuels in the table', i => i.tests_summary ? i.tests_summary.fuels.slice(0,3).join('; ') : '', i => i.tests_summary ? esc(i.tests_summary.fuels.join('; ')) : '', 'unified test table', 1],
+  ['Sample or burner shape and size', i => i.tests_summary ? i.tests_summary.geometry.join(', ') : '', i => i.tests_summary ? esc(i.tests_summary.geometry.join(', ')) + (Object.keys(i.tests_summary.sizes).length ? '<br>' + esc(Object.entries(i.tests_summary.sizes).map(([k,v])=>k+' '+v).join('; ')) : '') : '', 'unified test table', 1],
+  ['Test table in the catalog', i => i.table_type, i => esc(i.table_type), 'data/catalog.csv', 1],
+  ['Objectives', i => i.objective, i => `<pre class="t">${esc(i.objective)}</pre>`, 'PSI record', 0],
+  ['Approach (fuels, hardware, sensors)', i => i.approach, i => `<pre class="t">${esc(i.approach)}</pre>`, 'PSI record', 0],
+  ['What varied between tests', i => i.conditions_varied, i => `<pre class="t">${esc(i.conditions_varied)}</pre>`, 'PSI record and downloaded table', 0],
+  ['Measurements', i => i.outcomes_measured, i => `<pre class="t">${esc(i.outcomes_measured)}</pre>`, 'PSI record', 0]];
+function renderCmp(){
+  const ids = [...sel], inv = ids.map(id => D.investigations.find(i => i.id===id));
+  if(inv.length<2){ $('#s-cmp').innerHTML = `<h2>Compare investigations</h2><p>Select two or three investigations on the <a href="#" onclick="show('inv');return false">Investigations</a> tab (tick the box on each card).</p>`; return; }
+  const rows = FIELDS.map(([label, key, view, src, short]) => {
+    const keys = inv.map(i => (key(i) || '').trim()), known = keys.filter(k => k && k!==ND);
+    const same = known.length===inv.length && new Set(keys).size===1;
+    const cls = (k) => !k || k===ND ? 'nd' : (short ? (same ? 'same' : 'diff') : '');
+    return `<tr><th scope="row">${label}<div class="src">${esc(src)}</div></th>${inv.map((i,n) => `<td class="${cls(keys[n])}">${keys[n] && keys[n]!==ND ? view(i) : nd()}</td>`).join('')}</tr>`;
+  }).join('');
+  const shared = inv.map(i => new Set(i.tags.map(t => t.tag))).reduce((a,b) => new Set([...a].filter(x => b.has(x))));
+  $('#s-cmp').innerHTML = `<h2>Compare: ${inv.map(i=>esc(i.id)+' '+esc(i.acronym && i.acronym!=='none' ? i.acronym : '')).join(' | ')}</h2>
+  <p class="small"><span class="tag" style="background:var(--same)">same</span> <span class="tag" style="background:var(--diff)">differs</span> <span class="tag" style="background:var(--nd)">not documented</span> Highlighting applies to the short fields; the long text fields are shown in full for you to read. ${shared.size ? 'Safety areas in common: <b>'+[...shared].join(', ')+'</b>.' : 'No safety area in common (or not tagged).'}</p>
+  <div class="scroll"><table><thead><tr><th></th>${inv.map(i=>`<th>${esc(i.id)}<br><span class="small">${esc(i.title)}</span><br>${link(i.psi_url,'PSI record')}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+/* ---------- G3: mission atmospheres ---------- */
+function renderMis(){
+  const P = D.profiles;
+  const fam = p => Object.entries(p.tests_inside_by_family).map(([f,d]) => `${esc(f)}: ${d.tests} tests (gravity ${esc(d.gravity_levels.join(', '))} g; outcomes ${esc(Object.entries(d.outcomes).map(([k,v])=>k+' '+v).join(', '))})`).join('<br>') || 'none';
+  $('#s-mis').innerHTML = `<h2>Mission atmospheres</h2>
+  <p>Numbers from the official challenge text (${link(P.source.split(': ')[1], 'challenge page')}); kilopascals are computed in the pipeline (${esc(P.conversion)}). Earth sea level is ${P.reference.p_psi} psi = ${P.reference.p_kpa} kPa.</p>
+  <div class="grid">${P.profiles.map(p => `<div class="card"><b>${esc(p.name)}</b><br>"${esc(p.statement)}"<br>
+   oxygen: ${p.o2_max===1 && p.o2_min===1 ? '100%' : '>= '+Math.round(p.o2_min*100)+'%'}<br>pressure: ${p.p_min_psi!==null ? '' : '<= '}${p.p_max_psi} psi = ${p.p_max_kpa} kPa<hr>
+   <b>${p.tests_inside_total}</b> of ${P.tests_considered} test rows in the unified table fall inside this envelope.<br><span class="small">${fam(p)}</span><br>
+   <span class="src">${p.tests_without_oxygen_or_pressure} rows have no oxygen or no pressure value and cannot be placed. ${p.tests_inside_total ? 'Gravity of the rows inside: '+[...new Set(Object.values(p.tests_inside_by_family).flatMap(d=>d.gravity_levels))].join(', ')+' g; none is at lunar or Martian gravity.' : ''}</span></div>`).join('')}</div>
+  <p class="warn">The lunar base and pressurized rover share one envelope in the official text (oxygen likely 30% or greater, pressure 10.2 psi or less), so they show the same count. No test row in the table is at the suit condition (100% oxygen, 4.3 psi): the suit envelope is an evidence gap.</p>
+  <h3>Supporting evidence</h3>
+  ${D.bre_quote ? `<p>The ACME BRE investigation (PSI-20) states its planned atmospheres: <i>"${esc(D.bre_quote)}"</i> ${link(D.investigations.find(i=>i.id==='PSI-20').psi_url,'PSI-20 record')}. These are planned conditions in the objective text, not results.</p>` : ''}
+  <p>Exploration-atmosphere reports in the catalog (cited, not summarised here):</p><ul>${D.atmos_reports.map(r => `<li>${esc(r.title)} (${esc(r.item_id)}), ${link(r.url)}</li>`).join('')}</ul>
+  <p class="small">The highest-oxygen microgravity tests in the table are ACME CFI-G: up to ${Math.max(...D.investigations.filter(i=>i.id==='PSI-159').map(i=>parseFloat(i.tests_summary.o2.split(' to ').pop())))*100}% oxygen (official text: "up to 85% oxygen from a spherical burner").</p>`;
+}
+
+/* ---------- G4: partial-gravity bounds ---------- */
+function renderGrav(){
+  const c = D.gravity_counts, n = k => c[k] || {psi:0,outside_psi:0};
+  const cell = (r) => r ? `${esc(r.material_or_fuel)}<br>O2 ${esc(r.oxygen_fraction||'?')}, flow ${esc(r.flow_velocity_cm_s||'?')} cm/s<br>outcome: <b>${esc(r.outcome_class)}</b> (${esc(r.outcome_raw)})<br>burn ${esc(r.burn_duration_s||'n/a')} s; spread ${esc(r.spread_rate||'n/a')} ${esc(r.spread_rate_basis||'')}<br><span class="src">${esc(r.source_ref)}</span>${r.alt_value_report ? `<br><span class="src">report differs: ${esc(r.alt_value_report)}</span>`:''}` : nd();
+  $('#s-grav').innerHTML = `<h2>Partial gravity: what the evidence bounds</h2>
+  <p class="warn">Official text: "there is currently no partial-gravity combustion data in PSI." Microgravity (0 g) and normal-gravity (1 g) results could bound what occurs between. LUCI and FM2 are expected to add lunar-gravity data; ACME E-FIELD Flames mimicked partial gravity with an electric field acting on flame ions (see PSI-22).</p>
+  <h3>Rows in the unified table by gravity level</h3>
+  <div class="scroll"><table><tr><th>gravity</th><th>from PSI tables (tests and limits)</th><th>outside PSI (transcribed from NTRS reports)</th></tr>
+  ${['0','0.165','0.38','1','not stated'].filter(k=>c[k]).map(k => `<tr><td>${k==='0.165'?'0.165 g (lunar)':k==='0.38'?'0.38 g (Mars)':k==='0'?'0 g (microgravity)':k==='1'?'1 g':k}</td><td>${n(k).psi}</td><td>${n(k).outside_psi}</td></tr>`).join('')}</table></div>
+  <p><b>Gap:</b> lunar (0.165 g) and Martian (0.38 g) have 0 rows from PSI. The only lunar and Martian rows are transcribed from NTRS reports and are labelled <b>outside PSI, transcribed from NTRS</b>. "limit" rows are flammability-limit entries (oxygen limits) rather than single tests; their outcome is not classified.</p>
+  <div class="scroll"><table><tr><th>row</th><th>type</th><th>gravity</th><th>material</th><th>pressure kPa</th><th>limit data / outcome</th><th>source</th></tr>
+  ${D.literature.map(r=>`<tr><td>${esc(r.test_id)}</td><td>${esc(r.record_type)}</td><td>${esc(r.gravity_level_g)} g</td><td>${esc(r.material_or_fuel)}</td><td>${esc(r.pressure_kpa||'')}</td><td>${r.record_type==='limit' ? `ULOI ${esc(r.uloi_vol_pct||'n/a')}%, MOC ${esc(r.moc_vol_pct||'n/a')}%, margin vs 1 g ${esc(r.o2_margin_vs_1g_pct||'n/a')}% (${esc(r.limit_criterion||'')})` : esc(r.outcome_class)+' ('+esc(r.outcome_raw)+')'}</td><td class="small">${esc(r.source_ref)}</td></tr>`).join('')}</table></div>
+  <h3>0 g and 1 g side by side (Saffire-II samples, PSI-99)</h3>
+  <p class="small">Each sample was also tested at 1 g for comparison; rows are paired by <code>pair_id</code>.</p>
+  <div class="scroll"><table><tr><th>sample</th><th>0 g (flight)</th><th>1 g (comparison)</th></tr>
+  ${D.pairs.map(p => `<tr><td>${esc(p.id)}</td><td>${cell(p['0g'])}</td><td>${cell(p['1g'])}</td></tr>`).join('')}</table></div>`;
+}
+
+/* ---------- G5: Earth applications ---------- */
+function renderEarth(){
+  const L = [['Fireman\'s Air Tanks (spinoff)','https://spinoff.nasa.gov/node/9582'],['Fire Detector (spinoff)','https://spinoff.nasa.gov/node/9407'],['New Technology for the Fire Attire (spinoff)','https://spinoff.nasa.gov/node/9918']];
+  $('#s-earth').innerHTML = `<h2>Fire safety on Earth</h2>
+  <p>The official challenge text names three application areas for PSI data: fine-water-mist extinguishers developed for the ISS, terrestrial smoke detection, and firefighter gear and protective clothing. NASA lists three spinoff stories as resources:</p>
+  <ul>${L.map(([t,u]) => `<li>${link(u,t)}</li>`).join('')}</ul>
+  <p class="small muted">Which story covers which area is not stated in the official text, so no mapping is shown here. Related investigations in this explorer: detection (SAME, SAME-R, DAFT) and suppression (FLEX).</p>`;
+}
+
+/* ---------- G6: About ---------- */
+function renderAbout(){
+  const R = [['PSI Data Repository, Combustion Science','https://psi.nasa.gov/physci/repo/search?q=combustion'],['NASA Combustion Science','https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/'],
+   ['NASA ScienceCasts: The Power of Studying Combustion on the ISS (video, 2018)','https://www.youtube.com/watch?v=W1oXykoz9zg'],['A Researcher\'s Guide to International Space Station Combustion Science (2015)','https://www.nasa.gov/missions/station/a-researchers-guide-to-combustion-science/'],
+   ['Apollo 1','https://sma.nasa.gov/sma-disciplines/accllp/apollo-1'],['Apollo 13','https://sma.nasa.gov/sma-disciplines/accllp/apollo-13'],['25 Years Ago: Fire Aboard Space Station Mir','https://www.nasa.gov/history/25-years-ago-fire-aboard-space-station-mir/'],
+   ['Fireman\'s Air Tanks (spinoff)','https://spinoff.nasa.gov/node/9582'],['Fire Detector (spinoff)','https://spinoff.nasa.gov/node/9407'],['New Technology for the Fire Attire (spinoff)','https://spinoff.nasa.gov/node/9918']];
+  const lic = {}; D.investigations.forEach(i => { const k = i.license || 'not stated'; (lic[k] = lic[k] || []).push(i.id); });
+  $('#s-about').innerHTML = `<h2>About</h2>
+  <p class="warn"><b>Scope.</b> Fire safety involving rockets and propellants is generally beyond the scope of the PSI research (rocket-engine combustion is effectively independent of gravity), so it is outside this explorer.</p>
+  <h3>The ten official resources</h3><ol>${R.map(([t,u]) => `<li>${link(u,t)}</li>`).join('')}</ol>
+  <p class="small">Official challenge page: ${link(D.official)}</p>
+  <h3>Data origins and licenses</h3>
+  <ul><li><b>PSI investigation records and test tables</b> (${D.investigations.length} combustion investigations): ${Object.entries(lic).map(([k,v]) => `license ${esc(k)} for ${v.length} (${esc(v.join(', '))})`).join('; ')}. Source: ${link('https://psi.nasa.gov/physci/repo/search?q=combustion')}.</li>
+  <li><b>Unified test table</b> (${D.build.tests_rows} rows): built from the PSI tables by a reproducible pipeline; original values kept; every row has a source reference and quality flags.</li>
+  <li><b>Rows transcribed from NASA NTRS reports</b> (FLEX tests 275-280, BASS-II and literature tables, partial-gravity rows): numeric values transcribed with citation; NTRS rights determinations are not open licenses, so reports are cited and paraphrased, not redistributed. These rows are labelled outside PSI.</li>
+  <li><b>Outcome classes</b> for BASS-II are proposals by an AI assistant and are not used until a person approves them; this explorer does not show BASS-II outcome classes as findings.</li></ul>
+  <h3>SI use and limits</h3>
+  <p>The tags, hardware groups and comparisons are produced by code from the catalog and the PSI records; an AI coding assistant helped write that code and drafted the BASS-II outcome proposals, which await human review. The claim-extraction ledger (language-model extraction with automatic verification) is built but has not been run on the reports, so <b>no extracted claims are shown</b>. This explorer has no question-answering or ranking yet. Full details: the repository docs (SI_USAGE.md, STATUS.md).</p>`;
+}
+renderInv(); renderMis(); renderGrav(); renderEarth(); renderAbout(); show('inv');
+</script>
+</body>
+</html>

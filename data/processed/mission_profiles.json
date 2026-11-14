@@ -1,0 +1,82 @@
+{
+ "conversion": "1 psi = 6.894757 kPa",
+ "profiles": [
+  {
+   "id": "lunar_base",
+   "name": "Lunar base (planned)",
+   "o2_max": null,
+   "o2_min": 0.3,
+   "p_max_kpa": 70.33,
+   "p_max_psi": 10.2,
+   "p_min_kpa": null,
+   "p_min_psi": null,
+   "statement": "oxygen likely 30% or greater, pressure 10.2 psi or less",
+   "tests_inside_by_family": {
+    "CFI-G": {
+     "gravity_levels": [
+      "0"
+     ],
+     "outcomes": {
+      "externally_terminated": 29,
+      "no_ignition": 2,
+      "other": 3,
+      "self_extinguished": 13,
+      "unknown": 1
+     },
+     "tests": 48
+    }
+   },
+   "tests_inside_total": 48,
+   "tests_without_oxygen_or_pressure": 126
+  },
+  {
+   "id": "pressurized_rover",
+   "name": "Pressurized rover (planned)",
+   "o2_max": null,
+   "o2_min": 0.3,
+   "p_max_kpa": 70.33,
+   "p_max_psi": 10.2,
+   "p_min_kpa": null,
+   "p_min_psi": null,
+   "statement": "oxygen likely 30% or greater, pressure 10.2 psi or less",
+   "tests_inside_by_family": {
+    "CFI-G": {
+     "gravity_levels": [
+      "0"
+     ],
+     "outcomes": {
+      "externally_terminated": 29,
+      "no_ignition": 2,
+      "other": 3,
+      "self_extinguished": 13,
+      "unknown": 1
+     },
+     "tests": 48
+    }
+   },
+   "tests_inside_total": 48,
+   "tests_without_oxygen_or_pressure": 126
+  },
+  {
+   "id": "spacesuit",
+   "name": "Spacesuit",
+   "o2_max": 1.0,
+   "o2_min": 1.0,
+   "p_max_kpa": 29.65,
+   "p_max_psi": 4.3,
+   "p_min_kpa": 29.65,
+   "p_min_psi": 4.3,
+   "statement": "100% oxygen at 4.3 psi",
+   "tests_inside_by_family": {},
+   "tests_inside_total": 0,
+   "tests_without_oxygen_or_pressure": 126
+  }
+ ],
+ "reference": {
+  "name": "Earth sea level (reference in the same text)",
+  "p_kpa": 101.35,
+  "p_psi": 14.7
+ },
+ "source": "Official challenge text, Potential Considerations (docs/CHALLENGE.md): https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/",
+ "tests_considered": 769
+}

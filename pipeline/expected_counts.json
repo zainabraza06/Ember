@@ -1,0 +1,37 @@
+{
+ "by_family": {
+  "BASS-II": 129,
+  "CFI-G": 333,
+  "FLEX": 280,
+  "Saffire": 23,
+  "partial_gravity_literature": 29,
+  "screening_1g": 91
+ },
+ "by_family_and_outcome_class": {
+  "BASS-II|unknown": 129,
+  "CFI-G|externally_terminated": 91,
+  "CFI-G|no_ignition": 56,
+  "CFI-G|other": 3,
+  "CFI-G|self_extinguished": 173,
+  "CFI-G|unknown": 10,
+  "FLEX|burned_to_completion": 28,
+  "FLEX|other": 61,
+  "FLEX|self_extinguished": 191,
+  "Saffire|burned_to_completion": 9,
+  "Saffire|no_ignition": 1,
+  "Saffire|unknown": 13,
+  "partial_gravity_literature|burned_to_completion": 1,
+  "partial_gravity_literature|self_extinguished": 5,
+  "partial_gravity_literature|unknown": 23,
+  "screening_1g|unknown": 91
+ },
+ "by_outcome_class": {
+  "burned_to_completion": 38,
+  "externally_terminated": 91,
+  "no_ignition": 57,
+  "other": 64,
+  "self_extinguished": 369,
+  "unknown": 266
+ },
+ "rows": 885
+}

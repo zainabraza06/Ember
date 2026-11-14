@@ -1,0 +1,37 @@
+# Large source PDFs (decision D16): URL, size and SHA-256 are kept in the info.md next to them. The two explicit
+# lines below cover the large PDFs that sit in subfolders; small PDFs used for transcription stay tracked.
+data/raw/ntrs/*.pdf
+data/raw/ntrs/20150023456/*.pdf
+data/raw/ntrs/20210011385/*.pdf
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Node / frontend (later modules)
+node_modules/
+.next/
+dist/
+
+# Secrets and local files
+.env
+.env.*
+*.local
+.DS_Store
+
+# New ledger source PDFs (M3) are re-fetched by scripts/fetch_ledger_sources.py; URL and SHA-256 are in data/ledger/sources.csv
+data/raw/ntrs/*/*.pdf
+!data/raw/ntrs/20010059376/*.pdf
+!data/raw/ntrs/20110008636/*.pdf
+!data/raw/ntrs/20130010991/*.pdf
+!data/raw/ntrs/20170004702/*.pdf
+!data/raw/ntrs/20170008805/*.pdf
+!data/raw/ntrs/20250010653/*.pdf
+
+# M3 derived text layer (regenerate with: python -m ledger pages)
+data/ledger/pages.jsonl
+
+# No PDFs in this repository: URL and SHA-256 of every source are in data/raw/**/info.md and data/ledger/sources.csv
+*.pdf
