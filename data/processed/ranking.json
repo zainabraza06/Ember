@@ -1,0 +1,2562 @@
+{
+ "profiles": {
+  "iss_cabin": {
+   "basis": "team-defined: air-like, oxygen 19-25% and pressure within 10% of Earth sea level (14.7 psi, official reference)",
+   "envelope": {
+    "o2_max": 0.25,
+    "o2_min": 0.19,
+    "p_max_kpa": 111.49,
+    "p_min_kpa": 91.22
+   },
+   "items": [
+    {
+     "components": {
+      "atmosphere": 0.594,
+      "data": 1.0,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-25",
+     "notes": {
+      "atmosphere": "31 rows with oxygen and pressure; 32% inside; closest row distance 0.00",
+      "data": "129 test rows",
+      "fuel": "solid materials (solid: PMMA film/rod, SIBAL, Nomex (fabric, film, rods))",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 20.8,
+      "data": 15.0,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 1,
+     "score": 85.8
+    },
+    {
+     "components": {
+      "atmosphere": 0.544,
+      "data": 1.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-69",
+     "notes": {
+      "atmosphere": "279 rows with oxygen and pressure; 24% inside; closest row distance 0.00",
+      "data": "280 test rows",
+      "fuel": "liquid droplets or gas flames (liquid droplet: methanol (157 rows), heptane (117 rows))",
+      "gravity": "flight, microgravity",
+      "safety_area": "suppression"
+     },
+     "points": {
+      "atmosphere": 19.0,
+      "data": 15.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 2,
+     "score": 72.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.19,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-99",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "19 test rows",
+      "fuel": "solid materials (solid: silicone, SIBAL, PMMA, PMMA+Nomex)",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 2.9,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 3,
+     "score": 52.8
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.02,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-98",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "2 test rows",
+      "fuel": "solid materials (solid fabric: SIBAL (cotton/fiberglass))",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.3,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 4,
+     "score": 50.3
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.02,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-100",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "2 test rows",
+      "fuel": "solid materials (solid fabric: SIBAL)",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.3,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 5,
+     "score": 50.3
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-26",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "solid materials (solid: SIBAL, PMMA spheres/cylinders, Nomex blend, wax candl)",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 6,
+     "score": 50.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.474,
+      "data": 1.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-159",
+     "notes": {
+      "atmosphere": "333 rows with oxygen and pressure; 12% inside; closest row distance 0.00",
+      "data": "333 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuels: ethane, propane, butane (some mixtures: 30%/50% i)",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 16.6,
+      "data": 15.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 7,
+     "score": 49.6
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.6,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-47",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "smoke or aerosol from heated materials (aerosol (Arizona Road Dust with GN2))",
+      "gravity": "flight, microgravity",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 12.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 8,
+     "score": 42.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.6,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-101",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "smoke or aerosol from heated materials (smoke from heated Kapton, silicone, lampwick, Pyrell, Teflon)",
+      "gravity": "flight, microgravity",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 12.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 9,
+     "score": 42.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.6,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-102",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "smoke or aerosol from heated materials (smoke from heated Teflon and other samples (8 rows))",
+      "gravity": "flight, microgravity",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 12.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 10,
+     "score": 42.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-20",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel burner (100% C2H4 in rows read))",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 11,
+     "score": 38.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-68",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (liquid droplet: IsoOctane, n-Octane, Heptane, Decane, Ethano)",
+      "gravity": "flight, microgravity",
+      "safety_area": "suppression"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 12,
+     "score": 38.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 1.0
+     },
+     "id": "PSI-62",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 20.0
+     },
+     "rank": 13,
+     "score": 28.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 1.0
+     },
+     "id": "PSI-115",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 20.0
+     },
+     "rank": 14,
+     "score": 28.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-10",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (C2H4 187 rows, C3H8 20 rows in Normal table))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 15,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-21",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (methane/ethylene, N2 diluted))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 16,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-22",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (CH4 in rows read))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 17,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-23",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (C2H4 with N2 in rows read))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 18,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-39",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (liquid droplet: n-dodecane (C12H26) and mixtures with iso-do)",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 19,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-106",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (CH4, 40% CH4 with N2))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 20,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-107",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel: propylene mixtures 352, propane 50, ethylene 47, m)",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 21,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 0.4,
+      "safety_area": 0.0
+     },
+     "id": "PSI-142",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas (ozone-sensitized counterflow flames))",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 4.0,
+      "safety_area": 0.0
+     },
+     "rank": 22,
+     "score": 12.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 0.0
+     },
+     "id": "PSI-60",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 0.0
+     },
+     "rank": 23,
+     "score": 8.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 0.0
+     },
+     "id": "PSI-117",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 0.0
+     },
+     "rank": 24,
+     "score": 8.0
+    }
+   ],
+   "name": "ISS-like cabin"
+  },
+  "lunar_base": {
+   "basis": "official: oxygen 30% or more, pressure 10.2 psi or less",
+   "envelope": {
+    "o2_max": 1.0,
+    "o2_min": 0.3,
+    "p_max_kpa": 70.33,
+    "p_min_kpa": 0.0
+   },
+   "items": [
+    {
+     "components": {
+      "atmosphere": 0.076,
+      "data": 1.0,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-25",
+     "notes": {
+      "atmosphere": "31 rows with oxygen and pressure; 0% inside; closest row distance 0.81",
+      "data": "129 test rows",
+      "fuel": "solid materials (solid: PMMA film/rod, SIBAL, Nomex (fabric, film, rods))",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 2.7,
+      "data": 15.0,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 1,
+     "score": 67.7
+    },
+    {
+     "components": {
+      "atmosphere": 0.393,
+      "data": 1.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-69",
+     "notes": {
+      "atmosphere": "279 rows with oxygen and pressure; 0% inside; closest row distance 0.02",
+      "data": "280 test rows",
+      "fuel": "liquid droplets or gas flames (liquid droplet: methanol (157 rows), heptane (117 rows))",
+      "gravity": "flight, microgravity",
+      "safety_area": "suppression"
+     },
+     "points": {
+      "atmosphere": 13.7,
+      "data": 15.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 2,
+     "score": 66.7
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.19,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-99",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "19 test rows",
+      "fuel": "solid materials (solid: silicone, SIBAL, PMMA, PMMA+Nomex)",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 2.9,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 3,
+     "score": 52.8
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.02,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-98",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "2 test rows",
+      "fuel": "solid materials (solid fabric: SIBAL (cotton/fiberglass))",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.3,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 4,
+     "score": 50.3
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.02,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-100",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "2 test rows",
+      "fuel": "solid materials (solid fabric: SIBAL)",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.3,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 5,
+     "score": 50.3
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-26",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "solid materials (solid: SIBAL, PMMA spheres/cylinders, Nomex blend, wax candl)",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 6,
+     "score": 50.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.486,
+      "data": 1.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-159",
+     "notes": {
+      "atmosphere": "333 rows with oxygen and pressure; 14% inside; closest row distance 0.00",
+      "data": "333 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuels: ethane, propane, butane (some mixtures: 30%/50% i)",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 17.0,
+      "data": 15.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 7,
+     "score": 50.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.6,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-47",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "smoke or aerosol from heated materials (aerosol (Arizona Road Dust with GN2))",
+      "gravity": "flight, microgravity",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 12.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 8,
+     "score": 42.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.6,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-101",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "smoke or aerosol from heated materials (smoke from heated Kapton, silicone, lampwick, Pyrell, Teflon)",
+      "gravity": "flight, microgravity",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 12.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 9,
+     "score": 42.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.6,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-102",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "smoke or aerosol from heated materials (smoke from heated Teflon and other samples (8 rows))",
+      "gravity": "flight, microgravity",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 12.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 10,
+     "score": 42.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-20",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel burner (100% C2H4 in rows read))",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 11,
+     "score": 38.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-68",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (liquid droplet: IsoOctane, n-Octane, Heptane, Decane, Ethano)",
+      "gravity": "flight, microgravity",
+      "safety_area": "suppression"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 12,
+     "score": 38.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 1.0
+     },
+     "id": "PSI-62",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 20.0
+     },
+     "rank": 13,
+     "score": 28.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 1.0
+     },
+     "id": "PSI-115",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 20.0
+     },
+     "rank": 14,
+     "score": 28.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-10",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (C2H4 187 rows, C3H8 20 rows in Normal table))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 15,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-21",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (methane/ethylene, N2 diluted))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 16,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-22",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (CH4 in rows read))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 17,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-23",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (C2H4 with N2 in rows read))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 18,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-39",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (liquid droplet: n-dodecane (C12H26) and mixtures with iso-do)",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 19,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-106",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (CH4, 40% CH4 with N2))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 20,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-107",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel: propylene mixtures 352, propane 50, ethylene 47, m)",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 21,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 0.4,
+      "safety_area": 0.0
+     },
+     "id": "PSI-142",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas (ozone-sensitized counterflow flames))",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 4.0,
+      "safety_area": 0.0
+     },
+     "rank": 22,
+     "score": 12.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 0.0
+     },
+     "id": "PSI-60",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 0.0
+     },
+     "rank": 23,
+     "score": 8.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 0.0
+     },
+     "id": "PSI-117",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 0.0
+     },
+     "rank": 24,
+     "score": 8.0
+    }
+   ],
+   "name": "Lunar base"
+  },
+  "pressurized_rover": {
+   "basis": "official: oxygen 30% or more, pressure 10.2 psi or less",
+   "envelope": {
+    "o2_max": 1.0,
+    "o2_min": 0.3,
+    "p_max_kpa": 70.33,
+    "p_min_kpa": 0.0
+   },
+   "items": [
+    {
+     "components": {
+      "atmosphere": 0.076,
+      "data": 1.0,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-25",
+     "notes": {
+      "atmosphere": "31 rows with oxygen and pressure; 0% inside; closest row distance 0.81",
+      "data": "129 test rows",
+      "fuel": "solid materials (solid: PMMA film/rod, SIBAL, Nomex (fabric, film, rods))",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 2.7,
+      "data": 15.0,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 1,
+     "score": 67.7
+    },
+    {
+     "components": {
+      "atmosphere": 0.393,
+      "data": 1.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-69",
+     "notes": {
+      "atmosphere": "279 rows with oxygen and pressure; 0% inside; closest row distance 0.02",
+      "data": "280 test rows",
+      "fuel": "liquid droplets or gas flames (liquid droplet: methanol (157 rows), heptane (117 rows))",
+      "gravity": "flight, microgravity",
+      "safety_area": "suppression"
+     },
+     "points": {
+      "atmosphere": 13.7,
+      "data": 15.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 2,
+     "score": 66.7
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.19,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-99",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "19 test rows",
+      "fuel": "solid materials (solid: silicone, SIBAL, PMMA, PMMA+Nomex)",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 2.9,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 3,
+     "score": 52.8
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.02,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-98",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "2 test rows",
+      "fuel": "solid materials (solid fabric: SIBAL (cotton/fiberglass))",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.3,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 4,
+     "score": 50.3
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.02,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-100",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "2 test rows",
+      "fuel": "solid materials (solid fabric: SIBAL)",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.3,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 5,
+     "score": 50.3
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-26",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "solid materials (solid: SIBAL, PMMA spheres/cylinders, Nomex blend, wax candl)",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 6,
+     "score": 50.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.486,
+      "data": 1.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-159",
+     "notes": {
+      "atmosphere": "333 rows with oxygen and pressure; 14% inside; closest row distance 0.00",
+      "data": "333 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuels: ethane, propane, butane (some mixtures: 30%/50% i)",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 17.0,
+      "data": 15.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 7,
+     "score": 50.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.6,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-47",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "smoke or aerosol from heated materials (aerosol (Arizona Road Dust with GN2))",
+      "gravity": "flight, microgravity",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 12.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 8,
+     "score": 42.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.6,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-101",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "smoke or aerosol from heated materials (smoke from heated Kapton, silicone, lampwick, Pyrell, Teflon)",
+      "gravity": "flight, microgravity",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 12.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 9,
+     "score": 42.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.6,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-102",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "smoke or aerosol from heated materials (smoke from heated Teflon and other samples (8 rows))",
+      "gravity": "flight, microgravity",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 12.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 10,
+     "score": 42.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-20",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel burner (100% C2H4 in rows read))",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 11,
+     "score": 38.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-68",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (liquid droplet: IsoOctane, n-Octane, Heptane, Decane, Ethano)",
+      "gravity": "flight, microgravity",
+      "safety_area": "suppression"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 12,
+     "score": 38.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 1.0
+     },
+     "id": "PSI-62",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 20.0
+     },
+     "rank": 13,
+     "score": 28.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 1.0
+     },
+     "id": "PSI-115",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 20.0
+     },
+     "rank": 14,
+     "score": 28.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-10",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (C2H4 187 rows, C3H8 20 rows in Normal table))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 15,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-21",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (methane/ethylene, N2 diluted))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 16,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-22",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (CH4 in rows read))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 17,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-23",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (C2H4 with N2 in rows read))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 18,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-39",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (liquid droplet: n-dodecane (C12H26) and mixtures with iso-do)",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 19,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-106",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (CH4, 40% CH4 with N2))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 20,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-107",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel: propylene mixtures 352, propane 50, ethylene 47, m)",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 21,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 0.4,
+      "safety_area": 0.0
+     },
+     "id": "PSI-142",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas (ozone-sensitized counterflow flames))",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 4.0,
+      "safety_area": 0.0
+     },
+     "rank": 22,
+     "score": 12.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 0.0
+     },
+     "id": "PSI-60",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 0.0
+     },
+     "rank": 23,
+     "score": 8.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 0.0
+     },
+     "id": "PSI-117",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 0.0
+     },
+     "rank": 24,
+     "score": 8.0
+    }
+   ],
+   "name": "Pressurized rover"
+  },
+  "spacesuit": {
+   "basis": "official: 100% oxygen at 4.3 psi",
+   "envelope": {
+    "o2_max": 1.0,
+    "o2_min": 1.0,
+    "p_max_kpa": 29.65,
+    "p_min_kpa": 29.65
+   },
+   "items": [
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 1.0,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-25",
+     "notes": {
+      "atmosphere": "31 rows with oxygen and pressure; 0% inside; closest row distance 5.38",
+      "data": "129 test rows",
+      "fuel": "solid materials (solid: PMMA film/rod, SIBAL, Nomex (fabric, film, rods))",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 15.0,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 1,
+     "score": 65.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 1.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-69",
+     "notes": {
+      "atmosphere": "279 rows with oxygen and pressure; 0% inside; closest row distance 4.48",
+      "data": "280 test rows",
+      "fuel": "liquid droplets or gas flames (liquid droplet: methanol (157 rows), heptane (117 rows))",
+      "gravity": "flight, microgravity",
+      "safety_area": "suppression"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 15.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 2,
+     "score": 53.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.19,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-99",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "19 test rows",
+      "fuel": "solid materials (solid: silicone, SIBAL, PMMA, PMMA+Nomex)",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 2.9,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 3,
+     "score": 52.8
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.02,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-98",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "2 test rows",
+      "fuel": "solid materials (solid fabric: SIBAL (cotton/fiberglass))",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.3,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 4,
+     "score": 50.3
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.02,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-100",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "2 test rows",
+      "fuel": "solid materials (solid fabric: SIBAL)",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.3,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 5,
+     "score": 50.3
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 1.0,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-26",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "solid materials (solid: SIBAL, PMMA spheres/cylinders, Nomex blend, wax candl)",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 20.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 6,
+     "score": 50.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.6,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-47",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "smoke or aerosol from heated materials (aerosol (Arizona Road Dust with GN2))",
+      "gravity": "flight, microgravity",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 12.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 7,
+     "score": 42.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.6,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-101",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "smoke or aerosol from heated materials (smoke from heated Kapton, silicone, lampwick, Pyrell, Teflon)",
+      "gravity": "flight, microgravity",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 12.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 8,
+     "score": 42.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.6,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-102",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "smoke or aerosol from heated materials (smoke from heated Teflon and other samples (8 rows))",
+      "gravity": "flight, microgravity",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 12.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 9,
+     "score": 42.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-20",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel burner (100% C2H4 in rows read))",
+      "gravity": "flight, microgravity",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 10,
+     "score": 38.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 1.0
+     },
+     "id": "PSI-68",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (liquid droplet: IsoOctane, n-Octane, Heptane, Decane, Ethano)",
+      "gravity": "flight, microgravity",
+      "safety_area": "suppression"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 20.0
+     },
+     "rank": 11,
+     "score": 38.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 1.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-159",
+     "notes": {
+      "atmosphere": "333 rows with oxygen and pressure; 0% inside; closest row distance 1.12",
+      "data": "333 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuels: ethane, propane, butane (some mixtures: 30%/50% i)",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 15.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 12,
+     "score": 33.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 1.0
+     },
+     "id": "PSI-62",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "prevention"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 20.0
+     },
+     "rank": 13,
+     "score": 28.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 1.0
+     },
+     "id": "PSI-115",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "detection"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 20.0
+     },
+     "rank": 14,
+     "score": 28.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-10",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (C2H4 187 rows, C3H8 20 rows in Normal table))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 15,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-21",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (methane/ethylene, N2 diluted))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 16,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-22",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (CH4 in rows read))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 17,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-23",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (C2H4 with N2 in rows read))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 18,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-39",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (liquid droplet: n-dodecane (C12H26) and mixtures with iso-do)",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 19,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-106",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel (CH4, 40% CH4 with N2))",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 20,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 1.0,
+      "safety_area": 0.0
+     },
+     "id": "PSI-107",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas fuel: propylene mixtures 352, propane 50, ethylene 47, m)",
+      "gravity": "flight, microgravity",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 10.0,
+      "safety_area": 0.0
+     },
+     "rank": 21,
+     "score": 18.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.4,
+      "gravity": 0.4,
+      "safety_area": 0.0
+     },
+     "id": "PSI-142",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "liquid droplets or gas flames (gas (ozone-sensitized counterflow flames))",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 8.0,
+      "gravity": 4.0,
+      "safety_area": 0.0
+     },
+     "rank": 22,
+     "score": 12.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 0.0
+     },
+     "id": "PSI-60",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 0.0
+     },
+     "rank": 23,
+     "score": 8.0
+    },
+    {
+     "components": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 0.2,
+      "gravity": 0.4,
+      "safety_area": 0.0
+     },
+     "id": "PSI-117",
+     "notes": {
+      "atmosphere": "no per-test oxygen and pressure in the unified table (not scored from record text)",
+      "data": "0 test rows",
+      "fuel": "ground analysis or fuel not documented (n/a)",
+      "gravity": "ground analysis or modelling",
+      "safety_area": "untagged"
+     },
+     "points": {
+      "atmosphere": 0.0,
+      "data": 0.0,
+      "fuel": 4.0,
+      "gravity": 4.0,
+      "safety_area": 0.0
+     },
+     "rank": 24,
+     "score": 8.0
+    }
+   ],
+   "name": "Spacesuit"
+  }
+ },
+ "weight_text": {
+  "atmosphere": "How close the investigation's tested atmospheres (oxygen, pressure) are to the profile: 60% share of its rows inside the envelope + 40% nearness of its closest row",
+  "data": "Per-test data available in the unified table: min(1, test rows / 100)",
+  "fuel": "Fuel type: solid materials 1.0; smoke or aerosol from heated materials 0.6; liquid droplets or gas flames 0.4; ground analysis or unknown 0.2",
+  "gravity": "Flight data in microgravity 1.0; ground analysis or modelling 0.4 (no investigation has partial-gravity data)",
+  "safety_area": "Tagged prevention, detection or suppression (official Background text or record metadata): 1 if tagged, else 0"
+ },
+ "weights": {
+  "atmosphere": 0.35,
+  "data": 0.15,
+  "fuel": 0.2,
+  "gravity": 0.1,
+  "safety_area": 0.2
+ }
+}

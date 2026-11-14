@@ -45,7 +45,9 @@ def verify_claim(client, src, c, doc_pages, vprompt, vversion, use_llm=True):
         'gravity': check_gravity(c['conditions']['gravity_class'], c['span'], page_text),
         'support': {'result': 'skipped'},
     }
-    if sp['result'] != 'fail' and use_llm:
+    if sp['result'] != 'fail' and use_llm == 'skip':
+        c['verification']['support'] = {'result': 'pending_verification', 'reason': 'no verifier key available'}
+    elif sp['result'] != 'fail' and use_llm:
         c['verification']['support'] = check_support(client, src['sha256'], c, page_text, vprompt, vversion)
     c['verify_prompt_version'] = vversion
     return c
@@ -64,13 +66,16 @@ def assign_ids(claims):
     return out
 
 
-def run(client, doc_ids=None, eprompt=None, vprompt=None, quiet=False):
+def run(client, doc_ids=None, eprompt=None, vprompt=None, quiet=False, verify=True):
     """Extract and verify. Returns (claims, stats). Stops cleanly (stats['stopped']) on budget or rate-limit exhaustion."""
     eprompt = eprompt or config.EXTRACT_PROMPT_VERSION
     vprompt = vprompt or config.VERIFY_PROMPT_VERSION
     etext, vtext = prompt(eprompt), prompt(vprompt)
     pages = load_pages()
     srcs = [s for s in read_sources() if doc_ids is None or s['ntrs_id'] in doc_ids or s['doc_id'] in doc_ids]
+    if doc_ids:
+        order = {d: i for i, d in enumerate(doc_ids)}
+        srcs.sort(key=lambda s: order.get(s['ntrs_id'], order.get(s['doc_id'], 99)))
     stats = {'documents': [s['doc_id'] for s in srcs], 'extract_prompt': eprompt, 'verify_prompt': vprompt, 'pending_chunks': [], 'split_chunks': [],
              'failed_chunks': [], 'chunks_done': 0, 'pending_verifications': 0, 'stopped': None, 'chunks_total': 0}
     raw = []
@@ -96,7 +101,7 @@ def run(client, doc_ids=None, eprompt=None, vprompt=None, quiet=False):
         try:
             if stop:
                 raise CacheMiss('stopped')
-            verify_claim(client, s, c, pages[s['doc_id']], vtext, vprompt)
+            verify_claim(client, s, c, pages[s['doc_id']], vtext, vprompt, use_llm=True if verify else 'skip')
         except CacheMiss:
             verify_claim(client, s, c, pages[s['doc_id']], vtext, vprompt, use_llm=False)
             c['verification']['support'] = {'result': 'pending'}
@@ -116,7 +121,7 @@ def run(client, doc_ids=None, eprompt=None, vprompt=None, quiet=False):
             continue
         c['status'], c['reasons'] = decide(c)
         d = decisions.get(c['claim_id'])
-        if d == 'approved' and c['status'] == 'needs_review':
+        if d == 'approved' and c['status'] in ('needs_review', 'pending_verification'):
             c['status'] = 'approved'
         elif d == 'rejected':
             c['status'], c['reasons'] = 'rejected', c['reasons'] + ['human_rejected']
@@ -128,7 +133,7 @@ def write_outputs(claims):
     def row(c):
         return json.dumps(c, ensure_ascii=False, sort_keys=True)
     config.LEDGER_DIR.mkdir(parents=True, exist_ok=True)
-    keep = [c for c in claims if c['status'] in ('verified_auto', 'approved', 'needs_review')]
+    keep = [c for c in claims if c['status'] in ('verified_auto', 'approved', 'pending_verification', 'needs_review')]
     rej = [c for c in claims if c['status'] == 'rejected']
     with open(config.CLAIMS_JSONL, 'w', encoding='utf-8', newline='\n') as f:
         for c in keep:

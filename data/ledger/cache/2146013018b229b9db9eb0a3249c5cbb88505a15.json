@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n {\"page\": 8, \"locator\": \"Section 1.0\", \"span\": \"Natural convection, however, destroys the spherical symmetry of combustion in normal gravity, as was quite evident in the earliest experiments of Hall and Diederichsen (1953) and Goldsmith (1956).\", \"statement\": \"Natural convection destroys the spherical symmetry of combustion in normal gravity, as demonstrated in experiments by Hall and Diederichsen (1953) and Goldsmith (1956).\",\n  \"variables\": [\"gravity_level\", \"other\"],\n  \"conditions\": {\"gravity_class\": \"earth_1g\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null,\n                 \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null,\n                 \"material\": null, \"geometry\": null},\n  \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"\", \"evidence_type\": \"review\", \"extraction_confidence\": \"high\"},\n {\"page\": 8, \"locator\": \"\", \"span\": \"Besides documenting both radiative extinc tion at higher dilutions and diffusive extinctions at lower dilutions for both fuels, the results exhibited disruptive extinctions and provided information pertinent to soot production for heptane.\", \"statement\": \"Testing of methanol and n-heptane documented radiative extinction at higher dilutions, diffusive extinction at lower dilutions, and disruptive extinction.\",\n  \"variables\": [\"diluent\", \"extinction\"],\n  \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null,\n                 \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null,\n                 \"material\": null, \"geometry\": null},\n  \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"\", \"evidence_type\": \"observation\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T16:30:30",
+ "doc_checksum": "b4f6ca983e2792c33a0b92220a791a818f426bb635b94f7fd33dc8c9c471e79d",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20150023456:p8-9",
+ "kind": "extract",
+ "model_version": "gemini-3.6-flash",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.6-flash",
+ "response_id": "SEb4aqbiLbjPnsEPiPeT0Ak",
+ "tag": "NTRS-20150023456",
+ "usage": {
+  "completion_tokens": 2991,
+  "prompt_tokens": 3067,
+  "total_tokens": 6058
+ }
+}

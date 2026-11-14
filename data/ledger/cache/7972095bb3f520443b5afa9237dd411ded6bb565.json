@@ -1,0 +1,19 @@
+{
+ "content": "{\n  \"claims\": []\n}",
+ "created": "2026-11-14T16:31:07",
+ "doc_checksum": "b4f6ca983e2792c33a0b92220a791a818f426bb635b94f7fd33dc8c9c471e79d",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20150023456:p15-16",
+ "kind": "extract",
+ "model_version": "gemini-3.6-flash",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.6-flash",
+ "response_id": "dkb4ar6hL9qK7M8PlpjWwAk",
+ "tag": "NTRS-20150023456",
+ "usage": {
+  "completion_tokens": 767,
+  "prompt_tokens": 3142,
+  "total_tokens": 3909
+ }
+}

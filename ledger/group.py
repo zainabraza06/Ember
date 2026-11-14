@@ -25,7 +25,7 @@ def group_key(c):
 
 
 def assign_groups(claims, sources):
-    elig = [c for c in claims if c['status'] in ('verified_auto', 'approved')]
+    elig = [c for c in claims if c['status'] in ('verified_auto', 'approved', 'pending_verification')]
     for c in claims:
         c['group_id'] = None
         c['group_size'] = 0

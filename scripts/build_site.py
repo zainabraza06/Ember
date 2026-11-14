@@ -143,7 +143,42 @@ def main():
     m = re.search(r'NASA - considered atmosphere[^\n]*?34 % oxygen', pil.get('objective', ''))
     if m:
         quote = m.group(0)
-    data = {'official': OFFICIAL, 'nd': ND, 'investigations': invs, 'pairs': [dict(id=k, **v) for k, v in sorted(pairs.items())], 'literature': lit,
+    # ---- atmosphere map points, ranking, interpretations, ledger claims (all produced by the pipeline and the ledger)
+    points = [{'id': r['test_id'], 'f': r['family'], 'psi': r['psi_id'], 'o': float(r['oxygen_fraction']), 'p': float(r['pressure_kpa']),
+               'g': r['gravity_level_g'] or '?', 'c': r['outcome_class'], 's': r['source_ref'], 'org': r['data_origin']}
+              for r in tests if r['record_type'] == 'test' and r['oxygen_fraction'] and r['pressure_kpa']]
+    no_atm = sum(1 for r in tests if r['record_type'] == 'test') - len(points)
+    # oxygen-limit rows (MOC: the oxygen share at the flammability limit for that pressure) are drawn as bars, labelled as limits
+    for r in tests:
+        if r['record_type'] == 'limit' and r['moc_vol_pct'] and r['pressure_kpa']:
+            points.append({'id': r['test_id'], 'f': r['family'], 'psi': '', 'o': float(r['moc_vol_pct']) / 100.0, 'p': float(r['pressure_kpa']), 'g': r['gravity_level_g'] or '?',
+                           'c': 'limit', 's': r['source_ref'], 'org': r['data_origin']})
+    ranking = json.loads((ROOT / 'data/processed/ranking.json').read_text(encoding='utf-8'))
+    interp = json.loads((ROOT / 'data/processed/interpretations.json').read_text(encoding='utf-8'))
+    claims, ledger_stats, srcs = [], {}, {}
+    cp = ROOT / 'data/ledger/claims.jsonl'
+    if cp.exists():
+        import sys
+        sys.path.insert(0, str(ROOT))
+        from ledger import config as lcfg
+        from ledger import display as ldisp
+        with open(lcfg.SOURCES_CSV, encoding='utf-8') as f:
+            srcs = {r['doc_id']: {k: r[k] for k in ('doc_id', 'ntrs_id', 'title', 'year', 'url', 'display_verbatim', 'rights_determination')} for r in csv.DictReader(f)}
+        allc = ldisp.load_claims(cp)
+        for c in allc:
+            ledger_stats[c['status']] = ledger_stats.get(c['status'], 0) + 1
+        rp = ROOT / 'data/ledger/rejected.jsonl'
+        ledger_stats['rejected'] = sum(1 for _ in open(rp, encoding='utf-8')) if rp.exists() else 0
+        pub = ldisp.public_claims(allc, ldisp.load_sources())
+        gmap = {c['claim_id']: c['conditions']['gravity_class'] for c in allc}
+        for v in pub:
+            v['gravity_class'] = gmap[v['claim_id']]
+            v['doc'] = next(c['doc_id'] for c in allc if c['claim_id'] == v['claim_id'])
+        claims = pub
+    conflicts_md = (ROOT / 'docs/CONFLICTS.md').read_text(encoding='utf-8') if (ROOT / 'docs/CONFLICTS.md').exists() else ''
+    data = {'points': points, 'points_without_atmosphere': no_atm, 'ranking': ranking, 'interpretations': interp, 'claims': claims,
+            'ledger_stats': ledger_stats, 'sources': srcs, 'conflicts': [l for l in conflicts_md.splitlines() if l.startswith('| PSI-')],
+            'official': OFFICIAL, 'nd': ND, 'investigations': invs, 'pairs': [dict(id=k, **v) for k, v in sorted(pairs.items())], 'literature': lit,
             'gravity_counts': grav_counts, 'profiles': profiles, 'atmos_reports': atmos, 'bre_quote': quote,
             'build': {'tests_rows': len(tests), 'investigations': len(invs)}}
     tpl = (ROOT / 'scripts/site_template.html').read_text(encoding='utf-8')

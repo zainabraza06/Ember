@@ -45,7 +45,13 @@ def main(argv=None):
     ap.add_argument('command', nargs='?', default='all', choices=['smoke', 'pages', 'pilot', 'extract', 'rate', 'report', 'all'])
     ap.add_argument('--offline', action='store_true', help='use the cache only; never call the API')
     ap.add_argument('--skip-pilot', action='store_true')
+    ap.add_argument('--docs', default='', help='comma-separated NTRS ids in priority order (default: all in sources.csv)')
+    ap.add_argument('--no-verify', action='store_true', help='skip the LLM support check (automatic when GROQ_API_KEY is not set)')
+    ap.add_argument('--stop-at', default='', help='HH:MM local time; stop cleanly at that time')
     a = ap.parse_args(argv)
+    if a.stop_at:
+        import os
+        os.environ['LEDGER_STOP_AT'] = a.stop_at
     if a.command == 'smoke':
         from .smoke import smoke
         return smoke()
@@ -73,7 +79,10 @@ def main(argv=None):
         if not entry['passed']:
             print('Pilot did not pass: write a new prompt version (prompts/extract_vN.md, note it in prompts/CHANGELOG.md) and set LEDGER_EXTRACT_PROMPT.')
             return 1
-    claims, stats = build.run(client)
+    import os
+    verify = not a.no_verify and bool(os.environ.get('GROQ_API_KEY'))
+    docs = [d for d in a.docs.split(',') if d] or None
+    claims, stats = build.run(client, docs, verify=verify)
     return finish(claims, stats)
 
 

@@ -35,6 +35,7 @@ DOCS = {
     '20240002981': 'Preliminary results from Saffire VI',
     '20200000361': 'SoFIE project on ISS',
     '20040053586': 'CO2 suppression of PMMA flames in low gravity',
+    '20260002050': 'Surface vehicle atmospheric considerations for Moon to Mars exploration (exploration atmospheres)',
 }
 # Narrative pages only for the two long reports: FLEX Tables IX and Appendix B and BASS-II Appendix A are per-test data already in the
 # unified test table (M2), not findings. Empty = all pages.

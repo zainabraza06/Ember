@@ -1,0 +1,292 @@
+{
+ "items": [
+  {
+   "caveats": [
+    "58 of 280 tests have an \"end of test\" label that disagrees with the recorded extinction diameter; the label is used (decision D22).",
+    "Methanol and heptane droplets in one apparatus: this is one experiment family, not independent confirmation.",
+    "Tests were not designed as a controlled sweep of oxygen alone: pressure and diluent also vary."
+   ],
+   "conflicts": [],
+   "family": "FLEX",
+   "id": "flex_o2_diluent",
+   "investigation": "PSI-69",
+   "n": 280,
+   "sentences": [
+    "At oxygen fractions below 0.16, 45 of 48 FLEX droplet tests (94%) ended in extinction; at 0.24 or above, 9 of 49 (18%) did.",
+    "The other end states in the report are \"completion\" (the droplet burned to completion) and \"disruption\" (a disruption ended the test); both are counted as \"not extinguished\" here and are listed in the table.",
+    "With carbon dioxide in the diluent: 88 of 123 tests ended in extinction (72%).",
+    "With helium in the diluent: 45 of 56 tests ended in extinction (80%).",
+    "With nitrogen only: 58 of 101 tests ended in extinction (57%)."
+   ],
+   "strength": "moderate",
+   "tables": [
+    {
+     "classes": [
+      "self_extinguished",
+      "burned_to_completion",
+      "other"
+     ],
+     "rows": [
+      {
+       "bin": "0 to 0.16",
+       "counts": {
+        "burned_to_completion": 3,
+        "other": 0,
+        "self_extinguished": 45
+       },
+       "n": 48
+      },
+      {
+       "bin": "0.16 to 0.2",
+       "counts": {
+        "burned_to_completion": 8,
+        "other": 4,
+        "self_extinguished": 66
+       },
+       "n": 78
+      },
+      {
+       "bin": "0.2 to 0.24",
+       "counts": {
+        "burned_to_completion": 11,
+        "other": 23,
+        "self_extinguished": 71
+       },
+       "n": 105
+      },
+      {
+       "bin": "0.24 to 1.01",
+       "counts": {
+        "burned_to_completion": 6,
+        "other": 34,
+        "self_extinguished": 9
+       },
+       "n": 49
+      }
+     ],
+     "title": "By oxygen mole fraction"
+    },
+    {
+     "classes": [
+      "self_extinguished",
+      "burned_to_completion",
+      "other"
+     ],
+     "rows": [
+      {
+       "bin": "carbon dioxide in the diluent",
+       "counts": {
+        "burned_to_completion": 8,
+        "other": 27,
+        "self_extinguished": 88
+       },
+       "n": 123
+      },
+      {
+       "bin": "helium in the diluent",
+       "counts": {
+        "burned_to_completion": 7,
+        "other": 4,
+        "self_extinguished": 45
+       },
+       "n": 56
+      },
+      {
+       "bin": "nitrogen only",
+       "counts": {
+        "burned_to_completion": 13,
+        "other": 30,
+        "self_extinguished": 58
+       },
+       "n": 101
+      }
+     ],
+     "title": "By diluent"
+    }
+   ],
+   "title": "FLEX droplets: oxygen and diluent versus extinction"
+  },
+  {
+   "caveats": [
+    "Highest oxygen in the table: 0.85 (matches the official text: up to 85% oxygen from a spherical burner).",
+    "Fuel (ethane, propane, butane and mixtures), pressure and flow also vary between tests.",
+    "Outcome classes follow the PSI label (self-extinguished or flow terminated) plus comment rules (OUTCOME_MAPPING.md)."
+   ],
+   "conflicts": [],
+   "family": "CFI-G",
+   "id": "cfig_o2",
+   "investigation": "PSI-159",
+   "n": 333,
+   "sentences": [
+    "Oxygen 0 to 0.21: 29 tests; 15 self-extinguished, 5 stopped by the operator or flow cut-off while still burning, 2 did not ignite.",
+    "Oxygen 0.21 to 0.3: 74 tests; 31 self-extinguished, 12 stopped by the operator or flow cut-off while still burning, 30 did not ignite.",
+    "Oxygen 0.3 to 0.4: 124 tests; 59 self-extinguished, 39 stopped by the operator or flow cut-off while still burning, 23 did not ignite.",
+    "Oxygen 0.4 to 1.01: 106 tests; 68 self-extinguished, 35 stopped by the operator or flow cut-off while still burning, 1 did not ignite.",
+    "\"Stopped while still burning\" is a censored outcome: the flame had not gone out when the test ended, so it is not counted as an extinction."
+   ],
+   "strength": "moderate",
+   "tables": [
+    {
+     "classes": [
+      "self_extinguished",
+      "externally_terminated",
+      "no_ignition",
+      "other",
+      "unknown"
+     ],
+     "rows": [
+      {
+       "bin": "0 to 0.21",
+       "counts": {
+        "externally_terminated": 5,
+        "no_ignition": 2,
+        "other": 0,
+        "self_extinguished": 15,
+        "unknown": 7
+       },
+       "n": 29
+      },
+      {
+       "bin": "0.21 to 0.3",
+       "counts": {
+        "externally_terminated": 12,
+        "no_ignition": 30,
+        "other": 0,
+        "self_extinguished": 31,
+        "unknown": 1
+       },
+       "n": 74
+      },
+      {
+       "bin": "0.3 to 0.4",
+       "counts": {
+        "externally_terminated": 39,
+        "no_ignition": 23,
+        "other": 2,
+        "self_extinguished": 59,
+        "unknown": 1
+       },
+       "n": 124
+      },
+      {
+       "bin": "0.4 to 1.01",
+       "counts": {
+        "externally_terminated": 35,
+        "no_ignition": 1,
+        "other": 1,
+        "self_extinguished": 68,
+        "unknown": 1
+       },
+       "n": 106
+      }
+     ],
+     "title": "By oxygen mole fraction"
+    }
+   ],
+   "title": "ACME CFI-G gas flames: oxygen versus how tests ended"
+  },
+  {
+   "caveats": [
+    "Nine samples are too few for a general statement; these are individual samples on one spacecraft flight."
+   ],
+   "conflicts": [
+    "| PSI-99:2-6 | flow_velocity_cm_s | 20 cm/s (PSI-99, data/raw/psi/PSI-99/PSI-99_Experimental table_SAFFIRE-2.csv#data_row=6) | 25 cm/s (NTRS 20170008805, slide 29, Table I (Saffire results presentation)) | Report slide 29 prints 25 cm/s for sample 2-6; the PSI table prints 20 cm/s. Not resolved; do not average. |"
+   ],
+   "family": "Saffire",
+   "id": "saffire_0g_1g",
+   "investigation": "PSI-99",
+   "n": 9,
+   "sentences": [
+    "9 samples have both a microgravity result and a 1 g comparison result; 4 have the same outcome class at both gravity levels and 5 differ.",
+    "Outcome classes for these samples come from the burn lengths in the PSI table (OUTCOME_MAPPING.md)"
+   ],
+   "strength": "very limited",
+   "tables": [
+    {
+     "classes": [
+      "0 g",
+      "1 g"
+     ],
+     "rows": [
+      {
+       "bin": "PSI-99:2-1 Silicone",
+       "counts": {
+        "0 g": "unknown",
+        "1 g": "burned_to_completion"
+       },
+       "n": 2
+      },
+      {
+       "bin": "PSI-99:2-2 Silicone",
+       "counts": {
+        "0 g": "unknown",
+        "1 g": "unknown"
+       },
+       "n": 2
+      },
+      {
+       "bin": "PSI-99:2-3 Silicone",
+       "counts": {
+        "0 g": "unknown",
+        "1 g": "unknown"
+       },
+       "n": 2
+      },
+      {
+       "bin": "PSI-99:2-4 Silicone",
+       "counts": {
+        "0 g": "unknown",
+        "1 g": "burned_to_completion"
+       },
+       "n": 2
+      },
+      {
+       "bin": "PSI-99:2-5 Cotton-Fiberglass (SIBAL)",
+       "counts": {
+        "0 g": "burned_to_completion",
+        "1 g": "burned_to_completion"
+       },
+       "n": 2
+      },
+      {
+       "bin": "PSI-99:2-6 Cotton-Fiberglass",
+       "counts": {
+        "0 g": "burned_to_completion",
+        "1 g": "burned_to_completion"
+       },
+       "n": 2
+      },
+      {
+       "bin": "PSI-99:2-7-Nomex Nomex",
+       "counts": {
+        "0 g": "no_ignition",
+        "1 g": "unknown"
+       },
+       "n": 2
+      },
+      {
+       "bin": "PSI-99:2-8 PMMA",
+       "counts": {
+        "0 g": "unknown",
+        "1 g": "burned_to_completion"
+       },
+       "n": 2
+      },
+      {
+       "bin": "PSI-99:2-9 PMMA",
+       "counts": {
+        "0 g": "unknown",
+        "1 g": "burned_to_completion"
+       },
+       "n": 2
+      }
+     ],
+     "text": true,
+     "title": "Pairs"
+    }
+   ],
+   "title": "Saffire-II: the same sample at 0 g and at 1 g"
+  }
+ ],
+ "strength_rule": " (deterministic, see docs/RANKING.md section 3):\n  moderate  = at least 100 tests in one experiment family (never 'strong': strong would need two independent families agreeing)\n  limited   = 30 to 99 tests\n  very limited = fewer than 30 tests\nA source conflict that touches the analysis lowers the label by one step; a high share of unknown outcomes is stated beside it."
+}

@@ -9,7 +9,7 @@ import json
 
 from . import config
 
-PUBLIC_STATUSES = ('verified_auto', 'approved')
+PUBLIC_STATUSES = ('verified_auto', 'approved', 'pending_verification')   # pending_verification is shown labelled 'unreviewed'
 
 
 def load_sources():
@@ -36,6 +36,7 @@ def public_view(claim, source):
             'conditions': claim['conditions'], 'effect_direction': claim['effect_direction'], 'evidence_type': claim['evidence_type'],
             'group_id': claim.get('group_id'), 'independent_sources': claim.get('independent_sources', 0),
             'citation': citation(claim, source), 'source_url': source['url'], 'page': claim['page'],
+            'review_label': 'unreviewed' if claim['status'] == 'pending_verification' else 'verified',
             'span': claim['span'] if allowed else None, 'span_hidden_reason': None if allowed else 'source is not a US Government work (copyright)'}
 
 

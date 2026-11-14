@@ -220,9 +220,10 @@ class EndToEnd(Sandbox):
         self.assertEqual(claims[0]['status'], 'needs_review')       # pending verification is never published
         self.assertEqual(claims[0]['reasons'], ['support_check_pending'])
         api.daily_after = None                                       # next day
+        (config.LEDGER_DIR / 'exhausted.json').unlink(missing_ok=True)   # the exhausted-models record is per calendar day
         claims, stats = build.run(llm.Client(transport=api, sleep=lambda s: None), ['1'], quiet=True)
         self.assertEqual((claims[0]['status'], stats['stopped']), ('verified_auto', None))
-        self.assertEqual(api.calls, 3)                               # 1 extraction + 1 refused + 1 verification; extraction not repeated
+        self.assertEqual(api.calls, 4)                               # 1 extraction + 2 refused (same quota message twice) + 1 verification; extraction not repeated
 
     def test_own_daily_counter_stops_before_calling(self):
         config.PROVIDERS['groq']['rpd'] = 1

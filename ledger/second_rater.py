@@ -41,7 +41,7 @@ def rate_all(client):
             continue
         try:
             e = client.complete('rate', 'bass2-observations', o['test_id'], PROMPT_VERSION, text, 'Observation text:\n' + o['observation_text'],
-                                max_tokens=300, tag='bass2')
+                                max_tokens=2000, tag='bass2')
         except CacheMiss:
             pending += 1
             continue

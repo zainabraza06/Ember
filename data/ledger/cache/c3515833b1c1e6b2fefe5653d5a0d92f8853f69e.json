@@ -1,0 +1,19 @@
+{
+ "content": "{\"claims\": [\n {\"page\": 23, \"locator\": \"\", \"span\": \"Because methanol and heptane are relatively high volatility fuels, the droplet regression history was dominated by the fuel not by the contaminant.\", \"statement\": \"Because methanol and heptane are relatively high volatility fuels, the droplet regression history was dominated by the fuel not by the contaminant.\",\n  \"variables\": [\"fuel_type\", \"burn_time\", \"other\"],\n  \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null,\n                 \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null,\n                 \"material\": null, \"geometry\": \"droplet\"},\n  \"effect_direction\": \"not_applicable\", \"magnitude_text\": \"\", \"evidence_type\": \"review\", \"extraction_confidence\": \"high\"},\n {\"page\": 23, \"locator\": \"\", \"span\": \"(6) The diffusive extinction droplet diameters (smaller diameters) for methanol (where there is no disruption) were minimally influenced by the presence of the contaminant.\", \"statement\": \"The diffusive extinction droplet diameters (smaller diameters) for methanol (where there is no disruption) were minimally influenced by the presence of the contaminant.\",\n  \"variables\": [\"extinction\", \"material\", \"other\"],\n  \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null,\n                 \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null,\n                 \"material\": \"methanol\", \"geometry\": \"droplet\"},\n  \"effect_direction\": \"no_effect\", \"magnitude_text\": \"\", \"evidence_type\": \"review\", \"extraction_confidence\": \"high\"},\n {\"page\": 23, \"locator\": \"\", \"span\": \"(7) Radiative extinction droplet diameters (larger diameters) were not influenced by the presence of the contaminant.\", \"statement\": \"Radiative extinction droplet diameters (larger diameters) were not influenced by the presence of the contaminant.\",\n  \"variables\": [\"extinction\", \"other\"],\n  \"conditions\": {\"gravity_class\": \"not_stated\", \"gravity_g\": null, \"oxygen_fraction_min\": null, \"oxygen_fraction_max\": null,\n                 \"pressure_kpa_min\": null, \"pressure_kpa_max\": null, \"flow_cm_s_min\": null, \"flow_cm_s_max\": null,\n                 \"material\": null, \"geometry\": \"droplet\"},\n  \"effect_direction\": \"no_effect\", \"magnitude_text\": \"\", \"evidence_type\": \"review\", \"extraction_confidence\": \"high\"}\n]}",
+ "created": "2026-11-14T16:32:22",
+ "doc_checksum": "b4f6ca983e2792c33a0b92220a791a818f426bb635b94f7fd33dc8c9c471e79d",
+ "finish_reason": "stop",
+ "item_id": "NTRS-20150023456:p23-25",
+ "kind": "extract",
+ "model_version": "gemini-3.6-flash",
+ "prompt_version": "extract_v1",
+ "provider": "gemini",
+ "requested_model": "gemini-3.6-flash",
+ "response_id": "ukb4aujKNvShnsEP7OmmUA",
+ "tag": "NTRS-20150023456",
+ "usage": {
+  "completion_tokens": 2540,
+  "prompt_tokens": 2395,
+  "total_tokens": 4935
+ }
+}

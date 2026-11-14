@@ -39,7 +39,7 @@ def write_report(stats=None):
     status = collections.Counter(c['status'] for c in allc)
     L += ['## 1. Documents and claims', '',
           f"{len(srcs)} documents in `data/ledger/sources.csv`; {sum(1 for c in allc)} claims extracted (after parsing); "
-          f"**{status['verified_auto']} verified_auto, {status['approved']} approved, {status['needs_review']} needs_review, {status['rejected']} rejected.**", '',
+          f"**{status['verified_auto']} verified_auto, {status['approved']} approved, {status['pending_verification']} pending_verification (unreviewed; passed the code checks, no independent verifier ran), {status['needs_review']} needs_review, {status['rejected']} rejected.**", '',
           '| document | scope (PDF pages) | claims | verified_auto | needs_review | rejected | verbatim display |', '|---|---|---|---|---|---|---|']
     for s in srcs:
         cs = [c for c in allc if c['doc_id'] == s['doc_id']]

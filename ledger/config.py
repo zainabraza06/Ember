@@ -3,6 +3,21 @@ import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+
+
+def _load_env_local():
+    """Keys may be kept in <repo>/.env.local (KEY=value per line). The file is git-ignored; values are never printed or logged.
+    Real environment variables win over the file."""
+    f = ROOT / '.env.local'
+    if f.exists():
+        for line in f.read_text(encoding='utf-8').splitlines():
+            line = line.strip()
+            if line and not line.startswith('#') and '=' in line:
+                k, v = line.split('=', 1)
+                os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+
+_load_env_local()
 LEDGER_DIR = ROOT / 'data' / 'ledger'
 SOURCES_CSV = LEDGER_DIR / 'sources.csv'
 PAGES_JSONL = LEDGER_DIR / 'pages.jsonl'          # derived from the PDFs; git-ignored (regenerate with `python -m ledger pages`)
@@ -17,7 +32,7 @@ EXTRACT_PROMPT_VERSION = os.environ.get('LEDGER_EXTRACT_PROMPT', 'extract_v1')
 VERIFY_PROMPT_VERSION = os.environ.get('LEDGER_VERIFY_PROMPT', 'verify_v1')
 FUZZY_THRESHOLD = 0.95
 CHUNK_CHARS = 9000          # target size of one extraction chunk (characters of page text)
-VERIFY_CONTEXT_CHARS = 700  # page text around the span sent to the support check (keeps the Groq daily token use low)
+VERIFY_CONTEXT_CHARS = 500  # page text around the span sent to the support check (keeps the Groq daily token use low)
 
 
 def _chosen(provider):
@@ -57,6 +72,11 @@ PROVIDERS = {
         'rpm': _f('LEDGER_GROQ_RPM', 20), 'rpd': _f('LEDGER_GROQ_RPD', 1000), 'tpm': _f('LEDGER_GROQ_TPM', 6000), 'tpd': _f('LEDGER_GROQ_TPD', 0),
         'day_tz': 'UTC',
     },
+}
+# Free-tier daily quotas are per model. When the preferred model's daily quota is used up the client moves to the next one;
+# the model that produced every response is pinned in its cache entry and in each claim (model_version).
+MODEL_CHAIN = {
+    'gemini': [m for m in os.environ.get('LEDGER_GEMINI_MODELS', 'gemini-3.6-flash,gemini-3.7-flash,gemini-3.5-flash,gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-3.5-flash-lite,gemini-2.5-flash-lite').split(',') if m],
 }
 KIND_PROVIDER = {'extract': 'gemini', 'verify': 'groq', 'rate': 'groq'}
 

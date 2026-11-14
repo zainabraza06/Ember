@@ -1,189 +1,372 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ember: Fire Safety Evidence Explorer</title>
-<meta name="description" content="NASA combustion investigations compared side by side, with sources for every field.">
+<meta name="description" content="Where NASA has tested fire in space, where it has not, and how the 24 combustion investigations rank for a lunar base, rover, spacesuit or ISS-like cabin.">
 <style>
-:root{--bg:#fbfaf8;--panel:#fff;--ink:#1d1b19;--muted:#6b665f;--line:#e2ddd5;--accent:#b4410c;--same:#e4f1e6;--diff:#fbeccb;--nd:#efece6;--link:#0b5cad}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141211;--panel:#1d1a18;--ink:#efeae3;--muted:#a39d94;--line:#34302c;--accent:#f0925a;--same:#1f3324;--diff:#40331a;--nd:#27231f;--link:#7db7f0}}
-:root[data-theme="dark"]{--bg:#141211;--panel:#1d1a18;--ink:#efeae3;--muted:#a39d94;--line:#34302c;--accent:#f0925a;--same:#1f3324;--diff:#40331a;--nd:#27231f;--link:#7db7f0}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-a{color:var(--link)}header{padding:20px 16px 8px;max-width:1100px;margin:0 auto}h1{margin:0;font-size:1.5rem}h1 span{color:var(--accent)}
-.sub{color:var(--muted);margin:4px 0 0}nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
-nav div{max-width:1100px;margin:0 auto;padding:8px 16px;display:flex;gap:6px;flex-wrap:wrap}
-nav button,.btn{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
-nav button[aria-current="true"]{border-color:var(--accent);color:var(--accent);font-weight:600}
-main{max-width:1100px;margin:0 auto;padding:16px}section{display:none}section.on{display:block}
-h2{font-size:1.25rem;margin:8px 0}h3{font-size:1.05rem;margin:16px 0 6px}
+:root{--bg:#0f0e0d;--panel:#1a1816;--ink:#efeae3;--muted:#b3ada3;--line:#38342f;--accent:#f0925a;--on-accent:#1a1816;--same:#1f3324;--diff:#4a3a17;--nd:#262320;--link:#8ec2f5;
+--c-se:#56a8e8;--c-bc:#E69F00;--c-et:#2fc79a;--c-ni:#c9c9c9;--c-ot:#e08fbd;--c-uk:#8f8a82;--c-lim:#efeae3;--c-lim:#efeae3;--zone:rgba(240,146,90,.16)}
+:root[data-theme="light"]{--bg:#fbfaf8;--panel:#ffffff;--ink:#1d1b19;--muted:#59544d;--line:#d9d3ca;--accent:#a63a08;--on-accent:#ffffff;--same:#e0f0e3;--diff:#fbeccb;--nd:#efece6;--link:#0b5cad;
+--c-se:#0072B2;--c-bc:#b87400;--c-et:#007a5a;--c-ni:#6b6b6b;--c-ot:#b5518a;--c-uk:#6f6a62;--c-lim:#1d1b19;--c-lim:#1d1b19;--zone:rgba(166,58,8,.12)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--link)}:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:var(--on-accent);padding:8px 12px;z-index:50}.skip:focus{left:8px;top:8px}
+header{padding:16px;max-width:1120px;margin:0 auto;display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+h1{margin:0;font-size:1.4rem}h1 b{color:var(--accent)}.sub{color:var(--muted);margin:2px 0 0;max-width:62ch;font-size:.95rem}
+nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:20}
+#tabs{max-width:1120px;margin:0 auto;padding:8px 16px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin}
+button,.btn,select,input{font:inherit;color:var(--ink)}
+button,.btn{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer;white-space:nowrap;min-height:40px}
+button:hover{border-color:var(--accent)}button[aria-selected="true"],button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);font-weight:600}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:600}
+main{max-width:1120px;margin:0 auto;padding:16px}section[role=tabpanel]{display:none}section.on{display:block}
+h2{font-size:1.25rem;margin:6px 0 8px}h3{font-size:1.05rem;margin:18px 0 6px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.tag{display:inline-block;border-radius:99px;padding:1px 9px;font-size:.8rem;border:1px solid var(--line);background:var(--nd)}
-.tag.prevention{border-color:#2f7d4a}.tag.detection{border-color:#2d6cb5}.tag.suppression{border-color:#b4410c}.tag.none{color:var(--muted)}
-.muted{color:var(--muted)}.small{font-size:.85rem}.nd{color:var(--muted);font-style:italic}
-input[type=search],select{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px}
+.tag{display:inline-block;border-radius:99px;padding:1px 9px;font-size:.8rem;border:1px solid var(--line);background:var(--nd)}
+.tag.prevention{border-color:#2f9d5f}.tag.detection{border-color:#4f8fd6}.tag.suppression{border-color:var(--accent)}.tag.none{color:var(--muted)}
+.tag.unrev{border-color:var(--accent);color:var(--accent)}.tag.ver{border-color:#2f9d5f}
+.muted{color:var(--muted)}.small{font-size:.86rem}.nd{color:var(--muted);font-style:italic}.src{font-size:.78rem;color:var(--muted)}
+input[type=search],input[type=text],select{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);min-height:40px}
 table{border-collapse:collapse;width:100%}th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}th{background:var(--nd)}
 td.same{background:var(--same)}td.diff{background:var(--diff)}td.nd{background:var(--nd)}.scroll{overflow-x:auto}
-pre.t{white-space:pre-wrap;font:inherit;margin:0;max-height:16em;overflow:auto}
-.src{font-size:.78rem;color:var(--muted)}.warn{border-left:4px solid var(--accent);padding:6px 12px;background:var(--panel)}
-details summary{cursor:pointer}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
-@media (max-width:600px){main,header,nav div{padding-left:12px;padding-right:12px}}
+pre.t{white-space:pre-wrap;font:inherit;margin:0;max-height:16em;overflow:auto}.warn{border-left:4px solid var(--accent);padding:6px 12px;background:var(--panel)}
+.bar{display:flex;height:14px;border-radius:4px;overflow:hidden;background:var(--nd);min-width:120px}.bar i{display:block;height:100%}
+.state{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}
+.map-wrap{display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:14px}@media (max-width:820px){.map-wrap{grid-template-columns:1fr}}
+svg.map{width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+svg.map text{fill:var(--ink);font:11px system-ui,sans-serif}svg.map .ax{stroke:var(--line)}svg.map .mut{fill:var(--muted)}
+.leg{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.leg button{min-height:34px;padding:2px 10px;font-size:.85rem}
+#caption{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:2px solid var(--accent);padding:10px 16px;z-index:40;display:none}
+#caption.on{display:flex;gap:12px;align-items:center;justify-content:space-between}#caption p{margin:0;max-width:78ch}
+.brief{max-width:780px;margin:0 auto}.brief ol{padding-left:1.2em}.brief li{margin:6px 0}.brief sup a{text-decoration:none}
+footer{max-width:1120px;margin:0 auto;padding:16px;color:var(--muted);font-size:.85rem}
+@media (max-width:480px){main,header,#tabs{padding-left:12px;padding-right:12px}h1{font-size:1.2rem}}
+@media print{body{background:#fff;color:#000;font-size:10.5pt}nav,header,footer,#caption,.noprint,.skip{display:none!important}section[role=tabpanel]{display:none!important}
+#s-brief{display:block!important}.brief{max-width:none}.card{border:1px solid #999;background:#fff}a{color:#000}@page{size:A4;margin:14mm}}
 </style>
 </head>
 <body>
-<header><h1><span>Ember</span>: fire safety evidence explorer</h1>
-<p class="sub">NASA combustion investigations from the PSI repository, compared side by side. Every field names its source; what the catalog does not say is shown as "not documented in the catalog".</p></header>
-<nav><div id="tabs"></div></nav>
-<main>
-<section id="s-inv"></section><section id="s-cmp"></section><section id="s-mis"></section><section id="s-grav"></section><section id="s-earth"></section><section id="s-about"></section>
+<a class="skip" href="#main">Skip to content</a>
+<header><div><h1><b>Ember</b>: fire safety evidence explorer</h1>
+<p class="sub">Where NASA has tested fire in space, where it has not, and how the 24 combustion investigations compare. Every number links to its source; what is not documented is shown as not documented.</p></div>
+<div class="row noprint"><button id="storyBtn" class="primary" onclick="playStory()">Play the story (90 s)</button><button id="themeBtn" onclick="toggleTheme()" aria-label="Switch between dark and light theme">Light theme</button></div></header>
+<nav aria-label="Sections"><div id="tabs" role="tablist"></div></nav>
+<main id="main" tabindex="-1">
+<section id="s-map" role="tabpanel"></section><section id="s-inv" role="tabpanel"></section><section id="s-cmp" role="tabpanel"></section><section id="s-rank" role="tabpanel"></section>
+<section id="s-interp" role="tabpanel"></section><section id="s-ask" role="tabpanel"></section><section id="s-brief" role="tabpanel"></section><section id="s-mis" role="tabpanel"></section>
+<section id="s-grav" role="tabpanel"></section><section id="s-earth" role="tabpanel"></section><section id="s-about" role="tabpanel"></section>
 </main>
+<footer>Ember explorer. Built from NASA PSI records, NASA technical reports and a reproducible pipeline. No model runs on this page; its text is quoted from NASA records, counted from the data, or taken from the claim ledger and labelled with its review status.</footer>
+<div id="caption" role="status" aria-live="polite"><p id="capText"></p><div class="row"><button onclick="storyPause()" id="pauseBtn">Pause</button><button onclick="stopStory()">Stop</button></div></div>
+<noscript><p class="state">This explorer needs JavaScript to draw its tables and map.</p></noscript>
 <script id="data" type="application/json">/*__DATA__*/null</script>
 <script>
-const D = JSON.parse(document.getElementById('data').textContent);
-const ND = D.nd;
-const $ = (s, r = document) => r.querySelector(s);
+let D;
+try { D = JSON.parse(document.getElementById('data').textContent); } catch (e) { document.getElementById('main').innerHTML = '<p class="state">The data could not be loaded. Reload the page; if it persists, the build is broken.</p>'; throw e; }
+const ND = D.nd, $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const link = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t || u)}</a>`;
 const nd = () => `<span class="nd">${esc(ND)}</span>`;
-const TABS = [['inv','Investigations'],['cmp','Compare'],['mis','Mission atmospheres'],['grav','Partial-gravity bounds'],['earth','Earth applications'],['about','About']];
+const CLS = {self_extinguished:['Self-extinguished','var(--c-se)','circle'], burned_to_completion:['Burned to completion','var(--c-bc)','square'], externally_terminated:['Stopped while burning (censored)','var(--c-et)','tri'],
+  no_ignition:['No ignition','var(--c-ni)','diamond'], other:['Other','var(--c-ot)','cross'], unknown:['Unknown outcome','var(--c-uk)','ring'], limit:['Oxygen limit (MOC) from reports, outside PSI','var(--c-lim)','bar']};
+const TABS = [['map','Atmosphere map'],['inv','Investigations'],['cmp','Compare'],['rank','Ranking'],['interp','Interpretation'],['ask','Ask'],['brief','Mission brief'],['mis','Atmospheres'],['grav','Partial gravity'],['earth','Earth'],['about','About']];
+let current = 'map';
 const sel = new Set(); let filterTag = '', filterHw = '', q = '';
+const GL = {'0':'0 g','1':'1 g','0.165':'0.165 g (Moon)','0.38':'0.38 g (Mars)'};
+const ST = {grav:'0', hide:new Set(), rankProfile:'lunar_base'};
 
-function show(id){ TABS.forEach(([k]) => { $('#s-'+k).classList.toggle('on', k===id); }); document.querySelectorAll('#tabs button').forEach(b => b.setAttribute('aria-current', b.dataset.k===id)); if(id==='cmp') renderCmp(); window.scrollTo(0,0); }
-$('#tabs').innerHTML = TABS.map(([k,t]) => `<button data-k="${k}" onclick="show('${k}')">${t}</button>`).join('');
+/* ---------- shell: tabs, theme ---------- */
+function show(id){ current = id; TABS.forEach(([k]) => { $('#s-'+k).classList.toggle('on', k===id); });
+  document.querySelectorAll('#tabs button').forEach(b => { const on = b.dataset.k===id; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; });
+  if (id==='cmp') safe(renderCmp,'cmp'); window.scrollTo(0,0); }
+$('#tabs').innerHTML = TABS.map(([k,t]) => `<button role="tab" data-k="${k}" aria-controls="s-${k}" onclick="show('${k}')">${t}</button>`).join('');
+$('#tabs').addEventListener('keydown', e => { const b = [...document.querySelectorAll('#tabs button')], i = b.findIndex(x => x===document.activeElement);
+  if (i<0) return; let n = null; if (e.key==='ArrowRight') n = (i+1)%b.length; else if (e.key==='ArrowLeft') n = (i-1+b.length)%b.length; else if (e.key==='Home') n = 0; else if (e.key==='End') n = b.length-1;
+  if (n!==null){ e.preventDefault(); b[n].focus(); show(b[n].dataset.k); } });
+function setTheme(t){ document.documentElement.dataset.theme = t; $('#themeBtn').textContent = t==='dark' ? 'Light theme' : 'Dark theme'; try { localStorage.setItem('ember-theme', t); } catch(e) {} }
+function toggleTheme(){ setTheme(document.documentElement.dataset.theme==='dark' ? 'light' : 'dark'); }
+try { const t = localStorage.getItem('ember-theme'); if (t==='light'||t==='dark') setTheme(t); } catch(e) {}
+function safe(fn, id){ try { fn(); } catch(e) { console.error(e); $('#s-'+id).innerHTML = `<div class="state" role="alert">This section could not be drawn (${esc(e.message)}). The rest of the page still works.</div>`; } }
 
-/* ---------- G1/G2: investigations list with tag and hardware filters ---------- */
+/* ---------- Atmosphere map ---------- */
+const MAP = {W:760, H:470, L:58, R:14, T:14, B:56, XMAX:340};
+MAP.PW = MAP.W-MAP.L-MAP.R; MAP.PH = MAP.H-MAP.T-MAP.B;
+const mx = p => MAP.L + p/MAP.XMAX*MAP.PW, my = o => MAP.T + (1-o)*MAP.PH;
+const KPA_PSI = 6.894757;
+function shape(kind, x, y, r){
+  if (kind==='circle') return `<circle cx="${x}" cy="${y}" r="${r}"`;
+  if (kind==='square') return `<rect x="${x-r}" y="${y-r}" width="${2*r}" height="${2*r}"`;
+  if (kind==='tri') return `<path d="M${x} ${y-r-1} L${x+r+1} ${y+r} L${x-r-1} ${y+r}Z"`;
+  if (kind==='diamond') return `<path d="M${x} ${y-r-1} L${x+r+1} ${y} L${x} ${y+r+1} L${x-r-1} ${y}Z"`;
+  if (kind==='bar') return `<rect x="${x-7}" y="${y-1.5}" width="14" height="3"`;
+  if (kind==='cross') return `<path d="M${x-r} ${y-r}L${x+r} ${y+r}M${x-r} ${y+r}L${x+r} ${y-r}" fill="none" stroke-width="2"`;
+  return `<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke-width="1.6"`;
+}
+function mark(c, x, y){ const [lab, col, kind] = CLS[c] || CLS.unknown;
+  const st = kind==='cross' ? `stroke="${col}"` : kind==='ring' ? `stroke="${col}"` : `fill="${col}" fill-opacity=".8"`;
+  return shape(kind, x, y, 4)+` ${st}/>`; }
+function mapPoints(){ return D.points.filter(p => p.g===ST.grav); }
+function renderMap(){
+  const pts = mapPoints(), shown = pts.filter(p => !ST.hide.has(p.c));
+  const cells = {}; pts.forEach(p => { cells[Math.floor(p.p/20)+','+Math.floor(p.o/0.05)] = 1; });
+  let fog = '', nfog = 0;
+  for (let gx=0; gx<MAP.XMAX/20; gx++) for (let gy=0; gy<20; gy++) if (!cells[gx+','+gy]) { nfog++; fog += `<rect x="${mx(gx*20)}" y="${my((gy+1)*0.05)}" width="${mx(20)-mx(0)}" height="${my(0)-my(0.05)}" fill="url(#hatch)"/>`; }
+  const xt = []; for (let p=0; p<=MAP.XMAX; p+=50) xt.push(`<line class="ax" x1="${mx(p)}" x2="${mx(p)}" y1="${MAP.T}" y2="${MAP.T+MAP.PH}" opacity=".5"/><text x="${mx(p)}" y="${MAP.T+MAP.PH+16}" text-anchor="middle">${p}</text><text class="mut" x="${mx(p)}" y="${MAP.T+MAP.PH+30}" text-anchor="middle">${(p/KPA_PSI).toFixed(0)} psi</text>`);
+  const yt = []; for (let o=0; o<=1.0001; o+=0.2) yt.push(`<line class="ax" x1="${MAP.L}" x2="${MAP.W-MAP.R}" y1="${my(o)}" y2="${my(o)}" opacity=".5"/><text x="${MAP.L-6}" y="${my(o)+4}" text-anchor="end">${Math.round(o*100)}%</text>`);
+  const lz = D.profiles.profiles[0], zx0 = mx(0), zx1 = mx(lz.p_max_kpa), zy0 = my(1), zy1 = my(0.30);
+  const cf = D.points.filter(p => p.f==='CFI-G'), cmax = cf.reduce((a,b) => b.o>a.o ? b : a, cf[0]);
+  const suit = D.profiles.profiles[2];
+  const dots = shown.map(p => `<g>${mark(p.c, mx(p.p).toFixed(1), my(p.o).toFixed(1))}<title>${esc(p.id)}: ${esc(CLS[p.c][0])}; O2 ${(p.o*100).toFixed(1)}%, ${p.p.toFixed(1)} kPa</title></g>`).join('');
+  const counts = {}; pts.forEach(p => counts[p.c] = (counts[p.c]||0)+1);
+  $('#s-map').innerHTML = `<h2>Where has NASA tested fire in space?</h2>
+  <p class="muted">Each mark is one test in the unified table (${D.points.filter(p=>p.c!=='limit').length} of ${D.points.filter(p=>p.c!=='limit').length + D.points_without_atmosphere} tests have both oxygen and pressure); bars are oxygen limits from reports. Horizontal: total pressure. Vertical: oxygen share. Shape and colour show how the test ended. <b>Hatched areas have no test in the table</b> at the selected gravity.</p>
+  <div class="row noprint" role="group" aria-label="Gravity level"><span class="small muted">Gravity:</span>
+   ${[['0','0 g (microgravity)'],['1','1 g'],['0.165','0.165 g (Moon)'],['0.38','0.38 g (Mars)']].map(([g,l]) => `<button aria-pressed="${ST.grav===g}" onclick="ST.grav='${g}';renderMap()">${l} (${D.points.filter(p=>p.g===g).length})</button>`).join('')}</div>
+  <p class="warn small" style="margin-top:8px"><b>No partial-gravity tests in PSI.</b> The official text says PSI holds no partial-gravity combustion data. At 0.165 g (Moon) and 0.38 g (Mars) the map shows only three oxygen-limit bars each, transcribed from one NASA report (NTRS 20130010991) and marked <b>outside PSI</b>; no lunar or Martian flame test can be drawn.</p>
+  <div class="map-wrap"><div>
+  <svg class="map" viewBox="0 0 ${MAP.W} ${MAP.H}" role="img" aria-label="Scatter of ${shown.length} tests by pressure and oxygen share, with the lunar base zone, spacesuit, Earth sea level and CFI-G maximum marked. Equivalent data is in the table on this tab.">
+   <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="var(--muted)" stroke-width="1" opacity=".45"/></pattern></defs>
+   ${xt.join('')}${yt.join('')}${fog}
+   <rect x="${zx0}" y="${zy0}" width="${zx1-zx0}" height="${zy1-zy0}" fill="var(--zone)" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="5 3" id="zone" tabindex="0" role="button" aria-label="Lunar base and rover zone: click for details" style="cursor:pointer" onclick="showZone()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showZone()}"/>
+   <text x="${zx0+6}" y="${zy0+44}" style="fill:var(--accent);font-weight:600">Lunar base / rover zone</text><text class="mut" x="${zx0+6}" y="${zy0+57}">O2 30%+, 10.2 psi or less</text>
+   ${dots}
+   <g><circle cx="${mx(suit.p_max_kpa)}" cy="${my(1)}" r="8" fill="none" stroke="var(--accent)" stroke-width="2"/><text x="${mx(suit.p_max_kpa)+12}" y="${my(1)+4}">Spacesuit: 100% O2, 4.3 psi (no test)</text></g>
+   <g><path d="M${mx(D.profiles.reference.p_kpa)} ${my(0.21)-9} l2.6 6 6.4.6 -4.8 4.3 1.5 6.3 -5.7 -3.3 -5.7 3.3 1.5 -6.3 -4.8 -4.3 6.4 -.6z" fill="var(--accent)"/><text x="${mx(D.profiles.reference.p_kpa)+10}" y="${my(0.21)-12}">Earth sea level (14.7 psi, air)</text></g>
+   <g><circle cx="${mx(cmax.p)}" cy="${my(cmax.o)}" r="9" fill="none" stroke="var(--accent)" stroke-width="2"/><text x="${mx(cmax.p)+12}" y="${my(cmax.o)-8}">CFI-G maximum: ${(cmax.o*100).toFixed(0)}% O2</text></g>
+   <text x="${MAP.L+8}" y="${MAP.T+MAP.PH-8}" class="mut">Hatched: no test here (${nfog} of ${(MAP.XMAX/20)*20} cells)</text>
+   <text x="${MAP.L+MAP.PW/2}" y="${MAP.H-6}" text-anchor="middle">Total pressure (kPa; psi below)</text>
+  </svg>
+  <div class="leg noprint" role="group" aria-label="Outcome classes">${Object.entries(CLS).map(([k,[lab,col]]) => `<button aria-pressed="${!ST.hide.has(k)}" onclick="toggleCls('${k}')"><svg width="14" height="14" viewBox="-7 -7 14 14" aria-hidden="true" style="vertical-align:-2px">${mark(k,0,0).replace(/<(circle|rect|path)/,'<$1')}</svg> ${lab} (${counts[k]||0})</button>`).join('')}</div>
+  </div><div id="zonePanel" class="card" aria-live="polite"><h3 style="margin-top:0">Lunar base / rover zone</h3><p class="muted">Select the shaded zone (click or press Enter on it) to see which tests fall inside, what is nearby, which conditions are untested and where the numbers come from.</p><button onclick="showZone()">Show the zone details</button></div></div>
+  <details class="noprint"><summary>The same data as a table (first 60 tests shown)</summary><div class="scroll"><table><tr><th>test</th><th>oxygen %</th><th>pressure kPa</th><th>outcome</th></tr>${shown.slice(0,60).map(p => `<tr><td>${esc(p.id)}</td><td>${(p.o*100).toFixed(1)}</td><td>${p.p.toFixed(1)}</td><td>${esc(CLS[p.c][0])}</td></tr>`).join('')}</table></div></details>`;
+}
+function toggleCls(k){ ST.hide.has(k) ? ST.hide.delete(k) : ST.hide.add(k); renderMap(); }
+function showZone(){
+  const lz = D.profiles.profiles[0], pts = mapPoints(), inZ = pts.filter(p => p.o>=0.30 && p.p<=lz.p_max_kpa+1e-9);
+  const dist = p => Math.hypot(Math.max(0.30-p.o,0)/0.15, Math.max(p.p-lz.p_max_kpa,0)/50);
+  const near = pts.filter(p => !inZ.includes(p)).map(p => [dist(p), p]).sort((a,b) => a[0]-b[0]).slice(0,6);
+  const byF = {}; inZ.forEach(p => { byF[p.f] = byF[p.f] || {}; byF[p.f][p.c] = (byF[p.f][p.c]||0)+1; });
+  const pb = [0,20,40,60,lz.p_max_kpa], ob = [0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0001], empt = [];
+  for (let i=0;i<ob.length-1;i++){ const e = []; for (let j=0;j<pb.length-1;j++) if (!inZ.some(p => p.o>=ob[i] && p.o<ob[i+1] && p.p>=pb[j] && p.p<pb[j+1])) e.push(`${pb[j].toFixed(0)}-${pb[j+1].toFixed(0)}`); if (e.length) empt.push(`O2 ${Math.round(ob[i]*100)}-${Math.min(100,Math.round(ob[i+1]*100))}%: ${e.join(', ')} kPa`); }
+  const minP = Math.min(...D.points.map(p => p.p)), srcs = [...new Set(inZ.map(p => p.s.split('#')[0]))];
+  const lun = D.claims.filter(c => c.gravity_class==='lunar').slice(0,3);
+  $('#zonePanel').innerHTML = `<h3 style="margin-top:0">Lunar base / rover zone (${D.profiles.profiles[0].statement})</h3>
+  <p><b>${inZ.length}</b> mark${inZ.length===1?'':'s'} inside at ${GL[ST.grav]}. ${Object.entries(byF).map(([f,c]) => esc(f)+': '+Object.entries(c).map(([k,v]) => v+' '+esc(CLS[k][0].toLowerCase())).join(', ')).join('; ') || 'None.'}</p>
+  ${inZ.length ? `<p class="small">Oxygen ${(Math.min(...inZ.map(p=>p.o))*100).toFixed(0)}-${(Math.max(...inZ.map(p=>p.o))*100).toFixed(0)}%, pressure ${Math.min(...inZ.map(p=>p.p)).toFixed(1)}-${Math.max(...inZ.map(p=>p.p)).toFixed(1)} kPa.</p>` : ''}
+  <h3>Nearby tests (outside the zone)</h3>${near.length ? `<ul class="small">${near.map(([d,p]) => `<li>${esc(p.id)}: O2 ${(p.o*100).toFixed(0)}%, ${p.p.toFixed(0)} kPa, ${esc(CLS[p.c][0].toLowerCase())}</li>`).join('')}</ul>` : '<p class="small">None.</p>'}
+  <h3>Untested conditions inside the zone</h3><p class="small">No test in the table has a pressure below <b>${minP.toFixed(1)} kPa</b>, so the lowest-pressure part of the zone is untested. Empty pressure bands by oxygen band:</p>
+  <ul class="small">${empt.map(e => `<li>${e}</li>`).join('') || '<li>none</li>'}</ul>
+  <p class="small"><b>Gravity:</b> the marks shown are at ${GL[ST.grav]}; no flame test in PSI is at lunar gravity.</p>
+  <h3>Sources</h3><ul class="small">${srcs.slice(0,6).map(s => `<li>${esc(s)}</li>`).join('')}<li>${link(D.investigations.find(i=>i.id==='PSI-159').psi_url,'PSI-159 record')}</li><li>Zone definition: ${link(D.official,'official challenge page')}</li></ul>
+  ${lun.length ? `<h3>Ledger claims about lunar gravity</h3>${lun.map(claimHtml).join('')}` : ''}`;
+  $('#zonePanel').scrollIntoView({block:'nearest'});
+}
+
+/* ---------- Investigations / compare (G1, G2) ---------- */
 const hwList = [...new Set(D.investigations.map(i => i.hardware))].sort();
 function tagsHtml(i){ return i.tags.length ? i.tags.map(t => `<span class="tag ${t.tag}" title="${esc(t.reason)}">${t.tag}</span>`).join(' ') : `<span class="tag none" title="No basis in the official Background text or the investigation metadata">untagged</span>`; }
 function renderInv(){
-  const list = D.investigations.filter(i => (!filterTag || (filterTag==='untagged' ? !i.tags.length : i.tags.some(t => t.tag===filterTag))) && (!filterHw || i.hardware===filterHw) &&
-    (!q || (i.id+' '+i.title+' '+i.acronym+' '+i.objective).toLowerCase().includes(q)));
+  const list = D.investigations.filter(i => (!filterTag || (filterTag==='untagged' ? !i.tags.length : i.tags.some(t => t.tag===filterTag))) && (!filterHw || i.hardware===filterHw) && (!q || (i.id+' '+i.title+' '+i.acronym+' '+i.objective).toLowerCase().includes(q)));
   $('#s-inv').innerHTML = `<h2>${D.investigations.length} combustion investigations</h2>
-  <p class="muted small">Tags: prevention, detection, suppression follow the official Background text where it names the investigation, otherwise the investigation's own metadata; hover a tag for its reason. Tick two or three cards and open <b>Compare</b>.</p>
-  <div class="row"><input type="search" id="q" placeholder="Search title, acronym, objective" value="${esc(q)}" aria-label="Search">
-  <select id="ft" aria-label="Filter by tag"><option value="">All tags</option>${['prevention','detection','suppression','untagged'].map(t=>`<option ${filterTag===t?'selected':''}>${t}</option>`).join('')}</select>
+  <p class="muted small">Tags follow the official Background text where it names the investigation, otherwise the investigation's own metadata (hover a tag for the reason). Tick two or three and open Compare.</p>
+  <div class="row"><input type="search" id="q" placeholder="Search title, acronym, objective" value="${esc(q)}" aria-label="Search investigations">
+  <select id="ft" aria-label="Filter by safety area"><option value="">All safety areas</option>${['prevention','detection','suppression','untagged'].map(t=>`<option ${filterTag===t?'selected':''}>${t}</option>`).join('')}</select>
   <select id="fh" aria-label="Filter by hardware group"><option value="">All hardware groups</option>${hwList.map(h=>`<option ${filterHw===h?'selected':''}>${esc(h)}</option>`).join('')}</select>
-  <button class="btn" onclick="show('cmp')">Compare selected (${sel.size})</button></div>
-  <p class="small muted">${list.length} shown</p>
-  <div class="grid">${list.map(card).join('')}</div>`;
+  <button onclick="show('cmp')">Compare selected (${sel.size})</button></div>
+  <p class="small muted">${list.length} shown</p>${list.length ? `<div class="grid">${list.map(card).join('')}</div>` : '<div class="state">No investigation matches these filters.</div>'}`;
   $('#q').oninput = e => { q = e.target.value.toLowerCase(); const p = e.target.selectionStart; renderInv(); const n = $('#q'); n.focus(); n.setSelectionRange(p,p); };
-  $('#ft').onchange = e => { filterTag = e.target.value; renderInv(); };
-  $('#fh').onchange = e => { filterHw = e.target.value; renderInv(); };
+  $('#ft').onchange = e => { filterTag = e.target.value; renderInv(); }; $('#fh').onchange = e => { filterHw = e.target.value; renderInv(); };
 }
-function card(i){
-  const t = i.tests_summary;
-  return `<div class="card"><label class="row"><input type="checkbox" ${sel.has(i.id)?'checked':''} onchange="toggle('${i.id}',this)"> <b>${esc(i.id)}</b> ${esc(i.acronym && i.acronym!=='none' ? i.acronym : '')}</label>
+function card(i){ const t = i.tests_summary;
+  return `<div class="card"><label class="row"><input type="checkbox" ${sel.has(i.id)?'checked':''} onchange="toggle('${i.id}',this)" aria-label="Select ${esc(i.id)} for comparison"> <b>${esc(i.id)}</b> ${esc(i.acronym && i.acronym!=='none' ? i.acronym : '')}</label>
   <div>${esc(i.title)}</div><div class="row small" style="margin:6px 0">${tagsHtml(i)} <span class="tag">${esc(i.hardware)}</span></div>
   <div class="small muted">${t ? `${t.tests} test rows in the unified table` : 'no rows in the unified table'}${i.approx_tests && i.approx_tests!==ND ? ' | catalog: '+esc(i.approx_tests) : ''}</div>
-  <details><summary class="small">Details</summary>${detail(i)}</details></div>`;
-}
+  <details><summary class="small">Details</summary>${detail(i)}</details></div>`; }
 function detail(i){
-  const t = i.tests_summary, f = (label, val, src) => `<p><b>${label}</b><br>${val || nd()}<br><span class="src">Source: ${src}</span></p>`;
-  const psi = link(i.psi_url, 'PSI record ' + i.id);
-  return f('Objectives', i.objective && i.objective!==ND ? `<pre class="t">${esc(i.objective)}</pre>` : '', psi) +
-   f('Approach (fuels, hardware, sensors as described in the record)', i.approach && i.approach!==ND ? `<pre class="t">${esc(i.approach)}</pre>` : '', psi) +
-   f('Conditions varied', i.conditions_varied && i.conditions_varied!==ND ? `<pre class="t">${esc(i.conditions_varied)}</pre>` : '', psi + ' and the downloaded table (' + esc(i.table_files.join('; ') || 'none') + ')') +
-   f('Measurements', i.outcomes_measured && i.outcomes_measured!==ND ? `<pre class="t">${esc(i.outcomes_measured)}</pre>` : '', psi) +
+  const t = i.tests_summary, f = (label, val, src) => `<p><b>${label}</b><br>${val || nd()}<br><span class="src">Source: ${src}</span></p>`, psi = link(i.psi_url, 'PSI record ' + i.id);
+  const pre = v => v && v!==ND ? `<pre class="t">${esc(v)}</pre>` : '';
+  return f('Objectives', pre(i.objective), psi) + f('Approach (fuels, hardware, sensors as described in the record)', pre(i.approach), psi) +
+   f('Conditions varied', pre(i.conditions_varied), psi + ' and the downloaded table (' + esc(i.table_files.join('; ') || 'none') + ')') + f('Measurements', pre(i.outcomes_measured), psi) +
    f('Fuels in the unified table', t ? esc(t.fuels.join('; ') + (t.n_fuels>t.fuels.length ? ` (+${t.n_fuels-t.fuels.length} more)` : '')) + (t.geometry.length ? '<br>shape: '+esc(t.geometry.join(', ')) : '') + (Object.keys(t.sizes).length ? '<br>size: '+esc(Object.entries(t.sizes).map(([k,v])=>k+' '+v).join('; ')) : '') : '', 'data/processed/tests.csv rows for ' + i.id) +
-   f('Hardware group', esc(i.hardware), i.hardware_basis ? esc(i.hardware_basis) + ' | ' + link(D.official,'official challenge page') : '') +
-   `<p class="src">PSI record license: ${esc(i.license || 'not stated')} ${i.doi ? '| DOI '+esc(i.doi) : ''}</p>` + (i.known_problems ? `<p class="small"><b>Known problems with the data:</b> ${esc(i.known_problems)}</p>` : '');
-}
-function toggle(id, el){ if(el.checked){ if(sel.size>=3){ el.checked=false; alert('Compare up to three investigations.'); return; } sel.add(id);} else sel.delete(id); renderInv(); }
-
-/* ---------- G1: comparison view ---------- */
+   f('Hardware group', esc(i.hardware), (i.hardware_basis ? esc(i.hardware_basis) + ' | ' : '') + link(D.official,'official challenge page')) +
+   `<p class="src">PSI record license: ${esc(i.license || 'not stated')} ${i.doi ? '| DOI '+esc(i.doi) : ''}</p>` + (i.known_problems ? `<p class="small"><b>Known problems with the data:</b> ${esc(i.known_problems)}</p>` : ''); }
+function toggle(id, el){ if (el.checked){ if (sel.size>=3){ el.checked=false; alert('Compare up to three investigations.'); return; } sel.add(id); } else sel.delete(id); renderInv(); }
 const FIELDS = [
-  ['Hardware group', i => i.hardware, i => esc(i.hardware), 'official challenge page / catalog platform', 1],
-  ['Platform (PSI record)', i => i.platform, i => esc(i.platform), 'PSI record', 1],
-  ['Safety area', i => i.tags.map(t=>t.tag).sort().join(', ') || 'untagged', i => tagsHtml(i), 'official Background text / investigation metadata', 1],
-  ['Gravity levels in the table', i => i.tests_summary ? i.tests_summary.gravity_g.join(', ') : '', i => i.tests_summary ? esc(i.tests_summary.gravity_g.join(', ')) + ' g' : '', 'unified test table', 1],
-  ['Oxygen (mole fraction)', i => i.tests_summary?.o2 || '', i => i.tests_summary?.o2 ? esc(i.tests_summary.o2) : '', 'unified test table', 1],
-  ['Pressure (kPa)', i => i.tests_summary?.pressure_kpa || '', i => i.tests_summary?.pressure_kpa ? esc(i.tests_summary.pressure_kpa) : '', 'unified test table', 1],
-  ['Flow (cm/s)', i => i.tests_summary?.flow_cm_s || '', i => i.tests_summary?.flow_cm_s ? esc(i.tests_summary.flow_cm_s) : '', 'unified test table', 1],
-  ['Fuels in the table', i => i.tests_summary ? i.tests_summary.fuels.slice(0,3).join('; ') : '', i => i.tests_summary ? esc(i.tests_summary.fuels.join('; ')) : '', 'unified test table', 1],
-  ['Sample or burner shape and size', i => i.tests_summary ? i.tests_summary.geometry.join(', ') : '', i => i.tests_summary ? esc(i.tests_summary.geometry.join(', ')) + (Object.keys(i.tests_summary.sizes).length ? '<br>' + esc(Object.entries(i.tests_summary.sizes).map(([k,v])=>k+' '+v).join('; ')) : '') : '', 'unified test table', 1],
-  ['Test table in the catalog', i => i.table_type, i => esc(i.table_type), 'data/catalog.csv', 1],
-  ['Objectives', i => i.objective, i => `<pre class="t">${esc(i.objective)}</pre>`, 'PSI record', 0],
-  ['Approach (fuels, hardware, sensors)', i => i.approach, i => `<pre class="t">${esc(i.approach)}</pre>`, 'PSI record', 0],
-  ['What varied between tests', i => i.conditions_varied, i => `<pre class="t">${esc(i.conditions_varied)}</pre>`, 'PSI record and downloaded table', 0],
-  ['Measurements', i => i.outcomes_measured, i => `<pre class="t">${esc(i.outcomes_measured)}</pre>`, 'PSI record', 0]];
+ ['Hardware group', i => i.hardware, i => esc(i.hardware), 'official challenge page / catalog platform', 1], ['Platform (PSI record)', i => i.platform, i => esc(i.platform), 'PSI record', 1],
+ ['Safety area', i => i.tags.map(t=>t.tag).sort().join(', ') || 'untagged', i => tagsHtml(i), 'official Background text / investigation metadata', 1],
+ ['Gravity levels in the table', i => i.tests_summary ? i.tests_summary.gravity_g.join(', ') : '', i => i.tests_summary ? esc(i.tests_summary.gravity_g.join(', ')) + ' g' : '', 'unified test table', 1],
+ ['Oxygen (mole fraction)', i => i.tests_summary?.o2 || '', i => esc(i.tests_summary?.o2), 'unified test table', 1], ['Pressure (kPa)', i => i.tests_summary?.pressure_kpa || '', i => esc(i.tests_summary?.pressure_kpa), 'unified test table', 1],
+ ['Flow (cm/s)', i => i.tests_summary?.flow_cm_s || '', i => esc(i.tests_summary?.flow_cm_s), 'unified test table', 1], ['Fuels in the table', i => i.tests_summary ? i.tests_summary.fuels.slice(0,3).join('; ') : '', i => i.tests_summary ? esc(i.tests_summary.fuels.join('; ')) : '', 'unified test table', 1],
+ ['Sample or burner shape and size', i => i.tests_summary ? i.tests_summary.geometry.join(', ') : '', i => i.tests_summary ? esc(i.tests_summary.geometry.join(', ')) + (Object.keys(i.tests_summary.sizes).length ? '<br>' + esc(Object.entries(i.tests_summary.sizes).map(([k,v])=>k+' '+v).join('; ')) : '') : '', 'unified test table', 1],
+ ['Test table in the catalog', i => i.table_type, i => esc(i.table_type), 'data/catalog.csv', 1],
+ ['Objectives', i => i.objective, i => `<pre class="t">${esc(i.objective)}</pre>`, 'PSI record', 0], ['Approach (fuels, hardware, sensors)', i => i.approach, i => `<pre class="t">${esc(i.approach)}</pre>`, 'PSI record', 0],
+ ['What varied between tests', i => i.conditions_varied, i => `<pre class="t">${esc(i.conditions_varied)}</pre>`, 'PSI record and downloaded table', 0], ['Measurements', i => i.outcomes_measured, i => `<pre class="t">${esc(i.outcomes_measured)}</pre>`, 'PSI record', 0]];
 function renderCmp(){
-  const ids = [...sel], inv = ids.map(id => D.investigations.find(i => i.id===id));
-  if(inv.length<2){ $('#s-cmp').innerHTML = `<h2>Compare investigations</h2><p>Select two or three investigations on the <a href="#" onclick="show('inv');return false">Investigations</a> tab (tick the box on each card).</p>`; return; }
-  const rows = FIELDS.map(([label, key, view, src, short]) => {
-    const keys = inv.map(i => (key(i) || '').trim()), known = keys.filter(k => k && k!==ND);
-    const same = known.length===inv.length && new Set(keys).size===1;
-    const cls = (k) => !k || k===ND ? 'nd' : (short ? (same ? 'same' : 'diff') : '');
-    return `<tr><th scope="row">${label}<div class="src">${esc(src)}</div></th>${inv.map((i,n) => `<td class="${cls(keys[n])}">${keys[n] && keys[n]!==ND ? view(i) : nd()}</td>`).join('')}</tr>`;
-  }).join('');
+  const inv = [...sel].map(id => D.investigations.find(i => i.id===id));
+  if (inv.length<2){ $('#s-cmp').innerHTML = `<h2>Compare investigations</h2><div class="state">Select two or three investigations on the <a href="#" onclick="show('inv');return false">Investigations</a> tab.</div>`; return; }
+  const rows = FIELDS.map(([label, key, view, src, short]) => { const keys = inv.map(i => (key(i)||'').trim()), known = keys.filter(k => k && k!==ND), same = known.length===inv.length && new Set(keys).size===1;
+    const cls = k => !k || k===ND ? 'nd' : (short ? (same ? 'same' : 'diff') : '');
+    return `<tr><th scope="row">${label}<div class="src">${esc(src)}</div></th>${inv.map((i,n) => `<td class="${cls(keys[n])}">${keys[n] && keys[n]!==ND ? view(i) : nd()}</td>`).join('')}</tr>`; }).join('');
   const shared = inv.map(i => new Set(i.tags.map(t => t.tag))).reduce((a,b) => new Set([...a].filter(x => b.has(x))));
   $('#s-cmp').innerHTML = `<h2>Compare: ${inv.map(i=>esc(i.id)+' '+esc(i.acronym && i.acronym!=='none' ? i.acronym : '')).join(' | ')}</h2>
-  <p class="small"><span class="tag" style="background:var(--same)">same</span> <span class="tag" style="background:var(--diff)">differs</span> <span class="tag" style="background:var(--nd)">not documented</span> Highlighting applies to the short fields; the long text fields are shown in full for you to read. ${shared.size ? 'Safety areas in common: <b>'+[...shared].join(', ')+'</b>.' : 'No safety area in common (or not tagged).'}</p>
-  <div class="scroll"><table><thead><tr><th></th>${inv.map(i=>`<th>${esc(i.id)}<br><span class="small">${esc(i.title)}</span><br>${link(i.psi_url,'PSI record')}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>`;
+  <p class="small"><span class="tag" style="background:var(--same)">same</span> <span class="tag" style="background:var(--diff)">differs</span> <span class="tag" style="background:var(--nd)">not documented</span> Highlighting applies to short fields; long text is shown in full. ${shared.size ? 'Safety areas in common: <b>'+[...shared].join(', ')+'</b>.' : 'No safety area in common (or not tagged).'}</p>
+  <div class="scroll"><table><thead><tr><th></th>${inv.map(i=>`<th>${esc(i.id)}<br><span class="small">${esc(i.title)}</span><br>${link(i.psi_url,'PSI record')}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>`; }
+
+/* ---------- Ranking ---------- */
+const COMP_LABEL = {atmosphere:'Atmosphere match', safety_area:'Safety area', fuel:'Fuel type', data:'Per-test data', gravity:'Gravity regime'};
+function renderRank(){
+  const R = D.ranking, P = R.profiles[ST.rankProfile], inv = id => D.investigations.find(i => i.id===id);
+  $('#s-rank').innerHTML = `<h2>Which investigations matter most for each setting?</h2>
+  <p class="muted">A fixed formula scores each of the 24 investigations from facts in the data (documented in docs/RANKING.md). It measures <b>relevance to the chosen atmosphere and safety needs</b>, not the quality of the science. The weights are the team's judgement and are shown below. No model is involved.</p>
+  <div class="row" role="group" aria-label="Mission profile">${Object.entries(R.profiles).map(([k,p]) => `<button aria-pressed="${k===ST.rankProfile}" onclick="ST.rankProfile='${k}';renderRank()">${esc(p.name)}</button>`).join('')}</div>
+  <p class="small">Profile envelope: oxygen ${Math.round(P.envelope.o2_min*100)}-${Math.round(P.envelope.o2_max*100)}%, pressure ${P.envelope.p_min_kpa}-${P.envelope.p_max_kpa} kPa (${esc(P.basis)}).</p>
+  <details class="card"><summary>How the score is built (weights)</summary><table><tr><th>Component</th><th>Weight</th><th>Rule</th></tr>${Object.entries(R.weights).map(([k,w]) => `<tr><td>${COMP_LABEL[k]}</td><td>${Math.round(w*100)}</td><td class="small">${esc(R.weight_text[k])}</td></tr>`).join('')}</table></details>
+  <ol class="grid" style="list-style:none;padding:0">${P.items.map(it => { const i = inv(it.id); return `<li class="card"><div class="row"><b>#${it.rank}</b> <b>${esc(it.id)}</b> ${esc(i.acronym && i.acronym!=='none' ? i.acronym : '')} <span style="margin-left:auto"><b>${it.score}</b> / 100</span></div>
+   <div class="small">${esc(i.title)}</div><div class="bar" role="img" aria-label="Score breakdown">${Object.keys(R.weights).map((k,n) => `<i title="${COMP_LABEL[k]}: ${it.points[k]} points" style="width:${it.points[k]}%;background:var(--accent);opacity:${1-n*0.17}"></i>`).join('')}</div>
+   <details><summary class="small">Score breakdown</summary><table class="small">${Object.keys(R.weights).map(k => `<tr><td>${COMP_LABEL[k]}</td><td>${it.points[k]} of ${Math.round(R.weights[k]*100)}</td><td>${esc(it.notes[k])}</td></tr>`).join('')}</table></details></li>`; }).join('')}</ol>`;
 }
 
-/* ---------- G3: mission atmospheres ---------- */
-function renderMis(){
-  const P = D.profiles;
+/* ---------- Interpretation ---------- */
+function stackBar(counts, classes){ const tot = classes.reduce((a,c) => a+(counts[c]||0), 0) || 1;
+  return `<div class="bar">${classes.map(c => counts[c] ? `<i title="${esc(CLS[c]?.[0]||c)}: ${counts[c]}" style="width:${100*counts[c]/tot}%;background:${CLS[c]?.[1]||'var(--muted)'}"></i>` : '').join('')}</div>`; }
+function renderInterp(){
+  $('#s-interp').innerHTML = `<h2>What the data say</h2><p class="muted">Each summary is computed from the test table by a fixed rule (pipeline/interpret.py): counts and shares, no model. The evidence-strength label depends on how many tests there are and whether independent experiment families agree.</p>` +
+  D.interpretations.items.map(it => `<div class="card"><div class="row"><h3 style="margin:0">${esc(it.title)}</h3><span class="tag ${it.strength==='moderate'||it.strength==='strong' ? 'ver' : 'unrev'}" title="${esc(D.interpretations.strength_rule)}">evidence: ${esc(it.strength)} (${it.n} tests)</span></div>
+   <ul>${it.sentences.map(s => `<li>${esc(s)}</li>`).join('')}</ul>
+   ${it.tables.map(t => `<div class="scroll"><table><caption class="small muted" style="text-align:left">${esc(t.title)}</caption><tr><th>Group</th><th>n</th><th>Outcome mix</th></tr>${t.rows.map(r => t.text ? `<tr><td>${esc(r.bin)}</td><td>${r.n}</td><td>${Object.entries(r.counts).map(([k,v]) => esc(k)+': '+esc(v)).join(' | ')}</td></tr>` : `<tr><td>${esc(r.bin)}</td><td>${r.n}</td><td>${stackBar(r.counts, t.classes)}<span class="small">${t.classes.filter(c => r.counts[c]).map(c => esc(CLS[c][0])+' '+r.counts[c]).join(', ')}</span></td></tr>`).join('')}</table></div>`).join('')}
+   <p class="small"><b>Caveats:</b></p><ul class="small">${it.caveats.filter(Boolean).map(c => `<li>${esc(c)}</li>`).join('')}</ul>
+   ${it.conflicts.length ? `<p class="small"><b>Recorded source conflict:</b> ${it.conflicts.map(c => esc(c)).join('<br>')}</p>` : ''}
+   <p class="src">Source: data/processed/tests.csv (${esc(it.family)}), ${link(D.investigations.find(i=>i.id===it.investigation).psi_url, 'PSI record '+it.investigation)}.</p></div>`).join('') +
+  `<p class="small muted">Key: ${Object.values(CLS).map(([l,c]) => `<span style="color:${c}">&#9632;</span> ${l}`).join(' &nbsp; ')}</p>`;
+}
+
+/* ---------- Ask: retrieval over ledger claims only ---------- */
+const STOP = new Set('the a an of in at to and or for with was were is are by on as that this it its from be been than then which when what how does do did can could should would will not no into over under between about'.split(' '));
+const toks = s => (s.toLowerCase().match(/[a-z0-9.]+/g) || []).filter(t => t.length>1 && !STOP.has(t));
+const ALIAS = {moon:'lunar', martian:'mars', microgravity:'microgravity', weightless:'microgravity', extinguish:'extinction', extinguished:'extinction', 'o2':'oxygen'};
+function claimHtml(c){ const lab = c.review_label==='unreviewed' ? '<span class="tag unrev" title="Passed the span and number checks; no independent verifier ran and no person reviewed it">unreviewed</span>' : '<span class="tag ver">verified</span>';
+  return `<div class="card"><div class="row">${lab} <span class="tag">${esc(c.gravity_class)}</span> <span class="tag">${esc(c.evidence_type)}</span>${c.independent_sources>1 ? `<span class="tag">${c.independent_sources} independent sources</span>`:''}</div>
+  <p style="margin:6px 0">${esc(c.statement)}</p>${c.span ? `<blockquote class="small muted" style="margin:6px 0">"${esc(c.span)}"</blockquote>` : '<p class="src">Quotation not shown (the source is not a US Government work).</p>'}
+  <div class="src">${esc(c.citation)} | ${link(c.source_url,'NTRS record')} | claim ${esc(c.claim_id)}</div></div>`; }
+const IDX = (() => { const docs = D.claims.map(c => { const t = toks([c.statement, c.variables.join(' '), c.gravity_class, c.conditions.material||'', c.citation].join(' ').replace(/_/g,' ')).map(w => ALIAS[w]||w); const tf = {}; t.forEach(w => tf[w]=(tf[w]||0)+1); return {c, tf, n:t.length}; });
+  const df = {}; docs.forEach(d => Object.keys(d.tf).forEach(w => df[w]=(df[w]||0)+1)); return {docs, df, N:docs.length, avg: docs.reduce((a,d)=>a+d.n,0)/(docs.length||1)}; })();
+function search(query){
+  const qt = toks(query).map(w => ALIAS[w]||w), seen = new Set(), terms = qt.filter(w => !seen.has(w) && seen.add(w));
+  const res = IDX.docs.map(d => { let s = 0, hit = 0; terms.forEach(w => { if (d.tf[w]) { const idf = Math.log(1 + (IDX.N - IDX.df[w] + .5)/(IDX.df[w] + .5)), k = 1.5, b = .75; s += idf * d.tf[w]*(k+1)/(d.tf[w] + k*(1-b+b*d.n/IDX.avg)); hit++; } }); return {c:d.c, s, hit}; });
+  const need = Math.max(1, Math.ceil(terms.length/2));
+  const ok = res.filter(r => r.hit>=need && r.s>=1.0).sort((a,b) => b.s-a.s);
+  const gwant = ['lunar','mars'].filter(g => terms.includes(g)), gok = gwant.length ? ok.filter(r => gwant.includes(r.c.gravity_class)) : ok;
+  return {terms, hits: gwant.length ? gok : ok, gwant, relaxed: gwant.length && !gok.length && ok.length};
+}
+function renderAsk(){
+  const st = D.ledger_stats, n = D.claims.length;
+  $('#s-ask').innerHTML = `<h2>Ask the evidence</h2><p class="muted">Answers come only from claims in the evidence ledger: statements extracted from NASA reports, each checked by code against the report text (the quoted span must exist and its numbers must match). ${n} claims are available${st.verified_auto ? '' : ', all <b>unreviewed</b> (no independent verifier ran and no person has reviewed them)'}. If nothing relevant exists, this page says so instead of guessing.</p>
+  <form class="row" onsubmit="runAsk();return false" role="search"><input type="search" id="askq" size="40" placeholder="e.g. what happens to flames at lunar gravity" aria-label="Question" style="flex:1;min-width:200px"><button class="primary">Search claims</button></form>
+  <div class="row small" style="margin-top:6px">Try: ${['lunar gravity flammability','oxygen concentration extinction','Mars gravity','flame spread rate','smoke detection','helium suppression'].map(x => `<button type="button" onclick="$('#askq').value='${x}';runAsk()">${x}</button>`).join('')}</div>
+  <div id="askOut" aria-live="polite" style="margin-top:12px">${n ? '' : '<div class="state">The claim ledger has no claims yet, so there is nothing to retrieve.</div>'}</div>`;
+}
+function runAsk(){
+  const v = $('#askq').value.trim(), out = $('#askOut'); if (!v) { out.innerHTML = '<div class="state">Type a question first.</div>'; return; }
+  const r = search(v);
+  if (!r.hits.length) { out.innerHTML = `<div class="card" role="alert" style="border-color:var(--accent)"><h3 style="margin-top:0">No answer: the evidence ledger has nothing relevant</h3>
+    <p>No verified or unreviewed claim matches ${r.terms.map(t=>'<b>'+esc(t)+'</b>').join(', ') || 'this question'}${r.gwant.length ? ' at that gravity level' : ''}. Ember will not answer from general knowledge.</p>
+    <p class="small">The ledger holds ${D.claims.length} claims from ${new Set(D.claims.map(c=>c.doc)).size} reports. Gravity levels covered: ${[...new Set(D.claims.map(c=>c.gravity_class))].join(', ') || 'none'}. Try the Atmosphere map for tested conditions, or the Investigations tab for what each experiment covered.</p></div>`; return; }
+  out.innerHTML = (r.relaxed ? '' : '') + `<p class="small muted">${r.hits.length} matching claim${r.hits.length===1?'':'s'}; showing up to 8, best first.</p>` + r.hits.slice(0,8).map(h => claimHtml(h.c)).join('');
+}
+
+/* ---------- Mission brief (lunar base) ---------- */
+function renderBrief(){
+  const P = D.profiles, lz = P.profiles[0], R = D.ranking.profiles.lunar_base, cf = D.interpretations.items.find(i => i.id==='cfig_o2');
+  const fam = Object.entries(lz.tests_inside_by_family), oc = {}; fam.forEach(([f,d]) => Object.entries(d.outcomes).forEach(([k,v]) => oc[k]=(oc[k]||0)+v));
+  const minP = Math.min(...D.points.map(p => p.p)), b34 = cf.tables[0].rows.find(r => r.bin==='0.3 to 0.4');
+  const top = R.items.slice(0,3), inv = id => D.investigations.find(i => i.id===id);
+  const lun = D.claims.filter(c => c.gravity_class==='lunar').slice(0,2);
+  const S = [], src = [];
+  const cite = (label, html) => { let i = src.findIndex(s => s.label===label); if (i<0) { src.push({label, html}); i = src.length-1; } return i+1; };
+  const add = (text, cites) => S.push(text + cites.map(n => `<sup><a href="#ref${n}">[${n}]</a></sup>`).join(''));
+  const cOff = cite('official', `Official challenge page, Potential Considerations: ${link(D.official)}`);
+  const cT = cite('tests', 'Unified test table, data/processed/tests.csv (built by python -m pipeline) and mission_profiles.json');
+  const cP = cite('psi159', `${link(inv('PSI-159').psi_url, 'PSI-159 record')} (ACME CFI-G)`);
+  const cR = cite('rank', 'Ranking formula, data/processed/ranking.json and docs/RANKING.md');
+  const cI = cite('interp', 'Interpretation summaries, data/processed/interpretations.json');
+  add(`The official challenge text expects the lunar base and pressurized rovers to run at ${lz.statement}, which is ${lz.p_max_kpa} kPa or less (10.2 psi).`, [cOff]);
+  add(`The table holds ${lz.tests_inside_total} of ${P.tests_considered} tests inside that envelope; all are ${fam.map(([f]) => f).join(' and ')} gas-flame tests in microgravity (0 g), and none was run at lunar gravity.`, [cT, cP]);
+  add(`Of those ${lz.tests_inside_total}: ${Object.entries(oc).map(([k,v]) => `${v} ${CLS[k][0].toLowerCase()}`).join(', ')}. Tests stopped while still burning are censored: they are not extinctions.`, [cT]);
+  add(`No test in the table has a pressure below ${minP.toFixed(1)} kPa, so the lower part of the envelope has no data.`, [cT]);
+  if (b34) add(`In CFI-G tests at 30-40% oxygen, ${b34.counts.self_extinguished} of ${b34.n} self-extinguished and ${b34.counts.externally_terminated} were stopped while still burning (evidence: ${cf.strength}, one experiment family; fuel, pressure and flow also vary).`, [cT, cI]);
+  add(`By the documented relevance formula the three investigations most relevant to this atmosphere are ${top.map(t => `${t.id} ${inv(t.id).acronym} (${t.score})`).join(', ')}; the score measures relevance, not scientific quality.`, [cR]);
+  add(`The official text states there is currently no partial-gravity combustion data in PSI; LUCI and FM2 are expected to add lunar-gravity data, and microgravity and normal-gravity results could bound what happens in between.`, [cOff]);
+  lun.forEach(c => { const n = cite('claim'+c.claim_id, `${esc(c.citation)} (claim ${esc(c.claim_id)}, ${c.review_label}) ${link(c.source_url,'NTRS')}`); add(`Ledger claim (${c.review_label}): ${esc(c.statement)}`, [n]); });
+  $('#s-brief').innerHTML = `<div class="brief"><div class="row noprint"><button class="primary" onclick="window.print()">Print this brief</button><span class="small muted">One page, generated from the data; every sentence carries a source number.</span></div>
+  <h2>Mission brief: lunar base fire-safety evidence</h2><p class="small muted">Prepared from the Ember data build. Not a safety assessment.</p>
+  <ol>${S.map(s => `<li>${s}</li>`).join('')}</ol><h3>Sources</h3><ol class="small">${src.map((s,i) => `<li id="ref${i+1}" value="${i+1}">${s.html}</li>`).join('')}</ol>
+  <p class="small muted">Review status: claims from the ledger are labelled verified or unreviewed. Human review of the data and claims: <b>[TEAM TO CONFIRM]</b>.</p></div>`;
+}
+
+/* ---------- Atmospheres, partial gravity, Earth, About ---------- */
+function renderMis(){ const P = D.profiles;
   const fam = p => Object.entries(p.tests_inside_by_family).map(([f,d]) => `${esc(f)}: ${d.tests} tests (gravity ${esc(d.gravity_levels.join(', '))} g; outcomes ${esc(Object.entries(d.outcomes).map(([k,v])=>k+' '+v).join(', '))})`).join('<br>') || 'none';
-  $('#s-mis').innerHTML = `<h2>Mission atmospheres</h2>
-  <p>Numbers from the official challenge text (${link(P.source.split(': ')[1], 'challenge page')}); kilopascals are computed in the pipeline (${esc(P.conversion)}). Earth sea level is ${P.reference.p_psi} psi = ${P.reference.p_kpa} kPa.</p>
-  <div class="grid">${P.profiles.map(p => `<div class="card"><b>${esc(p.name)}</b><br>"${esc(p.statement)}"<br>
-   oxygen: ${p.o2_max===1 && p.o2_min===1 ? '100%' : '>= '+Math.round(p.o2_min*100)+'%'}<br>pressure: ${p.p_min_psi!==null ? '' : '<= '}${p.p_max_psi} psi = ${p.p_max_kpa} kPa<hr>
-   <b>${p.tests_inside_total}</b> of ${P.tests_considered} test rows in the unified table fall inside this envelope.<br><span class="small">${fam(p)}</span><br>
-   <span class="src">${p.tests_without_oxygen_or_pressure} rows have no oxygen or no pressure value and cannot be placed. ${p.tests_inside_total ? 'Gravity of the rows inside: '+[...new Set(Object.values(p.tests_inside_by_family).flatMap(d=>d.gravity_levels))].join(', ')+' g; none is at lunar or Martian gravity.' : ''}</span></div>`).join('')}</div>
-  <p class="warn">The lunar base and pressurized rover share one envelope in the official text (oxygen likely 30% or greater, pressure 10.2 psi or less), so they show the same count. No test row in the table is at the suit condition (100% oxygen, 4.3 psi): the suit envelope is an evidence gap.</p>
-  <h3>Supporting evidence</h3>
-  ${D.bre_quote ? `<p>The ACME BRE investigation (PSI-20) states its planned atmospheres: <i>"${esc(D.bre_quote)}"</i> ${link(D.investigations.find(i=>i.id==='PSI-20').psi_url,'PSI-20 record')}. These are planned conditions in the objective text, not results.</p>` : ''}
-  <p>Exploration-atmosphere reports in the catalog (cited, not summarised here):</p><ul>${D.atmos_reports.map(r => `<li>${esc(r.title)} (${esc(r.item_id)}), ${link(r.url)}</li>`).join('')}</ul>
-  <p class="small">The highest-oxygen microgravity tests in the table are ACME CFI-G: up to ${Math.max(...D.investigations.filter(i=>i.id==='PSI-159').map(i=>parseFloat(i.tests_summary.o2.split(' to ').pop())))*100}% oxygen (official text: "up to 85% oxygen from a spherical burner").</p>`;
-}
-
-/* ---------- G4: partial-gravity bounds ---------- */
+  $('#s-mis').innerHTML = `<h2>Mission atmospheres</h2><p>Numbers from the official challenge text (${link(P.source.split(': ')[1], 'challenge page')}); kilopascals are computed in the pipeline (${esc(P.conversion)}). Earth sea level is ${P.reference.p_psi} psi = ${P.reference.p_kpa} kPa.</p>
+  <div class="grid">${P.profiles.map(p => `<div class="card"><b>${esc(p.name)}</b><br>"${esc(p.statement)}"<br>oxygen: ${p.o2_max===1 && p.o2_min===1 ? '100%' : '>= '+Math.round(p.o2_min*100)+'%'}<br>pressure: ${p.p_min_psi!==null ? '' : '<= '}${p.p_max_psi} psi = ${p.p_max_kpa} kPa<hr>
+   <b>${p.tests_inside_total}</b> of ${P.tests_considered} test rows fall inside this envelope.<br><span class="small">${fam(p)}</span><br><span class="src">${p.tests_without_oxygen_or_pressure} rows have no oxygen or no pressure value and cannot be placed. ${p.tests_inside_total ? 'Gravity of the rows inside: '+[...new Set(Object.values(p.tests_inside_by_family).flatMap(d=>d.gravity_levels))].join(', ')+' g; none is at lunar or Martian gravity.' : ''}</span></div>`).join('')}</div>
+  <p class="warn">The lunar base and pressurized rover share one envelope in the official text, so they show the same count. No test row is at the suit condition (100% oxygen, 4.3 psi): an evidence gap.</p>
+  <h3>Supporting evidence</h3>${D.bre_quote ? `<p>The ACME BRE investigation (PSI-20) states its planned atmospheres: <i>"${esc(D.bre_quote)}"</i> ${link(D.investigations.find(i=>i.id==='PSI-20').psi_url,'PSI-20 record')}. These are planned conditions, not results.</p>` : ''}
+  <p>Exploration-atmosphere reports in the catalog:</p><ul>${D.atmos_reports.map(r => `<li>${esc(r.title)} (${esc(r.item_id)}), ${link(r.url)}</li>`).join('')}</ul>`; }
 function renderGrav(){
   const c = D.gravity_counts, n = k => c[k] || {psi:0,outside_psi:0};
-  const cell = (r) => r ? `${esc(r.material_or_fuel)}<br>O2 ${esc(r.oxygen_fraction||'?')}, flow ${esc(r.flow_velocity_cm_s||'?')} cm/s<br>outcome: <b>${esc(r.outcome_class)}</b> (${esc(r.outcome_raw)})<br>burn ${esc(r.burn_duration_s||'n/a')} s; spread ${esc(r.spread_rate||'n/a')} ${esc(r.spread_rate_basis||'')}<br><span class="src">${esc(r.source_ref)}</span>${r.alt_value_report ? `<br><span class="src">report differs: ${esc(r.alt_value_report)}</span>`:''}` : nd();
+  const cell = r => r ? `${esc(r.material_or_fuel)}<br>O2 ${esc(r.oxygen_fraction||'?')}, flow ${esc(r.flow_velocity_cm_s||'?')} cm/s<br>outcome: <b>${esc(r.outcome_class)}</b> (${esc(r.outcome_raw)})<br>burn ${esc(r.burn_duration_s||'n/a')} s; spread ${esc(r.spread_rate||'n/a')} ${esc(r.spread_rate_basis||'')}<br><span class="src">${esc(r.source_ref)}</span>${r.alt_value_report ? `<br><span class="src">report differs: ${esc(r.alt_value_report)}</span>`:''}` : nd();
   $('#s-grav').innerHTML = `<h2>Partial gravity: what the evidence bounds</h2>
-  <p class="warn">Official text: "there is currently no partial-gravity combustion data in PSI." Microgravity (0 g) and normal-gravity (1 g) results could bound what occurs between. LUCI and FM2 are expected to add lunar-gravity data; ACME E-FIELD Flames mimicked partial gravity with an electric field acting on flame ions (see PSI-22).</p>
-  <h3>Rows in the unified table by gravity level</h3>
-  <div class="scroll"><table><tr><th>gravity</th><th>from PSI tables (tests and limits)</th><th>outside PSI (transcribed from NTRS reports)</th></tr>
+  <p class="warn">Official text: "there is currently no partial-gravity combustion data in PSI." Microgravity (0 g) and normal-gravity (1 g) results could bound what occurs between. LUCI and FM2 are expected to add lunar-gravity data; ACME E-FIELD Flames mimicked partial gravity with an electric field acting on flame ions (PSI-22).</p>
+  <h3>Rows in the unified table by gravity level</h3><div class="scroll"><table><tr><th>gravity</th><th>from PSI tables (tests and limits)</th><th>outside PSI (transcribed from NTRS reports)</th></tr>
   ${['0','0.165','0.38','1','not stated'].filter(k=>c[k]).map(k => `<tr><td>${k==='0.165'?'0.165 g (lunar)':k==='0.38'?'0.38 g (Mars)':k==='0'?'0 g (microgravity)':k==='1'?'1 g':k}</td><td>${n(k).psi}</td><td>${n(k).outside_psi}</td></tr>`).join('')}</table></div>
-  <p><b>Gap:</b> lunar (0.165 g) and Martian (0.38 g) have 0 rows from PSI. The only lunar and Martian rows are transcribed from NTRS reports and are labelled <b>outside PSI, transcribed from NTRS</b>. "limit" rows are flammability-limit entries (oxygen limits) rather than single tests; their outcome is not classified.</p>
+  <p><b>Gap:</b> lunar (0.165 g) and Martian (0.38 g) have 0 rows from PSI. The only rows are transcribed from NTRS reports and labelled <b>outside PSI, transcribed from NTRS</b>. "limit" rows are oxygen-limit entries, not single tests.</p>
   <div class="scroll"><table><tr><th>row</th><th>type</th><th>gravity</th><th>material</th><th>pressure kPa</th><th>limit data / outcome</th><th>source</th></tr>
   ${D.literature.map(r=>`<tr><td>${esc(r.test_id)}</td><td>${esc(r.record_type)}</td><td>${esc(r.gravity_level_g)} g</td><td>${esc(r.material_or_fuel)}</td><td>${esc(r.pressure_kpa||'')}</td><td>${r.record_type==='limit' ? `ULOI ${esc(r.uloi_vol_pct||'n/a')}%, MOC ${esc(r.moc_vol_pct||'n/a')}%, margin vs 1 g ${esc(r.o2_margin_vs_1g_pct||'n/a')}% (${esc(r.limit_criterion||'')})` : esc(r.outcome_class)+' ('+esc(r.outcome_raw)+')'}</td><td class="small">${esc(r.source_ref)}</td></tr>`).join('')}</table></div>
-  <h3>0 g and 1 g side by side (Saffire-II samples, PSI-99)</h3>
-  <p class="small">Each sample was also tested at 1 g for comparison; rows are paired by <code>pair_id</code>.</p>
-  <div class="scroll"><table><tr><th>sample</th><th>0 g (flight)</th><th>1 g (comparison)</th></tr>
-  ${D.pairs.map(p => `<tr><td>${esc(p.id)}</td><td>${cell(p['0g'])}</td><td>${cell(p['1g'])}</td></tr>`).join('')}</table></div>`;
-}
-
-/* ---------- G5: Earth applications ---------- */
+  <h3>0 g and 1 g side by side (Saffire-II samples, PSI-99)</h3><div class="scroll"><table><tr><th>sample</th><th>0 g (flight)</th><th>1 g (comparison)</th></tr>${D.pairs.map(p => `<tr><td>${esc(p.id)}</td><td>${cell(p['0g'])}</td><td>${cell(p['1g'])}</td></tr>`).join('')}</table></div>`; }
 function renderEarth(){
   const L = [['Fireman\'s Air Tanks (spinoff)','https://spinoff.nasa.gov/node/9582'],['Fire Detector (spinoff)','https://spinoff.nasa.gov/node/9407'],['New Technology for the Fire Attire (spinoff)','https://spinoff.nasa.gov/node/9918']];
-  $('#s-earth').innerHTML = `<h2>Fire safety on Earth</h2>
-  <p>The official challenge text names three application areas for PSI data: fine-water-mist extinguishers developed for the ISS, terrestrial smoke detection, and firefighter gear and protective clothing. NASA lists three spinoff stories as resources:</p>
-  <ul>${L.map(([t,u]) => `<li>${link(u,t)}</li>`).join('')}</ul>
-  <p class="small muted">Which story covers which area is not stated in the official text, so no mapping is shown here. Related investigations in this explorer: detection (SAME, SAME-R, DAFT) and suppression (FLEX).</p>`;
-}
-
-/* ---------- G6: About ---------- */
+  $('#s-earth').innerHTML = `<h2>Fire safety on Earth</h2><p>The official challenge text names three application areas for PSI data: fine-water-mist extinguishers developed for the ISS, terrestrial smoke detection, and firefighter gear and protective clothing. NASA lists three spinoff stories as resources:</p>
+  <ul>${L.map(([t,u]) => `<li>${link(u,t)}</li>`).join('')}</ul><p class="small muted">Which story covers which area is not stated in the official text, so no mapping is shown. Related investigations here: detection (SAME, SAME-R, DAFT) and suppression (FLEX).</p>`; }
 function renderAbout(){
   const R = [['PSI Data Repository, Combustion Science','https://psi.nasa.gov/physci/repo/search?q=combustion'],['NASA Combustion Science','https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/'],
    ['NASA ScienceCasts: The Power of Studying Combustion on the ISS (video, 2018)','https://www.youtube.com/watch?v=W1oXykoz9zg'],['A Researcher\'s Guide to International Space Station Combustion Science (2015)','https://www.nasa.gov/missions/station/a-researchers-guide-to-combustion-science/'],
    ['Apollo 1','https://sma.nasa.gov/sma-disciplines/accllp/apollo-1'],['Apollo 13','https://sma.nasa.gov/sma-disciplines/accllp/apollo-13'],['25 Years Ago: Fire Aboard Space Station Mir','https://www.nasa.gov/history/25-years-ago-fire-aboard-space-station-mir/'],
    ['Fireman\'s Air Tanks (spinoff)','https://spinoff.nasa.gov/node/9582'],['Fire Detector (spinoff)','https://spinoff.nasa.gov/node/9407'],['New Technology for the Fire Attire (spinoff)','https://spinoff.nasa.gov/node/9918']];
   const lic = {}; D.investigations.forEach(i => { const k = i.license || 'not stated'; (lic[k] = lic[k] || []).push(i.id); });
-  $('#s-about').innerHTML = `<h2>About</h2>
-  <p class="warn"><b>Scope.</b> Fire safety involving rockets and propellants is generally beyond the scope of the PSI research (rocket-engine combustion is effectively independent of gravity), so it is outside this explorer.</p>
-  <h3>The ten official resources</h3><ol>${R.map(([t,u]) => `<li>${link(u,t)}</li>`).join('')}</ol>
-  <p class="small">Official challenge page: ${link(D.official)}</p>
-  <h3>Data origins and licenses</h3>
-  <ul><li><b>PSI investigation records and test tables</b> (${D.investigations.length} combustion investigations): ${Object.entries(lic).map(([k,v]) => `license ${esc(k)} for ${v.length} (${esc(v.join(', '))})`).join('; ')}. Source: ${link('https://psi.nasa.gov/physci/repo/search?q=combustion')}.</li>
-  <li><b>Unified test table</b> (${D.build.tests_rows} rows): built from the PSI tables by a reproducible pipeline; original values kept; every row has a source reference and quality flags.</li>
-  <li><b>Rows transcribed from NASA NTRS reports</b> (FLEX tests 275-280, BASS-II and literature tables, partial-gravity rows): numeric values transcribed with citation; NTRS rights determinations are not open licenses, so reports are cited and paraphrased, not redistributed. These rows are labelled outside PSI.</li>
-  <li><b>Outcome classes</b> for BASS-II are proposals by an AI assistant and are not used until a person approves them; this explorer does not show BASS-II outcome classes as findings.</li></ul>
-  <h3>SI use and limits</h3>
-  <p>The tags, hardware groups and comparisons are produced by code from the catalog and the PSI records; an AI coding assistant helped write that code and drafted the BASS-II outcome proposals, which await human review. The claim-extraction ledger (language-model extraction with automatic verification) is built but has not been run on the reports, so <b>no extracted claims are shown</b>. This explorer has no question-answering or ranking yet. Full details: the repository docs (SI_USAGE.md, STATUS.md).</p>`;
-}
-renderInv(); renderMis(); renderGrav(); renderEarth(); renderAbout(); show('inv');
+  const st = D.ledger_stats, srcs = Object.values(D.sources);
+  $('#s-about').innerHTML = `<h2>About</h2><p class="warn"><b>Scope.</b> Fire safety involving rockets and propellants is generally beyond the scope of the PSI research (rocket-engine combustion is effectively independent of gravity), so it is outside this explorer.</p>
+  <h3>The ten official resources</h3><ol>${R.map(([t,u]) => `<li>${link(u,t)}</li>`).join('')}</ol><p class="small">Official challenge page: ${link(D.official)}</p>
+  <h3>Data origins and licenses</h3><ul><li><b>PSI investigation records and test tables</b> (${D.investigations.length} combustion investigations): ${Object.entries(lic).map(([k,v]) => `license ${esc(k)} for ${v.length} (${esc(v.join(', '))})`).join('; ')}. ${link('https://psi.nasa.gov/physci/repo/search?q=combustion')}</li>
+  <li><b>Unified test table</b> (${D.build.tests_rows} rows): built from the PSI tables by a reproducible pipeline; original values kept; each row has a source reference and quality flags.</li>
+  <li><b>Rows transcribed from NASA NTRS reports</b>: numeric values with citation; NTRS rights determinations are not open licenses, so reports are cited and paraphrased, not redistributed. Labelled outside PSI.</li>
+  <li><b>Evidence ledger</b>: ${D.claims.length} claims from ${new Set(D.claims.map(c=>c.doc)).size} of ${srcs.length} reports. Status counts: ${Object.entries(st).map(([k,v]) => esc(k)+' '+v).join(', ') || 'none'}. Verbatim quotations appear only for US Government works.</li></ul>
+  <h3>SI use and limits</h3><p>An AI coding assistant helped write the pipeline, checks and this page. Claim extraction used a language model (Google Gemini); an independent verifier (a different model family on Groq) checks claims when available; claims that did not get that check are labelled <b>unreviewed</b>. Every claim must also pass code checks against the report text. Rankings, summaries and the mission brief are computed by fixed rules from the data; the page itself runs no model and makes no network calls. BASS-II outcome classes proposed by the assistant are not used until a person approves them. Human review status: <b>[TEAM TO CONFIRM]</b>.</p>`; }
+
+/* ---------- Judge mode: "Play the story" ---------- */
+let story = {timer:null, i:0, paused:false};
+const STEPS = [
+ [9000, 'Every mark is a NASA test of fire in space, placed by oxygen and pressure. Hatched areas: nobody has tested there.', () => { show('map'); ST.grav='0'; renderMap(); }],
+ [11000, 'The lunar base zone: 30% oxygen or more at 10.2 psi or less. Only gas-flame tests fall inside, all in microgravity, none at lunar gravity.', () => { show('map'); showZone(); }],
+ [9000, 'Switch to 1 g: far fewer tests. Partial gravity, the Moon and Mars, has no PSI data at all.', () => { ST.grav='1'; renderMap(); }],
+ [10000, 'Ranking: a fixed, visible formula scores all 24 investigations for a lunar base, rover, spacesuit or ISS-like cabin.', () => { ST.grav='0'; renderMap(); ST.rankProfile='lunar_base'; renderRank(); show('rank'); }],
+ [10000, 'Compare two investigations side by side: what is the same, what differs, what is not documented.', () => { sel.clear(); ['PSI-25','PSI-69'].forEach(i => sel.add(i)); renderInv(); show('cmp'); }],
+ [10000, 'Interpretation: counts computed from the data, with an evidence-strength label and the caveats.', () => show('interp')],
+ [9000, 'Ask: answers come only from claims checked against NASA report text. If nothing matches, it refuses.', () => { show('ask'); $('#askq').value = 'lunar gravity flammability'; runAsk(); }],
+ [10000, 'A one-page mission brief, every sentence cited, ready to print.', () => show('brief')],
+ [6000, 'Ember: where NASA has tested fire in space, where it has not, and how sure we can be.', () => show('map')]];
+function playStory(){ stopStory(); story = {timer:null, i:0, paused:false}; $('#caption').classList.add('on'); stepStory(); }
+function stepStory(){ if (story.i>=STEPS.length) { stopStory(); return; } const [ms, cap, fn] = STEPS[story.i++]; safe(fn, current); $('#capText').textContent = cap; story.timer = setTimeout(() => { if (!story.paused) stepStory(); }, ms); }
+function storyPause(){ story.paused = !story.paused; $('#pauseBtn').textContent = story.paused ? 'Resume' : 'Pause'; if (!story.paused) stepStory(); else clearTimeout(story.timer); }
+function stopStory(){ clearTimeout(story.timer); $('#caption').classList.remove('on'); $('#pauseBtn').textContent = 'Pause'; }
+document.addEventListener('keydown', e => { if (e.key==='Escape') stopStory(); });
+
+/* ---------- init ---------- */
+[['map',renderMap],['inv',renderInv],['rank',renderRank],['interp',renderInterp],['ask',renderAsk],['brief',renderBrief],['mis',renderMis],['grav',renderGrav],['earth',renderEarth],['about',renderAbout]].forEach(([id,fn]) => safe(fn,id));
+show('map');
 </script>
 </body>
 </html>

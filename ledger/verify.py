@@ -121,7 +121,7 @@ def check_support(client, doc_checksum, claim, page_text, prompt_text, prompt_ve
     user = json.dumps({'claim_statement': claim['statement'], 'claim_variables': claim['variables'], 'claim_conditions': claim['conditions'],
                        'claim_effect_direction': claim['effect_direction'], 'span': claim['span']}, ensure_ascii=False) \
         + '\n\nPAGE TEXT (context):\n' + context_around(claim['span'], page_text)
-    e = client.complete('verify', doc_checksum, claim['claim_id'], prompt_version, prompt_text, user, max_tokens=300, tag=claim['doc_id'])
+    e = client.complete('verify', doc_checksum, claim['claim_id'], prompt_version, prompt_text, user, max_tokens=2000, tag=claim['doc_id'])
     try:
         o = json.loads(e['content'])
         v = o.get('verdict')
@@ -140,6 +140,12 @@ def decide(c):
         return 'rejected', ['span_not_found']
     if v['support']['result'] == 'unsupported':
         return 'rejected', ['support_unsupported']
+    if v['support']['result'] == 'pending_verification':
+        # no independent verifier ran: usable only if the code checks are all clean; shown as 'unreviewed'
+        clean = (v['span']['result'] == 'exact' and v['numbers']['result'] == 'pass' and v['conditions']['result'] == 'pass'
+                 and v['gravity']['result'] in ('pass', 'context') and c['extraction_confidence'] != 'low' and 'span_too_long' not in c.get('flags', []))
+        if clean:
+            return 'pending_verification', ['support_check_not_run']
     reasons = []
     if v['span']['result'] == 'fuzzy':
         reasons.append('fuzzy_span')
@@ -153,6 +159,8 @@ def decide(c):
         reasons.append('support_partial')
     if v['support']['result'] == 'error':
         reasons.append('support_check_error')
+    if v['support']['result'] == 'pending_verification':
+        reasons.append('support_check_not_run')
     if c['extraction_confidence'] == 'low':
         reasons.append('low_extraction_confidence')
     if 'span_too_long' in c.get('flags', []):

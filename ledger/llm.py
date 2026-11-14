@@ -29,6 +29,14 @@ class DailyLimit(Exception):
     """A provider's per-day quota is used up (own counter or a 429 that names a daily quota)."""
 
 
+class ModelUnavailable(Exception):
+    """The model keeps timing out or failing with 5xx; the client tries the next model in the chain for this call."""
+
+
+class CutOff(Exception):
+    """LEDGER_STOP_AT (HH:MM local time) reached; the run stops cleanly and can be resumed."""
+
+
 class RateLimited(Exception):
     """Per-minute retries exhausted; the run stops cleanly and can be resumed."""
 
@@ -39,7 +47,7 @@ class CacheMiss(Exception):
 
 USAGE_LOG = config.LEDGER_DIR / 'usage.jsonl'
 RUN_LOG = config.LEDGER_DIR / 'run_log.jsonl'
-STOPS = (BudgetReached, DailyLimit, RateLimited)
+STOPS = (BudgetReached, DailyLimit, RateLimited, CutOff, ModelUnavailable)
 
 
 def cache_key(kind, doc_checksum, item_id, prompt_version, model, provider=''):
@@ -105,6 +113,7 @@ def build_request(provider, model, system, user, max_tokens):
     else:
         headers = {'Content-Type': 'application/json', 'Authorization': f'Bearer {key}'}
         payload = {'model': model, 'temperature': 0, 'seed': 0, 'max_tokens': min(max_tokens, 8000), 'response_format': {'type': 'json_object'},
+                   **({'reasoning_effort': 'low'} if 'gpt-oss' in model else {}),
                    'messages': [{'role': 'system', 'content': system}, {'role': 'user', 'content': user}]}
         url = p['url']
     return url, headers, payload
@@ -129,8 +138,8 @@ def parse_response(provider, resp):
 
 
 def http_transport(provider, url, headers, payload):
-    req = urllib.request.Request(url, data=json.dumps(payload).encode('utf-8'), headers={**headers, 'Accept': 'application/json'}, method='POST')
-    r = urllib.request.urlopen(req, timeout=240)
+    req = urllib.request.Request(url, data=json.dumps(payload).encode('utf-8'), headers={**headers, 'Accept': 'application/json', 'User-Agent': 'ember-ledger/0.1 (research project; python-urllib)'}, method='POST')
+    r = urllib.request.urlopen(req, timeout=100)
     return json.loads(r.read().decode('utf-8')), dict(r.headers.items())
 
 
@@ -153,17 +162,37 @@ class Client:
     # ---- public
     def complete(self, kind, doc_checksum, item_id, prompt_version, system, user, max_tokens=8000, tag=''):
         provider = config.KIND_PROVIDER[kind]
-        model = model_for(provider)
-        key = cache_key(kind, doc_checksum, item_id, prompt_version, model, provider)
-        path = config.CACHE_DIR / f'{key}.json'
-        if path.exists():
-            self.session_cached += 1
-            return json.loads(path.read_text(encoding='utf-8'))
+        primary = model_for(provider)
+        chain = [primary] + [m for m in config.MODEL_CHAIN.get(provider, []) if m != primary]
+        for model in chain:      # any earlier answer, whichever model gave it, is reused
+            path = config.CACHE_DIR / f'{cache_key(kind, doc_checksum, item_id, prompt_version, model, provider)}.json'
+            if path.exists():
+                self.session_cached += 1
+                return json.loads(path.read_text(encoding='utf-8'))
         if self.offline:
             raise CacheMiss(f'{kind} {item_id}')
-        self._guard(provider)
-        url, headers, payload = build_request(provider, model, system, user, max_tokens)
-        resp = self._with_retries(provider, url, headers, payload, f'{kind} {item_id}')
+        last = None
+        for model in chain:
+            if (provider, model) in self._exhausted_models():
+                continue
+            self._guard(provider)
+            url, headers, payload = build_request(provider, model, system, user, max_tokens)
+            try:
+                resp = self._with_retries(provider, url, headers, payload, f'{kind} {item_id}')
+            except ModelUnavailable as e:
+                log_event('model_unavailable', provider=provider, model=model, what=f'{kind} {item_id}')
+                last = e
+                continue
+            except DailyLimit as e:
+                self._mark_exhausted(provider, model)
+                log_event('model_exhausted', provider=provider, model=model)
+                last = e
+                continue
+            return self._store(kind, provider, model, doc_checksum, item_id, prompt_version, resp, tag)
+        raise last or DailyLimit(f'{provider}: every model in the chain has used its daily quota')
+
+    def _store(self, kind, provider, model, doc_checksum, item_id, prompt_version, resp, tag):
+        path = config.CACHE_DIR / f'{cache_key(kind, doc_checksum, item_id, prompt_version, model, provider)}.json'
         r = parse_response(provider, resp)
         entry = {'kind': kind, 'provider': provider, 'item_id': item_id, 'doc_checksum': doc_checksum, 'prompt_version': prompt_version,
                  'requested_model': model, 'model_version': r['model_version'], 'response_id': r['response_id'], 'finish_reason': r['finish_reason'],
@@ -178,8 +207,31 @@ class Client:
         self.session_calls += 1
         return entry
 
+    def _exhausted_models(self):
+        f = config.LEDGER_DIR / 'exhausted.json'
+        try:
+            d = json.loads(f.read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            return set()
+        return {(p, m) for p, ms in d.items() for m, day in ms.items() if day == day_key(p)}
+
+    def _mark_exhausted(self, provider, model):
+        f = config.LEDGER_DIR / 'exhausted.json'
+        try:
+            d = json.loads(f.read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            d = {}
+        d.setdefault(provider, {})[model] = day_key(provider)
+        f.write_text(json.dumps(d, indent=1, sort_keys=True) + '\n', encoding='utf-8')
+
     # ---- limits
     def _guard(self, provider):
+        stop_at = os.environ.get('LEDGER_STOP_AT', '')
+        if stop_at:
+            hh, mm = stop_at.split(':')
+            lt = time.localtime()
+            if (lt.tm_hour, lt.tm_min) >= (int(hh), int(mm)):
+                raise CutOff(f'cut-off time {stop_at} reached')
         tokens, _ = usage_totals()
         if tokens >= config.MAX_TOKENS:
             raise BudgetReached(f'LEDGER_MAX_TOKENS reached: {tokens} of {config.MAX_TOKENS} tokens')
@@ -212,6 +264,7 @@ class Client:
 
     def _with_retries(self, provider, url, headers, payload, what):
         delay = 2.0
+        daily_hits = 0
         for attempt in range(1, config.MAX_RETRIES + 1):
             self._pace(provider)
             try:
@@ -231,8 +284,13 @@ class Client:
                     pass
                 if code == 429:
                     if self._is_daily(detail, ra):
-                        log_event('daily_limit', provider=provider, what=what, http=429)
-                        raise DailyLimit(f'{provider}: HTTP 429 naming a daily quota ({detail[:160]!r})')
+                        daily_hits += 1
+                        log_event('quota_429', provider=provider, what=what, attempt=attempt, detail=(detail[detail.find('Quota exceeded'):][:500] if 'Quota exceeded' in detail else detail[:300]).replace(os.environ.get(config.PROVIDERS[provider]['key_env'], '#'), '<key>'))
+                        if daily_hits >= 2:   # the same quota message twice, 70 s apart: treat as this model's daily limit
+                            log_event('daily_limit', provider=provider, what=what, http=429)
+                            raise DailyLimit(f'{provider}: HTTP 429 naming a daily quota ({detail[:160]!r})')
+                        self.sleep(70)
+                        continue
                     pause = min(ra if ra is not None else delay, 120.0) + random.uniform(0, 1)
                     log_event('retry', provider=provider, what=what, http=429, attempt=attempt, pause_s=round(pause, 1))
                     self.sleep(pause)
@@ -240,6 +298,8 @@ class Client:
                     continue
                 if code in (500, 502, 503, 504):
                     log_event('retry', provider=provider, what=what, http=code, attempt=attempt)
+                    if attempt >= 3:
+                        raise ModelUnavailable(f'{provider}: HTTP {code}')
                     self.sleep(min(delay, 60.0) + random.uniform(0, 1))
                     delay = min(delay * 2, 120.0)
                     continue
@@ -248,6 +308,9 @@ class Client:
                 raise ApiError(provider, code, detail)
             except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
                 log_event('retry', provider=provider, what=what, error=type(e).__name__, attempt=attempt)
+                fails = locals().get('fails', 0)
+                if attempt >= 2:
+                    raise ModelUnavailable(f'{provider}: {type(e).__name__}')
                 self.sleep(min(delay, 60.0))
                 delay = min(delay * 2, 120.0)
         log_event('rate_limit_exhausted', provider=provider, what=what)
