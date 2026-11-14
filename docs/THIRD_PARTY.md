@@ -24,6 +24,8 @@ Rule: **nothing without a known, open license goes into the product.** Every ent
 |---|---|---|---|---|
 | Python standard library (urllib, csv, json, os) | `scripts/fetch_psi_tables.py` | PSF License | https://docs.python.org/3/license.html | In use |
 | pyarrow 26.0.0 | Parquet output of `python -m pipeline` | Apache-2.0 (package metadata) | https://pypi.org/project/pyarrow/ ; https://arrow.apache.org/ | In use (requirements.txt) |
+| Python standard library (csv, json, re, hashlib, base64, unittest and others) | the pipeline, the evidence ledger, the site build (`scripts/build_site.py`) and the unit tests | PSF License | https://docs.python.org/3/license.html | In use |
+| **None** (no third-party JavaScript, CSS framework, icon set or image in the web page) | `site/index.html` is one self-written page: its scripts (map, 3D and 2D plots, Ask parser) are in `scripts/`, its two plots draw on a canvas without a library, and its logo is a small inline SVG made for this project | not applicable | not applicable | In use |
 
 Development-only tools (not part of the product): `pypdf` (BSD-3-Clause, to be verified) and `pymupdf` (AGPL-3.0 or commercial) are in `requirements-dev.txt`; `scripts/extract_bass2_observations.py` uses PyMuPDF to extract the Appendix A observations once, and its output CSV is what the pipeline reads. They must not be added to the product without a license check. Note: `pypdf` is an **optional development tool** used only by `pipeline/spot_check.py` to check transcribed rows against PDF pages; the pipeline itself needs no third-party package. `pymupdf` (PyMuPDF, used to render PDF pages to images) and `pypdf` (text extraction) were used only in a temporary folder outside the repo for reading reports; they are **not project dependencies**. PyMuPDF is reported to be dual-licensed (AGPL-3.0 or commercial) and must not be added to the product without a license check (https://pymupdf.readthedocs.io/en/latest/about.html#license-and-copyright); `pypdf` is reported as BSD-3-Clause (https://github.com/py-pdf/pypdf), to be verified before any use.
 
@@ -33,7 +35,13 @@ Models used by the ledger build (not shipped to users; decision D31, amended 202
 No model is otherwise part of the product yet. Claude (claude-sonnet-5-5, via Claude Code) is a development tool and produced the BASS-II outcome proposals (logged in SI_USAGE.md). For M4/M8 (Q&A, briefs) no model has been adopted yet; candidates must be added with license and source URL before use.
 
 ## Development tools (not shipped)
-See [SI_USAGE.md](SI_USAGE.md).
+See [SI_USAGE.md](SI_USAGE.md) for the AI tools. Other tools used only while building and testing, none of them part of the deployed site:
+
+| Tool | Used for | License |
+|---|---|---|
+| Node.js | runs the Ask query parser's unit tests (`tests/test_ask_parser.py` calls `node`; the tests are skipped when it is absent) | MIT |
+| Headless Google Chrome (DevTools protocol) | browser checks for JavaScript errors, sideways scroll and tap-target size at 390 px and 1366 px | proprietary browser, used as a test driver only |
+| `pypdf`, `pymupdf` | text layer and page images of the NTRS PDFs (see Libraries above) | BSD-3-Clause; AGPL-3.0 or commercial |
 
 ## Fonts embedded in the site (scripts/fonts/)
 
