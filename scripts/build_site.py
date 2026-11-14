@@ -89,10 +89,20 @@ def summarize_tests(rows):
         v = rng([r[k] for r in t])
         if v:
             size[lab] = v
+    # fields that have the same value in every test row of the investigation (taken only from the unified table)
+    constant = []
+    if len(t) >= 2:
+        for k, lab in (('gravity_level_g', 'gravity (g)'), ('oxygen_fraction', 'oxygen (mole fraction)'), ('pressure_kpa', 'pressure (kPa)'), ('flow_velocity_cm_s', 'flow velocity (cm/s)'),
+                       ('flow_direction', 'flow direction'), ('spread_orientation', 'spread orientation'), ('diluent', 'diluent'), ('ignition_method', 'ignition method'),
+                       ('material_or_fuel', 'material or fuel'), ('sample_geometry', 'sample geometry'), ('sample_thickness_mm', 'thickness (mm)'),
+                       ('sample_width_cm', 'width (cm)'), ('sample_length_cm', 'length (cm)'), ('platform', 'platform')):
+            vals = [(r[k] or '').strip() for r in t]
+            if all(vals) and len(set(vals)) == 1 and vals[0].lower() not in ('unknown', 'n/a', 'not stated'):
+                constant.append({'field': lab, 'value': vals[0]})
     return {'tests': len(t), 'o2': rng([r['oxygen_fraction'] for r in t], '{:.3g}'), 'pressure_kpa': rng([r['pressure_kpa'] for r in t], '{:.4g}'),
             'flow_cm_s': rng([r['flow_velocity_cm_s'] for r in t], '{:.3g}'), 'gravity_g': sorted({r['gravity_level_g'] or 'not stated' for r in t}),
             'fuels': sorted(mats, key=lambda m: -mats[m])[:12], 'n_fuels': len(mats), 'geometry': geoms, 'sizes': size, 'outcomes': oc,
-            'source_refs': sorted({r['source_ref'].split('#')[0] for r in t})[:4]}
+            'source_refs': sorted({r['source_ref'].split('#')[0] for r in t})[:4], 'constant': constant}
 
 
 def _inline(t):
