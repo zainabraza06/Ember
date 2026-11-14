@@ -95,6 +95,86 @@ def summarize_tests(rows):
             'source_refs': sorted({r['source_ref'].split('#')[0] for r in t})[:4]}
 
 
+def _inline(t):
+    import html as _h
+    t = _h.escape(t, quote=False)
+    t = re.sub(r'`([^`]+)`', r'<code>\1</code>', t)
+    t = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', t)
+    t = re.sub(r'\[([^\]]+)\]\((https?://[^)\s]+)\)', r'<a href="\2">\1</a>', t)
+    return t
+
+
+def md_to_html(md):
+    """Small Markdown renderer for docs/DATA_DICTIONARY.md: headings, tables, bullet lists, code spans, bold, paragraphs."""
+    out, lines, i = [], md.split('\n'), 0
+    while i < len(lines):
+        ln = lines[i]
+        if ln.startswith('|') and i + 1 < len(lines) and re.match(r'^\|[\s:|-]+\|\s*$', lines[i + 1]):
+            head = [c.strip() for c in ln.strip().strip('|').split('|')]
+            i += 2
+            rows = []
+            while i < len(lines) and lines[i].startswith('|'):
+                rows.append([c.strip() for c in lines[i].strip().strip('|').split('|')])
+                i += 1
+            out.append('<div class="scroll"><table><thead><tr>' + ''.join(f'<th>{_inline(h)}</th>' for h in head) + '</tr></thead><tbody>' +
+                       ''.join('<tr>' + ''.join(f'<td>{_inline(c)}</td>' for c in r) + '</tr>' for r in rows) + '</tbody></table></div>')
+            continue
+        m = re.match(r'^(#{1,4})\s+(.*)$', ln)
+        if m:
+            n = len(m.group(1))
+            out.append(f'<h{n}>{_inline(m.group(2))}</h{n}>')
+        elif ln.startswith('- '):
+            items = []
+            while i < len(lines) and lines[i].startswith('- '):
+                items.append(lines[i][2:])
+                i += 1
+            out.append('<ul>' + ''.join(f'<li>{_inline(x)}</li>' for x in items) + '</ul>')
+            continue
+        elif ln.strip():
+            para = [ln]
+            while i + 1 < len(lines) and lines[i + 1].strip() and not re.match(r'^(#{1,4}\s|- |\|)', lines[i + 1]):
+                i += 1
+                para.append(lines[i])
+            out.append('<p>' + _inline(' '.join(para)) + '</p>')
+        i += 1
+    return '\n'.join(out)
+
+
+DICT_PAGE = """<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember data dictionary</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:1100px;margin:0 auto;padding:16px;background:#fff;color:#1c1c1c}
+@media (prefers-color-scheme:dark){body{background:#111;color:#eee}a{color:#f4a26b}th{background:#222}td,th{border-color:#444}code,pre{background:#222}}
+table{border-collapse:collapse;font-size:.88rem}td,th{border:1px solid #ccc;padding:4px 8px;vertical-align:top;text-align:left}th{background:#f1f1f1}.scroll{overflow-x:auto}
+code,pre{background:#eee;border-radius:4px;padding:1px 4px}pre{padding:10px;overflow-x:auto}.note{border-left:4px solid #e8844a;padding:6px 12px;background:rgba(232,132,74,.1)}</style></head><body>
+<p><a href="../">&larr; Back to Ember</a> | <a href="tests.csv">tests.csv</a> | <a href="ledger_claims.json">ledger_claims.json</a></p>
+<h1>Ember data dictionary</h1>
+<div class="note"><p><b>About these files.</b> <code>tests.csv</code> has 885 rows. Rows come from NASA PSI test tables or are transcribed from public NASA reports (NTRS); every row carries a source reference in <code>source_ref</code> (the PSI table row, or the report with its PDF page and table). The spot check compared 10 sampled values with the source PDFs: 10 of 10 were AI-checked against the PDFs, and 2 of them were also checked by a person.</p>
+<p>Outcome classes include <code>externally_terminated</code>: the test was stopped while the flame was still burning. It is a censored outcome, not &ldquo;did not burn&rdquo;. <code>unknown</code> means the source does not state an outcome.</p>
+<p><code>ledger_claims.json</code> holds the public claims of the evidence ledger (status approved or verified_auto only) with their citations and PDF pages.</p></div>
+<h2>How to load it</h2>
+<pre>import pandas as pd
+df = pd.read_csv("tests.csv")            # 885 rows; use df[df.record_type == "test"] for the 769 test rows
+df[(df.oxygen_fraction.astype(float) &gt;= 0.30) &amp; (df.pressure_kpa.astype(float) &lt;= 70.33)]</pre>
+__BODY__
+</body></html>
+"""
+
+
+def write_download_files(tests_rows, public_claims):
+    """site/data/: the unified table, the data dictionary rendered as a page, and the public ledger claims as JSON."""
+    import shutil
+    d = ROOT / 'site' / 'data'
+    d.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / 'data/processed/tests.csv', d / 'tests.csv')
+    body = md_to_html((ROOT / 'docs/DATA_DICTIONARY.md').read_text(encoding='utf-8'))
+    (d / 'data_dictionary.html').write_text(DICT_PAGE.replace('__BODY__', body), encoding='utf-8')
+    payload = {'description': 'Public claims of the Ember evidence ledger: status approved or verified_auto only. Quoted spans appear only for US Government works.',
+               'statuses': ['approved', 'verified_auto'], 'count': len(public_claims), 'claims': public_claims}
+    (d / 'ledger_claims.json').write_text(json.dumps(payload, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+    return len(tests_rows), len(public_claims)
+
+
 def main():
     catalog = {r['item_id'].split(' ')[0]: r for r in read_csv('data/catalog.csv') if r['source'] == 'NASA PSI'}
     tests = read_csv('data/processed/tests.csv')
@@ -196,6 +276,8 @@ def main():
     out.parent.mkdir(exist_ok=True)
     parser_js = (ROOT / 'scripts/ask_parser.js').read_text(encoding='utf-8').replace('</', '<\\/')
     out.write_text(tpl.replace('/*__ASK_PARSER__*/', parser_js).replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False).replace('</', '<\\/')), encoding='utf-8')
+    nt, nc = write_download_files(tests, claims)
+    print('wrote site/data: tests.csv', nt, 'rows; data_dictionary.html; ledger_claims.json', nc, 'claims')
     print('wrote', out, len(invs), 'investigations;', len(pairs), 'pairs;', len(lit), 'literature rows;', quote[:80])
 
 
