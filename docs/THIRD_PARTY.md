@@ -34,3 +34,13 @@ No model is otherwise part of the product yet. Claude (claude-sonnet-5-5, via Cl
 
 ## Development tools (not shipped)
 See [SI_USAGE.md](SI_USAGE.md).
+
+## Fonts embedded in the site (scripts/fonts/)
+
+Embedded in `site/index.html` as base64 `@font-face` data (no request to a font server when the page loads). All four files come from the Fontsource packages on npm and are licensed under the SIL Open Font License 1.1.
+
+| Font | Use | Licence |
+|---|---|---|
+| Sora (variable) | headlines and numbers | SIL OFL 1.1 |
+| IBM Plex Sans (variable) | body text | SIL OFL 1.1 |
+| IBM Plex Mono 400 and 500 | data labels, chart labels, table numbers | SIL OFL 1.1 |
