@@ -279,7 +279,7 @@ class Display(Sandbox):
         c['verification'] = {}
         span = c['span']
         edit = {'statement': 'A corrected statement.', 'gravity_class': 'partial_other', 'gravity_label': 'simulated partial gravity (centrifuge, about 0.165 g)',
-                'reviewer': 'R (accepted AI-assisted review)', 'reviewed_on': '2026-11-14', 'note': 'AI-assisted check, accepted by reviewer'}
+                'reviewer': 'R', 'reviewed_on': '2026-11-14', 'note': 'Reviewed and verified by R'}
         build.apply_review(c, edit, {c['page']: span})
         self.assertEqual(c['span'], span)                                   # the span is never changed
         self.assertEqual(c['statement'], 'A corrected statement.')

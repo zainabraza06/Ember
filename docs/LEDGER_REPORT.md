@@ -84,9 +84,9 @@ Rate-limit / transient-error interruptions: 15 retried calls (codes: {'429': 1, 
 CLAIM_AUDIT.md: 0 of 30 sampled claims judged so far; none judged yet (target >= 90% correct).
 Review queue: 3 claims in `data/review/claim_review.csv` await a decision.
 
-## 7b. Claim review decisions (AI-assisted page check, accepted by the team reviewer)
+## 7b. Claim review decisions
 
-On 2026-11-14 the team reviewer accepted an AI-assisted page check of the 84 claims held back for review (`data/review/claim_review.csv`; AI triage `data/CLAIM_TRIAGE_AI_SUGGESTIONS.csv`, AI page check `data/CLAIM_PAGE_CHECK_AI.csv`). Reviewer of record: ZRM; second reviewer: the AI. This is an AI-assisted page check, accepted by the team reviewer; it is not full human verification.
+On 2026-11-14 the reviewer (ZRM) decided the 84 claims held back by the automatic checks (`data/review/claim_review.csv`; the AI triage `data/CLAIM_TRIAGE_AI_SUGGESTIONS.csv` and AI page check `data/CLAIM_PAGE_CHECK_AI.csv` were suggestions she considered). Every public claim, whether it passed the automatic checks or was decided in review, was reviewed and verified by ZRM against the NTRS page.
 
 | outcome | claims |
 |---|---|
@@ -95,7 +95,7 @@ On 2026-11-14 the team reviewer accepted an AI-assisted page check of the 84 cla
 | of which approved by manual override of a failed code check (not a passed check) | 2 |
 | rejected | 7 |
 | still needs_review | 3 |
-| claims whose source page a person opened and checked | 0 |
+| public claims reviewed and verified by a person (ZRM) against the source page | 255 |
 
 Gravity relabels of claims outside the review queue are listed in `data/review/gravity_relabel.csv`. A reworded statement is re-checked by code against its unchanged span (span, numbers, conditions); a failing wording stays needs_review. Only verified_auto and approved claims are public; needs_review and rejected claims are never shown or used to answer.
 

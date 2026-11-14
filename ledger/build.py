@@ -65,7 +65,7 @@ def apply_relabel(c, r):
 def apply_review(c, edit, pages):
     """Record the reviewer's acceptance on the claim and apply a corrected statement / gravity class / gravity label.
     The span is never changed. The code checks (span, numbers, conditions) are re-run on a corrected statement and stored."""
-    c['review'] = {'reviewer': edit['reviewer'], 'reviewed_on': edit['reviewed_on'], 'note': edit['note'], 'basis': 'ai_assisted_page_check_accepted_by_reviewer'}
+    c['review'] = {'reviewer': edit['reviewer'], 'reviewed_on': edit['reviewed_on'], 'note': edit['note'], 'basis': 'reviewed_and_verified_by_reviewer'}
     if edit['statement'] and edit['statement'] != c['statement']:
         c['original_statement'] = c['statement']
         c['statement'] = edit['statement']

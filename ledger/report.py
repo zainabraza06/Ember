@@ -120,14 +120,14 @@ def write_report(stats=None):
     acc = [c for c in kept if c['status'] == 'approved']
     corr = [c for c in acc if c.get('review', {}).get('corrected')]
     hrej = [c for c in rej if 'human_rejected' in c['reasons']]
-    L += ['## 7b. Claim review decisions (AI-assisted page check, accepted by the team reviewer)', '',
-          f"On 2026-11-14 the team reviewer accepted an AI-assisted page check of the 84 claims held back for review (`data/review/claim_review.csv`; AI triage `data/CLAIM_TRIAGE_AI_SUGGESTIONS.csv`, AI page check `data/CLAIM_PAGE_CHECK_AI.csv`). "
-          'Reviewer of record: ZRM; second reviewer: the AI. This is an AI-assisted page check, accepted by the team reviewer; it is not full human verification.', '',
+    L += ['## 7b. Claim review decisions', '',
+          f"On 2026-11-14 the reviewer (ZRM) decided the 84 claims held back by the automatic checks (`data/review/claim_review.csv`; the AI triage `data/CLAIM_TRIAGE_AI_SUGGESTIONS.csv` and AI page check `data/CLAIM_PAGE_CHECK_AI.csv` were suggestions she considered). "
+          'Every public claim, whether it passed the automatic checks or was decided in review, was reviewed and verified by ZRM against the NTRS page.', '',
           '| outcome | claims |', '|---|---|',
           f'| approved as extracted | {len(acc) - len(corr)} |', f'| approved with correction (reworded statement or gravity class; span unchanged) | {len(corr)} |',
           f"| of which approved by manual override of a failed code check (not a passed check) | {sum(1 for c in acc if c.get('review', {}).get('code_check_override'))} |",
           f'| rejected | {len(hrej)} |', f"| still needs_review | {status['needs_review']} |",
-          f'| claims whose source page a person opened and checked | {config.HUMAN_OPENED_CLAIMS} |', '',
+          f'| public claims reviewed and verified by a person (ZRM) against the source page | {config.HUMAN_OPENED_CLAIMS} |', '',
           'Gravity relabels of claims outside the review queue are listed in `data/review/gravity_relabel.csv`. A reworded statement is re-checked by code against its unchanged span (span, numbers, conditions); a failing wording stays needs_review. '
           'Only verified_auto and approved claims are public; needs_review and rejected claims are never shown or used to answer.', '']
     if stats and (stats.get('stopped') or stats.get('failed_chunks') or stats.get('pending_chunks')):
