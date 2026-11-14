@@ -257,6 +257,10 @@ def main():
                  'o': fl(r['oxygen_fraction']) if r['record_type'] == 'test' else (fl(r['moc_vol_pct']) / 100.0 if fl(r['moc_vol_pct']) is not None else None),
                  'p': fl(r['pressure_kpa']), 'g': r['gravity_level_g'] or '?', 'c': r['outcome_class'], 'r': r['outcome_raw'], 'd': dil(r['diluent']), 's': r['source_ref'], 't': r['record_type'], 'org': r['data_origin']}
                 for r in tests if r['record_type'] in ('test', 'limit')]
+    # change in oxygen margin of safety (percentage points of O2, low gravity minus 1 g), as transcribed from Table I of NTRS 20130010991
+    moon_margin = {'doc': 'NTRS-20130010991', 'rows': [
+        {'id': r['test_id'], 'fuel': r['material_or_fuel'], 'g': r['gravity_level_g'], 'margin': float(r['o2_margin_vs_1g_pct']), 'src': r['source_ref'].split(' | ')[0]}
+        for r in tests if 'NTRS 20130010991' in r['source_ref'] and r['o2_margin_vs_1g_pct'] not in ('', None) and r['gravity_level_g'] in ('0.165', '0.38')]}
     ranking = json.loads((ROOT / 'data/processed/ranking.json').read_text(encoding='utf-8'))
     interp = json.loads((ROOT / 'data/processed/interpretations.json').read_text(encoding='utf-8'))
     claims, ledger_stats, srcs = [], {}, {}
@@ -292,7 +296,7 @@ def main():
     data = {'points': points, 'points_without_atmosphere': no_atm, 'ranking': ranking, 'interpretations': interp, 'claims': claims,
             'ledger_stats': ledger_stats, 'sources': srcs, 'conflicts': [l for l in conflicts_md.splitlines() if l.startswith('| PSI-')],
             'official': OFFICIAL, 'nd': ND, 'investigations': invs, 'pairs': [dict(id=k, **v) for k, v in sorted(pairs.items())], 'literature': lit,
-            'tests': ask_rows, 'review_counts': review_counts, 'gravity_counts': grav_counts, 'profiles': profiles, 'atmos_reports': atmos, 'bre_quote': quote,
+            'tests': ask_rows, 'moon_margin': moon_margin, 'review_counts': review_counts, 'gravity_counts': grav_counts, 'profiles': profiles, 'atmos_reports': atmos, 'bre_quote': quote,
             'build': {'tests_rows': len(tests), 'investigations': len(invs)}}
     tpl = (ROOT / 'scripts/site_template.html').read_text(encoding='utf-8')
     out = ROOT / 'site' / 'index.html'
