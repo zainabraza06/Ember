@@ -92,21 +92,16 @@ function initCube(canvas, tipEl, rows, opts) {
   return { refresh() { readColors(); draw(); }, count: pts.length };
 }
 
-/* 2D "Where fire was tested" plot: pressure (kPa) on x, oxygen share (%) on y.
-   Many tests share the same oxygen and pressure, so single dots would pile up. Tests that fall in the same small cell are merged into one
-   bubble: its AREA grows with the number of tests, and the BLUE share of the bubble is the share of those tests where a flame was lit
-   (this includes tests stopped while the flame was still burning); the grey share is no ignition or no recorded outcome.
+/* 2D "Where fire was tested" plot: pressure (kPa) on x, oxygen share (%) on y, one dot per real test.
    x is linear to 120 kPa and compressed above it (tests reach 331 kPa); y runs 10 to 100 % (tests reach 12 %).
-   Motion: bubbles pop in as a left-to-right sweep, the lunar-base box draws in and its dashes march slowly, the hovered bubble pulses.
+   Blue = flame lit (this includes tests stopped while the flame was still burning); grey = no ignition or no recorded outcome.
+   Motion: the dots pop in as a left-to-right sweep, the lunar-base box draws in and its dashes march slowly; the hovered dot pulses.
    In calm mode (html.calm) everything is drawn at once and nothing moves. */
 function initScatter(canvas, tipEl, rows, opts) {
   'use strict';
-  const ctx = canvas.getContext('2d'), all = rows.filter(r => r.t === 'test' && r.o != null && r.p != null);
-  const XLIN = 120, XMAX = 350, FRAC = 0.86, YMIN = 10, YMAX = 100, M = { l: 44, r: 16, t: 24, b: 34 }, CELL = 11;
-  const FAM = { 'FLEX': 'FLEX', 'CFI-G': 'CFI-G', 'BASS-II': 'BASS-II', 'Saffire': 'Saffire' }, famOf = r => FAM[r.f] || 'REPORTS';
-  const famShort = { FLEX: 'FLEX', 'CFI-G': 'CFI-G', 'BASS-II': 'BASS-II', Saffire: 'Saffire', REPORTS: 'reports' };
-  let active = new Set(['FLEX', 'CFI-G', 'BASS-II', 'Saffire', 'REPORTS']);
-  let W = 0, H = 0, col = {}, hover = null, bins = [], t0 = performance.now(), visible = true, frameT = 0;
+  const ctx = canvas.getContext('2d'), pts = rows.filter(r => r.t === 'test' && r.o != null && r.p != null);
+  const XLIN = 120, XMAX = 350, FRAC = 0.86, YMIN = 10, YMAX = 100, M = { l: 44, r: 16, t: 24, b: 34 };
+  let W = 0, H = 0, col = {}, hover = null, drawn = [], t0 = performance.now(), visible = true, frameT = 0;
   const calm = () => document.documentElement.classList.contains('calm');
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const easeOut = t => 1 - Math.pow(1 - clamp(t, 0, 1), 3);
@@ -114,88 +109,64 @@ function initScatter(canvas, tipEl, rows, opts) {
   const lit = r => r.c !== 'no_ignition' && r.c !== 'unknown';
   function colors() {
     const cs = getComputedStyle(document.documentElement), g = n => cs.getPropertyValue(n).trim();
-    col = { lit: g('--blue'), dark: g('--c-ni'), ember: g('--ember'), head: g('--head'), muted: g('--muted'), line: g('--line'), panel: g('--panel') };
+    col = { lit: g('--blue'), dark: g('--c-ni'), ember: g('--ember'), head: g('--head'), muted: g('--muted'), line: g('--line') };
   }
   function size() { const dpr = Math.min(window.devicePixelRatio || 1, 2), b = canvas.getBoundingClientRect(); W = b.width; H = b.height; canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
   const pw = () => W - M.l - M.r;
   const X = p => M.l + (p <= XLIN ? (p / XLIN) * FRAC : FRAC + ((p - XLIN) / (XMAX - XLIN)) * (1 - FRAC)) * pw();
   const Y = o => M.t + (1 - (o * 100 - YMIN) / (YMAX - YMIN)) * (H - M.t - M.b);
   const mono = (px, w) => (w || 400) + ' ' + px + 'px "IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace';
-  function rebin() {
-    const m = {};
-    all.forEach(r => { if (!active.has(famOf(r))) return; const x = X(r.p), y = Y(r.o), k = Math.floor(x / CELL) + ':' + Math.floor(y / CELL);
-      const b = m[k] || (m[k] = { n: 0, lit: 0, sx: 0, sy: 0, fam: {}, omin: 9, omax: 0, pmin: 1e9, pmax: 0, rows: [] });
-      b.n++; b.sx += x; b.sy += y; if (lit(r)) b.lit++; const f = famOf(r); b.fam[f] = (b.fam[f] || 0) + 1; b.omin = Math.min(b.omin, r.o); b.omax = Math.max(b.omax, r.o); b.pmin = Math.min(b.pmin, r.p); b.pmax = Math.max(b.pmax, r.p); b.rows.push(r); });
-    bins = Object.values(m).map(b => { b.x = b.sx / b.n; b.y = b.sy / b.n; b.rad = Math.min(15, 3.6 + 1.55 * Math.sqrt(b.n - 1) + (b.n > 1 ? 1 : 0)); b.top = Object.entries(b.fam).sort((a, c) => c[1] - a[1])[0][0]; return b; });
-    bins.sort((a, b) => b.n - a.n);   // big bubbles first so small ones stay visible on top
-    bins.reverse();
-  }
   function draw(now) {
     now = now || performance.now();
     const age = calm() ? 1e9 : now - t0;
     ctx.clearRect(0, 0, W, H); ctx.font = mono(12); ctx.textBaseline = 'middle'; ctx.lineWidth = 1;
     const gridA = easeOut(age / 500);
-    [20, 40, 60, 80, 100].forEach(v => { const y = Y(v / 100); ctx.strokeStyle = col.line; ctx.globalAlpha = 0.7 * gridA; ctx.beginPath(); ctx.moveTo(M.l, y); ctx.lineTo(M.l + pw() * easeOut(age / 700), y); ctx.stroke(); ctx.globalAlpha = gridA; ctx.fillStyle = col.muted; ctx.textAlign = 'right'; ctx.fillText(v, M.l - 8, y); });
-    ctx.globalAlpha = gridA; ctx.fillStyle = col.muted; ctx.textAlign = 'center';
+    ctx.globalAlpha = gridA;
+    [20, 40, 60, 80, 100].forEach(v => { const y = Y(v / 100); ctx.strokeStyle = col.line; ctx.globalAlpha = 0.7 * gridA; ctx.beginPath(); ctx.moveTo(M.l, y); ctx.lineTo(M.l + (W - M.l - M.r) * easeOut(age / 700), y); ctx.stroke(); ctx.globalAlpha = gridA; ctx.fillStyle = col.muted; ctx.textAlign = 'right'; ctx.fillText(v, M.l - 8, y); });
+    ctx.fillStyle = col.muted; ctx.textAlign = 'center';
     [0, 25, 50, 75, 100].forEach(v => ctx.fillText(v, X(v), H - M.b + 16));
     ctx.fillText('kPa', X(120) + 18, H - M.b + 16);
     ctx.strokeStyle = col.muted; ctx.beginPath(); ctx.moveTo(X(XLIN) - 3, H - M.b - 4); ctx.lineTo(X(XLIN) + 3, H - M.b + 4); ctx.stroke();
     ctx.textAlign = 'left'; ctx.fillText('O₂ %', 4, M.t - 12); ctx.globalAlpha = 1;
-    // lunar-base zone: oxygen 30% or more, pressure 10.2 psi (70.33 kPa) or less
+    // lunar-base zone: oxygen 30% or more, pressure 10.2 psi (70.33 kPa) or less. It grows out of the top-left corner, then its dashes march.
     const zk = easeOut((age - 250) / 700), zx = X(0), zy = Y(1), zw = (X(opts.zone.pMaxKpa) - X(0)) * zk, zh = (Y(opts.zone.oMin) - Y(1)) * zk;
-    ctx.fillStyle = col.ember; ctx.globalAlpha = 0.12; ctx.fillRect(zx, zy, zw, zh); ctx.globalAlpha = 1;
+    ctx.fillStyle = col.ember; ctx.globalAlpha = 0.13; ctx.fillRect(zx, zy, zw, zh); ctx.globalAlpha = 1;
     ctx.strokeStyle = col.ember; ctx.lineWidth = 1.5; ctx.setLineDash([6, 4]); ctx.lineDashOffset = calm() ? 0 : -((now / 90) % 10); ctx.strokeRect(zx, zy, zw, zh); ctx.setLineDash([]); ctx.lineDashOffset = 0; ctx.lineWidth = 1;
-    ctx.globalAlpha = easeOut((age - 900) / 500); ctx.fillStyle = col.ember; ctx.font = mono(12, 500); ctx.textAlign = 'left'; ctx.fillText('LUNAR BASE · ≥30% O₂ · ≤10.2 psi', zx + 10, zy + 22, Math.max(60, X(opts.zone.pMaxKpa) - X(0) - 16)); ctx.globalAlpha = 1;
-    // bubbles: area = number of tests, blue wedge = share with a flame lit
-    bins.forEach(b => {
-      const hot = hover === b, k = pop((age - 350 - ((b.x - M.l) / pw()) * 1000 - (1 - b.omax) * 160) / 450); if (k <= 0 && !hot) return;
-      const r = Math.max(0, (hot ? b.rad + 2 + (calm() ? 0 : Math.sin(now / 160) * 1.2) : b.rad) * Math.min(k, 1.12));
-      ctx.globalAlpha = hot ? 1 : 0.9 * clamp(k, 0, 1);
-      ctx.fillStyle = col.dark; ctx.beginPath(); ctx.arc(b.x, b.y, r, 0, 6.2832); ctx.fill();
-      if (b.lit > 0) { ctx.fillStyle = col.lit; ctx.beginPath(); if (b.lit < b.n) ctx.moveTo(b.x, b.y); ctx.arc(b.x, b.y, r, -Math.PI / 2, -Math.PI / 2 + (b.lit / b.n) * 6.2832); if (b.lit < b.n) ctx.closePath(); ctx.fill(); }
-      ctx.lineWidth = hot ? 2 : 1.2; ctx.strokeStyle = hot ? col.head : col.panel; ctx.beginPath(); ctx.arc(b.x, b.y, r, 0, 6.2832); ctx.stroke(); ctx.lineWidth = 1;
+    const la = easeOut((age - 900) / 500);
+    ctx.globalAlpha = la; ctx.fillStyle = col.ember; ctx.font = mono(12, 500); ctx.textAlign = 'left'; ctx.fillText('LUNAR BASE · ≥30% O₂ · ≤10.2 psi', zx + 10, zy + 22, Math.max(60, X(opts.zone.pMaxKpa) - X(0) - 16)); ctx.globalAlpha = 1;
+    // dots sweep in from the left; each one overshoots slightly as it appears
+    drawn = [];
+    pts.forEach(r => {
+      const x = X(r.p), y = Y(r.o), hot = hover && hover.r === r, k = pop((age - 350 - ((x - M.l) / pw()) * 1000 - (1 - r.o) * 160) / 450);
+      if (k <= 0 && !hot) return;
+      const base = hot ? 1 : (lit(r) ? 0.8 : 0.6), rad = hot ? 6.5 + (calm() ? 0 : Math.sin(now / 160) * 1.2) : 3.4 * Math.max(k, 0);
+      ctx.globalAlpha = base * clamp(k, 0, 1); ctx.fillStyle = lit(r) ? col.lit : col.dark; ctx.beginPath(); ctx.arc(x, y, Math.max(rad, 0), 0, 6.2832); ctx.fill();
+      if (hot) { ctx.strokeStyle = col.head; ctx.lineWidth = 2; ctx.stroke(); ctx.lineWidth = 1; }
+      drawn.push({ r, x, y });
     });
     ctx.globalAlpha = 1;
-    // direct labels on the biggest clusters: count and family
-    if (age > 1100) {
-      const placed = [[X(101.325) - 22 - 100, Y(0.2095) - 22, 100]], la = easeOut((age - 1100) / 500);   // the Earth-air label is already there
-      bins.slice().sort((a, b) => b.n - a.n).filter(b => b.n >= 12).slice(0, 6).forEach(b => {
-        const txt = b.n + ' \u00b7 ' + famShort[b.top]; ctx.font = mono(12, 500); const w = ctx.measureText(txt).width;
-        const cands = [[b.x + b.rad + 7, b.y], [b.x - b.rad - 7 - w, b.y], [b.x - w / 2, b.y - b.rad - 10], [b.x - w / 2, b.y + b.rad + 11]];   // right, left, above, below
-        const pick1 = cands.find(c => c[0] > M.l && c[0] + w < W - M.r && c[1] > M.t && c[1] < H - M.b && !placed.some(p => c[0] < p[0] + p[2] + 4 && c[0] + w > p[0] - 4 && Math.abs(c[1] - p[1]) < 14));
-        if (!pick1) return; placed.push([pick1[0], pick1[1], w]);
-        ctx.globalAlpha = la; ctx.textAlign = 'left'; ctx.lineWidth = 3.5; ctx.strokeStyle = col.panel; ctx.strokeText(txt, pick1[0], pick1[1]); ctx.fillStyle = col.head; ctx.fillText(txt, pick1[0], pick1[1]); ctx.lineWidth = 1;
-      }); ctx.globalAlpha = 1;
-    }
-    // reference markers fade in last
-    ctx.globalAlpha = easeOut((age - 1300) / 500);
-    const sx = X(opts.suit.p), sy = Y(opts.suit.o), lx2 = Math.min(X(opts.zone.pMaxKpa) + 14, W - M.r - 150);
+    // markers fade in last
+    const ma = easeOut((age - 1300) / 500);
+    ctx.globalAlpha = ma;
+    const sx = X(opts.suit.p), sy = Y(opts.suit.o), lx = Math.min(X(opts.zone.pMaxKpa) + 14, W - M.r - 150);
     ctx.strokeStyle = col.head; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(sx, sy, 6, 0, 6.2832); ctx.stroke(); ctx.lineWidth = 1;
-    ctx.strokeStyle = col.muted; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(sx + 7, sy); ctx.lineTo(sx + 7 + (lx2 - 4 - sx - 7) * easeOut((age - 1400) / 500), sy); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle = col.head; ctx.font = mono(12, 500); ctx.textAlign = 'left'; ctx.fillText('SPACESUIT · NO TEST', lx2, sy);
+    ctx.strokeStyle = col.muted; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(sx + 7, sy); ctx.lineTo(sx + 7 + (lx - 4 - sx - 7) * easeOut((age - 1400) / 500), sy); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = col.head; ctx.font = mono(12, 500); ctx.textAlign = 'left'; ctx.fillText('SPACESUIT · NO TEST', lx, sy);
     const ex = X(101.325), ey = Y(0.2095);
-    ctx.strokeStyle = col.head; ctx.lineWidth = 1.8; ctx.setLineDash([3, 2]); ctx.beginPath(); ctx.arc(ex, ey, 17, 0, 6.2832); ctx.stroke(); ctx.setLineDash([]); ctx.lineWidth = 1;
-    ctx.fillStyle = col.head; ctx.textAlign = 'right'; ctx.fillText('EARTH AIR 21%', ex - 22, ey - 22);
+    ctx.strokeStyle = col.head; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(ex, ey, 6, 0, 6.2832); ctx.stroke(); ctx.lineWidth = 1;
+    ctx.fillStyle = col.head; ctx.font = mono(12, 500); ctx.textAlign = 'right'; ctx.fillText('EARTH AIR 21%', ex - 12, ey - 14);
     ctx.globalAlpha = 1;
   }
-  function pick(x, y) { let b = null, bd = 1e9; bins.forEach(c => { const e = Math.hypot(c.x - x, c.y - y); if (e < c.rad + 5 && e < bd) { bd = e; b = c; } }); return b; }
+  function pick(x, y) { let b = null, bd = 120; drawn.forEach(d => { const e = (d.x - x) * (d.x - x) + (d.y - y) * (d.y - y); if (e < bd) { bd = e; b = d; } }); return b; }
   function pos(e) { const b = canvas.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; }
-  function tip(b) {
-    if (!b) { tipEl.style.display = 'none'; return; }
-    tipEl.style.display = 'block';
-    if (b.n === 1) { const r = b.rows[0]; tipEl.textContent = (r.i || r.f) + ' | ' + (r.m || '?') + ' | O2 ' + (r.o * 100).toFixed(1) + '% | ' + r.p.toFixed(1) + ' kPa | ' + (r.g === '?' ? 'gravity not stated' : r.g + ' g') + ' | ' + (opts.label[r.c] || r.c); return; }
-    const fams = Object.entries(b.fam).sort((a, c) => c[1] - a[1]).map(e => e[0] + ' ' + e[1]).join(', '), o = (b.omin * 100).toFixed(0) + (b.omax > b.omin + 0.004 ? '-' + (b.omax * 100).toFixed(0) : ''), p = b.pmin.toFixed(0) + (b.pmax > b.pmin + 1 ? '-' + b.pmax.toFixed(0) : '');
-    tipEl.textContent = b.n + ' tests | ' + fams + ' | O2 ' + o + '% | ' + p + ' kPa | flame lit in ' + b.lit + ', no ignition or no recorded outcome in ' + (b.n - b.lit);
-  }
+  function tip(d) { if (!d) { tipEl.style.display = 'none'; return; } const r = d.r; tipEl.style.display = 'block'; tipEl.textContent = (r.i || r.f) + ' | ' + (r.m || '?') + ' | O2 ' + (r.o * 100).toFixed(1) + '% | ' + r.p.toFixed(1) + ' kPa | ' + (r.g === '?' ? 'gravity not stated' : r.g + ' g') + ' | ' + (opts.label[r.c] || r.c); }
   canvas.addEventListener('pointermove', e => { const p = pos(e); hover = pick(p[0], p[1]); tip(hover); canvas.style.cursor = hover ? 'pointer' : 'default'; draw(); });
   canvas.addEventListener('pointerleave', () => { hover = null; tip(null); draw(); });
   canvas.addEventListener('pointerdown', e => { const p = pos(e); hover = pick(p[0], p[1]); tip(hover); draw(); });
   function loop(now) { if (visible && !document.hidden && W > 0 && !calm() && now - frameT > 30) { frameT = now; draw(now); } requestAnimationFrame(loop); }
   if ('IntersectionObserver' in window) new IntersectionObserver(es => { const v = es[0].isIntersecting; if (v && !visible) t0 = performance.now(); visible = v; }).observe(canvas);
-  const relayout = () => { size(); rebin(); draw(); };
-  window.addEventListener('resize', relayout);
-  if (window.ResizeObserver) new ResizeObserver(() => { const was = W; size(); rebin(); if (!was && W) t0 = performance.now(); draw(); }).observe(canvas);
-  const famCounts = {}; all.forEach(r => { const f = famOf(r); famCounts[f] = (famCounts[f] || 0) + 1; });
-  colors(); size(); rebin(); draw(); requestAnimationFrame(loop);
-  return { refresh() { colors(); relayout(); }, replay() { t0 = performance.now(); draw(); }, setFamilies(list) { active = new Set(list); hover = null; tip(null); rebin(); t0 = performance.now() - 900; draw(); }, famCounts, count: all.length, bubbles() { return bins.length; } };
+  window.addEventListener('resize', () => { size(); draw(); });
+  if (window.ResizeObserver) new ResizeObserver(() => { const was = W; size(); if (!was && W) t0 = performance.now(); draw(); }).observe(canvas);
+  colors(); size(); draw(); requestAnimationFrame(loop);
+  return { refresh() { colors(); size(); draw(); }, replay() { t0 = performance.now(); draw(); }, count: pts.length };
 }

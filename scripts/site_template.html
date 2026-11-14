@@ -75,7 +75,7 @@ pre.t{white-space:pre-wrap;font:inherit;font-family:var(--sans);margin:0;max-hei
 .refusal{display:flex;gap:var(--s2);align-items:flex-start;border:1px solid var(--ember);background:linear-gradient(180deg,var(--zone),var(--panel));border-radius:var(--r);padding:var(--s3);margin:var(--s2) 0}
 .refusal .ic{flex:0 0 48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--ember);color:var(--on-accent);font-family:var(--display);font-weight:700;font-size:1.3rem}.refusal h3{margin:0 0 6px}.meaning{margin:6px 0 10px;padding-left:1.1em}
 .map-wrap{display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:var(--s2)}
-svg.map{width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:var(--r)}svg.map text{fill:var(--ink);font:12px var(--mono)}svg.map .ax{stroke:var(--line)}svg.map .mut{fill:var(--muted)}
+svg.map{width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:var(--r)}svg.map text{fill:var(--ink);font:12px var(--mono);paint-order:stroke;stroke:var(--panel);stroke-width:4px;stroke-linejoin:round;user-select:none;-webkit-user-select:none}svg.map .ax{stroke:var(--line)}svg.map .mut{fill:var(--muted)}
 .leg{display:flex;gap:var(--s1);flex-wrap:wrap;margin:var(--s1) 0}.leg button{min-height:44px;padding:4px 14px;font-size:.88rem}
 #caption{position:fixed;left:0;right:0;bottom:0;background:var(--glass);backdrop-filter:blur(14px);border-top:1px solid var(--ember);padding:var(--s2) var(--s3);z-index:40;display:none}
 #caption.on{display:flex;gap:var(--s2);align-items:center;justify-content:space-between}#caption p{margin:0;max-width:80ch;font-size:1.05rem;color:var(--head)}
@@ -150,11 +150,9 @@ button:hover:not(:disabled){transform:translateY(-1px)}.hsearch button:hover{tra
 .glass.icard:hover,.glass.lcard:hover{transform:translateY(-6px);border-color:rgba(124,194,255,.6);box-shadow:var(--shadow),0 0 0 1px rgba(124,194,255,.18)}
 .icard a:hover{letter-spacing:.14em}.dlbtns a:hover{transform:translateY(-2px);box-shadow:0 0 20px rgba(124,194,255,.25)}
 .hsearch{transition:border-color .25s,box-shadow .25s,transform .25s}.hsearch:focus-within{transform:scale(1.012)}
-#askOut>*{animation:fadeUp .55s cubic-bezier(.2,.7,.2,1) both}#askOut>*:nth-child(2){animation-delay:.07s}#askOut>*:nth-child(3){animation-delay:.14s}#askOut>*:nth-child(4){animation-delay:.21s}#askOut>*:nth-child(n+5){animation-delay:.28s}
+#askOut{scroll-margin-top:88px}#askOut>*{animation:fadeUp .55s cubic-bezier(.2,.7,.2,1) both}#askOut>*:nth-child(2){animation-delay:.07s}#askOut>*:nth-child(3){animation-delay:.14s}#askOut>*:nth-child(4){animation-delay:.21s}#askOut>*:nth-child(n+5){animation-delay:.28s}
 #caption.on{animation:slideUp .4s cubic-bezier(.2,.7,.2,1)}
-#motionBtn{font-size:.74rem;padding:8px 14px;background:transparent;font-family:var(--mono);border-radius:999px}#motionBtn::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ember);margin-right:8px;box-shadow:0 0 10px var(--ember)}
-html.calm #motionBtn::before{background:var(--muted);box-shadow:none}
-.mainnav a.only-menu{display:none}
+#motionBtn{width:44px;min-width:44px;padding:0;border-radius:50%;display:inline-grid;place-items:center;background:transparent}#motionBtn svg{width:20px;height:20px;stroke:var(--head);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}html.calm #motionBtn svg{opacity:.4}html.calm #motionBtn{border-style:dashed}
 /* ask answer layout */
 .splitrow{display:flex;flex-wrap:wrap;gap:6px 22px;margin:var(--s2) 0 4px}.splitrow b{font-family:var(--mono);font-weight:500;color:var(--head);margin-right:6px}.cens{margin:0 0 var(--s2)}
 .card.answer>h3{font-size:1.25rem;line-height:1.35}
@@ -169,7 +167,8 @@ section.on:not(#s-map)>*:nth-child(2){animation-delay:.05s}section.on:not(#s-map
 /* calm mode: switched on by the OS "reduce motion" setting or by the Motion button; nothing moves, everything is shown at once */
 html.calm *,html.calm *::before,html.calm *::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
 html.calm .rv{opacity:1;transform:none}html.calm .orbit-dot{display:none}
-@media (max-width:560px){#motionBtn{display:none}.mainnav.open a.only-menu{display:inline-flex}}
+@media (max-width:400px){.top-in{padding-left:8px;padding-right:8px;gap:4px}.logo{letter-spacing:.04em;font-size:.82rem;gap:6px}.logo svg{width:22px;height:22px}#motionBtn,#themeBtn{width:40px;min-width:44px}.tour{padding:8px 10px}#menuBtn{padding:8px 10px}}
+@media (max-width:480px){.tour .tl{display:none}.tour{padding:8px 12px}#menuBtn{padding:8px 12px}.top-actions{gap:4px}.logo{letter-spacing:.1em;gap:8px}}
 @media print{body{background:#fff;color:#000;font-size:10.5pt}header,nav,footer,#caption,.noprint,.skip,.sphere,.orbit,.star{display:none!important}section[role=tabpanel]{display:none!important}
 #s-brief{display:block!important}.brief{max-width:none}.card{border:1px solid #999;background:#fff;box-shadow:none}a{color:#000}h1,h2,h3{color:#000}@page{size:A4;margin:14mm}}
 :root[data-theme="light"] body{background:var(--bg)}:root[data-theme="light"] .sphere,:root[data-theme="light"] .orbit,:root[data-theme="light"] .star{display:none}:root[data-theme="light"] .hsearch button,:root[data-theme="light"] button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -182,10 +181,10 @@ body[data-tab="map"]>footer{display:none}
 <div id="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="top-in"><a class="logo" href="#" onclick="show('map');return false" aria-label="Ember, home"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="none" stroke="#7CC2FF" stroke-width="2"/><circle cx="16" cy="16" r="5" style="fill:var(--ember)"/></svg>EMBER</a>
- <nav class="mainnav noprint" id="mainnav" aria-label="Main"><a href="#" data-k="map" onclick="show('map');return false">Atmosphere map</a><a href="#" data-k="ask" onclick="show('ask');return false">Ask the ledger</a><a href="#" data-k="inv" onclick="show('inv');return false">Investigations</a><a href="#" data-k="about" onclick="show('about');return false">Data</a><a href="#" data-k="limits" onclick="show('limits');return false">Honest limits</a>
+ <nav class="mainnav noprint" id="mainnav" aria-label="Main"><a href="#" data-k="map" onclick="show('map');return false">Atmosphere map</a><a href="#" data-k="ask" onclick="show('ask');return false">Ask the ledger</a><a href="#" data-k="about" onclick="show('about');return false">Data</a><a href="#" data-k="limits" onclick="show('limits');return false">Honest limits</a>
   <div class="more" id="more"><button type="button" id="moreBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="tabs" onclick="toggleMore()"><span id="moreLabel">More</span><i aria-hidden="true">&#9662;</i></button><div class="morepanel" id="tabs" role="menu" aria-label="More pages"></div></div>
-  <a href="#" class="only-menu" onclick="toggleMotion();return false">Toggle motion</a></nav>
- <div class="top-actions noprint"><button id="storyBtn" class="tour" onclick="playStory()" aria-label="Play the 25 second guided tour">25 s tour</button><button id="menuBtn" onclick="document.getElementById('mainnav').classList.toggle('open');this.setAttribute('aria-expanded',document.getElementById('mainnav').classList.contains('open'))" aria-expanded="false" aria-controls="mainnav">Menu</button><button id="motionBtn" onclick="toggleMotion()" aria-pressed="true" aria-label="Turn page motion on or off">Motion on</button><button id="themeBtn" onclick="toggleTheme()" aria-label="Switch between dark and light theme">Light theme</button></div></div></header>
+  </nav>
+ <div class="top-actions noprint"><button id="storyBtn" class="tour" onclick="playStory()" aria-label="Play the 25 second guided tour"><span class="tl">25 s </span>tour</button><button id="menuBtn" onclick="document.getElementById('mainnav').classList.toggle('open');this.setAttribute('aria-expanded',document.getElementById('mainnav').classList.contains('open'))" aria-expanded="false" aria-controls="mainnav">Menu</button><button id="motionBtn" type="button" onclick="toggleMotion()" aria-pressed="true" aria-label="Page motion is on. Activate to turn it off." title="Page motion: on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></button><button id="themeBtn" onclick="toggleTheme()" aria-label="Switch between dark and light theme">Light theme</button></div></div></header>
 <main id="main" tabindex="-1">
 <section id="s-map" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-inv" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-cmp" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-rank" role="tabpanel"><div class="state" role="status">Loading…</div></section>
 <section id="s-interp" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-ask" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-brief" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-mis" role="tabpanel"><div class="state" role="status">Loading…</div></section>
@@ -216,7 +215,7 @@ const ST = {grav:'0', hide:new Set(), rankProfile:'lunar_base'};
 (function motionController(){
   const root = document.documentElement, mq = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : null; let pref = 'auto';
   try { pref = localStorage.getItem('ember-motion') || 'auto'; } catch (e) {}
-  function apply(){ const calm = pref==='off' || (pref==='auto' && mq && mq.matches); root.classList.toggle('calm', calm); const b = document.getElementById('motionBtn'); if (b) { b.setAttribute('aria-pressed', String(!calm)); b.textContent = calm ? 'Motion off' : 'Motion on'; } }
+  function apply(){ const calm = pref==='off' || (pref==='auto' && mq && mq.matches); root.classList.toggle('calm', calm); const b = document.getElementById('motionBtn'); if (b) { b.setAttribute('aria-pressed', String(!calm)); const msg = calm ? 'Page motion is off. Activate to turn it on.' : 'Page motion is on. Activate to turn it off.'; b.setAttribute('aria-label', msg); b.title = calm ? 'Page motion: off' : 'Page motion: on'; } }
   window.toggleMotion = function(){ pref = root.classList.contains('calm') ? 'on' : 'off'; try { localStorage.setItem('ember-motion', pref); } catch (e) {} apply(); if (window.PLOT) PLOT.replay(); };
   if (mq && mq.addEventListener) mq.addEventListener('change', apply);
   apply();
@@ -246,7 +245,7 @@ function setupMotion(){
 function show(id){ current = id; TABS.forEach(([k]) => { $('#s-'+k).classList.toggle('on', k===id); });
   document.querySelectorAll('#tabs button').forEach(b => { b.setAttribute('aria-selected', String(b.dataset.k===id)); }); toggleMore(false); const inMore = MORE.includes(id), mb = document.getElementById('moreBtn'); document.getElementById('moreLabel').textContent = inMore ? TABS.find(x => x[0]===id)[1] : 'More'; if (inMore) mb.setAttribute('aria-current','page'); else mb.removeAttribute('aria-current');
   if (id==='cmp') safe(renderCmp,'cmp'); document.body.dataset.tab = id; if (id==='map' && window.PLOT) requestAnimationFrame(() => PLOT.refresh()); document.querySelectorAll('.mainnav a').forEach(a => { if (a.dataset.k===id) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); }); const mn = document.getElementById('mainnav'); if (mn) mn.classList.remove('open'); window.scrollTo(0,0); }
-const MORE = ['cmp','rank','interp','brief','mis','grav','earth','about'];
+const MORE = ['inv','cmp','rank','interp','brief','mis','grav','earth','about'];
 $('#tabs').innerHTML = MORE.map(k => `<button type="button" role="menuitem" data-k="${k}" aria-controls="s-${k}" onclick="show('${k}')">${TABS.find(x => x[0]===k)[1]}</button>`).join('');
 function toggleMore(force){ const m = $('#more'), open = force!==undefined ? force : !m.classList.contains('open'); m.classList.toggle('open', open); $('#moreBtn').setAttribute('aria-expanded', String(open)); if (open) { const b = $('#tabs button'); if (b && force===undefined) setTimeout(() => b.focus(), 0); } }
 document.addEventListener('click', e => { if (!e.target.closest('#more')) toggleMore(false); });
@@ -274,7 +273,7 @@ function shape(kind, x, y, r){
   return `<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke-width="1.6"`;
 }
 function mark(c, x, y){ const [lab, col, kind] = CLS[c] || CLS.unknown;
-  const st = kind==='cross' ? `stroke="${col}"` : kind==='ring' ? `stroke="${col}"` : `fill="${col}" fill-opacity=".8"`;
+  const st = kind==='cross' ? `stroke="${col}"` : kind==='ring' ? `stroke="${col}"` : `fill="${col}" fill-opacity=".85" stroke="var(--panel)" stroke-width=".8"`;
   return shape(kind, x, y, 4)+` ${st}/>`; }
 function mapPoints(){ return D.points.filter(p => p.g===ST.grav); }
 function renderMap(){
@@ -296,12 +295,13 @@ function renderMap(){
   <p class="warn small" style="margin-top:8px"><b>No partial-gravity tests in PSI.</b> The official text says PSI holds no partial-gravity combustion data. At 0.165 g (lunar gravity) and 0.38 g (Mars gravity) the map shows only three oxygen-limit bars each, every one tagged <b>outside PSI</b> in its tooltip,, transcribed from one NASA report (NTRS 20130010991) and marked <b>outside PSI</b>; no lunar or Martian flame test can be drawn.</p>
   <div class="map-wrap"><div><div class="scroll">
   <svg class="map" viewBox="0 0 ${MAP.W} ${MAP.H}" role="img" aria-label="Scatter of ${shown.length} tests by pressure and oxygen share, with the lunar base zone, spacesuit, Earth sea level and CFI-G maximum marked. Equivalent data is in the table on this tab.">
-   <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="var(--muted)" stroke-width="1" opacity=".45"/></pattern></defs>
+   <defs><pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="var(--muted)" stroke-width="1" opacity=".2"/></pattern></defs>
    ${xt.join('')}${yt.join('')}${fog}
+   <rect x="${zx0}" y="${zy0}" width="${zx1-zx0}" height="${zy1-zy0}" fill="var(--panel)"/>
    <rect x="${zx0}" y="${zy0}" width="${zx1-zx0}" height="${zy1-zy0}" fill="var(--zone)" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="5 3" id="zone" tabindex="0" role="button" aria-label="Lunar base and rover zone: click for details" style="cursor:pointer" onclick="showZone()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showZone()}"/>
-   <text x="${zx0+6}" y="${zy0+44}" style="fill:var(--accent);font-weight:600">Lunar base / rover zone</text><text class="mut" x="${zx0+6}" y="${zy0+57}">O2 30%+, 10.2 psi or less</text>
+   <text x="${zx0+6}" y="${zy0+44}" style="fill:var(--accent);font-weight:600">Lunar base / rover zone</text><text class="mut" x="${zx0+6}" y="${zy0+57}">O2 30%+</text><text class="mut" x="${zx0+6}" y="${zy0+70}">10.2 psi or less</text>
    ${dots}
-   <g><circle cx="${mx(suit.p_max_kpa)}" cy="${my(1)}" r="8" fill="none" stroke="var(--accent)" stroke-width="2"/><text x="${mx(suit.p_max_kpa)+12}" y="${my(1)+4}">Spacesuit: 100% O2, 4.3 psi (no test)</text></g>
+   <g><circle cx="${mx(suit.p_max_kpa)}" cy="${my(1)}" r="8" fill="none" stroke="var(--accent)" stroke-width="2"/><line x1="${mx(suit.p_max_kpa)+10}" y1="${my(1)}" x2="${zx1+8}" y2="${my(1)}" stroke="var(--muted)" stroke-dasharray="2 3"/><text x="${zx1+12}" y="${my(1)+4}">Spacesuit: 100% O2, 4.3 psi (no test)</text></g>
    <g><path d="M${mx(D.profiles.reference.p_kpa)} ${my(0.21)-9} l2.6 6 6.4.6 -4.8 4.3 1.5 6.3 -5.7 -3.3 -5.7 3.3 1.5 -6.3 -4.8 -4.3 6.4 -.6z" fill="var(--accent)"/><text x="${mx(D.profiles.reference.p_kpa)+10}" y="${my(0.21)-12}">Earth sea level (14.7 psi, air)</text></g>
    <g><circle cx="${mx(cmax.p)}" cy="${my(cmax.o)}" r="9" fill="none" stroke="var(--accent)" stroke-width="2"/><text x="${mx(cmax.p)+12}" y="${my(cmax.o)-8}">CFI-G maximum: ${(cmax.o*100).toFixed(0)}% O2</text></g>
    <text x="${MAP.L+8}" y="${MAP.T+MAP.PH-8}" class="mut">Hatched: no test here (${nfog} of ${(MAP.XMAX/20)*20} cells)</text>
@@ -515,7 +515,8 @@ function matsHtml(rows){ const c = {}; rows.forEach(r => { const k = String(r.m|
 function chipsHtml(f){ if (!f.chips.length) return '';
   return `<div class="row small" style="margin:8px 0" role="group" aria-label="Filters applied">Filters applied: ${f.chips.map(c => `<button type="button" class="tag" title="Remove this filter and answer again" onclick="askDrop('${esc(c.key)}')">${esc(c.label)} &times;</button>`).join(' ')}</div>`; }
 function askDrop(key){ const q = AF.q; AF = AskParser.without(AF, key); AF.q = q; ASHOW = false; askRender(); }
-function runAsk(){ const v = $('#askq').value.trim(), out = $('#askOut'); if (!v) { out.innerHTML = '<div class="state">Type a question first.</div>'; return; } ASHOW = false; AF = AskParser.parseQuery(v, TVOC); AF.q = v; askRender(); }
+function scrollAnswer(){ const el = document.getElementById('askOut'); if (!el) return; const top = el.getBoundingClientRect().top + scrollY - 88; if (el.getBoundingClientRect().top > 140) window.scrollTo({top, behavior: document.documentElement.classList.contains('calm') ? 'auto' : 'smooth'}); }
+function runAsk(){ const v = $('#askq').value.trim(), out = $('#askOut'); if (!v) { out.innerHTML = '<div class="state">Type a question first.</div>'; return; } ASHOW = false; AF = AskParser.parseQuery(v, TVOC); AF.q = v; askRender(); scrollAnswer(); }
 const ASK_EXAMPLES = ['lunar base at 30% oxygen and 10.2 psi', 'smoke detection in microgravity', 'does CO2 suppress flames', 'Mars gravity flammability'];
 function askExample(q){ $('#askq').value = q; runAsk(); }
 function confLine(rows){ const o = rows.filter(r => r.org!=='psi_table' || r.g==='0.165' || r.g==='0.38').length; return `<p class="small"><b>Evidence and confidence:</b> ${rows.length} row${rows.length===1?'':'s'} read directly from the unified table${o ? ', ' + o + ' of them transcribed from NASA reports outside PSI' : ''}. Each row cites its PSI table row or NTRS PDF page. Nothing is estimated or interpolated.</p>`; }
@@ -685,9 +686,8 @@ function renderLanding(){
       <div class="suggest noprint" id="hsug"></div></div>
      <div class="plotcard glass noprint"><div class="plot-h"><h2>Where fire was tested</h2><span class="meta" id="plotMeta"></span></div>
       <canvas id="plot2d" role="img" aria-label="Scatter plot of the real tests by pressure and oxygen share. A dashed box marks the planned lunar-base atmosphere, ring markers show Earth air and the spacesuit atmosphere, for which no test exists."></canvas><div class="viz-tip" id="plotTip"></div>
-      <div class="plot-f"><span class="lg" title="Includes tests stopped while the flame was still burning"><i style="background:var(--blue)"></i>Flame lit (blue share of a bubble)</span><span class="lg"><i style="background:var(--c-ni)"></i>No ignition or no recorded outcome</span><span class="em" id="plotEm"></span></div>
-      <div class="famrow" id="famRow" role="group" aria-label="Show experiment families"></div>
-      <p class="small muted" style="margin:0;padding:0 22px 16px">One bubble = the tests run at the same oxygen and pressure; a bigger bubble means more tests. Hover a bubble for its tests. The x-axis is compressed above 120 kPa (tests reach 331 kPa).</p></div>
+      <div class="plot-f"><span class="lg" title="Includes tests stopped while the flame was still burning"><i style="background:var(--blue)"></i>Flame lit</span><span class="lg"><i style="background:var(--c-ni)"></i>No ignition or no recorded outcome</span><span class="em" id="plotEm"></span></div>
+      <p class="small muted" style="margin:0;padding:0 22px 16px">Hover a point for its test. The x-axis is compressed above 120 kPa (tests reach 331 kPa).</p></div>
     </div>
     <div class="stats glass" id="stats"><div class="stat"><b id="stI"></b><span>NASA combustion investigations</span></div><div class="stat"><b id="stC"></b><span>claims, each with a page citation</span></div><div class="stat"><b id="stT"></b><span>tests mapped by oxygen and pressure</span></div><div class="stat"><b id="stP"></b><span>partial-gravity tests in PSI, shown openly</span></div></div>
    </section>
@@ -721,9 +721,6 @@ function renderLanding(){
   $('#plotMeta').innerHTML = plotted.length + ' tests &middot; O&#8322; % &times; kPa';
   $('#plotEm').textContent = inside.length + ' tests in lunar-base air' + (micro ? ', all microgravity' : '');
   try { window.PLOT = initScatter($('#plot2d'), $('#plotTip'), D.tests, {zone, suit, label: OC}); } catch (e) { console.error(e); $('#plot2d').outerHTML = '<div class="state">The plot could not start in this browser.</div>'; }
-  if (window.PLOT) { const FAMS = [['FLEX', 'FLEX \u00b7 droplets'], ['CFI-G', 'CFI-G \u00b7 gas flames'], ['BASS-II', 'BASS-II \u00b7 solids'], ['Saffire', 'Saffire \u00b7 fabrics'], ['REPORTS', 'NASA reports (outside PSI)']], on = new Set(FAMS.map(x => x[0]));
-    $('#famRow').innerHTML = '<span class="small muted">Show:</span>' + FAMS.filter(x => PLOT.famCounts[x[0]]).map(([k, lab]) => `<button type="button" class="tag fam" aria-pressed="true" data-f="${k}">${esc(lab)} <b>${PLOT.famCounts[k]}</b></button>`).join('');
-    $('#famRow').addEventListener('click', e => { const b = e.target.closest('button[data-f]'); if (!b) return; const k = b.dataset.f; if (on.has(k)) { if (on.size > 1) on.delete(k); } else on.add(k); document.querySelectorAll('#famRow button').forEach(x => x.setAttribute('aria-pressed', String(on.has(x.dataset.f)))); PLOT.setFamilies([...on]); }); }
   $('#det3d').addEventListener('toggle', () => { if ($('#det3d').open && !window.CUBE) { try { window.CUBE = initCube($('#cube'), $('#cubeTip'), D.tests, {zone, suit, label: OC}); } catch (e) { console.error(e); } } else if (window.CUBE) CUBE.refresh(); });
   const box = $('#starsBox'); for (let n = 0; n < 40; n++) { const st = document.createElement('i'); st.className = 'star'; const z = Math.random() < .2 ? 2 : 1; st.style.cssText = `left:${(Math.random()*100).toFixed(1)}%;top:${(Math.random()*620).toFixed(0)}px;width:${z}px;height:${z}px;animation-delay:${(Math.random()*6).toFixed(1)}s`; box.appendChild(st); }
   renderMap();
