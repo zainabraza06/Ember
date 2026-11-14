@@ -251,7 +251,7 @@ def main():
     # compact copy of the unified table for the Ask page (tests and oxygen-limit rows; limits use the limit oxygen share)
     ask_rows = [{'i': r['psi_id'] or ('PSI-69' if r['family'] == 'FLEX' else ''), 'f': r['family'], 'm': r['material_or_fuel'],
                  'o': fl(r['oxygen_fraction']) if r['record_type'] == 'test' else (fl(r['moc_vol_pct']) / 100.0 if fl(r['moc_vol_pct']) is not None else None),
-                 'p': fl(r['pressure_kpa']), 'g': r['gravity_level_g'] or '?', 'c': r['outcome_class'], 's': r['source_ref'], 't': r['record_type'], 'org': r['data_origin']}
+                 'p': fl(r['pressure_kpa']), 'g': r['gravity_level_g'] or '?', 'c': r['outcome_class'], 'r': r['outcome_raw'], 's': r['source_ref'], 't': r['record_type'], 'org': r['data_origin']}
                 for r in tests if r['record_type'] in ('test', 'limit')]
     ranking = json.loads((ROOT / 'data/processed/ranking.json').read_text(encoding='utf-8'))
     interp = json.loads((ROOT / 'data/processed/interpretations.json').read_text(encoding='utf-8'))
@@ -271,8 +271,10 @@ def main():
         ledger_stats['rejected'] = sum(1 for _ in open(rp, encoding='utf-8')) if rp.exists() else 0
         pub = ldisp.public_claims(allc, ldisp.load_sources())
         gmap = {c['claim_id']: c['conditions']['gravity_class'] for c in allc}
+        cmap = {c['claim_id']: c.get('extraction_confidence', '') for c in allc}
         for v in pub:
             v['gravity_class'] = gmap[v['claim_id']]
+            v['confidence'] = cmap[v['claim_id']]
             v['doc'] = next(c['doc_id'] for c in allc if c['claim_id'] == v['claim_id'])
         claims = pub
     conflicts_md = (ROOT / 'docs/CONFLICTS.md').read_text(encoding='utf-8') if (ROOT / 'docs/CONFLICTS.md').exists() else ''
