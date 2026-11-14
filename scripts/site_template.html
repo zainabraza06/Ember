@@ -303,7 +303,7 @@ function renderMap(){
   const lz = D.profiles.profiles[0], zx0 = mx(0), zx1 = mx(lz.p_max_kpa), zy0 = my(1), zy1 = my(0.30);
   const cf = D.points.filter(p => p.f==='CFI-G'), cmax = cf.reduce((a,b) => b.o>a.o ? b : a, cf[0]);
   const suit = D.profiles.profiles[2];
-  const hlr = ST.hl ? `<rect class="hlcell" x="${mx(ST.hl.gx*GRID.dx)}" y="${my((ST.hl.gy+1)*GRID.dy)}" width="${mx(GRID.dx)-mx(0)}" height="${my(0)-my(GRID.dy)}"><title>Untested cell: ${ST.hl.gy*5}-${ST.hl.gy*5+5}% O2, ${ST.hl.gx*GRID.dx}-${ST.hl.gx*GRID.dx+GRID.dx} kPa</title></rect>` : '';
+  const hlr = ST.hl ? `<rect class="hlcell" x="${mx(ST.hl.gx*GRID.dx)}" y="${my((ST.hl.gy1+1)*GRID.dy)}" width="${mx(GRID.dx)-mx(0)}" height="${my(ST.hl.gy0*GRID.dy)-my((ST.hl.gy1+1)*GRID.dy)}"><title>Untested band: ${ST.hl.gy0*5}-${(ST.hl.gy1+1)*5}% O2, ${ST.hl.gx*GRID.dx}-${ST.hl.gx*GRID.dx+GRID.dx} kPa</title></rect>` : '';
   const dots = shown.map((p, n) => `<g data-i style="--i:${n}">${mark(p.c, mx(p.p).toFixed(1), my(p.o).toFixed(1))}<title>${esc(p.id)}: ${esc(CLS[p.c][0])}; O2 ${(p.o*100).toFixed(1)}%, ${p.p.toFixed(1)} kPa${p.c==='limit' ? '; outside PSI (transcribed from an NTRS report)' : ''}${(p.g==='0.165'||p.g==='0.38') ? '; '+(p.g==='0.165' ? 'lunar' : 'Mars')+' gravity, literature value, outside PSI' : ''}</title></g>`).join('');
   const counts = {}; pts.forEach(p => counts[p.c] = (counts[p.c]||0)+1);
   $('#mapBody').innerHTML = `<h2>Where has NASA tested fire in space?</h2>
@@ -714,38 +714,48 @@ function moonMarginHtml(){
 }
 
 /* ---------- Where should NASA test next? ranking of untested oxygen-pressure cells (microgravity coverage grid) ---------- */
-const GRID = {dx: 20, dy: 0.05};
+const GRID = {dx: 20, dy: 0.05, maxBand: 3};
 let GAPS = [];
 function gapRank(){
   const lz = D.profiles.profiles[0], pEnv = lz.p_max_kpa, oEnv = lz.o2_min != null ? lz.o2_min : 0.30, nx = Math.round(MAP.XMAX / GRID.dx), ny = Math.round(1 / GRID.dy);
   const key = (gx, gy) => gx + ',' + gy, covered = new Set(D.points.filter(p => p.g==='0').map(p => key(Math.floor(p.p / GRID.dx), Math.floor(p.o / GRID.dy))));
   const tests = D.tests.filter(r => r.t==='test' && r.g==='0' && r.o != null && r.p != null), tc = {};
   tests.forEach(r => { const k = key(Math.floor(r.p / GRID.dx), Math.floor(r.o / GRID.dy)); tc[k] = (tc[k] || 0) + 1; });
-  const out = [];
-  for (let gx = 0; gx < nx; gx++) for (let gy = 0; gy < ny; gy++) { if (covered.has(key(gx, gy))) continue;
-    const pc = (gx + .5) * GRID.dx, oc = (gy + .5) * GRID.dy;
-    const dEnv = Math.hypot(Math.max(0, pc - pEnv) / GRID.dx, Math.max(0, oEnv - oc) / GRID.dy), dNom = Math.hypot((pc - pEnv) / GRID.dx, (oc - oEnv) / GRID.dy);
-    let nb = 0; for (let a = -1; a <= 1; a++) for (let b = -1; b <= 1; b++) if (a || b) nb += tc[key(gx + a, gy + b)] || 0;
-    let near = null, nd = 1e9; tests.forEach(r => { const d = Math.hypot((r.p - pc) / GRID.dx, (r.o - oc) / GRID.dy); if (d < nd) { nd = d; near = r; } });
-    out.push({gx, gy, pc, oc, dEnv, dNom, nb, near, nd}); }
-  out.sort((a, b) => a.dEnv - b.dEnv || a.nb - b.nb || a.dNom - b.dNom || a.gx - b.gx || a.gy - b.gy);
-  return {cells: out, total: nx * ny, untested: out.length, pEnv, oEnv};
+  // untested cells inside the planned lunar-base atmosphere (cell centre: oxygen >= 30%, pressure <= 70.33 kPa)
+  const inside = (gx, gy) => (gx + .5) * GRID.dx <= pEnv && (gy + .5) * GRID.dy >= oEnv;
+  let untestedAll = 0; const cand = new Set();
+  for (let gx = 0; gx < nx; gx++) for (let gy = 0; gy < ny; gy++) if (!covered.has(key(gx, gy))) { untestedAll++; if (inside(gx, gy)) cand.add(key(gx, gy)); }
+  const mk = (gx, ys) => { const gy0 = ys[0], gy1 = ys[ys.length - 1], own = new Set(ys.map(y => key(gx, y))), around = new Set();
+    ys.forEach(y => { for (let a = -1; a <= 1; a++) for (let b = -1; b <= 1; b++) { const k = key(gx + a, y + b); if (!own.has(k)) around.add(k); } });
+    let nb = 0; around.forEach(k => { nb += tc[k] || 0; });
+    const dnom = Math.min(...ys.map(y => Math.hypot(((gx + .5) * GRID.dx - pEnv) / GRID.dx, ((y + .5) * GRID.dy - oEnv) / GRID.dy)));
+    const pc = (gx + .5) * GRID.dx, oc = (gy0 + gy1 + 1) / 2 * GRID.dy; let near = null, nd = 1e9;
+    tests.forEach(r => { const d = Math.hypot((r.p - pc) / GRID.dx, (r.o - oc) / GRID.dy); if (d < nd) { nd = d; near = r; } });
+    return {gx, gy0, gy1, n: ys.length, nb, dnom, near, nd}; };
+  // adjacent untested cells of one pressure column are merged into a band, at most maxBand cells (20 points of O2) tall
+  const bands = [];
+  for (let gx = 0; gx < nx; gx++) { let run = []; const flush = () => { for (let i = 0; i < run.length; i += GRID.maxBand) bands.push(mk(gx, run.slice(i, i + GRID.maxBand))); run = []; };
+    for (let gy = 0; gy < ny; gy++) { if (cand.has(key(gx, gy))) run.push(gy); else flush(); } flush(); }
+  bands.sort((a, b) => a.dnom - b.dnom || a.nb - b.nb || a.gy0 - b.gy0 || a.gx - b.gx);
+  const touches = (a, b) => Math.abs(a.gx - b.gx) <= 1 && !(a.gy1 < b.gy0 - 1 || a.gy0 > b.gy1 + 1), top = [];
+  for (const b of bands) { if (top.length >= 5) break; if (!top.some(c => touches(b, c))) top.push(b); }
+  return {top, bands: bands.length, untestedAll, untestedInside: cand.size, total: nx * ny, pEnv, oEnv};
 }
-function gapCardHtml(c, i, R){
-  const p0 = c.gx * GRID.dx, p1 = p0 + GRID.dx, o0 = Math.round(c.gy * GRID.dy * 100), o1 = o0 + Math.round(GRID.dy * 100), psi = k => (k / KPA_PSI).toFixed(1);
-  const fam = c.near ? (c.near.i ? c.near.i + (D.investigations.find(x => x.id===c.near.i) && D.investigations.find(x => x.id===c.near.i).acronym!=='none' ? ' ' + D.investigations.find(x => x.id===c.near.i).acronym : '') : c.near.f) : 'none';
-  const reason = (c.dEnv === 0 ? 'Inside the planned lunar-base atmosphere' : c.dEnv.toFixed(1) + ' cells from it') + (c.nb === 0 ? ', and no test in any of the 8 neighbouring cells.' : `, with only ${c.nb} test${c.nb===1 ? '' : 's'} in the 8 neighbouring cells.`);
+function gapCardHtml(c, i){
+  const p0 = c.gx * GRID.dx, p1 = p0 + GRID.dx, o0 = Math.round(c.gy0 * GRID.dy * 100), o1 = Math.round((c.gy1 + 1) * GRID.dy * 100), psi = k => (k / KPA_PSI).toFixed(1);
+  const inv = c.near && c.near.i ? D.investigations.find(x => x.id===c.near.i) : null, fam = c.near ? (c.near.i ? c.near.i + (inv && inv.acronym && inv.acronym!=='none' ? ' ' + inv.acronym : '') : c.near.f) : 'none';
+  const reason = `Inside the planned lunar-base atmosphere: ${c.n} untested cell${c.n===1 ? '' : 's'} in a row, ${c.dnom.toFixed(1)} cells from the design point, ${c.nb === 0 ? 'and no test in the cells around it.' : `with ${c.nb} test${c.nb===1 ? '' : 's'} in the cells around it.`}`;
   return `<button type="button" class="gapcard glass" aria-pressed="false" onclick="gapGo(${i})"><span class="gaprank">#${i + 1}</span><b class="gapwhere">${o0}&ndash;${o1}% O<sub>2</sub> &middot; ${p0}&ndash;${p1} kPa <span class="muted">(${psi(p0)}&ndash;${psi(p1)} psi)</span></b>
-   <span class="gapline">${esc(reason)}</span><span class="gapmeta"><span>Tests nearby <b>${c.nb}</b></span><span>Closest: <b>${esc(fam)}</b> (${c.nd.toFixed(1)} cells away)</span></span><span class="gapgo">Show on the map &rarr;</span></button>`;
+   <span class="gapline">${esc(reason)}</span><span class="gapmeta"><span>Tests nearby <b>${c.nb}</b></span><span>Closest: <b>${esc(fam)}</b> (${c.nd.toFixed(1)} cells away)</span></span><span class="gapgo">Show the band on the map &rarr;</span></button>`;
 }
 function renderGaps(){
-  const R = gapRank(); GAPS = R.cells.slice(0, 5);
+  const R = gapRank(); GAPS = R.top;
   const box = document.getElementById('gapCards'); if (!box) return;
-  box.innerHTML = GAPS.map((c, i) => gapCardHtml(c, i, R)).join('');
-  const f = document.getElementById('gapFormula');
-  if (f) f.innerHTML = `<b>How the cells are ranked</b> (microgravity coverage grid: ${GRID.dx} kPa wide, ${Math.round(GRID.dy * 100)} points of O&#8322; tall; a cell is untested when no test or oxygen-limit point at 0 g falls in it; ${R.untested} of ${R.total} cells are untested). In order: <b>1.</b> distance from the planned lunar-base atmosphere (&ge;${Math.round(R.oEnv * 100)}% O&#8322;, &le;${(R.pEnv / KPA_PSI).toFixed(1)} psi), in cells, nearest first; <b>2.</b> fewest tests in the 8 neighbouring cells; <b>3.</b> closest to the ${Math.round(R.oEnv * 100)}% O&#8322; / ${(R.pEnv / KPA_PSI).toFixed(1)} psi design point. <b>This is a data-gap ranking, not a safety judgement.</b>`;
+  box.innerHTML = GAPS.map((c, i) => gapCardHtml(c, i)).join('');
+  const f = document.getElementById('gapFormula'), psiE = (R.pEnv / KPA_PSI).toFixed(1), oE = Math.round(R.oEnv * 100);
+  if (f) f.innerHTML = `<b>How the bands are ranked.</b> Grid: microgravity (0 g) coverage of the map, cells ${GRID.dx} kPa wide and ${Math.round(GRID.dy * 100)} points of O&#8322; tall. A cell is untested when no test or oxygen-limit point at 0 g falls in it (${R.untestedAll} of ${R.total} cells; ${R.untestedInside} of them inside the planned lunar-base atmosphere). Only those cells are considered: the atmosphere is <b>NASA's own planned lunar atmosphere from the challenge text</b> (oxygen likely ${oE}% or more, pressure ${psiE} psi or less), and its design point is ${oE}% O&#8322; at ${psiE} psi (${R.pEnv} kPa). Untested cells that touch in one ${GRID.dx} kPa column are merged into a <b>band</b> at most ${GRID.maxBand * Math.round(GRID.dy * 100)} points of O&#8322; tall. Bands are ranked by <b>1.</b> distance from the design point, in cells, nearest first; <b>2.</b> fewest tests in the cells around the band; <b>3.</b> lower oxygen first. The top five are shown, skipping any band that touches one already shown. <b>This is a data-gap ranking, not a safety judgement.</b>`;
 }
-function gapGo(i){ const c = GAPS[i]; if (!c) return; ST.grav = '0'; ST.hl = {gx: c.gx, gy: c.gy}; renderMap();
+function gapGo(i){ const c = GAPS[i]; if (!c) return; ST.grav = '0'; ST.hl = {gx: c.gx, gy0: c.gy0, gy1: c.gy1}; renderMap();
   document.querySelectorAll('.gapcard').forEach((b, k) => b.setAttribute('aria-pressed', String(k===i)));
   const svg = document.querySelector('svg.map'); if (svg) svg.scrollIntoView({behavior: document.documentElement.classList.contains('calm') ? 'auto' : 'smooth', block: 'center'}); }
 function openGroup(g){ filterTag = ''; filterHw = ''; q = ''; filterIds = null; if (g==='extremes') filterIds = ['PSI-159', 'PSI-22']; else filterTag = g; show('inv'); renderInv(); }
@@ -773,7 +783,7 @@ function renderLanding(){
    <section class="sec" aria-labelledby="t-map"><p class="eyebrow">THE MAP</p><h2 class="big" id="t-map">Every test, placed by oxygen and pressure.</h2><div id="mapBody"></div>
     <details class="card" id="det3d"><summary>3D view of the same tests</summary><div class="plotcard" style="margin-top:8px"><canvas id="cube" tabindex="0" role="img" aria-label="Interactive 3D plot of the real tests: pressure, oxygen share and experiment family. Drag to rotate; arrow keys also rotate."></canvas><div class="viz-tip" id="cubeTip"></div></div><p class="small muted">Drag to rotate. The translucent box is the planned lunar-base atmosphere.</p></details></section>
    <section class="sec" id="gaps" aria-labelledby="t-gaps"><p class="eyebrow">WHERE NEXT</p><h2 class="big" id="t-gaps">Where should NASA test next?</h2>
-    <p class="gapintro muted">The five untested oxygen-pressure cells closest to the planned lunar-base atmosphere. Select one to see it on the map above.</p><p class="small gapintro" id="gapFormula"></p><div class="gapcards" id="gapCards"></div></section>
+    <p class="gapintro muted">The five most relevant untested bands of oxygen and pressure inside NASA's planned lunar-base atmosphere. Select one to see the whole band on the map above.</p><p class="small gapintro" id="gapFormula"></p><div class="gapcards" id="gapCards"></div></section>
    <section class="sec" aria-labelledby="t-led"><p class="eyebrow">THE LEDGER</p><h2 class="big" id="t-led">An answer you can check, or no answer at all.</h2>
     <div class="two"><article class="glass lcard"><div class="row"><span class="tag ver">Verified</span><span class="tag unrev">Outside PSI</span></div>
       <p class="claim">${vc ? esc(vc.statement) : 'The ledger holds cited claims from NASA reports.'}</p>
