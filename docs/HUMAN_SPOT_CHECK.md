@@ -26,4 +26,4 @@ Seeded random sample (seed 20261019) of 10 of 489 printed values transcribed by 
 
 ## Summary
 
-10 of 10 values AI-checked against the source PDFs, of which 2 were also checked by a person (ZRM). 0 individual claims opened by a person.
+All 10 values were AI-checked against the source PDFs, and 2 were also checked by ZRM. This table covers the 10 transcribed table values only. Separately, the reviewer (ZRM) opened and checked each of the 255 public claims against its source page (see `data/review/claim_review.csv` and `docs/LEDGER_REPORT.md` section 7b).

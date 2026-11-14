@@ -84,18 +84,26 @@ Rate-limit / transient-error interruptions: 15 retried calls (codes: {'429': 1, 
 CLAIM_AUDIT.md: 0 of 30 sampled claims judged so far; none judged yet (target >= 90% correct).
 Review queue: 3 claims in `data/review/claim_review.csv` await a decision.
 
-## 7b. Claim review decisions
+## 7b. How the claims were checked
 
-On 2026-11-14 the reviewer (ZRM) decided the 84 claims held back by the automatic checks (`data/review/claim_review.csv`; the AI triage `data/CLAIM_TRIAGE_AI_SUGGESTIONS.csv` and AI page check `data/CLAIM_PAGE_CHECK_AI.csv` were suggestions she considered). Every public claim, whether it passed the automatic checks or was decided in review, was reviewed and verified by ZRM against the NTRS page.
+Generated from the ledger files by `ledger/review_wording.py` (the same source as the site); the counts cannot drift from the data.
+
+- 255 public claims, each opened and checked against its source page by the reviewer (ZRM).
+- 181 of them passed the automatic checks first: code checks for the exact text span, numbers and conditions, plus a second AI model.
+- 74 were held back by those checks and approved after an AI-assisted page check, which the reviewer then checked herself.
+- 7 claims were rejected and 3 are held back and not published; none of them is shown as checked.
+- 2 claims were approved by manual override of the number check (C-cbca12ebcd, C-f4d3c81aef).
+- Spot check of the transcribed table values: all 10 were AI-checked against the PDFs, and 2 were also checked by ZRM.
 
 | outcome | claims |
 |---|---|
-| approved as extracted | 49 |
-| approved with correction (reworded statement or gravity class; span unchanged) | 25 |
-| of which approved by manual override of a failed code check (not a passed check) | 2 |
+| public claims, each opened and checked against its source page by the reviewer (ZRM) | 255 |
+| passed the automatic checks first | 181 |
+| approved after an AI-assisted page check, then checked by the reviewer | 74 |
+| of which with a corrected statement or gravity class (span unchanged unless extended) | 25 |
+| of which approved by manual override of the number check | 2 |
 | rejected | 7 |
-| still needs_review | 3 |
-| public claims reviewed and verified by a person (ZRM) against the source page | 255 |
+| held back, not published | 3 |
 
-Gravity relabels of claims outside the review queue are listed in `data/review/gravity_relabel.csv`. A reworded statement is re-checked by code against its unchanged span (span, numbers, conditions); a failing wording stays needs_review. Only verified_auto and approved claims are public; needs_review and rejected claims are never shown or used to answer.
+A reworded statement is re-checked by code against its span (span, numbers, conditions); a failing wording stays held back. A span can only be extended, never replaced. Gravity relabels of claims outside the review queue are in `data/review/gravity_relabel.csv`. Only automatic-checks-passed and approved claims are public; held-back and rejected claims are never shown or used to answer.
 
