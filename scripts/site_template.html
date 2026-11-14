@@ -47,7 +47,7 @@ main{max-width:1180px;margin:0 auto;padding:var(--s4)}section[role=tabpanel]{dis
 .grid .card{margin:0;transition:transform .15s,border-color .15s}.grid .card:hover{border-color:color-mix(in srgb,var(--accent) 55%,var(--line));transform:translateY(-2px)}
 .row{display:flex;gap:var(--s2);flex-wrap:wrap;align-items:center}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--s3)}
 .tag{display:inline-block;border-radius:999px;padding:2px 11px;font-size:.8rem;border:1px solid var(--line);background:var(--nd);color:var(--ink)}
-button.tag{min-height:44px;padding:8px 16px;font-size:.86rem}
+button.tag{min-height:44px;padding:8px 16px;font-size:.86rem;white-space:normal;text-align:left;max-width:100%}
 .tag.prevention{border-color:#2fb36b}.tag.detection{border-color:var(--cool)}.tag.suppression{border-color:var(--accent)}.tag.none{color:var(--muted)}
 .tag.unrev{border-color:var(--accent);color:var(--accent)}.tag.ver{border-color:#2fb36b}
 .muted{color:var(--muted)}.small{font-size:.88rem}.nd{color:var(--muted);font-style:italic}.src{font-size:.78rem;color:var(--muted)}
@@ -319,13 +319,18 @@ function claimHtml(c){ const lab = c.review_label==='unreviewed' ? '<span class=
   <div class="src">${esc(c.citation)} | ${link(c.source_url,'NTRS record')} | claim ${esc(c.claim_id)}</div></div>`; }
 const IDX = (() => { const docs = D.claims.map(c => { const t = toks([c.statement, c.variables.join(' '), c.gravity_class, c.gravity_label||'', c.conditions.material||'', c.citation].join(' ').replace(/_/g,' ')).map(w => ALIAS[w]||w); const tf = {}; t.forEach(w => tf[w]=(tf[w]||0)+1); return {c, tf, n:t.length}; });
   const df = {}; docs.forEach(d => Object.keys(d.tf).forEach(w => df[w]=(df[w]||0)+1)); return {docs, df, N:docs.length, avg: docs.reduce((a,d)=>a+d.n,0)/(docs.length||1)}; })();
-function search(query){
+const GENERIC = new Set(['flame','flames','test','tests','tested','effect','effects','affect','affects','happen','happens','material','materials','burn','burns','burning','rate','rates','level','levels','condition','conditions','base','fire','fires','safety','show','tell','give','find','list','whats','used','using','use']);
+const stem = t => t.length > 6 ? t.slice(0, 6) : t;
+function search(query, opts){
+  opts = opts || {};
   const qt = toks(query).map(w => ALIAS[w]||w), seen = new Set(), terms = qt.filter(w => !seen.has(w) && seen.add(w));
-  const res = IDX.docs.map(d => { let s = 0, hit = 0; terms.forEach(w => { if (d.tf[w]) { const idf = Math.log(1 + (IDX.N - IDX.df[w] + .5)/(IDX.df[w] + .5)), k = 1.5, b = .75; s += idf * d.tf[w]*(k+1)/(d.tf[w] + k*(1-b+b*d.n/IDX.avg)); hit++; } }); return {c:d.c, s, hit}; });
+  const res = IDX.docs.map(d => { let s = 0, hit = 0; terms.forEach(w => { if (d.tf[w]) { const idf = Math.log(1 + (IDX.N - IDX.df[w] + .5)/(IDX.df[w] + .5)), k = 1.5, b = .75; s += idf * d.tf[w]*(k+1)/(d.tf[w] + k*(1-b+b*d.n/IDX.avg)); hit++; } }); return {c:d.c, s, hit, stems:d.stems || (d.stems = new Set(toks([d.c.statement, d.c.variables.join(' '), d.c.gravity_class, d.c.gravity_label||'', d.c.conditions.material||''].join(' ').replace(/_/g,' ')).map(w => stem(ALIAS[w]||w))))}; });
   const need = Math.max(1, Math.ceil(terms.length/2));
-  const ok = res.filter(r => r.hit>=need && r.s>=1.0).sort((a,b) => b.s-a.s);
-  const gwant = ['lunar','mars'].filter(g => terms.includes(g)), gok = gwant.length ? ok.filter(r => gwant.includes(r.c.gravity_class)) : ok;
-  return {terms, hits: gwant.length ? gok : ok, gwant, relaxed: gwant.length && !gok.length && ok.length};
+  // relevance gate: a claim must share most of the question's key content terms (generic words and bare numbers do not count)
+  const keys = (opts.keys || terms.filter(w => !GENERIC.has(w) && !/^[0-9.]+$/.test(w))), kneed = keys.length ? Math.ceil(keys.length * 2 / 3) : 0;
+  const ok = res.filter(r => r.hit>=need && r.s>=1.0 && (!keys.length || keys.filter(k => r.stems.has(stem(k))).length >= kneed)).sort((a,b) => b.s-a.s);
+  const gwant = opts.gravityGate===false ? [] : ['lunar','mars'].filter(g => terms.includes(g)), gok = gwant.length ? ok.filter(r => gwant.includes(r.c.gravity_class)) : ok;
+  return {terms, keys, hits: gwant.length ? gok : ok, gwant, relaxed: gwant.length && !gok.length && ok.length};
 }
 function renderAsk(){
   const st = D.ledger_stats, n = D.claims.length, n_acc = D.claims.filter(c => (c.review_label||'').startsWith('reviewer-accepted')).length;
@@ -356,19 +361,21 @@ function kindLine(rows){ const by = {}; rows.forEach(r => { const k = r.i || ('f
     const gr = [...new Set(rs.map(r => GPH[r.g] || (r.g==='?' ? 'unstated gravity' : r.g + ' g')))].join(' and ');
     if (k.indexOf('fam:')===0) return `${rs.length} ${esc(k.slice(4).replace(/_/g,' '))} rows in ${gr}, transcribed from NASA reports outside PSI`;
     const inv = D.investigations.find(x => x.id===k); if (!inv) return `${rs.length} tests in ${gr}`;
-    const kk = String(inv.material_class||'').split(/[:(]/)[0].trim().toLowerCase(), kind = KIND[kk] || (kk || 'tests'), tags = inv.tags.map(t => t.tag);
+    const kk0 = String(inv.material_class||'').split(/[:(]/)[0].trim().toLowerCase(), kk = /^gas/.test(kk0) ? 'gas fuel' : /^liquid/.test(kk0) ? 'liquid droplet' : /^solid/.test(kk0) ? 'solid' : /^smoke/.test(kk0) ? 'smoke' : /^aerosol/.test(kk0) ? 'aerosol' : kk0, kind = KIND[kk] || (kk || 'tests'), tags = inv.tags.map(t => t.tag);
     const study = tags.includes('suppression') ? 'a suppression study' : tags.includes('detection') ? 'a detection study' : tags.includes('prevention') ? 'a materials prevention study' : '';
     const std = kk==='solid' ? '' : ', not standard materials flammability tests';
     return `${rs.length} ${esc(kind)} in ${gr} (${esc(inv.acronym && inv.acronym!=='none' ? inv.acronym : inv.id)}, ${esc(inv.hardware)})${study ? ', ' + study : ''}${std}`; });
   return `<p class="small"><b>What kind of tests matched:</b> ${parts.join('; ')}.</p>`; }
 function stdClaims(){ return D.claims.filter(c => /6001/.test(c.citation) && /(limiting oxygen|ULOI|\bMOC\b|maximum oxygen)/i.test(c.statement)).slice(0,3); }
 function stdHtml(){ const cs = stdClaims(); if (!cs.length) return ''; return `<div class="card"><h3 style="margin-top:0">Standard 1 g flammability limits for materials</h3><p class="small muted">You asked about materials. NASA's standard test (NASA-STD-6001 type, upward flame propagation at 1 g) defines the limits. These ledger claims describe it; they are approved or auto-verified claims with their report page.</p>${cs.map(claimHtml).join('')}</div>`; }
-function rowHtml(r){ const o = r.o==null ? '<span class="muted">n/a</span>' : (r.o*100).toFixed(1) + '%', p = r.p==null ? '<span class="muted">n/a</span>' : r.p.toFixed(1) + ' kPa (' + (r.p/6.894757).toFixed(1) + ' psi)';
+function dfmt(v){ return v==null ? '<span class="muted">n/a</span>' : String(v); }
+function rowHtml(r, withD){ const o = r.o==null ? '<span class="muted">n/a</span>' : (r.o*100).toFixed(1) + '%', p = r.p==null ? '<span class="muted">n/a</span>' : r.p.toFixed(1) + ' kPa (' + (r.p/6.894757).toFixed(1) + ' psi)';
   const part = r.g==='0.165' || r.g==='0.38';
-  return `<tr><td>${esc(invLabel(r))}</td><td>${esc(r.m)}</td><td>${o}</td><td>${p}</td><td>${esc(r.g==='?' ? 'not stated' : r.g + ' g')}${part ? ' <span class="tag unrev">outside PSI</span>' : ''}</td><td>${outCell(r)}</td><td class="small">${esc(srcLabel(r))}${r.org!=='psi_table' && !part ? ' <span class="tag">transcribed from NTRS</span>' : ''}</td></tr>`; }
+  return `<tr><td>${esc(invLabel(r))}</td><td>${esc(r.m)}</td><td>${o}</td><td>${p}</td><td>${esc(r.g==='?' ? 'not stated' : r.g + ' g')}${part ? ' <span class="tag unrev">outside PSI</span>' : ''}</td>${withD ? `<td>${dfmt(r.d && r.d.n2)}</td><td>${dfmt(r.d && r.d.co2)}</td><td>${dfmt(r.d && r.d.he)}</td>` : ''}<td>${outCell(r)}</td><td class="small">${esc(srcLabel(r))}${r.org!=='psi_table' && !part ? ' <span class="tag">transcribed from NTRS</span>' : ''}</td></tr>`; }
 const THEAD = '<thead><tr><th>Investigation</th><th>Material or fuel</th><th>O2</th><th>Pressure</th><th>Gravity</th><th>Outcome class</th><th>Source</th></tr></thead>';
-function tableHtml(rows, cap){ const shown = ASHOW ? rows : rows.slice(0, cap);
-  return `<div class="scroll"><table>${THEAD}<tbody>${shown.map(rowHtml).join('')}</tbody></table></div>` +
+function theadHtml(withD){ return withD ? '<thead><tr><th>Investigation</th><th>Material or fuel</th><th>O2</th><th>Pressure</th><th>Gravity</th><th>N2 (mole fraction)</th><th>CO2 (mole fraction)</th><th>He (mole fraction)</th><th>Outcome class</th><th>Source</th></tr></thead>' : THEAD; }
+function tableHtml(rows, cap, withD){ const shown = ASHOW ? rows : rows.slice(0, cap);
+  return `<div class="scroll"><table>${theadHtml(withD)}<tbody>${shown.map(r => rowHtml(r, withD)).join('')}</tbody></table></div>` +
    (rows.length > cap ? `<p class="small"><button type="button" onclick="ASHOW=!ASHOW;askRender()">${ASHOW ? 'Show fewer rows' : 'Show all ' + rows.length + ' rows'}</button></p>` : ''); }
 function splitHtml(rows){ const s = AskParser.split(rows), b = k => `<b>${s[k]||0}</b> ${k==='externally_terminated' ? 'externally terminated' : OC[k]}`, ol = {}; rows.filter(r => r.c==='other').forEach(r => { const k = String(r.r||'').trim() || 'none given'; ol[k] = (ol[k]||0) + 1; }); const olab = Object.entries(ol).map(([k,v]) => '&ldquo;' + esc(k) + '&rdquo; x' + v).join(', ');
   return `<p>Outcome split: ${b('no_ignition')}; ${b('self_extinguished')}; ${b('burned_to_completion')}; ${b('externally_terminated')}; ${s.other||0} other${s.other ? ' (source labels: ' + olab + ')' : ''}; ${s.unknown||0} unknown. <span class="small muted">Externally terminated means the test was stopped while the flame was still burning: the outcome is censored, not "did not burn".</span></p>`; }
@@ -378,35 +385,52 @@ function chipsHtml(f){ if (!f.chips.length) return '';
   return `<div class="row small" style="margin:8px 0" role="group" aria-label="Filters applied">Filters applied: ${f.chips.map(c => `<button type="button" class="tag" title="Remove this filter and answer again" onclick="askDrop('${esc(c.key)}')">${esc(c.label)} &times;</button>`).join(' ')}</div>`; }
 function askDrop(key){ const q = AF.q; AF = AskParser.without(AF, key); AF.q = q; ASHOW = false; askRender(); }
 function runAsk(){ const v = $('#askq').value.trim(), out = $('#askOut'); if (!v) { out.innerHTML = '<div class="state">Type a question first.</div>'; return; } ASHOW = false; AF = AskParser.parseQuery(v, TVOC); AF.q = v; askRender(); }
-const ASK_EXAMPLES = ['smoke detection in microgravity', 'which materials burn at 30% oxygen at 10.2 psi', 'Mars gravity flammability', 'how does flow velocity affect flame spread over thin fuels'];
+const ASK_EXAMPLES = ['lunar base at 30% oxygen and 10.2 psi', 'smoke detection in microgravity', 'does CO2 suppress flames', 'Mars gravity flammability'];
 function askExample(q){ $('#askq').value = q; runAsk(); }
 function confLine(rows){ const o = rows.filter(r => r.org!=='psi_table' || r.g==='0.165' || r.g==='0.38').length; return `<p class="small"><b>Evidence and confidence:</b> ${rows.length} row${rows.length===1?'':'s'} read directly from the unified table${o ? ', ' + o + ' of them transcribed from NASA reports outside PSI' : ''}. Each row cites its PSI table row or NTRS PDF page. Nothing is estimated or interpolated.</p>`; }
+const DNAME = {co2:'CO2', he:'helium', n2:'nitrogen'};
+function splitText(rows){ const s = AskParser.split(rows); return `${s.self_extinguished||0} self-extinguished, ${s.burned_to_completion||0} burned to completion, ${s.externally_terminated||0} externally terminated (censored), ${s.no_ignition||0} did not ignite, ${s.other||0} other, ${s.unknown||0} unknown`; }
+function envCaveat(f, rows){ const gs = [...new Set(rows.map(r => r.g))], gl = gs.map(g => GPH[g] || (g==='?' ? 'unstated gravity' : g + ' g')).join(' and ') || 'microgravity';
+  if (f.env.key==='lunar') return `<p class="warn small"><b>Read this as an atmosphere, not a gravity.</b> These ${rows.length} tests were run in ${esc(gl)}, so this is the atmosphere of a lunar base, not its gravity. PSI has no partial-gravity data.</p>`;
+  return `<p class="warn small"><b>Team-defined envelope.</b> The ISS-like cabin atmosphere is the team's own definition (air-like: oxygen 19-25%, pressure within 10% of sea level), not an official NASA number. These tests were run in ${esc(gl)}.</p>`; }
+function dilNarr(f, rows){
+  const names = f.dil.map(k => DNAME[k]), rg = f.dil.map(k => { const v = rows.map(r => r.d[k]).filter(x => x!=null); return v.length ? `${DNAME[k]} mole fraction ${Math.min(...v)} to ${Math.max(...v)}` : ''; }).filter(Boolean).join('; ');
+  const base = D.tests.filter(r => r.t==='test' && r.d && f.dil.every(k => !(r.d[k] > 0))), fam = [...new Set(D.tests.filter(r => r.d).map(r => r.i || r.f))].join(', ');
+  return `<div class="card"><h3 style="margin-top:0">What the table shows, and what it does not</h3>
+  <p class="small"><b>It shows:</b> ${rows.length} test${rows.length===1?'':'s'} whose ambient mixture contains ${esc(names.join(' and '))} (${esc(rg)}), with the outcome split given above. For comparison, ${base.length} test${base.length===1?'':'s'} in the same table have none of it (${esc(names.join(', '))} = 0): ${splitText(base)}.</p>
+  <p class="small"><b>It does not show</b> that the diluent caused the outcome. Fuel, pressure, oxygen share and droplet size also change between tests, and the outcome labels are the experimenters' own "Test end" records (Extinction, Completion, Disruption). Diluent mole fractions are recorded only for ${esc(fam)}; other investigations do not state them as numbers, so they cannot be searched here. A comparison with everything else held equal would be needed before drawing a conclusion.</p></div>`; }
 function askRender(){
-  const f = AF, out = $('#askOut'), partial = f.g==='0.165' || f.g==='0.38', parts = [chipsHtml(f)];
-  let tableShown = false;
-  if (f.numeric) {
+  const f = AF, out = $('#askOut'), partial = f.g==='0.165' || f.g==='0.38', parts = [chipsHtml(f)], withD = f.dil.length > 0, es = n => n===1 ? '' : 's';
+  let tableShown = false, claimQ = f.tableQuery ? (f.stripped || '') : f.q, claimOpts = {};
+  if (f.tableQuery) {
     const res = AskParser.applyFilters(D.tests, f), rows = res.hit.slice().sort((a,b) => (a.g===b.g ? 0 : (a.g<b.g ? -1 : 1)) || String(a.i).localeCompare(String(b.i)) || String(a.m).localeCompare(String(b.m)));
     const gnote = f.g===null ? ' No gravity level was given, so every gravity level is included.' : '';
-    const skipped = (f.p && res.noP ? `${res.noP} test${res.noP===1?'':'s'} that fit the other filters ha${res.noP===1?'s':'ve'} no recorded pressure and cannot be matched. ` : '') + (f.o && res.noO ? `${res.noO} test${res.noO===1?'':'s'} that fit the other filters ha${res.noO===1?'s':'ve'} no recorded oxygen value and cannot be matched.` : '');
+    const skipped = (f.p && res.noP ? `${res.noP} test${es(res.noP)} that fit the other filters ha${res.noP===1?'s':'ve'} no recorded pressure and cannot be matched. ` : '') + (f.o && res.noO ? `${res.noO} test${es(res.noO)} that fit the other filters ha${res.noO===1?'s':'ve'} no recorded oxygen value and cannot be matched. ` : '') + (withD && res.noD ? `${res.noD} test${es(res.noD)} have no diluent fractions in the table and cannot be matched.` : '');
     tableShown = true;
+    const dnames = f.dil.map(k => DNAME[k]).join(' and ');
+    const title = f.env ? `${rows.length} test${es(rows.length)} fall inside the ${f.env.key==='lunar' ? 'lunar-base / rover' : 'ISS-like cabin'} atmosphere` : withD ? `${rows.length} test${es(rows.length)} with ${esc(dnames)} in the mixture` : `${rows.length} test${es(rows.length)} in the unified table match these conditions`;
     if (rows.length) {
-      parts.push(`<div class="card"><h3 style="margin-top:0">${rows.length} test${rows.length===1?'':'s'} in the unified table match these conditions</h3><p class="small muted">Answered from the test table (${D.tests.filter(r=>r.t==='test').length} tests) before the claims below; only the filters shown above were applied.${gnote} ${skipped}</p>` + confLine(rows) + kindLine(rows) + splitHtml(rows) + meaningHtml(rows) + matsHtml(rows) + tableHtml(rows, 12) + (partial ? '<p class="warn small">Partial-gravity rows come from NASA reports, not from PSI: PSI has no partial-gravity combustion data.</p>' : '') + '</div>');
+      parts.push(`<div class="card"><h3 style="margin-top:0">${title}</h3><p class="small muted">Answered from the test table (${D.tests.filter(r=>r.t==='test').length} tests) before the claims below; only the filters shown above were applied.${gnote} ${skipped}</p>` + confLine(rows) + kindLine(rows) + splitHtml(rows) + meaningHtml(rows) + matsHtml(rows) + tableHtml(rows, 12, withD) + (partial ? '<p class="warn small">Partial-gravity rows come from NASA reports, not from PSI: PSI has no partial-gravity combustion data.</p>' : '') + '</div>');
+      if (f.env) parts.push(envCaveat(f, rows));
+      if (withD) parts.push(dilNarr(f, rows));
     } else {
-      const near = AskParser.nearest(D.tests, f, 6);
-      parts.push(`<div class="card" style="border-color:var(--accent)"><h3 style="margin-top:0">No test in the unified table matches these conditions</h3><p>${partial ? 'PSI holds no partial-gravity tests, and the report rows outside PSI do not cover this condition either. ' : ''}Nothing is estimated or interpolated between tested points.${gnote} ${skipped}</p>` +
-        (near.length ? `<p><b>Nearest tested conditions</b> (closest in oxygen and pressure, shown as they were tested):</p><div class="scroll"><table>${THEAD}<tbody>${near.map(x => rowHtml(x.r)).join('')}</tbody></table></div>` + kindLine(near.map(x => x.r)) + splitHtml(near.map(x => x.r)) + meaningHtml(near.map(x => x.r)) : '<p>No test shares the other filters either (gravity, material, outcome). Remove a filter above to widen the search.</p>') + '</div>');
+      const near = f.env || withD ? [] : AskParser.nearest(D.tests, f, 6);
+      parts.push(`<div class="card" style="border-color:var(--accent)"><h3 style="margin-top:0">${withD ? 'No test in the table has ' + esc(dnames) + ' in its mixture' : 'No test in the unified table matches these conditions'}</h3><p>${partial ? 'PSI holds no partial-gravity tests, and the report rows outside PSI do not cover this condition either. ' : ''}Nothing is estimated or interpolated between tested points.${gnote} ${skipped}</p>` +
+        (near.length ? `<p><b>Nearest tested conditions</b> (closest in oxygen and pressure, shown as they were tested):</p><div class="scroll"><table>${theadHtml(false)}<tbody>${near.map(x => rowHtml(x.r)).join('')}</tbody></table></div>` + kindLine(near.map(x => x.r)) + splitHtml(near.map(x => x.r)) + meaningHtml(near.map(x => x.r)) : '<p>No test shares the other filters either (gravity, material, outcome). Remove a filter above to widen the search.</p>') + '</div>');
     }
+    if (f.env) { claimQ = 'atmosphere pressure oxygen'; claimOpts = {keys: ['atmosphere','pressure','oxygen'], gravityGate: false}; }
+    else if (withD) { claimQ = f.q; claimOpts = {gravityGate: false}; }
   } else if (partial) {
     const rows = D.tests.filter(r => r.g===f.g), nt = rows.filter(r => r.t==='test').length, nl = rows.filter(r => r.t==='limit').length;
     tableShown = rows.length > 0;
-    parts.push(`<div class="card" style="border-color:var(--accent)"><h3 style="margin-top:0">${AskParser.GLABEL[f.g]}: no tests in PSI</h3><p>The official text says PSI holds no partial-gravity combustion data. The unified table has ${nt} test row${nt===1?'':'s'} and ${nl} oxygen-limit entr${nl===1?'y':'ies'} at this gravity, all transcribed from NASA reports (<b>outside PSI</b>).</p>` + (rows.length ? tableHtml(rows, 12) : '') + '</div>');
+    parts.push(`<div class="card" style="border-color:var(--accent)"><h3 style="margin-top:0">${AskParser.GLABEL[f.g]}: no tests in PSI</h3><p>The official text says PSI holds no partial-gravity combustion data. The unified table has ${nt} test row${es(nt)} and ${nl} oxygen-limit entr${nl===1?'y':'ies'} at this gravity, all transcribed from NASA reports (<b>outside PSI</b>).</p>` + (rows.length ? tableHtml(rows, 12) : '') + '</div>');
   }
   if (/\bmaterials?\b/i.test(f.q || '')) parts.push(stdHtml());
-  const lq = f.numeric ? (f.stripped || '') : f.q, r = lq && toks(lq).length ? search(lq) : {hits: [], terms: [], gwant: []};
-  if (r.hits.length) parts.push(`<h3>Supporting claims from the evidence ledger</h3><p class="small muted">${r.hits.length} matching claim${r.hits.length===1?'':'s'}; showing up to 8, best first. Only approved or auto-verified claims are searched.</p>` + r.hits.slice(0,8).map(h => claimHtml(h.c)).join(''));
-  else if (tableShown) parts.push(`<p class="small muted">No ledger claim matches the wording of the question, so only the test table answers it.</p>`);
+  const r = claimQ && toks(claimQ).length ? search(claimQ, claimOpts) : {hits: [], terms: [], gwant: [], keys: []};
+  if (r.hits.length) parts.push(`<h3>Supporting claims from the evidence ledger</h3><p class="small muted">${r.hits.length} matching claim${es(r.hits.length)}; showing up to 8, best first. Only approved or auto-verified claims that share the question's key terms are shown.</p>` + r.hits.slice(0,8).map(h => claimHtml(h.c)).join(''));
+  else if (tableShown) parts.push(`<div class="card small"><b>The ledger has no claim on this topic.</b> No approved or auto-verified claim shares the key terms of the question${r.keys && r.keys.length ? ' (' + r.keys.map(esc).join(', ') + ')' : ''}, so Ember shows no loosely related claim. The test-table rows above are the only evidence it can offer.</div>`);
   if (!tableShown && !r.hits.length) { out.innerHTML = parts.join('') + `<div class="refusal" role="alert"><div class="ic" aria-hidden="true">?</div><div><h3>Not in the evidence</h3>
-    <p>No claim in the ledger and no test in the table matches ${r.terms.map(t=>'<b>'+esc(t)+'</b>').join(', ') || 'this question'}${r.gwant && r.gwant.length ? ' at that gravity level' : ''}. Ember refuses to answer from general knowledge: it only reports what a NASA report or a PSI table says.</p>
+    <p>The ledger has no claim on this topic, and no test in the table matches ${r.terms.map(t=>'<b>'+esc(t)+'</b>').join(', ') || 'this question'}${r.gwant && r.gwant.length ? ' at that gravity level' : ''}. Ember refuses to answer from general knowledge: it only reports what a NASA report or a PSI table says.</p>
     <p class="small muted">The ledger holds ${D.claims.length} claims from ${new Set(D.claims.map(c=>c.doc)).size} reports and the test table ${D.tests.filter(x=>x.t==='test').length} tests. Try one of these:</p>
     <div class="suggest">${ASK_EXAMPLES.map(x => `<button type="button" onclick="askExample(this.textContent)">${esc(x)}</button>`).join('')}</div></div></div>`; return; }
   out.innerHTML = parts.join('');
@@ -486,11 +510,11 @@ function renderAbout(){
 /* ---------- Judge mode: "Play the story" ---------- */
 let story = {timer:null, i:0, paused:false};
 const STEPS = [
- [5000, 'The lunar-base atmosphere (30% oxygen or more, 10.2 psi or less) is the shaded zone. Only microgravity gas-flame tests fall inside it; hatched areas have no test at all.', () => { ST.grav='0'; show('map'); renderMap(); showZone(); }],
- [5000, 'Ranked: a fixed, visible formula scores all 24 investigations for a lunar base. It measures relevance, not scientific quality.', () => { ST.rankProfile='lunar_base'; renderRank(); show('rank'); }],
+ [4000, 'The planned lunar-base atmosphere (30% oxygen or more, 10.2 psi or less) is the shaded zone. Hatched areas have no test at all.', () => { ST.grav='0'; show('map'); renderMap(); showZone(); }],
+ [7000, 'Ask: "lunar base at 30% oxygen and 10.2 psi". Ember answers from the test table: how many tests, their outcomes with the source labels, and why this is an atmosphere, not a gravity.', () => { show('ask'); $('#askq').value = 'lunar base at 30% oxygen and 10.2 psi'; runAsk(); }],
  [5000, 'Ask: "smoke detection in microgravity" returns a cited claim: the report, the PDF page and how it was checked.', () => { show('ask'); $('#askq').value = 'smoke detection in microgravity'; runAsk(); }],
  [5000, 'Ask something the evidence cannot answer, and Ember refuses instead of guessing.', () => { show('ask'); $('#askq').value = 'who won the cricket match'; runAsk(); }],
- [5000, 'Honest limits: no partial-gravity data in PSI, Moon and Mars numbers come from papers outside PSI, and AI-checked is not human-checked.', () => show('limits')]];
+ [4000, 'Honest limits: no partial-gravity data in PSI, Moon and Mars numbers come from papers outside PSI, and AI-checked is not human-checked.', () => show('limits')]];
 function playStory(){ stopStory(); story = {timer:null, i:0, paused:false}; $('#caption').classList.add('on'); stepStory(); }
 function stepStory(){ if (story.i>=STEPS.length) { stopStory(); return; } const [ms, cap, fn] = STEPS[story.i++]; safe(fn, current); $('#capText').textContent = cap; story.timer = setTimeout(() => { if (!story.paused) stepStory(); }, ms); }
 function storyPause(){ story.paused = !story.paused; $('#pauseBtn').textContent = story.paused ? 'Resume' : 'Pause'; if (!story.paused) stepStory(); else clearTimeout(story.timer); }
@@ -520,7 +544,7 @@ function heroAsk(){ const v = $('#hq').value.trim(); if (!v) { $('#hq').focus();
 function setupHero(){
   const nt = D.tests.filter(r => r.t==='test');
   $('#hN').textContent = nt.length; $('#hI').textContent = D.investigations.length; $('#claimN').textContent = D.claims.length;
-  $('#hsug').innerHTML = ['smoke detection in microgravity', 'which materials burn at 30% oxygen at 10.2 psi', 'Mars gravity flammability'].map(x => `<button type="button" onclick="$('#hq').value=this.textContent;heroAsk()">${esc(x)}</button>`).join('');
+  $('#hsug').innerHTML = ['lunar base at 30% oxygen and 10.2 psi', 'smoke detection in microgravity', 'does CO2 suppress flames'].map(x => `<button type="button" onclick="$('#hq').value=this.textContent;heroAsk()">${esc(x)}</button>`).join('');
   const lz = D.profiles.profiles[0], su = D.profiles.profiles[2], zone = {pMaxKpa: lz.p_max_kpa, oMin: lz.o2_min != null ? lz.o2_min : 0.30};
   const inside = nt.filter(r => r.o!=null && r.p!=null && r.o>=zone.oMin && r.p<=zone.pMaxKpa), micro = inside.every(r => r.g==='0');
   $('#cubeCap').textContent = nt.filter(r => r.o!=null && r.p!=null).length + ' of ' + nt.length + ' tests have both oxygen and pressure and are plotted. Box = planned lunar-base atmosphere: ' + inside.length + ' tests fall inside' + (micro ? ', all in microgravity.' : '.');
