@@ -248,10 +248,14 @@ def main():
             return float(v) if v not in ('', None) else None
         except ValueError:
             return None
+    def dil(v):
+        # FLEX rows carry diluent mole fractions as "N2=0.79;CO2=0;He=0"; other rows have free text and no fractions
+        m = re.fullmatch(r'N2=([0-9.]+);CO2=([0-9.]+);He=([0-9.]+)', (v or '').strip())
+        return {'n2': float(m.group(1)), 'co2': float(m.group(2)), 'he': float(m.group(3))} if m else None
     # compact copy of the unified table for the Ask page (tests and oxygen-limit rows; limits use the limit oxygen share)
     ask_rows = [{'i': r['psi_id'] or ('PSI-69' if r['family'] == 'FLEX' else ''), 'f': r['family'], 'm': r['material_or_fuel'],
                  'o': fl(r['oxygen_fraction']) if r['record_type'] == 'test' else (fl(r['moc_vol_pct']) / 100.0 if fl(r['moc_vol_pct']) is not None else None),
-                 'p': fl(r['pressure_kpa']), 'g': r['gravity_level_g'] or '?', 'c': r['outcome_class'], 'r': r['outcome_raw'], 's': r['source_ref'], 't': r['record_type'], 'org': r['data_origin']}
+                 'p': fl(r['pressure_kpa']), 'g': r['gravity_level_g'] or '?', 'c': r['outcome_class'], 'r': r['outcome_raw'], 'd': dil(r['diluent']), 's': r['source_ref'], 't': r['record_type'], 'org': r['data_origin']}
                 for r in tests if r['record_type'] in ('test', 'limit')]
     ranking = json.loads((ROOT / 'data/processed/ranking.json').read_text(encoding='utf-8'))
     interp = json.loads((ROOT / 'data/processed/interpretations.json').read_text(encoding='utf-8'))

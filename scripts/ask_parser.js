@@ -79,6 +79,14 @@
     ['0', /(micro-?\s?gravity|zero[- ]g(?:ravity)?|weightless|free-?\s?fall|\b0\s?g\b|\bug\b|µ\s?g)/i],
     ['1', /(\b1\s?-?g\b|normal gravity|earth gravity|terrestrial|ground[- ]based|1 g\b)/i]
   ];
+  // Environment words mean an atmosphere envelope, not a gravity: lunar base, rover and habitat use the official envelope
+  // (oxygen 30% or more, pressure 10.2 psi or less, docs/CHALLENGE.md); cabin uses the team-defined ISS-like cabin profile.
+  const ENVS = [
+    ['lunar', /\b(?:lunar|moon)\s+(?:base|habitat|outpost|surface base)\b|\b(?:pressuri[sz]ed\s+)?rovers?\b|\bhabitat\b/ig, 'lunar base / rover atmosphere (oxygen 30% or more, pressure 10.2 psi or less)', { o: { min: 0.30 }, p: { max: 70.33 } }],
+    ['cabin', /\b(?:iss[- ]like\s+|space\s+station\s+)?cabin\b/ig, 'ISS-like cabin atmosphere (team-defined: oxygen 19-25%, pressure within 10% of sea level)', { o: { min: 0.19, max: 0.25 }, p: { min: 91.22, max: 111.49 } }]
+  ];
+  const DIL = [['co2', /(\bco2\b|\bco₂\b|carbon dioxide)/i, 'CO2'], ['he', /(\bhelium\b|\bHe\b)/, 'helium'], ['n2', /(\bnitrogen\b|\bn2\b)/i, 'nitrogen']];
+  const DESCRIPTORS = new Set(['fabric']);          // describes a material, does not identify one ("SIBAL fabric")
   const GLABEL = { '0': 'microgravity (0 g)', '1': '1 g', '0.165': 'lunar gravity (0.165 g, outside PSI)', '0.38': 'Mars gravity (0.38 g, outside PSI)' };
 
   const OUT = [
@@ -143,10 +151,31 @@
         out.o = spec('o', md, v / sc); out.o.label = oLabel(out.o); blank(m);
       }
     }
+    // environment words
+    let gtext = text;
+    out.env = null; out.dil = []; out.dilIntent = false;
+    if (!/\b(mars|martian)\b/i.test(text)) {
+      for (const [key, rx, label, envSpec] of ENVS) {
+        rx.lastIndex = 0;
+        if (!rx.test(text)) continue;
+        rx.lastIndex = 0; gtext = gtext.replace(rx, ' ');
+        out.env = { key, label };
+        // explicit numbers win, except a restatement of the envelope boundary ("lunar base at 30% oxygen and 10.2 psi")
+        const restO = out.o && out.o.eq !== undefined && envSpec.o.min !== undefined && envSpec.o.max === undefined && Math.abs(out.o.eq - envSpec.o.min) < 1e-9;
+        const restP = out.p && out.p.eq !== undefined && envSpec.p.max !== undefined && envSpec.p.min === undefined && Math.abs(out.p.eq - envSpec.p.max) / envSpec.p.max < 0.03;
+        if (!out.o || restO) { out.o = Object.assign({ fromEnv: true, label: '' }, envSpec.o); }
+        if (!out.p || restP) { out.p = Object.assign({ fromEnv: true, label: '' }, envSpec.p); }
+        break;
+      }
+    }
+    // diluent words (FLEX rows carry diluent mole fractions)
+    for (const [key, rx, lab] of DIL) { if (rx.test(text)) out.dil.push(key); }
+    out.dilIntent = /\b(suppress\w*|dilut\w*|extinguish\w*|inert)\b/i.test(text);
     out.numeric = !!(out.o || out.p);
+    out.tableQuery = !!(out.numeric || out.dil.length);
 
     // gravity
-    for (const [g, rx] of GRAV) { if (rx.test(text)) { out.g = g; break; } }
+    for (const [g, rx] of GRAV) { if (rx.test(gtext)) { out.g = g; break; } }
     // outcomes
     for (const [cls, rx, lab] of OUT) {
       if (rx.test(text)) {
@@ -164,11 +193,14 @@
       if (!STOP.has(w) && stem.length >= 3 && vs.has(stem)) { if (!seen.has(stem)) { seen.add(stem); out.materials.push(stem); } }
       else if (!STOP.has(w)) leftover.push(w);
     }
+    if (out.materials.length > 1) out.materials = out.materials.filter((x) => !DESCRIPTORS.has(x));
     out.residual = leftover.join(' ');
     out.stripped = work.replace(/\s+/g, ' ').trim();
 
-    if (out.o) out.chips.push({ key: 'o', label: out.o.label });
-    if (out.p) out.chips.push({ key: 'p', label: out.p.label });
+    if (out.env) out.chips.push({ key: 'env', label: 'Environment: ' + out.env.label });
+    if (out.o && !out.o.fromEnv) out.chips.push({ key: 'o', label: out.o.label });
+    if (out.p && !out.p.fromEnv) out.chips.push({ key: 'p', label: out.p.label });
+    out.dil.forEach((k) => out.chips.push({ key: 'd:' + k, label: 'Diluent: ' + DIL.find((d) => d[0] === k)[2] + ' present' }));
     if (out.g !== null) out.chips.push({ key: 'g', label: 'Gravity: ' + GLABEL[out.g] });
     out.materials.forEach((mw) => out.chips.push({ key: 'm:' + mw, label: 'Material: ' + mw }));
     if (out.outcomes.length) out.chips.push({ key: 'c', label: 'Outcome: ' + out.outcomeLabels[0] });
@@ -189,18 +221,19 @@
     if (f.g !== null && f.g !== undefined && String(r.g) !== String(f.g)) return false;
     for (const w of f.materials || []) if (!matName(r.m, w)) return false;
     if (f.outcomes && f.outcomes.length && f.outcomes.indexOf(r.c) < 0) return false;
+    for (const k of f.dil || []) if (!(r.d && r.d[k] > 0)) return false;
     return true;
   }
   function applyFilters(rows, f) {
     const hit = [];
-    let noO = 0, noP = 0;
+    let noO = 0, noP = 0, noD = 0;
     for (const r of rows) {
-      if (!nonNumeric(r, f)) continue;
+      if (!nonNumeric(r, f)) { if (f.dil && f.dil.length && r.t === 'test' && !r.d) noD++; continue; }
       if (f.o && !within(r.o, f.o)) { if (r.o === null || r.o === undefined) noO++; continue; }
       if (f.p && !within(r.p, f.p)) { if (r.p === null || r.p === undefined) noP++; continue; }
       hit.push(r);
     }
-    return { hit, noO, noP };
+    return { hit, noO, noP, noD };
   }
   function target(f) { return f.eq !== undefined ? f.eq : (f.min !== undefined && f.max !== undefined ? (f.min + f.max) / 2 : (f.min !== undefined ? f.min : f.max)); }
   // nearest tested conditions when nothing matches: distance in O2 (5 points = 1 unit) and pressure (10 kPa = 1 unit)
@@ -235,10 +268,14 @@
   }
   function without(f, key) {
     const g = Object.assign({}, f, { materials: (f.materials || []).slice() });
+    g.dil = (f.dil || []).slice();
     if (key === 'o') g.o = null; else if (key === 'p') g.p = null; else if (key === 'g') g.g = null;
+    else if (key === 'env') { g.env = null; if (g.o && g.o.fromEnv) g.o = null; if (g.p && g.p.fromEnv) g.p = null; }
+    else if (key.indexOf('d:') === 0) g.dil = g.dil.filter((x) => x !== key.slice(2));
     else if (key === 'c') { g.outcomes = []; g.outcomeLabels = []; }
     else if (key.indexOf('m:') === 0) g.materials = g.materials.filter((x) => x !== key.slice(2));
     g.numeric = !!(g.o || g.p);
+    g.tableQuery = !!(g.numeric || g.dil.length);
     g.chips = f.chips.filter((c) => c.key !== key);
     return g;
   }

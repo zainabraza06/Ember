@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 NODE = shutil.which('node')
-VOCAB = ['pmma', 'methanol', 'heptane', 'rod', 'sibal', 'silicone', 'nomex', 'film']
+VOCAB = ['pmma', 'methanol', 'heptane', 'rod', 'sibal', 'silicone', 'nomex', 'film', 'fabric']
 
 ROWS = [  # compact test rows as embedded in the site: i investigation, m material, o O2 fraction, p kPa, g gravity, c outcome, t record type
     {'i': 'PSI-39', 'm': 'Methanol', 'o': 0.30, 'p': 70.3, 'g': '0', 'c': 'self_extinguished', 't': 'test'},
@@ -139,6 +139,109 @@ class AskParser(unittest.TestCase):
         o = run(js)
         self.assertEqual(o['hit'], 1)
         self.assertEqual(o['noP'], 1)
+
+
+@unittest.skipUnless(NODE, 'node not installed')
+class AskParserEnvironments(unittest.TestCase):
+    def approx(self, a, b, tol=1e-6):
+        self.assertAlmostEqual(a, b, delta=tol)
+
+    def test_lunar_base_is_an_atmosphere_not_a_gravity(self):
+        for q in ('lunar base fire safety', 'moon base atmosphere', 'lunar habitat', 'pressurized rover', 'rover'):
+            r = parse(q)
+            self.assertIsNone(r['g'], q)
+            self.assertEqual(r['env']['key'], 'lunar', q)
+            self.approx(r['o']['min'], 0.30)
+            self.approx(r['p']['max'], 70.33)
+            self.assertNotIn('min', r['p'])
+            self.assertTrue(r['numeric'])
+            self.assertEqual([c['key'] for c in r['chips']], ['env'])    # one chip stands for both limits
+
+    def test_gravity_words_stay_gravity_filters(self):
+        self.assertEqual(parse('lunar gravity flammability')['g'], '0.165')
+        self.assertEqual(parse('flames at 0.165 g')['g'], '0.165')
+        self.assertEqual(parse('Mars gravity flammability')['g'], '0.38')
+        r = parse('lunar gravity flammability')
+        self.assertIsNone(r['env'])
+        self.assertFalse(r['numeric'])
+        r = parse('Mars habitat fire')                  # Mars is never given the lunar envelope
+        self.assertIsNone(r['env'])
+        self.assertEqual(r['g'], '0.38')
+
+    def test_environment_and_gravity_together(self):
+        r = parse('lunar base atmosphere in microgravity')
+        self.assertEqual(r['env']['key'], 'lunar')
+        self.assertEqual(r['g'], '0')
+
+    def test_restating_the_envelope_uses_the_envelope(self):
+        r = parse('lunar base at 30% oxygen and 10.2 psi')
+        self.assertEqual(r['env']['key'], 'lunar')
+        self.assertTrue(r['o']['fromEnv'])
+        self.assertTrue(r['p']['fromEnv'])
+        self.approx(r['o']['min'], 0.30)
+        self.assertNotIn('max', r['o'])
+        self.approx(r['p']['max'], 70.33)
+
+    def test_explicit_different_numbers_win(self):
+        r = parse('lunar base at 40% oxygen')
+        self.assertFalse(r['o'].get('fromEnv'))
+        self.approx(r['o']['eq'], 0.40)
+        self.assertTrue(r['p']['fromEnv'])
+        r = parse('rover below 5 psi')
+        self.assertFalse(r['p'].get('fromEnv'))
+        self.assertTrue(r['p']['maxEx'])
+
+    def test_cabin_uses_the_iss_like_profile(self):
+        r = parse('what burns in a cabin')
+        self.assertEqual(r['env']['key'], 'cabin')
+        self.approx(r['o']['min'], 0.19)
+        self.approx(r['o']['max'], 0.25)
+        self.approx(r['p']['min'], 91.22)
+        self.approx(r['p']['max'], 111.49)
+
+    def test_removing_the_environment_chip_removes_both_limits(self):
+        js = ("const A=require('./scripts/ask_parser.js');const f=A.parseQuery('lunar base at 30% oxygen and 10.2 psi',new Set());"
+              "const g=A.without(f,'env');console.log(JSON.stringify({o:g.o,p:g.p,env:g.env,numeric:g.numeric,chips:g.chips.length}))")
+        o = run(js)
+        self.assertIsNone(o['o'])
+        self.assertIsNone(o['p'])
+        self.assertIsNone(o['env'])
+        self.assertFalse(o['numeric'])
+
+    def test_diluent_words(self):
+        self.assertEqual(parse('does CO2 suppress flames')['dil'], ['co2'])
+        self.assertEqual(parse('carbon dioxide dilution')['dil'], ['co2'])
+        self.assertEqual(parse('helium suppression of flames')['dil'], ['he'])
+        self.assertEqual(parse('He diluent tests')['dil'], ['he'])
+        self.assertEqual(parse('nitrogen extinguish')['dil'], ['n2'])
+        self.assertEqual(parse('CO2 and helium')['dil'], ['co2', 'he'])
+        self.assertEqual(parse('he said she left')['dil'], [])     # lower-case "he" is a pronoun, not helium
+        r = parse('does CO2 suppress flames')
+        self.assertTrue(r['dilIntent'])
+        self.assertTrue(r['tableQuery'])
+        self.assertFalse(r['numeric'])
+        self.assertEqual(r['outcomes'], [])                        # "suppress" is not an outcome filter
+        self.assertFalse(parse('smoke detection in microgravity')['tableQuery'])
+
+    def test_diluent_filter_uses_fractions_and_ignores_text_rows(self):
+        rows = [{'i': 'PSI-69', 'm': 'Methanol', 'o': 0.21, 'p': 100, 'g': '0', 'c': 'self_extinguished', 't': 'test', 'd': {'n2': 0.56, 'co2': 0.2, 'he': 0}},
+                {'i': 'PSI-69', 'm': 'Methanol', 'o': 0.21, 'p': 100, 'g': '0', 'c': 'other', 't': 'test', 'd': {'n2': 0.79, 'co2': 0, 'he': 0}},
+                {'i': 'PSI-69', 'm': 'Heptane', 'o': 0.30, 'p': 100, 'g': '0', 'c': 'other', 't': 'test', 'd': {'n2': 0.4, 'co2': 0, 'he': 0.3}},
+                {'i': 'x', 'm': 'PMMA', 'o': 0.21, 'p': 100, 'g': '0', 'c': 'unknown', 't': 'test', 'd': None}]
+        js = ("const A=require('./scripts/ask_parser.js');const rows=%s;const v=A.vocabFrom(rows);"
+              "const a=A.applyFilters(rows,A.parseQuery('does CO2 suppress flames',v));const b=A.applyFilters(rows,A.parseQuery('helium suppression',v));"
+              "console.log(JSON.stringify({co2:a.hit.length,he:b.hit.length,noD:a.noD}))") % json.dumps(rows)
+        o = run(js)
+        self.assertEqual(o['co2'], 1)
+        self.assertEqual(o['he'], 1)
+        self.assertEqual(o['noD'], 1)                              # the row without structured fractions cannot be matched
+
+    def test_descriptor_word_is_not_a_material_chip(self):
+        r = parse('SIBAL fabric flame spread rate')
+        self.assertEqual(r['materials'], ['sibal'])
+        self.assertEqual([c['key'] for c in r['chips']], ['m:sibal'])
+        r = parse('Nomex fabric at 21% oxygen')
+        self.assertEqual(r['materials'], ['nomex'])
 
 
 if __name__ == '__main__':
