@@ -43,3 +43,16 @@ A recorded source conflict that touches the analysis lowers the label one step (
 
 ## 6. Reproduce
 `python -m pipeline && python -m pipeline.profiles && python -m pipeline.ranking && python -m pipeline.interpret && python scripts/build_site.py`
+
+## 7. Data-gap ranking ("Where should NASA test next?", home page)
+Not a safety judgement and not part of the investigation ranking above: it ranks **untested conditions**, using only the existing coverage grid of the Atmosphere map.
+
+- **Grid.** The microgravity (0 g) coverage grid of the map: cells 20 kPa wide and 5 percentage points of O2 tall (17 x 20 = 340 cells). A cell is **untested** when no test and no oxygen-limit point at 0 g falls in it.
+- **Envelope.** The planned lunar-base atmosphere from the official text: oxygen >= 30% and pressure <= 70.33 kPa (10.2 psi). Design point = (30% O2, 70.33 kPa).
+- **Sort key, in this order, ascending:**
+  1. `d_env` = distance from the cell centre to the envelope, in cells: sqrt( (max(0, p - 70.33) / 20)^2 + (max(0, 0.30 - o) / 0.05)^2 ). Cells inside the envelope have `d_env` = 0.
+  2. `n_nb` = number of **tests** (oxygen-limit rows excluded) in the 8 surrounding cells. Fewer first.
+  3. `d_nom` = distance from the cell centre to the design point, in cells. Nearer first.
+  4. Cell index (pressure column, then oxygen row), only to make the order deterministic.
+- **Card fields.** Oxygen and pressure range of the cell; `n_nb`; the investigation family of the nearest test (distance in cells); one line stating whether the cell is inside the envelope and how many tests are around it.
+- **Limits.** It looks at oxygen and pressure only (not gravity, fuel, flow or sample size), uses 0 g coverage only, and says nothing about how dangerous a condition is.
