@@ -35,3 +35,8 @@ data/ledger/pages.jsonl
 
 # No PDFs in this repository: URL and SHA-256 of every source are in data/raw/**/info.md and data/ledger/sources.csv
 *.pdf
+
+# Archives and source PDFs never go in the repository (URL and SHA-256 are in info.md next to each source)
+*.rar
+*.zip
+data/raw/**/*.pdf

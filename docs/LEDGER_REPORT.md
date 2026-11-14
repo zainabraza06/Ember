@@ -86,7 +86,7 @@ Review queue: 3 claims in `data/review/claim_review.csv` await a decision.
 
 ## 7b. Claim review decisions (AI-assisted page check, accepted by the team reviewer)
 
-On 2026-11-14 the team reviewer accepted an AI-assisted page check of the 84 claims held back for review (`data/review/claim_review.csv`; AI triage `data/CLAIM_TRIAGE_AI_SUGGESTIONS.csv`, AI page check `data/CLAIM_PAGE_CHECK_AI.csv`). This is an AI-assisted page check, accepted by the team reviewer; it is not full human verification.
+On 2026-11-14 the team reviewer accepted an AI-assisted page check of the 84 claims held back for review (`data/review/claim_review.csv`; AI triage `data/CLAIM_TRIAGE_AI_SUGGESTIONS.csv`, AI page check `data/CLAIM_PAGE_CHECK_AI.csv`). Reviewer of record: ZRM; second reviewer: the AI. This is an AI-assisted page check, accepted by the team reviewer; it is not full human verification.
 
 | outcome | claims |
 |---|---|

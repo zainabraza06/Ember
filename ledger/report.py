@@ -122,7 +122,7 @@ def write_report(stats=None):
     hrej = [c for c in rej if 'human_rejected' in c['reasons']]
     L += ['## 7b. Claim review decisions (AI-assisted page check, accepted by the team reviewer)', '',
           f"On 2026-11-14 the team reviewer accepted an AI-assisted page check of the 84 claims held back for review (`data/review/claim_review.csv`; AI triage `data/CLAIM_TRIAGE_AI_SUGGESTIONS.csv`, AI page check `data/CLAIM_PAGE_CHECK_AI.csv`). "
-          'This is an AI-assisted page check, accepted by the team reviewer; it is not full human verification.', '',
+          'Reviewer of record: ZRM; second reviewer: the AI. This is an AI-assisted page check, accepted by the team reviewer; it is not full human verification.', '',
           '| outcome | claims |', '|---|---|',
           f'| approved as extracted | {len(acc) - len(corr)} |', f'| approved with correction (reworded statement or gravity class; span unchanged) | {len(corr)} |',
           f"| of which approved by manual override of a failed code check (not a passed check) | {sum(1 for c in acc if c.get('review', {}).get('code_check_override'))} |",
