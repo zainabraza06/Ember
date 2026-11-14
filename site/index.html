@@ -77,7 +77,7 @@ const CLS = {self_extinguished:['Self-extinguished','var(--c-se)','circle'], bur
 const TABS = [['map','Atmosphere map'],['inv','Investigations'],['cmp','Compare'],['rank','Ranking'],['interp','Interpretation'],['ask','Ask'],['brief','Mission brief'],['mis','Atmospheres'],['grav','Partial gravity'],['earth','Earth'],['about','About']];
 let current = 'map';
 const sel = new Set(); let filterTag = '', filterHw = '', q = '';
-const GL = {'0':'0 g','1':'1 g','0.165':'0.165 g (Moon)','0.38':'0.38 g (Mars)'};
+const GL = {'0':'0 g','1':'1 g','0.165':'0.165 g (lunar gravity, literature, outside PSI)','0.38':'0.38 g (Mars gravity, literature, outside PSI)'};
 const ST = {grav:'0', hide:new Set(), rankProfile:'lunar_base'};
 
 /* ---------- shell: tabs, theme ---------- */
@@ -163,7 +163,7 @@ function showZone(){
   <ul class="small">${empt.map(e => `<li>${e}</li>`).join('') || '<li>none</li>'}</ul>
   <p class="small"><b>Gravity:</b> the marks shown are at ${GL[ST.grav]}; no flame test in PSI is at lunar gravity.</p>
   <h3>Sources</h3><ul class="small">${srcs.slice(0,6).map(s => `<li>${esc(s)}</li>`).join('')}<li>${link(D.investigations.find(i=>i.id==='PSI-159').psi_url,'PSI-159 record')}</li><li>Zone definition: ${link(D.official,'official challenge page')}</li></ul>
-  ${lun.length ? `<h3>Ledger claims about lunar gravity</h3>${lun.map(claimHtml).join('')}` : ''}`;
+  ${lun.length ? `<h3>Ledger claims about lunar gravity (literature, outside PSI)</h3>${lun.map(claimHtml).join('')}` : ''}`;
   $('#zonePanel').scrollIntoView({block:'nearest'});
 }
 
