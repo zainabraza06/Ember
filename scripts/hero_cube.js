@@ -87,6 +87,7 @@ function initCube(canvas, tipEl, rows, opts) {
   canvas.addEventListener('keydown', e => { const k = e.key; if (k === 'ArrowLeft') yaw -= 0.1; else if (k === 'ArrowRight') yaw += 0.1; else if (k === 'ArrowUp') pitch = Math.min(1.2, pitch + 0.08); else if (k === 'ArrowDown') pitch = Math.max(-1.2, pitch - 0.08); else return; e.preventDefault(); idle = 300; });
   if ('IntersectionObserver' in window) new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(canvas);
   window.addEventListener('resize', () => { resize(); draw(); });
+  if (window.ResizeObserver) new ResizeObserver(() => { resize(); draw(); }).observe(canvas);
   readColors(); resize(); draw(); requestAnimationFrame(loop);
   return { refresh() { readColors(); draw(); }, count: pts.length };
 }
@@ -143,6 +144,8 @@ function initScatter(canvas, tipEl, rows, opts) {
   canvas.addEventListener('pointerleave', () => { hover = null; tip(null); draw(); });
   canvas.addEventListener('pointerdown', e => { const p = pos(e); hover = pick(p[0], p[1]); tip(hover); draw(); });
   window.addEventListener('resize', () => { size(); draw(); });
+  // redraw whenever the canvas gets a real size (tab shown, fonts loaded, window or panel resized), so the plot can never stay blank
+  if (window.ResizeObserver) new ResizeObserver(() => { size(); draw(); }).observe(canvas);
   colors(); size(); draw();
   return { refresh() { colors(); size(); draw(); }, count: pts.length };
 }

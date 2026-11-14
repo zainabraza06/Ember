@@ -1,6 +1,6 @@
 # Alignment with the official challenge text
 
-Updated 2026-11-14 (evening build) against [CHALLENGE.md](CHALLENGE.md) (official text as supplied by the team). "Product" means `site/index.html` (built by `scripts/build_site.py`) plus the data pipeline in this repository. Verdicts: **met**, **partly met**, **not met**. Nothing is claimed that the product does not do. The site is deployed on GitHub Pages: https://zainabraza06.github.io/Nasa_Challange/ (see STATUS.md).
+Updated 2026-11-14 (evening build) against [CHALLENGE.md](CHALLENGE.md) (official text as supplied by the team). "Product" means `site/index.html` (built by `scripts/build_site.py`) plus the data pipeline in this repository. Verdicts: **met**, **partly met**, **not met**. Nothing is claimed that the product does not do. The site is deployed on GitHub Pages: https://zainabraza06.github.io/Ember/ (see STATUS.md).
 
 ## Objectives
 

@@ -2,7 +2,7 @@
 
 Updated 2026-11-14 to match what is built and deployed. Text in **[BRACKETS]** is a placeholder for the team to fill in; nothing in brackets has been invented. The summary below is the single description used in both submissions so they agree. Check every claim against `docs/OFFICIAL_ALIGNMENT.md` and `docs/STATUS.md` before pasting.
 
-Live explorer: https://zainabraza06.github.io/Nasa_Challange/ . Source code: https://github.com/zainabraza06/Nasa_Challange (the early history is explained in its README, "Provenance").
+Live explorer: https://zainabraza06.github.io/Ember/ . Source code: https://github.com/zainabraza06/Ember (the early history is explained in its README, "Provenance").
 
 ---
 
@@ -60,8 +60,8 @@ Ember answers the challenge's problem that NASA's combustion results are "hard t
 - Transcribed report values were spot-checked, not independently verified in full: 10 of 10 transcribed values were AI-checked against the source PDFs, of which 2 were also checked by a person (ZRM); 0 individual claims were opened by a person. NTRS reports carry NASA rights determinations that are not open licenses, so they are cited, not redistributed.
 
 **Demonstration video:** **[LINK TO VIDEO]**
-**Project link (deployed explorer):** https://zainabraza06.github.io/Nasa_Challange/
-**Source code:** https://github.com/zainabraza06/Nasa_Challange
+**Project link (deployed explorer):** https://zainabraza06.github.io/Ember/
+**Source code:** https://github.com/zainabraza06/Ember
 
 ---
 
@@ -80,6 +80,6 @@ Submit this form **and** the official website submission. The description below 
 | Project title | Ember |
 | Project description (about 150 words) | Ember is a web-based explorer for NASA's microgravity combustion research. Its home screen maps every test NASA has run by oxygen and pressure, shows where nothing has been tested, and marks the planned lunar-base atmosphere, the spacesuit and Earth sea level. It lists and compares the 24 combustion investigations in NASA's Physical Sciences Informatics (PSI) repository, ranks them for a lunar base, rover, spacesuit or ISS-like cabin with a visible formula, summarizes effects computed from 769 harmonised tests with evidence-strength labels, and answers questions only from claims extracted from NASA reports and checked against the report text, refusing when nothing matches. A printable one-page brief cites every sentence. Built for students, researchers and engineers, every figure is traceable to a NASA record or a checked claim, and anything undocumented is shown as such. SI tools helped build the pipeline and extract the claims; the claims got an AI-assisted page check, accepted by the team reviewer; no claim was opened and verified by a person. |
 | Demonstration video link | **[LINK TO VIDEO]** |
-| Project link | https://zainabraza06.github.io/Nasa_Challange/ |
+| Project link | https://zainabraza06.github.io/Ember/ |
 
 Before pasting: confirm the form's own field names and word limits (they were not available to me), keep the description identical in both submissions, and submit before 3:30 PM PKT on 15 November.
