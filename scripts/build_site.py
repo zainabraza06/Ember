@@ -159,7 +159,7 @@ table{border-collapse:collapse;font-size:.88rem}td,th{border:1px solid #ccc;padd
 code,pre{background:#eee;border-radius:4px;padding:1px 4px}pre{padding:10px;overflow-x:auto}.note{border-left:4px solid #e8844a;padding:6px 12px;background:rgba(232,132,74,.1)}</style></head><body>
 <p><a href="../">&larr; Back to Ember</a> | <a href="tests.csv">tests.csv</a> | <a href="ledger_claims.json">ledger_claims.json</a></p>
 <h1>Ember data dictionary</h1>
-<div class="note"><p><b>About these files.</b> <code>tests.csv</code> has 885 rows. Rows come from NASA PSI test tables or are transcribed from public NASA reports (NTRS); every row carries a source reference in <code>source_ref</code> (the PSI table row, or the report with its PDF page and table). The spot check compared 10 sampled values with the source PDFs: 10 of 10 were AI-checked against the PDFs, and 2 of them were also checked by a person.</p>
+<div class="note"><p><b>About these files.</b> <code>tests.csv</code> has 885 rows. Rows come from NASA PSI test tables or are transcribed from public NASA reports (NTRS); every row carries a source reference in <code>source_ref</code> (the PSI table row, or the report with its PDF page and table). The spot check compared 10 sampled values with the source PDFs: all 10 were AI-checked against the PDFs, and 2 were also checked by ZRM.</p>
 <p>Outcome classes include <code>externally_terminated</code>: the test was stopped while the flame was still burning. It is a censored outcome, not &ldquo;did not burn&rdquo;. <code>unknown</code> means the source does not state an outcome.</p>
 <p><code>ledger_claims.json</code> holds the public claims of the evidence ledger (status approved or verified_auto only) with their citations and PDF pages.</p></div>
 <h2>How to load it</h2>
@@ -264,7 +264,7 @@ def main():
     ranking = json.loads((ROOT / 'data/processed/ranking.json').read_text(encoding='utf-8'))
     interp = json.loads((ROOT / 'data/processed/interpretations.json').read_text(encoding='utf-8'))
     claims, ledger_stats, srcs = [], {}, {}
-    review_counts = {}
+    review = {}
     cp = ROOT / 'data/ledger/claims.jsonl'
     if cp.exists():
         import sys
@@ -286,17 +286,14 @@ def main():
             v['confidence'] = cmap[v['claim_id']]
             v['doc'] = next(c['doc_id'] for c in allc if c['claim_id'] == v['claim_id'])
         claims = pub
-        acc = [c for c in allc if c['status'] == 'approved']
-        review_counts = {'auto_verified': sum(1 for c in allc if c['status'] == 'verified_auto'), 'approved': len(acc),
-                         'corrected': sum(1 for c in acc if c.get('review', {}).get('corrected')),
-                         'override': sum(1 for c in acc if c.get('review', {}).get('code_check_override')),
-                         'rejected': sum(1 for line in open(rp, encoding='utf-8') if 'human_rejected' in line) if rp.exists() else 0,
-                         'needs_review': sum(1 for c in allc if c['status'] == 'needs_review')}
+        from ledger import review_wording
+        rsum = review_wording.summary()
+        review = {'counts': rsum, 'text': review_wording.words(rsum)}
     conflicts_md = (ROOT / 'docs/CONFLICTS.md').read_text(encoding='utf-8') if (ROOT / 'docs/CONFLICTS.md').exists() else ''
     data = {'points': points, 'points_without_atmosphere': no_atm, 'ranking': ranking, 'interpretations': interp, 'claims': claims,
             'ledger_stats': ledger_stats, 'sources': srcs, 'conflicts': [l for l in conflicts_md.splitlines() if l.startswith('| PSI-')],
             'official': OFFICIAL, 'nd': ND, 'investigations': invs, 'pairs': [dict(id=k, **v) for k, v in sorted(pairs.items())], 'literature': lit,
-            'tests': ask_rows, 'moon_margin': moon_margin, 'review_counts': review_counts, 'gravity_counts': grav_counts, 'profiles': profiles, 'atmos_reports': atmos, 'bre_quote': quote,
+            'tests': ask_rows, 'moon_margin': moon_margin, 'review': review, 'gravity_counts': grav_counts, 'profiles': profiles, 'atmos_reports': atmos, 'bre_quote': quote,
             'build': {'tests_rows': len(tests), 'investigations': len(invs)}}
     tpl = (ROOT / 'scripts/site_template.html').read_text(encoding='utf-8')
     out = ROOT / 'site' / 'index.html'
