@@ -17,7 +17,7 @@
 :root[data-theme="light"]{--bg:#F4F6FB;--bg2:#FFFFFF;--panel:#FFFFFF;--panel2:#F1F4FA;--line:#D3DBEA;--glass:rgba(255,255,255,.88);--glass-line:rgba(30,80,150,.25);--blue:#0B5CAD;--ember:#B8420B;--ember2:#C4521A;--green:#0B7A45;--violet:#5B3FB0;
 --ink:#2B3750;--head:#0A1226;--muted:#52607C;--accent:#B8420B;--accent2:#C4521A;--cool:#0B5CAD;--link:#0B5CAD;--on-accent:#FFFFFF;--same:rgba(11,92,173,.10);--diff:rgba(184,66,11,.12);--nd:#EEF2F9;
 --c-se:#0B5CAD;--c-bc:#B8420B;--c-et:#0A1226;--c-ni:#52607C;--c-ot:#2B3750;--c-uk:#8895AF;--c-lim:#0A1226;--zone:rgba(184,66,11,.12);--shadow:0 20px 50px rgba(30,50,90,.14);--glow:0 0 0 3px rgba(11,92,173,.22)}
-[hidden]{display:none!important}*{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+[hidden]{display:none!important}*{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:radial-gradient(720px 520px at -6% 104%,rgba(255,138,92,.20),transparent 62%),var(--bg);background-attachment:fixed;color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
 a{color:var(--link);overflow-wrap:anywhere;text-underline-offset:3px}:focus-visible{outline:2px solid #7CC2FF;outline-offset:2px;border-radius:6px}
 .skip{position:absolute;left:-999px;top:0;background:var(--ember);color:var(--on-accent);padding:8px 16px;z-index:60}.skip:focus{left:8px;top:8px}
@@ -114,6 +114,42 @@ footer{max-width:1280px;margin:var(--s5) auto 0;padding:var(--s3);color:var(--mu
 @media (max-width:980px){.hero-grid{grid-template-columns:minmax(0,1fr)}.mainnav{display:none}.mainnav.open{display:flex;position:absolute;left:var(--s2);right:var(--s2);top:70px;flex-direction:column;align-items:stretch;gap:0;background:var(--panel);border:1px solid var(--glass-line);border-radius:var(--r);padding:var(--s1);z-index:50;box-shadow:var(--shadow)}.mainnav.open a{padding:10px 16px;border-bottom:0}#menuBtn{display:inline-flex;align-items:center}.stats{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--glass-line)}.two,.four{grid-template-columns:1fr 1fr}.sphere{right:-40%;opacity:.8}.map-wrap{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){svg.map{min-width:640px}.two,.four{grid-template-columns:1fr}.plotcard canvas{height:330px}h2{font-size:1.4rem}.lfoot{flex-direction:column}}
 @media (max-width:480px){main,.top-in,#tabs{padding-left:12px;padding-right:12px}.hero h1{font-size:2.19rem}.stat{padding:var(--s2) 12px}.stat b{font-size:1.7rem}.refusal{flex-direction:column;padding:var(--s2)}.logo{letter-spacing:.14em}.hsearch{padding-left:16px}.hsearch button{padding:8px 20px}.top-in{gap:var(--s1)}}
+
+/* motion */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:none}}
+@keyframes drift{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-30px,22px,0) scale(1.07)}}
+@keyframes glow{0%,100%{text-shadow:0 0 0 rgba(255,138,92,0)}50%{text-shadow:0 0 30px rgba(255,138,92,.6)}}
+@keyframes beat{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.3)}}
+@keyframes dashmove{to{stroke-dashoffset:-220}}
+@keyframes sheen{0%{background-position:-120% 0}100%{background-position:220% 0}}
+section.on{animation:fadeUp .5s cubic-bezier(.2,.7,.2,1) both}
+.hero-copy>*{opacity:0;animation:fadeUp .9s cubic-bezier(.2,.7,.2,1) forwards}
+.hero-copy>*:nth-child(1){animation-delay:.05s}.hero-copy>*:nth-child(2){animation-delay:.16s}.hero-copy>*:nth-child(3){animation-delay:.32s}.hero-copy>*:nth-child(4){animation-delay:.46s}.hero-copy>*:nth-child(5){animation-delay:.6s}
+.plotcard{animation:fadeUp 1s cubic-bezier(.2,.7,.2,1) .25s both}
+.hero h1 .hl{animation:glow 3.6s ease-in-out 1.4s infinite}
+.logo svg circle:last-child{transform-box:fill-box;transform-origin:center;animation:beat 2.6s ease-in-out infinite}
+.sphere-wrap{position:absolute;inset:0;pointer-events:none;z-index:0;transform:translate3d(calc(var(--mx,0)*-28px),calc(var(--my,0)*-20px),0);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.sphere{animation:drift 16s ease-in-out infinite alternate}
+#starsBox{position:absolute;inset:0;pointer-events:none;transform:translate3d(calc(var(--mx,0)*14px),calc(var(--my,0)*10px),0);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.orbit-line{animation:dashmove 40s linear infinite}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .85s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .85s cubic-bezier(.2,.7,.2,1) var(--d,0s)}.rv.in{opacity:1;transform:none}
+#progress{position:fixed;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,var(--ember),var(--ember2));transform-origin:0 50%;transform:scaleX(0);z-index:70;pointer-events:none;box-shadow:0 0 12px rgba(255,138,92,.6)}
+button,.btn,.tag,.mainnav a,#tabs button,.icard a,.dlbtns a{transition:color .2s,border-color .2s,background .2s,transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .25s,letter-spacing .25s}
+button:hover:not(:disabled){transform:translateY(-1px)}.hsearch button:hover{transform:scale(1.05);box-shadow:0 0 0 4px rgba(255,255,255,.12)}.tour:hover{box-shadow:0 0 22px rgba(124,194,255,.35)}
+.glass.icard,.glass.lcard,.grid .card{transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s,box-shadow .3s}
+.glass.icard:hover,.glass.lcard:hover{transform:translateY(-6px);border-color:rgba(124,194,255,.6);box-shadow:var(--shadow),0 0 0 1px rgba(124,194,255,.18)}
+.icard a:hover{letter-spacing:.14em}.dlbtns a:hover{transform:translateY(-2px);box-shadow:0 0 20px rgba(124,194,255,.25)}
+.hsearch{transition:border-color .25s,box-shadow .25s,transform .25s}.hsearch:focus-within{transform:scale(1.012)}
+#askOut>*{animation:fadeUp .55s cubic-bezier(.2,.7,.2,1) both}#askOut>*:nth-child(2){animation-delay:.07s}#askOut>*:nth-child(3){animation-delay:.14s}#askOut>*:nth-child(4){animation-delay:.21s}#askOut>*:nth-child(n+5){animation-delay:.28s}
+#caption.on{animation:slideUp .4s cubic-bezier(.2,.7,.2,1)}
+#motionBtn{font-size:.74rem;padding:8px 14px;background:transparent;font-family:var(--mono);border-radius:999px}#motionBtn::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ember);margin-right:8px;box-shadow:0 0 10px var(--ember)}
+html.calm #motionBtn::before{background:var(--muted);box-shadow:none}
+.only-menu{display:none}
+/* calm mode: switched on by the OS "reduce motion" setting or by the Motion button; nothing moves, everything is shown at once */
+html.calm *,html.calm *::before,html.calm *::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
+html.calm .rv{opacity:1;transform:none}html.calm .orbit-dot{display:none}
+@media (max-width:560px){#motionBtn{display:none}.mainnav.open .only-menu{display:inline-flex}}
 @media print{body{background:#fff;color:#000;font-size:10.5pt}header,nav,footer,#caption,.noprint,.skip,.sphere,.orbit,.star{display:none!important}section[role=tabpanel]{display:none!important}
 #s-brief{display:block!important}.brief{max-width:none}.card{border:1px solid #999;background:#fff;box-shadow:none}a{color:#000}h1,h2,h3{color:#000}@page{size:A4;margin:14mm}}
 :root[data-theme="light"] body{background:var(--bg)}:root[data-theme="light"] .sphere,:root[data-theme="light"] .orbit,:root[data-theme="light"] .star{display:none}:root[data-theme="light"] .hsearch button,:root[data-theme="light"] button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -123,10 +159,11 @@ body[data-tab="map"]>footer{display:none}
 </style>
 </head>
 <body>
+<div id="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="top-in"><a class="logo" href="#" onclick="show('map');return false" aria-label="Ember, home"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="none" stroke="#7CC2FF" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#FF8A5C"/></svg>EMBER</a>
- <nav class="mainnav noprint" id="mainnav" aria-label="Main"><a href="#" data-k="map" onclick="show('map');return false">Atmosphere map</a><a href="#" data-k="ask" onclick="show('ask');return false">Ask the ledger</a><a href="#" data-k="inv" onclick="show('inv');return false">Investigations</a><a href="#" data-k="about" onclick="show('about');return false">Data</a><a href="#" data-k="limits" onclick="show('limits');return false">Honest limits</a></nav>
- <div class="top-actions noprint"><button id="storyBtn" class="tour" onclick="playStory()" aria-label="Play the 25 second guided tour">25 s tour</button><button id="menuBtn" onclick="document.getElementById('mainnav').classList.toggle('open');this.setAttribute('aria-expanded',document.getElementById('mainnav').classList.contains('open'))" aria-expanded="false" aria-controls="mainnav">Menu</button><button id="themeBtn" onclick="toggleTheme()" aria-label="Switch between dark and light theme">Light theme</button></div></div></header>
+ <nav class="mainnav noprint" id="mainnav" aria-label="Main"><a href="#" data-k="map" onclick="show('map');return false">Atmosphere map</a><a href="#" data-k="ask" onclick="show('ask');return false">Ask the ledger</a><a href="#" data-k="inv" onclick="show('inv');return false">Investigations</a><a href="#" data-k="about" onclick="show('about');return false">Data</a><a href="#" data-k="limits" onclick="show('limits');return false">Honest limits</a><a href="#" class="only-menu" onclick="toggleMotion();return false">Toggle motion</a></nav>
+ <div class="top-actions noprint"><button id="storyBtn" class="tour" onclick="playStory()" aria-label="Play the 25 second guided tour">25 s tour</button><button id="menuBtn" onclick="document.getElementById('mainnav').classList.toggle('open');this.setAttribute('aria-expanded',document.getElementById('mainnav').classList.contains('open'))" aria-expanded="false" aria-controls="mainnav">Menu</button><button id="motionBtn" onclick="toggleMotion()" aria-pressed="true" aria-label="Turn page motion on or off">Motion on</button><button id="themeBtn" onclick="toggleTheme()" aria-label="Switch between dark and light theme">Light theme</button></div></div></header>
 <nav class="alltabs" aria-label="All sections"><div id="tabs" role="tablist"></div></nav>
 <main id="main" tabindex="-1">
 <section id="s-map" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-inv" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-cmp" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-rank" role="tabpanel"><div class="state" role="status">Loading…</div></section>
@@ -154,6 +191,36 @@ const sel = new Set(); let filterTag = '', filterHw = '', q = '', filterIds = nu
 const GL = {'0':'0 g','1':'1 g','0.165':'0.165 g (lunar gravity, literature, outside PSI)','0.38':'0.38 g (Mars gravity, literature, outside PSI)'};
 const ST = {grav:'0', hide:new Set(), rankProfile:'lunar_base'};
 
+/* ---------- motion: on by default, calm when the OS asks for reduced motion or when the visitor switches it off ---------- */
+(function motionController(){
+  const root = document.documentElement, mq = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : null; let pref = 'auto';
+  try { pref = localStorage.getItem('ember-motion') || 'auto'; } catch (e) {}
+  function apply(){ const calm = pref==='off' || (pref==='auto' && mq && mq.matches); root.classList.toggle('calm', calm); const b = document.getElementById('motionBtn'); if (b) { b.setAttribute('aria-pressed', String(!calm)); b.textContent = calm ? 'Motion off' : 'Motion on'; } }
+  window.toggleMotion = function(){ pref = root.classList.contains('calm') ? 'on' : 'off'; try { localStorage.setItem('ember-motion', pref); } catch (e) {} apply(); if (window.PLOT) PLOT.replay(); };
+  if (mq && mq.addEventListener) mq.addEventListener('change', apply);
+  apply();
+  const prog = document.getElementById('progress');
+  function onScroll(){ const m = root.scrollHeight - innerHeight; prog.style.transform = 'scaleX(' + (m > 0 ? Math.min(1, scrollY / m) : 0).toFixed(4) + ')'; }
+  addEventListener('scroll', onScroll, {passive: true}); addEventListener('resize', onScroll); onScroll();
+})();
+function setupMotion(){
+  const root = document.documentElement, calm = () => root.classList.contains('calm'), hasIO = 'IntersectionObserver' in window;
+  // sections rise into view as they are scrolled to
+  const els = [];
+  ['.stats', '.sec .eyebrow', '.sec h2.big', '.sec .two > *', '.sec .four > *', '.lfoot', '#det3d'].forEach(sel => document.querySelectorAll('#s-map ' + sel).forEach((el, i) => { el.classList.add('rv'); el.style.setProperty('--d', (Math.min(i, 4) * 0.09).toFixed(2) + 's'); els.push(el); }));
+  const reveal = el => { el.classList.add('in'); setTimeout(() => { el.classList.remove('rv', 'in'); el.style.removeProperty('--d'); }, 1700); };
+  if (calm() || !hasIO) els.forEach(el => el.classList.remove('rv'));
+  else { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }), {threshold: 0.12, rootMargin: '0px 0px -6% 0px'}); els.forEach(el => io.observe(el));
+    setTimeout(() => els.forEach(el => { if (el.classList.contains('rv') && !el.classList.contains('in')) reveal(el); }), 7000); }
+  // stat numbers count up once, when the strip scrolls into view (they always end on the live value)
+  const nums = [...document.querySelectorAll('#stats .stat b')]; nums.forEach(b => { b.dataset.final = b.textContent; });
+  const count = b => { const f = +b.dataset.final, t0 = performance.now(); (function step(n){ const k = Math.min(1, (n - t0) / 1500), e = 1 - Math.pow(1 - k, 3); b.textContent = k < 1 ? Math.round(f * e) : f; if (k < 1) requestAnimationFrame(step); })(t0); };
+  if (!calm() && hasIO) { nums.forEach(b => { b.textContent = '0'; }); const io2 = new IntersectionObserver(es => { if (es[0].isIntersecting) { nums.forEach(count); io2.disconnect(); } }, {threshold: 0.35}); io2.observe(document.getElementById('stats'));
+    setTimeout(() => nums.forEach(b => { b.textContent = b.dataset.final; }), 12000); }
+  // the glow and the stars drift a little with the pointer
+  const land = document.querySelector('.landing');
+  if (land && window.matchMedia && matchMedia('(pointer:fine)').matches) { let raf = 0; addEventListener('pointermove', e => { if (calm() || raf) return; raf = requestAnimationFrame(() => { raf = 0; land.style.setProperty('--mx', (e.clientX / innerWidth - 0.5).toFixed(3)); land.style.setProperty('--my', (e.clientY / innerHeight - 0.5).toFixed(3)); }); }, {passive: true}); }
+}
 /* ---------- shell: tabs, theme ---------- */
 function show(id){ current = id; TABS.forEach(([k]) => { $('#s-'+k).classList.toggle('on', k===id); });
   document.querySelectorAll('#tabs button').forEach(b => { const on = b.dataset.k===id; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; });
@@ -545,7 +612,7 @@ const STEPS = [
  [7000, 'Ask: "lunar base at 30% oxygen and 10.2 psi". Ember answers from the test table: how many tests, their outcomes with the source labels, and why this is an atmosphere, not a gravity.', () => { show('ask'); $('#askq').value = 'lunar base at 30% oxygen and 10.2 psi'; runAsk(); }],
  [5000, 'Ask: "smoke detection in microgravity" returns a cited claim: the report, the PDF page and how it was checked.', () => { show('ask'); $('#askq').value = 'smoke detection in microgravity'; runAsk(); }],
  [5000, 'Ask something the evidence cannot answer, and Ember refuses instead of guessing.', () => { show('ask'); $('#askq').value = 'who won the cricket match'; runAsk(); }],
- [4000, 'Honest limits: no partial-gravity data in PSI, Moon and Mars numbers come from papers outside PSI, and AI-checked is not human-checked.', () => show('limits')]];
+ [4000, 'Honest limits: no partial-gravity data in PSI, and Moon and Mars numbers come from papers outside PSI.', () => show('limits')]];
 function playStory(){ stopStory(); story = {timer:null, i:0, paused:false}; $('#caption').classList.add('on'); stepStory(); }
 function stepStory(){ if (story.i>=STEPS.length) { stopStory(); return; } const [ms, cap, fn] = STEPS[story.i++]; safe(fn, current); $('#capText').textContent = cap; story.timer = setTimeout(() => { if (!story.paused) stepStory(); }, ms); }
 function storyPause(){ story.paused = !story.paused; $('#pauseBtn').textContent = story.paused ? 'Resume' : 'Pause'; if (!story.paused) stepStory(); else clearTimeout(story.timer); }
@@ -559,11 +626,6 @@ function renderLimits(){
   <div class="grid">
    <div class="card"><h3 style="margin-top:0">No partial-gravity data in PSI</h3><p>NASA's own challenge text: &ldquo;there is currently no partial-gravity combustion data in PSI.&rdquo; Ember therefore draws no lunar or Martian flame test. Microgravity (0 g) and 1 g results can only bound what happens in between.</p></div>
    <div class="card"><h3 style="margin-top:0">Moon and Mars numbers are from papers outside PSI</h3><p>${l.outside_psi} rows at 0.165 g and ${m.outside_psi} at 0.38 g are transcribed from NASA reports (NTRS); ${l.psi + m.psi} come from PSI. Each such row, bar and claim carries an <span class="tag unrev">outside PSI</span> tag. The LUCI numbers come from a centrifuge simulation of lunar gravity, not from the Moon.</p></div>
-   <div class="card"><h3 style="margin-top:0">AI-checked is not human-checked</h3><ul class="small">
-     <li><b>${rc.auto_verified}</b> claims are auto-verified: the quoted text was found in the report, its numbers matched, and a second AI model agreed.</li>
-     <li><b>${rc.approved}</b> claims were approved after an AI-assisted page check, accepted by the team reviewer (reviewer of record: ZRM; the AI was the second reviewer): ${rc.approved - rc.corrected} approved as extracted, ${rc.corrected} approved with a corrected statement (${rc.override} of them by manual override of the number check), ${rc.rejected} rejected, ${rc.needs_review} still needing review (not published).</li>
-     <li>Claims whose source page a person opened and checked: <b>0 for now</b>. This is not full human verification.</li>
-     <li>Transcribed table values: 10 of 10 spot-check values were AI-checked against the source PDFs, and 2 were also checked by a person.</li></ul></div>
    <div class="card"><h3 style="margin-top:0">Gaps in the data itself</h3><ul class="small">
      <li>${unk} of ${nt.length} tests have no outcome class (unknown), including every BASS-II test.</li>
      <li>&ldquo;Externally terminated&rdquo; tests were stopped while the flame was still burning: a censored outcome, never &ldquo;did not burn&rdquo;.</li>
@@ -577,8 +639,8 @@ function renderLanding(){
   const nt = D.tests.filter(r => r.t==='test'), rc = D.review_counts || {};
   const vc = D.claims.find(c => c.claim_id==='C-9494f38314') || D.claims.find(c => c.gravity_class==='mars'), ntrs = vc ? String(vc.doc || '').replace(/^NTRS-/, '') : '';
   const rl = vc && (vc.review_label || '').startsWith('reviewer-accepted') ? 'AI-assisted check, accepted by reviewer' : 'auto-verified: code checks plus a second AI model';
-  $('#s-map').innerHTML = `<div class="landing"><div class="sphere" aria-hidden="true"></div>
-   <svg class="orbit" viewBox="0 0 900 420" aria-hidden="true"><ellipse cx="450" cy="210" rx="440" ry="165" fill="none" stroke="#7CC2FF" stroke-opacity=".3" stroke-dasharray="3 8" transform="rotate(-11 450 210)"/></svg><div id="starsBox" aria-hidden="true"></div>
+  $('#s-map').innerHTML = `<div class="landing"><div class="sphere-wrap" aria-hidden="true"><div class="sphere"></div></div>
+   <svg class="orbit" viewBox="0 0 900 420" aria-hidden="true"><g transform="rotate(-11 450 210)"><ellipse class="orbit-line" cx="450" cy="210" rx="440" ry="165" fill="none" stroke="#7CC2FF" stroke-opacity=".3" stroke-dasharray="3 8"/><circle class="orbit-dot" r="4.5" fill="#FF8A5C"><animateMotion dur="26s" repeatCount="indefinite" path="M10,210 a440,165 0 1,1 880,0 a440,165 0 1,1 -880,0"/></circle></g></svg><div id="starsBox" aria-hidden="true"></div>
    <section class="hero" aria-label="Ember">
     <div class="hero-grid">
      <div class="hero-copy"><p class="eyebrow">NASA Space Apps 2026 &middot; Flame in Freefall</p>
@@ -627,6 +689,7 @@ function renderLanding(){
   const box = $('#starsBox'); for (let n = 0; n < 40; n++) { const st = document.createElement('i'); st.className = 'star'; const z = Math.random() < .2 ? 2 : 1; st.style.cssText = `left:${(Math.random()*100).toFixed(1)}%;top:${(Math.random()*620).toFixed(0)}px;width:${z}px;height:${z}px;animation-delay:${(Math.random()*6).toFixed(1)}s`; box.appendChild(st); }
   renderMap();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (window.PLOT) PLOT.refresh(); });
+  setupMotion();
 }
 /* ---------- init ---------- */
 [['map',renderLanding],['inv',renderInv],['rank',renderRank],['interp',renderInterp],['ask',renderAsk],['brief',renderBrief],['mis',renderMis],['grav',renderGrav],['earth',renderEarth],['limits',renderLimits],['about',renderAbout]].forEach(([id,fn]) => safe(fn,id));

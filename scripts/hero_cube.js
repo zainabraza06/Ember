@@ -4,7 +4,7 @@
 function initCube(canvas, tipEl, rows, opts) {
   'use strict';
   const ctx = canvas.getContext('2d');
-  const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const calm = () => document.documentElement.classList.contains('calm');
   const LANES = ['FLEX', 'CFI-G', 'BASS-II', 'Saffire', 'screening_1g', 'partial_gravity_literature'];
   const pts = rows.filter(r => r.t === 'test' && r.o != null && r.p != null).map(r => ({ r, lane: Math.max(0, LANES.indexOf(r.f)) }));
   const pmax = Math.max.apply(null, pts.map(p => p.r.p)) * 1.02;
@@ -64,7 +64,7 @@ function initCube(canvas, tipEl, rows, opts) {
   }
   function loop(t) {
     if (visible && !document.hidden) {
-      if (!reduce && !drag && idle <= 0) yaw += 0.0035; else if (idle > 0) idle -= 1;
+      if (!calm() && !drag && idle <= 0) yaw += 0.0035; else if (idle > 0) idle -= 1;
       draw();
     }
     requestAnimationFrame(loop);
@@ -94,12 +94,18 @@ function initCube(canvas, tipEl, rows, opts) {
 
 /* 2D "Where fire was tested" plot: pressure (kPa) on x, oxygen share (%) on y, one dot per real test.
    x is linear to 120 kPa and compressed above it (tests reach 331 kPa); y runs 10 to 100 % (tests reach 12 %).
-   Blue = flame lit (this includes tests stopped while the flame was still burning); grey = no ignition or no recorded outcome. */
+   Blue = flame lit (this includes tests stopped while the flame was still burning); grey = no ignition or no recorded outcome.
+   Motion: the dots pop in as a left-to-right sweep, the lunar-base box draws in and its dashes march slowly; the hovered dot pulses.
+   In calm mode (html.calm) everything is drawn at once and nothing moves. */
 function initScatter(canvas, tipEl, rows, opts) {
   'use strict';
   const ctx = canvas.getContext('2d'), pts = rows.filter(r => r.t === 'test' && r.o != null && r.p != null);
   const XLIN = 120, XMAX = 350, FRAC = 0.86, YMIN = 10, YMAX = 100, M = { l: 44, r: 16, t: 24, b: 34 };
-  let W = 0, H = 0, col = {}, hover = null, drawn = [];
+  let W = 0, H = 0, col = {}, hover = null, drawn = [], t0 = performance.now(), visible = true, frameT = 0;
+  const calm = () => document.documentElement.classList.contains('calm');
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const easeOut = t => 1 - Math.pow(1 - clamp(t, 0, 1), 3);
+  const pop = t => { if (t <= 0) return 0; if (t >= 1) return 1; const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
   const lit = r => r.c !== 'no_ignition' && r.c !== 'unknown';
   function colors() {
     const cs = getComputedStyle(document.documentElement), g = n => cs.getPropertyValue(n).trim();
@@ -110,42 +116,57 @@ function initScatter(canvas, tipEl, rows, opts) {
   const X = p => M.l + (p <= XLIN ? (p / XLIN) * FRAC : FRAC + ((p - XLIN) / (XMAX - XLIN)) * (1 - FRAC)) * pw();
   const Y = o => M.t + (1 - (o * 100 - YMIN) / (YMAX - YMIN)) * (H - M.t - M.b);
   const mono = (px, w) => (w || 400) + ' ' + px + 'px "IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace';
-  function draw() {
+  function draw(now) {
+    now = now || performance.now();
+    const age = calm() ? 1e9 : now - t0;
     ctx.clearRect(0, 0, W, H); ctx.font = mono(12); ctx.textBaseline = 'middle'; ctx.lineWidth = 1;
-    [20, 40, 60, 80, 100].forEach(v => { const y = Y(v / 100); ctx.strokeStyle = col.line; ctx.globalAlpha = 0.7; ctx.beginPath(); ctx.moveTo(M.l, y); ctx.lineTo(W - M.r, y); ctx.stroke(); ctx.globalAlpha = 1; ctx.fillStyle = col.muted; ctx.textAlign = 'right'; ctx.fillText(v, M.l - 8, y); });
+    const gridA = easeOut(age / 500);
+    ctx.globalAlpha = gridA;
+    [20, 40, 60, 80, 100].forEach(v => { const y = Y(v / 100); ctx.strokeStyle = col.line; ctx.globalAlpha = 0.7 * gridA; ctx.beginPath(); ctx.moveTo(M.l, y); ctx.lineTo(M.l + (W - M.l - M.r) * easeOut(age / 700), y); ctx.stroke(); ctx.globalAlpha = gridA; ctx.fillStyle = col.muted; ctx.textAlign = 'right'; ctx.fillText(v, M.l - 8, y); });
     ctx.fillStyle = col.muted; ctx.textAlign = 'center';
     [0, 25, 50, 75, 100].forEach(v => ctx.fillText(v, X(v), H - M.b + 16));
     ctx.fillText('kPa', X(120) + 18, H - M.b + 16);
-    ctx.strokeStyle = col.muted; ctx.beginPath(); ctx.moveTo(X(XLIN) - 3, H - M.b - 4); ctx.lineTo(X(XLIN) + 3, H - M.b + 4); ctx.stroke();   // axis break
-    ctx.textAlign = 'left'; ctx.fillText('O₂ %', 4, M.t - 12);
-    // lunar-base zone: oxygen 30% or more, pressure 10.2 psi (70.33 kPa) or less
-    const zx = X(0), zy = Y(1), zw = X(opts.zone.pMaxKpa) - X(0), zh = Y(opts.zone.oMin) - Y(1);
+    ctx.strokeStyle = col.muted; ctx.beginPath(); ctx.moveTo(X(XLIN) - 3, H - M.b - 4); ctx.lineTo(X(XLIN) + 3, H - M.b + 4); ctx.stroke();
+    ctx.textAlign = 'left'; ctx.fillText('O₂ %', 4, M.t - 12); ctx.globalAlpha = 1;
+    // lunar-base zone: oxygen 30% or more, pressure 10.2 psi (70.33 kPa) or less. It grows out of the top-left corner, then its dashes march.
+    const zk = easeOut((age - 250) / 700), zx = X(0), zy = Y(1), zw = (X(opts.zone.pMaxKpa) - X(0)) * zk, zh = (Y(opts.zone.oMin) - Y(1)) * zk;
     ctx.fillStyle = col.ember; ctx.globalAlpha = 0.13; ctx.fillRect(zx, zy, zw, zh); ctx.globalAlpha = 1;
-    ctx.strokeStyle = col.ember; ctx.lineWidth = 1.5; ctx.setLineDash([6, 4]); ctx.strokeRect(zx, zy, zw, zh); ctx.setLineDash([]); ctx.lineWidth = 1;
-    ctx.fillStyle = col.ember; ctx.font = mono(12, 500); ctx.textAlign = 'left'; ctx.fillText('LUNAR BASE · ≥30% O₂ · ≤10.2 psi', zx + 10, zy + 22, Math.max(60, zw - 16));
-    // points
+    ctx.strokeStyle = col.ember; ctx.lineWidth = 1.5; ctx.setLineDash([6, 4]); ctx.lineDashOffset = calm() ? 0 : -((now / 90) % 10); ctx.strokeRect(zx, zy, zw, zh); ctx.setLineDash([]); ctx.lineDashOffset = 0; ctx.lineWidth = 1;
+    const la = easeOut((age - 900) / 500);
+    ctx.globalAlpha = la; ctx.fillStyle = col.ember; ctx.font = mono(12, 500); ctx.textAlign = 'left'; ctx.fillText('LUNAR BASE · ≥30% O₂ · ≤10.2 psi', zx + 10, zy + 22, Math.max(60, X(opts.zone.pMaxKpa) - X(0) - 16)); ctx.globalAlpha = 1;
+    // dots sweep in from the left; each one overshoots slightly as it appears
     drawn = [];
-    pts.forEach(r => { const x = X(r.p), y = Y(r.o), hot = hover && hover.r === r; ctx.globalAlpha = hot ? 1 : (lit(r) ? 0.8 : 0.6); ctx.fillStyle = lit(r) ? col.lit : col.dark; ctx.beginPath(); ctx.arc(x, y, hot ? 6.5 : 3.4, 0, 6.2832); ctx.fill(); if (hot) { ctx.strokeStyle = col.head; ctx.lineWidth = 2; ctx.stroke(); ctx.lineWidth = 1; } drawn.push({ r, x, y }); });
+    pts.forEach(r => {
+      const x = X(r.p), y = Y(r.o), hot = hover && hover.r === r, k = pop((age - 350 - ((x - M.l) / pw()) * 1000 - (1 - r.o) * 160) / 450);
+      if (k <= 0 && !hot) return;
+      const base = hot ? 1 : (lit(r) ? 0.8 : 0.6), rad = hot ? 6.5 + (calm() ? 0 : Math.sin(now / 160) * 1.2) : 3.4 * Math.max(k, 0);
+      ctx.globalAlpha = base * clamp(k, 0, 1); ctx.fillStyle = lit(r) ? col.lit : col.dark; ctx.beginPath(); ctx.arc(x, y, Math.max(rad, 0), 0, 6.2832); ctx.fill();
+      if (hot) { ctx.strokeStyle = col.head; ctx.lineWidth = 2; ctx.stroke(); ctx.lineWidth = 1; }
+      drawn.push({ r, x, y });
+    });
     ctx.globalAlpha = 1;
-    // spacesuit marker (100% oxygen, 4.3 psi): no test exists. Label sits to the right of the box, joined by a dotted leader.
-    const sx = X(opts.suit.p), sy = Y(opts.suit.o), lx = Math.min(zx + zw + 14, W - M.r - 150);
+    // markers fade in last
+    const ma = easeOut((age - 1300) / 500);
+    ctx.globalAlpha = ma;
+    const sx = X(opts.suit.p), sy = Y(opts.suit.o), lx = Math.min(X(opts.zone.pMaxKpa) + 14, W - M.r - 150);
     ctx.strokeStyle = col.head; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(sx, sy, 6, 0, 6.2832); ctx.stroke(); ctx.lineWidth = 1;
-    ctx.strokeStyle = col.muted; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(sx + 7, sy); ctx.lineTo(lx - 4, sy); ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = col.muted; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(sx + 7, sy); ctx.lineTo(sx + 7 + (lx - 4 - sx - 7) * easeOut((age - 1400) / 500), sy); ctx.stroke(); ctx.setLineDash([]);
     ctx.fillStyle = col.head; ctx.font = mono(12, 500); ctx.textAlign = 'left'; ctx.fillText('SPACESUIT · NO TEST', lx, sy);
-    // Earth air (21% oxygen, 101.3 kPa)
     const ex = X(101.325), ey = Y(0.2095);
     ctx.strokeStyle = col.head; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(ex, ey, 6, 0, 6.2832); ctx.stroke(); ctx.lineWidth = 1;
     ctx.fillStyle = col.head; ctx.font = mono(12, 500); ctx.textAlign = 'right'; ctx.fillText('EARTH AIR 21%', ex - 12, ey - 14);
+    ctx.globalAlpha = 1;
   }
   function pick(x, y) { let b = null, bd = 120; drawn.forEach(d => { const e = (d.x - x) * (d.x - x) + (d.y - y) * (d.y - y); if (e < bd) { bd = e; b = d; } }); return b; }
   function pos(e) { const b = canvas.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; }
   function tip(d) { if (!d) { tipEl.style.display = 'none'; return; } const r = d.r; tipEl.style.display = 'block'; tipEl.textContent = (r.i || r.f) + ' | ' + (r.m || '?') + ' | O2 ' + (r.o * 100).toFixed(1) + '% | ' + r.p.toFixed(1) + ' kPa | ' + (r.g === '?' ? 'gravity not stated' : r.g + ' g') + ' | ' + (opts.label[r.c] || r.c); }
-  canvas.addEventListener('pointermove', e => { const p = pos(e); hover = pick(p[0], p[1]); tip(hover); draw(); });
+  canvas.addEventListener('pointermove', e => { const p = pos(e); hover = pick(p[0], p[1]); tip(hover); canvas.style.cursor = hover ? 'pointer' : 'default'; draw(); });
   canvas.addEventListener('pointerleave', () => { hover = null; tip(null); draw(); });
   canvas.addEventListener('pointerdown', e => { const p = pos(e); hover = pick(p[0], p[1]); tip(hover); draw(); });
+  function loop(now) { if (visible && !document.hidden && W > 0 && !calm() && now - frameT > 30) { frameT = now; draw(now); } requestAnimationFrame(loop); }
+  if ('IntersectionObserver' in window) new IntersectionObserver(es => { const v = es[0].isIntersecting; if (v && !visible) t0 = performance.now(); visible = v; }).observe(canvas);
   window.addEventListener('resize', () => { size(); draw(); });
-  // redraw whenever the canvas gets a real size (tab shown, fonts loaded, window or panel resized), so the plot can never stay blank
-  if (window.ResizeObserver) new ResizeObserver(() => { size(); draw(); }).observe(canvas);
-  colors(); size(); draw();
-  return { refresh() { colors(); size(); draw(); }, count: pts.length };
+  if (window.ResizeObserver) new ResizeObserver(() => { const was = W; size(); if (!was && W) t0 = performance.now(); draw(); }).observe(canvas);
+  colors(); size(); draw(); requestAnimationFrame(loop);
+  return { refresh() { colors(); size(); draw(); }, replay() { t0 = performance.now(); draw(); }, count: pts.length };
 }
