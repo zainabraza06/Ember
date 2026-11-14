@@ -186,8 +186,27 @@ html.calm *,html.calm *::before,html.calm *::after{animation-duration:.001ms!imp
 html.calm .rv{opacity:1;transform:none}html.calm .orbit-dot{display:none}
 @media (max-width:400px){.top-in{padding-left:8px;padding-right:8px;gap:4px}.logo{letter-spacing:.04em;font-size:.82rem;gap:6px}.logo svg{width:22px;height:22px}#motionBtn,#themeBtn{width:40px;min-width:44px}.tour{padding:8px 10px}#menuBtn{padding:8px 10px}}
 @media (max-width:480px){.tour .tl{display:none}.tour{padding:8px 12px}#menuBtn{padding:8px 12px}.top-actions{gap:4px}.logo{letter-spacing:.1em;gap:8px}}
-@media print{body{background:#fff;color:#000;font-size:10.5pt}header,nav,footer,#caption,.noprint,.skip,.sphere,.orbit,.star{display:none!important}section[role=tabpanel]{display:none!important}
-#s-brief{display:block!important}.brief{max-width:none}.card{border:1px solid #999;background:#fff;box-shadow:none}a{color:#000}h1,h2,h3{color:#000}@page{size:A4;margin:14mm}}
+@media print{body{background:#fff;color:#000;font-size:9pt;line-height:1.35}header,nav,footer,#caption,.noprint,.skip,.sphere,.orbit,.star,.mtip{display:none!important}section[role=tabpanel]{display:none!important}
+#s-brief{display:block!important;padding:0!important;margin:0!important}.brief{max-width:none;margin:0}.brief h2{font-size:14pt;margin:0 0 2pt}.brief h3{font-size:10pt;margin:6pt 0 2pt}.brief ol{margin:2pt 0;padding-left:16pt}.brief li{margin:1pt 0;break-inside:avoid}.brief .small,.brief .src{font-size:7.5pt}.brief p{margin:2pt 0}.brief sup a{text-decoration:none}
+.card{border:1px solid #999;background:#fff;box-shadow:none}a{color:#000;text-decoration:none}h1,h2,h3{color:#000}*{animation:none!important;transition:none!important}@page{size:A4;margin:12mm}}
+/* oxygen dial, spacecraft-fire timeline, tooltip */
+.dial{padding:var(--s4);margin-top:var(--s3)}.dialtop{display:flex;justify-content:space-between;gap:var(--s2);align-items:baseline;flex-wrap:wrap}.dialval{font-family:var(--display);font-size:1.25rem;color:var(--head)}.dialval b{font-size:2.4rem;font-weight:500;font-variant-numeric:tabular-nums}
+.dialwrap{margin:var(--s2) 0 0}#dial{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;margin:0;cursor:pointer;touch-action:pan-y}
+#dial::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--blue),var(--violet),var(--ember))}#dial::-moz-range-track{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--blue),var(--violet),var(--ember))}
+#dial::-webkit-slider-thumb{-webkit-appearance:none;width:44px;height:44px;margin-top:-18px;border-radius:50%;background:var(--head);border:4px solid var(--bg);box-shadow:0 0 0 2px var(--head),0 6px 18px rgba(0,0,0,.4)}#dial::-moz-range-thumb{width:36px;height:36px;border-radius:50%;background:var(--head);border:4px solid var(--bg);box-shadow:0 0 0 2px var(--head)}
+#dial:focus-visible{outline:none}#dial:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px #7CC2FF,0 0 0 6px rgba(124,194,255,.35)}#dial:focus-visible::-moz-range-thumb{box-shadow:0 0 0 3px #7CC2FF}
+.dialmarks{position:relative;height:50px;margin:0 22px}.dialmarks span{position:absolute;left:calc(var(--f)*100%);transform:translateX(-50%);text-align:center;font:.78rem/1.3 var(--mono);color:var(--head);white-space:nowrap}.dialmarks span::before{content:"";display:block;width:2px;height:12px;background:var(--head);margin:0 auto 4px}
+.dialmarks .dm-min,.dialmarks .dm-max{color:var(--muted)}.dialmarks .dm-min::before,.dialmarks .dm-max::before{background:var(--muted);height:8px}
+.dcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:var(--s2);margin:var(--s2) 0}
+.dcard{position:relative;padding:var(--s2);border:1px solid var(--line);border-left:5px solid var(--muted);border-radius:var(--r-s);background:var(--panel);min-width:0}.dcard b{display:block;color:var(--head);font-family:var(--display);overflow-wrap:anywhere}.dcard p{margin:6px 0 0}
+.dcard .lim{font-family:var(--mono);font-size:.9rem;color:var(--head)}.dcard .dstate{font-weight:600;color:var(--head)}.dcard.d-b{border-left-color:var(--blue)}.dcard.d-m{border-left-color:var(--violet)}.dcard.d-a{border-left-color:var(--ember);background:linear-gradient(0deg,rgba(var(--ember-rgb),.10),rgba(var(--ember-rgb),.10)),var(--panel)}
+.dcard.flip{animation:dflip .7s cubic-bezier(.2,.7,.2,1)}@keyframes dflip{0%{transform:scale(1)}35%{transform:scale(1.045);box-shadow:0 0 0 3px rgba(var(--ember-rgb),.5)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){.dcard.flip{animation:none}}
+.tline{list-style:none;margin:var(--s3) 0 0;padding:0;position:relative}.tline::before{content:"";position:absolute;left:19px;top:8px;bottom:8px;width:2px;background:var(--glass-line)}
+.tline li{position:relative;padding:0 0 var(--s3) 56px}.tline li:last-child{padding-bottom:0}.tline .tn{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--panel);border:2px solid var(--ember);color:var(--head);font:600 .95rem var(--mono)}
+.tline .tc{padding:var(--s2) var(--s3)}.tline .tc p{margin:8px 0 0}.tline .claim{color:var(--head);font-size:1.05rem}
+.nw{white-space:nowrap}.tline .row{margin-top:10px}.mtip{position:fixed;z-index:80;pointer-events:none;max-width:min(300px,86vw);padding:8px 12px;border-radius:10px;background:var(--panel);color:var(--head);border:1px solid var(--glass-line);box-shadow:var(--shadow);font:.82rem/1.4 var(--mono)}
+@media (max-width:560px){.dial{padding:var(--s2)}.dialmarks span{font-size:.72rem}}
 :root[data-theme="light"] body{background:var(--bg)}:root[data-theme="light"] .sphere,:root[data-theme="light"] .orbit,:root[data-theme="light"] .star{display:none}:root[data-theme="light"] .hsearch button,:root[data-theme="light"] button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 .top-actions{display:flex;gap:var(--s1);align-items:center}@media (max-width:980px){.top-actions{margin-left:auto}}
 body[data-tab="map"]>footer{display:none}
@@ -293,7 +312,8 @@ function mark(c, x, y){ const [lab, col, kind] = CLS[c] || CLS.unknown;
   const st = kind==='cross' ? `stroke="${col}"` : kind==='ring' ? `stroke="${col}"` : `fill="${col}" fill-opacity=".85" stroke="var(--panel)" stroke-width=".8"`;
   return shape(kind, x, y, 4)+` ${st}/>`; }
 function mapPoints(){ return D.points.filter(p => p.g===ST.grav); }
-function renderMap(){
+function renderMap(){ renderMap0(); const mb = document.getElementById('mapBody'); if (mb) setupMapTip(mb); }
+function renderMap0(){
   const pts = mapPoints(), shown = pts.filter(p => !ST.hide.has(p.c));
   const cells = {}; pts.forEach(p => { cells[Math.floor(p.p/20)+','+Math.floor(p.o/0.05)] = 1; });
   let fog = '', nfog = 0;
@@ -691,6 +711,61 @@ function renderLimits(){
   </div>`; }
 function heroAsk(){ const v = $('#hq').value.trim(); if (!v) { $('#hq').focus(); return; } show('ask'); $('#askq').value = v; runAsk(); }
 /* ---------- Moon safety margin card (numbers come from the transcribed Table I rows of NTRS 20130010991) ---------- */
+/* ---------- oxygen dial ---------- */
+const DIAL = {v: 30, all: false, prev: {}};
+const DIAL_CAPTION = 'Limits from the standard 1 g upward-burn test, mostly at 14.7 psia. The planned lunar base is 30% oxygen at 10.2 psi. Pressure and gravity change the result; this is a warning, not a design value.';
+function dialState(r, v){ return v < r.c ? 'b' : (v >= r.u ? 'a' : 'm'); }
+const DIAL_TXT = {b: 'Below its limit: did not sustain flame in the standard test', a: 'Above its limit: burned in the standard test', m: 'Between its two printed limits: some samples burned'};
+function dialHtml(){
+  const R = D.oxygen_dial || []; if (!R.length) return '';
+  const f = v => ((v - 15) / 25).toFixed(4);
+  return `<section class="sec" aria-labelledby="t-dial"><p class="eyebrow">OXYGEN DIAL</p><h2 class="big" id="t-dial">Turn the oxygen up and watch materials cross their limit.</h2>
+  <div class="glass dial"><div class="dialtop"><label for="dial" class="dialval">Oxygen <b id="dialv">${DIAL.v}</b>%</label><span class="small" id="dialn" aria-live="polite"></span></div>
+   <div class="dialwrap"><input id="dial" type="range" min="15" max="40" step="0.5" value="${DIAL.v}" aria-valuetext="${DIAL.v} percent oxygen" aria-describedby="dialcap"><div class="dialmarks" aria-hidden="true"><span class="dm-min" style="--f:0">15%</span><span style="--f:${f(21)}">Earth air 21%</span><span style="--f:${f(30)}">Lunar base 30%</span><span class="dm-max" style="--f:1">40%</span></div></div>
+   <div class="dcards" id="dialcards"></div>
+   <div class="row"><button class="ghost" type="button" id="dialmore" aria-expanded="false"></button></div>
+   <p class="small muted" id="dialcap">${esc(DIAL_CAPTION)}</p></div></section>`;
+}
+function renderDial(animate){
+  const R = D.oxygen_dial || []; if (!R.length || !document.getElementById('dialcards')) return;
+  const v = DIAL.v, d = r => (v < r.c ? r.c - v : (v >= r.u ? v - r.u : 0));
+  const sorted = R.map(r => ({r, s: dialState(r, v), k: d(r)})).sort((a, b) => a.k - b.k || a.r.u - b.r.u);
+  const cnt = {a: 0, b: 0, m: 0}; sorted.forEach(x => cnt[x.s]++);
+  const n0 = window.matchMedia && matchMedia('(max-width:560px)').matches ? 6 : 12, shownN = DIAL.all ? sorted.length : n0, list = sorted.slice(0, shownN);
+  $('#dialn').textContent = `${cnt.a} of ${R.length} materials burned in the test at this oxygen level, ${cnt.m} are between their limits, ${cnt.b} did not.`;
+  $('#dialcards').innerHTML = list.map(({r, s}) => `<article class="dcard d-${s}${animate && DIAL.prev[r.id] && DIAL.prev[r.id] !== s ? ' flip' : ''}"><b>${esc(r.m)}</b>
+   <p class="lim">ULOI ${r.u}% &middot; MOC ${r.c}%</p><p class="small">Tested at ${r.psia} psia${r.psia === 14.7 ? '' : ' (10.2 psia is the lunar-base pressure)'}</p>
+   <p class="dstate">${DIAL_TXT[s]}</p><p class="src">${link('https://ntrs.nasa.gov/citations/' + r.doc.replace('NTRS-', ''), r.doc.replace('-', ' '))}, <span class="nw">PDF ${esc(r.page)}, ${esc(r.tab)}</span></p></article>`).join('');
+  R.forEach(r => { DIAL.prev[r.id] = dialState(r, v); });
+  const b = $('#dialmore'); b.textContent = DIAL.all ? `Show only the ${n0} nearest to the dial` : `Show all ${R.length} materials`; b.setAttribute('aria-expanded', DIAL.all);
+}
+function setupDial(){
+  const el = document.getElementById('dial'); if (!el) return; renderDial(false);
+  el.addEventListener('input', () => { DIAL.v = +el.value; $('#dialv').textContent = DIAL.v; el.setAttribute('aria-valuetext', DIAL.v + ' percent oxygen'); renderDial(true); });
+  $('#dialmore').addEventListener('click', () => { DIAL.all = !DIAL.all; renderDial(false); });
+}
+/* ---------- what a spacecraft fire does (public claims only, shown unchanged) ---------- */
+function timelineHtml(){
+  const C = (D.timeline_ids || []).map(id => D.claims.find(c => c.claim_id === id)).filter(Boolean); if (!C.length) return '';
+  return `<section class="sec" aria-labelledby="t-fire"><p class="eyebrow">SPACECRAFT FIRE</p><h2 class="big" id="t-fire">What a spacecraft fire does.</h2>
+  <p class="gapintro muted">Four public claims from NASA's Saffire reports, in this order, each exactly as stored in the ledger with its review label and page citation. The ledger has no public claim on exposure limits, so none is shown.</p>
+  <ol class="tline">${C.map((c, i) => `<li><span class="tn" aria-hidden="true">${i + 1}</span><article class="glass tc"><p class="claim">${esc(c.statement)}</p><div class="row"><span class="tag ver">${esc(c.review_label)}</span></div>
+   <p class="src">${esc(c.citation)} &middot; claim ${esc(c.claim_id)} &middot; ${link(c.source_url, 'NTRS')}</p></article></li>`).join('')}</ol></section>`;
+}
+/* ---------- tooltip on map points ---------- */
+function setupMapTip(root){
+  const first = !root.dataset.tipReady; root.dataset.tipReady = 1;
+  let tip = document.getElementById('mtip'); if (!tip) { tip = document.createElement('div'); tip.id = 'mtip'; tip.className = 'mtip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true; document.body.appendChild(tip); }
+  root.querySelectorAll('g[data-i]').forEach(g => { const t = g.querySelector('title'); if (!t) return; g.dataset.tip = t.textContent; g.setAttribute('tabindex', '0'); g.setAttribute('role', 'img'); g.setAttribute('aria-label', t.textContent); t.remove(); });
+  const put = (g, x, y) => { tip.textContent = g.dataset.tip; tip.hidden = false; const w = tip.offsetWidth, h = tip.offsetHeight; tip.style.left = Math.max(8, Math.min(innerWidth - w - 8, x + 14)) + 'px'; tip.style.top = Math.max(8, Math.min(innerHeight - h - 8, y + 16)) + 'px'; };
+  root.querySelectorAll('g[data-i]').forEach(g => { if (g.dataset.tip) return; });
+  if (!first) return;
+  root.addEventListener('pointermove', e => { const g = e.target.closest && e.target.closest('g[data-i]'); if (g && g.dataset.tip) put(g, e.clientX, e.clientY); else tip.hidden = true; });
+  root.addEventListener('pointerleave', () => { tip.hidden = true; });
+  root.addEventListener('focusin', e => { const g = e.target.closest && e.target.closest('g[data-i]'); if (g) { const r = g.getBoundingClientRect(); put(g, r.left, r.top); } });
+  root.addEventListener('focusout', () => { tip.hidden = true; });
+  addEventListener('scroll', () => { tip.hidden = true; }, {passive: true});
+}
 function moonMarginHtml(){
   const M = D.moon_margin; if (!M || !M.rows.length) return '';
   const src = D.sources[M.doc] || {}, minus = v => (v < 0 ? '−' : '') + Math.abs(v), name = r => r.fuel.split(/[ (]/)[0];
@@ -780,6 +855,7 @@ function renderLanding(){
     <div class="stats glass" id="stats"><div class="stat"><b id="stI"></b><span>NASA combustion investigations</span></div><div class="stat"><b id="stC"></b><span>claims, each with a page citation</span></div><div class="stat"><b id="stT"></b><span>tests mapped by oxygen and pressure</span></div><div class="stat"><b id="stP"></b><span>partial-gravity tests in PSI, shown openly</span></div></div>
    ${moonMarginHtml()}
    </section>
+   ${dialHtml()}
    <section class="sec" aria-labelledby="t-map"><p class="eyebrow">THE MAP</p><h2 class="big" id="t-map">Every test, placed by oxygen and pressure.</h2><div id="mapBody"></div>
     <details class="card" id="det3d"><summary>3D view of the same tests</summary><div class="plotcard" style="margin-top:8px"><canvas id="cube" tabindex="0" role="img" aria-label="Interactive 3D plot of the real tests: pressure, oxygen share and experiment family. Drag to rotate; arrow keys also rotate."></canvas><div class="viz-tip" id="cubeTip"></div></div><p class="small muted">Drag to rotate. The translucent box is the planned lunar-base atmosphere.</p></details></section>
    <section class="sec" id="gaps" aria-labelledby="t-gaps"><p class="eyebrow">WHERE NEXT</p><h2 class="big" id="t-gaps">Where should NASA test next?</h2>
@@ -791,6 +867,7 @@ function renderLanding(){
      <article class="glass lcard noans"><div class="row"><span class="tag unrev">No answer</span></div>
       <p class="claim">The evidence ledger has nothing on this. Ember will not guess.</p>
       <p class="small">Ask it something NASA's reports do not cover and it says so, instead of improvising.</p><button class="ghost" type="button" onclick="show('ask');askExample('who won the cricket match')">Try an unsupported question</button></article></div></section>
+   ${timelineHtml()}
    <section class="sec" aria-labelledby="t-inv"><p class="eyebrow">THE INVESTIGATIONS</p><h2 class="big" id="t-inv">Prevention, detection, suppression: what NASA tested for each.</h2>
     <div class="four">
      <article class="glass icard"><span class="tag prevention">Prevention</span><h3>BASS, BASS-II</h3><p>Which solid materials ignite and keep burning, and at what oxygen level, in flowing air.</p><a href="#" onclick="openGroup('prevention');return false">Open in Investigations &rarr;</a></article>
@@ -814,7 +891,7 @@ function renderLanding(){
   try { window.PLOT = initScatter($('#plot2d'), $('#plotTip'), D.tests, {zone, suit, label: OC}); } catch (e) { console.error(e); $('#plot2d').outerHTML = '<div class="state">The plot could not start in this browser.</div>'; }
   $('#det3d').addEventListener('toggle', () => { if ($('#det3d').open && !window.CUBE) { try { window.CUBE = initCube($('#cube'), $('#cubeTip'), D.tests, {zone, suit, label: OC}); } catch (e) { console.error(e); } } else if (window.CUBE) CUBE.refresh(); });
   const box = $('#starsBox'); for (let n = 0; n < 40; n++) { const st = document.createElement('i'); st.className = 'star'; const z = Math.random() < .2 ? 2 : 1; st.style.cssText = `left:${(Math.random()*100).toFixed(1)}%;top:${(Math.random()*620).toFixed(0)}px;width:${z}px;height:${z}px;animation-delay:${(Math.random()*6).toFixed(1)}s`; box.appendChild(st); }
-  renderMap();
+  renderMap(); setupDial();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (window.PLOT) PLOT.refresh(); });
   renderGaps();
   setupMotion();

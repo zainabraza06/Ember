@@ -11,6 +11,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 OFFICIAL = 'https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/'
 ND = 'not documented in the catalog'
+# Steps of the spacecraft-fire timeline on the home page: existing public claims about Saffire VI and related spacecraft-fire results, shown unchanged.
+TIMELINE_IDS = ['C-93ae8672b7', 'C-c53c7f1c5c', 'C-3a58e8c51e', 'C-2eef8a9583']
+DIAL_DOCS = ('NTRS 20110008636', 'NTRS 20170004702')
 
 # ---- Tags (G2). Reasons come from the official Background / Potential Considerations text, or from the investigation metadata.
 TAGS = {
@@ -261,6 +264,21 @@ def main():
     moon_margin = {'doc': 'NTRS-20130010991', 'rows': [
         {'id': r['test_id'], 'fuel': r['material_or_fuel'], 'g': r['gravity_level_g'], 'margin': float(r['o2_margin_vs_1g_pct']), 'src': r['source_ref'].split(' | ')[0]}
         for r in tests if 'NTRS 20130010991' in r['source_ref'] and r['o2_margin_vs_1g_pct'] not in ('', None) and r['gravity_level_g'] in ('0.165', '0.38')]}
+    # oxygen dial: 1 g flammability-limit rows (ULOI and MOC as printed) that state a numeric limit and a pressure
+    def oxy_dial_rows():
+        out = []
+        for r in tests:
+            ref = r['source_ref'].split(' | ')[0]
+            if r['record_type'] != 'limit' or r['gravity_level_g'] != '1' or not ref.startswith(DIAL_DOCS):
+                continue
+            u, m, pk = fl(r['uloi_vol_pct']), fl(r['moc_vol_pct']), fl(r['pressure_kpa'])
+            if u is None or m is None or pk is None:
+                continue
+            seg = [x.strip() for x in ref.split(';')[0].split(',')]
+            out.append({'id': r['test_id'], 'm': r['material_or_fuel'], 'u': u, 'c': m, 'psia': round(pk / 6.894757, 1), 'doc': seg[0].replace('NTRS ', 'NTRS-'),
+                        'page': re.match(r'p\.[\d-]+', seg[1].replace('PDF ', '')).group(0), 'tab': re.match(r'Table \d+', next((x for x in seg[2:] if x.startswith('Table')), 'Table ')).group(0).strip()})
+        return out
+    oxygen_dial = oxy_dial_rows()
     ranking = json.loads((ROOT / 'data/processed/ranking.json').read_text(encoding='utf-8'))
     interp = json.loads((ROOT / 'data/processed/interpretations.json').read_text(encoding='utf-8'))
     claims, ledger_stats, srcs = [], {}, {}
@@ -293,7 +311,7 @@ def main():
     data = {'points': points, 'points_without_atmosphere': no_atm, 'ranking': ranking, 'interpretations': interp, 'claims': claims,
             'ledger_stats': ledger_stats, 'sources': srcs, 'conflicts': [l for l in conflicts_md.splitlines() if l.startswith('| PSI-')],
             'official': OFFICIAL, 'nd': ND, 'investigations': invs, 'pairs': [dict(id=k, **v) for k, v in sorted(pairs.items())], 'literature': lit,
-            'tests': ask_rows, 'moon_margin': moon_margin, 'review': review, 'gravity_counts': grav_counts, 'profiles': profiles, 'atmos_reports': atmos, 'bre_quote': quote,
+            'tests': ask_rows, 'moon_margin': moon_margin, 'oxygen_dial': oxygen_dial, 'timeline_ids': TIMELINE_IDS, 'review': review, 'gravity_counts': grav_counts, 'profiles': profiles, 'atmos_reports': atmos, 'bre_quote': quote,
             'build': {'tests_rows': len(tests), 'investigations': len(invs)}}
     tpl = (ROOT / 'scripts/site_template.html').read_text(encoding='utf-8')
     out = ROOT / 'site' / 'index.html'
