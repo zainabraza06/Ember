@@ -7,7 +7,7 @@
 import csv
 import json
 
-from . import config
+from . import config, review_wording
 
 PUBLIC_STATUSES = ('verified_auto', 'approved', 'pending_verification')   # pending_verification is shown labelled 'unreviewed'
 
@@ -34,9 +34,9 @@ def public_view(claim, source):
     allowed = source.get('display_verbatim') == 'yes'
     return {'claim_id': claim['claim_id'], 'statement': claim['statement'], 'status': claim['status'], 'variables': claim['variables'],
             'conditions': claim['conditions'], 'effect_direction': claim['effect_direction'], 'evidence_type': claim['evidence_type'],
-            'gravity_label': claim.get('gravity_label'), 'corrected': 'original_statement' in claim, 'group_id': claim.get('group_id'), 'independent_sources': claim.get('independent_sources', 0),
+            'review_path': 'automatic' if claim['status'] == 'verified_auto' else 'ai_page_check', 'override': bool(claim.get('review', {}).get('code_check_override')), 'gravity_label': claim.get('gravity_label'), 'corrected': 'original_statement' in claim, 'group_id': claim.get('group_id'), 'independent_sources': claim.get('independent_sources', 0),
             'citation': citation(claim, source), 'source_url': source['url'], 'page': claim['page'],
-            'review_label': 'unreviewed' if claim['status'] == 'pending_verification' else 'reviewed and verified by ZRM',
+            'review_label': 'unreviewed' if claim['status'] == 'pending_verification' else review_wording.label_for(claim['status']),
             'span': claim['span'] if allowed else None, 'span_hidden_reason': None if allowed else 'source is not a US Government work (copyright)'}
 
 

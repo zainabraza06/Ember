@@ -5,6 +5,7 @@ import json
 from . import config
 from .llm import RUN_LOG, read_usage, usage_totals
 from .pages import read_sources
+from . import review_wording
 from .review import audit_stats
 
 PILOT_JSON = config.LEDGER_DIR / 'pilot.json'
@@ -117,19 +118,18 @@ def write_report(stats=None):
     L += ['## 7. Human audit', '',
           f"CLAIM_AUDIT.md: {done} of 30 sampled claims judged so far; " + (f"{yes} correct ({yes / done:.0%}); target >= 90%." if done else 'none judged yet (target >= 90% correct).'),
           f"Review queue: {status['needs_review']} claims in `data/review/claim_review.csv` await a decision.", '']
-    acc = [c for c in kept if c['status'] == 'approved']
-    corr = [c for c in acc if c.get('review', {}).get('corrected')]
-    hrej = [c for c in rej if 'human_rejected' in c['reasons']]
-    L += ['## 7b. Claim review decisions', '',
-          f"On 2026-11-14 the reviewer (ZRM) decided the 84 claims held back by the automatic checks (`data/review/claim_review.csv`; the AI triage `data/CLAIM_TRIAGE_AI_SUGGESTIONS.csv` and AI page check `data/CLAIM_PAGE_CHECK_AI.csv` were suggestions she considered). "
-          'Every public claim, whether it passed the automatic checks or was decided in review, was reviewed and verified by ZRM against the NTRS page.', '',
+    sm = review_wording.summary(); w = review_wording.words(sm)
+    L += ['## 7b. How the claims were checked', '',
+          'Generated from the ledger files by `ledger/review_wording.py` (the same source as the site); the counts cannot drift from the data.', '',
+          '- ' + w['all'], '- ' + w['auto'], '- ' + w['ai'], '- ' + w['excluded']] + (['- ' + w['override']] if w['override'] else []) + ['- ' + w['spot'], '',
           '| outcome | claims |', '|---|---|',
-          f'| approved as extracted | {len(acc) - len(corr)} |', f'| approved with correction (reworded statement or gravity class; span unchanged) | {len(corr)} |',
-          f"| of which approved by manual override of a failed code check (not a passed check) | {sum(1 for c in acc if c.get('review', {}).get('code_check_override'))} |",
-          f'| rejected | {len(hrej)} |', f"| still needs_review | {status['needs_review']} |",
-          f'| public claims reviewed and verified by a person (ZRM) against the source page | {config.HUMAN_OPENED_CLAIMS} |', '',
-          'Gravity relabels of claims outside the review queue are listed in `data/review/gravity_relabel.csv`. A reworded statement is re-checked by code against its unchanged span (span, numbers, conditions); a failing wording stays needs_review. '
-          'Only verified_auto and approved claims are public; needs_review and rejected claims are never shown or used to answer.', '']
+          f"| public claims, each opened and checked against its source page by the reviewer (ZRM) | {sm['checked_by_reviewer']} |",
+          f"| passed the automatic checks first | {sm['auto']} |", f"| approved after an AI-assisted page check, then checked by the reviewer | {sm['ai_page_check']} |",
+          f"| of which with a corrected statement or gravity class (span unchanged unless extended) | {sm['corrected']} |",
+          f"| of which approved by manual override of the number check | {len(sm['overrides'])} |",
+          f"| rejected | {sm['rejected']} |", f"| held back, not published | {sm['held_back']} |", '',
+          'A reworded statement is re-checked by code against its span (span, numbers, conditions); a failing wording stays held back. A span can only be extended, never replaced. Gravity relabels of claims outside the review queue are in `data/review/gravity_relabel.csv`. '
+          'Only automatic-checks-passed and approved claims are public; held-back and rejected claims are never shown or used to answer.', '']
     if stats and (stats.get('stopped') or stats.get('failed_chunks') or stats.get('pending_chunks')):
         L += ['## 8. Last run did not complete', '', f"Stopped: {stats.get('stopped')}. Pending chunks: {len(stats.get('pending_chunks', []))}; failed chunks: {stats.get('failed_chunks')}. "
               'Rerun `python -m ledger`; finished calls are cached and are not repeated.', '']

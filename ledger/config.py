@@ -84,5 +84,5 @@ MAX_TOKENS = int(os.environ.get('LEDGER_MAX_TOKENS', 3_000_000))   # total over 
 MAX_RETRIES = int(os.environ.get('LEDGER_MAX_RETRIES', 8))
 DAILY_RETRY_AFTER_S = 900   # a Retry-After longer than this is treated as a daily limit
 
-# Claims whose source page a person (the reviewer, ZRM) opened and checked by hand: all public claims (confirmed by the team, 2026-11-14).
-HUMAN_OPENED_CLAIMS = 255
+# The reviewer (ZRM) opened and checked every public claim against its source page (confirmed by the team, 2026-11-14). Used only by ledger/review_wording.py.
+REVIEWER_CHECKED_ALL_PUBLIC = True
