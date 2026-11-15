@@ -1,9 +1,2 @@
-* text=auto
-# Data files must stay byte-exact on every platform (hashes in data/processed/build_report.json depend on it)
-data/raw/** -text
-data/transcribed/** -text
-data/processed/** -text
-data/llm/** -text
-data/review/** -text
-*.pdf binary
-data/ledger/** -text
+site/model/* -text
+data/embeddings/* -text
