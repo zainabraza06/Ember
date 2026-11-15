@@ -1,0 +1,13 @@
+{
+ "model": "BAAI/bge-small-en-v1.5",
+ "export": "Xenova/bge-small-en-v1.5 onnx/model_quantized.onnx (int8)",
+ "dim": 384,
+ "claims": 255,
+ "pooling": "cls",
+ "normalized": true,
+ "query_prefix": "Represent this sentence for searching relevant passages: ",
+ "passage_text": "claim statement",
+ "model_sha256": "6c9c6101a956d62dfb5e7190c538226c0c5bb9cb27b651234b6df063ee7dbfe4",
+ "vocab_sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+ "vectors_sha256": "ca22c0ac9764c0fff44c1b7a693989d0497b075f067e37a71c18a997a7e07092"
+}
