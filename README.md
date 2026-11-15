@@ -391,7 +391,7 @@ Word matching misses paraphrases ("how long did the smoke detector take to sound
 - **Model:** BAAI `bge-small-en-v1.5` (MIT), int8 ONNX, 34 MB, run in the browser with `onnxruntime-web` (WASM, one thread). Claim vectors (255 x 384, 382 KB) are computed offline by `scripts/build_embeddings.py` and embedded in the page; only the user's question is embedded at query time.
 - **Safe by construction:** it only ranks existing claims. Nothing is generated, every result keeps its review label and page citation, a claim is shown only at a similarity of at least 0.60 (off-topic questions score at most 0.52, so they are still refused), and held-back or rejected claims have no vector.
 - **Fallback:** if the model cannot load (the page opened from a file, no WASM SIMD, a failed download), the page says so and the word-matching search is used unchanged.
-- **Cost, measured:** the model adds about 215 MB of browser memory, loads in about 2 s from a local server and embeds a question in about 0.1 to 0.2 s. Details in [`docs/SEMANTIC_SEARCH.md`](docs/SEMANTIC_SEARCH.md).
+- **Cost, measured:** the model adds about 215 MB of browser memory, loads in about 2 s from a local server (the first uncached visit to GitHub Pages took about 21 s on the build machine's connection) and embeds a question in about 0.1 to 0.2 s. Details in [`docs/SEMANTIC_SEARCH.md`](docs/SEMANTIC_SEARCH.md).
 - **Evaluation:** on 16 hand-written paraphrases that avoid the claims' words, the expected claim is in the top 3 for 9 of 16 questions (word matching: 0 of 16 by construction); 0 of 6 off-topic questions show a claim. The set is small and hand-made, so read it as a direction, not a benchmark.
 
 ---

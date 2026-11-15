@@ -28,7 +28,7 @@ browser:  question --prefix + WordPiece--> BGE-small int8 (onnxruntime-web, WASM
 | Chrome process memory, page without the model | about +210 MB over an empty tab |
 | Chrome process memory, page with the model ready | about +425 MB over an empty tab, so the model adds **about 215 MB** |
 | JavaScript heap | about 5 MB (the model lives in WASM memory) |
-| Model load time (local server) | 1.8 to 2.6 s |
+| Model load time | 1.8 to 2.6 s from a local server; about 21 s for the first, uncached visit to GitHub Pages on the build machine's connection (the browser caches it afterwards) |
 | Embedding one question | roughly 0.1 to 0.2 s |
 
 ## Evaluation (`data/eval/semantic_queries.json`, `scripts/eval_semantic.mjs`)
