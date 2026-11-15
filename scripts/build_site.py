@@ -313,6 +313,16 @@ def main():
             'official': OFFICIAL, 'nd': ND, 'investigations': invs, 'pairs': [dict(id=k, **v) for k, v in sorted(pairs.items())], 'literature': lit,
             'tests': ask_rows, 'moon_margin': moon_margin, 'oxygen_dial': oxygen_dial, 'timeline_ids': TIMELINE_IDS, 'review': review, 'gravity_counts': grav_counts, 'profiles': profiles, 'atmos_reports': atmos, 'bre_quote': quote,
             'build': {'tests_rows': len(tests), 'investigations': len(invs)}}
+    # meaning-based search: claim vectors computed offline by scripts/build_embeddings.py (only public claims; checked against the claims shown on the page)
+    emb = ROOT / 'data/embeddings'
+    if (emb / 'claim_vectors.f32').exists():
+        ids = json.loads((emb / 'claim_ids.json').read_text(encoding='utf-8'))
+        shown = {c['claim_id'] for c in claims}
+        assert set(ids) == shown, 'data/embeddings is out of date: run python scripts/build_embeddings.py'
+        data['semantic'] = dict(json.loads((emb / 'meta.json').read_text(encoding='utf-8')), ids=ids, vectors=__import__('base64').b64encode((emb / 'claim_vectors.f32').read_bytes()).decode('ascii'))
+        sem_js = (ROOT / 'scripts/semantic_core.js').read_text(encoding='utf-8')
+    else:
+        sem_js = ''
     tpl = (ROOT / 'scripts/site_template.html').read_text(encoding='utf-8')
     out = ROOT / 'site' / 'index.html'
     out.parent.mkdir(exist_ok=True)
@@ -326,7 +336,7 @@ def main():
     fonts_css = (face('Sora', 'Sora-var.woff2', 100, 800) + face('IBM Plex Sans', 'IBMPlexSans-var.woff2', 100, 700)
                  + face('IBM Plex Mono', 'IBMPlexMono-400.woff2', 400) + face('IBM Plex Mono', 'IBMPlexMono-500.woff2', 500))
     tpl = tpl.replace('/*__FONTS__*/', fonts_css)
-    out.write_text(tpl.replace('/*__HERO_CUBE__*/', cube_js).replace('/*__ASK_PARSER__*/', parser_js).replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False).replace('</', '<\\/')), encoding='utf-8')
+    out.write_text(tpl.replace('/*__HERO_CUBE__*/', cube_js).replace('/*__ASK_PARSER__*/', parser_js).replace('/*__SEMANTIC_CORE__*/', sem_js).replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False).replace('</', '<\\/')), encoding='utf-8')
     nt, nc = write_download_files(tests, claims)
     print('wrote site/data: tests.csv', nt, 'rows; data_dictionary.html; ledger_claims.json', nc, 'claims')
     print('wrote', out, len(invs), 'investigations;', len(pairs), 'pairs;', len(lit), 'literature rows;', quote[:80])

@@ -100,8 +100,10 @@ class NoSecretsOrNetwork(unittest.TestCase):
         html = (ROOT / 'site' / 'index.html').read_text(encoding='utf-8')
         import re
         self.assertIsNone(re.search(r'AQ\.[A-Za-z0-9_-]{20,}|gsk_[A-Za-z0-9]{20,}|AIza[A-Za-z0-9_-]{20,}', html))
-        for bad in ('GEMINI_API_KEY', 'GROQ_API_KEY', 'fetch(', 'XMLHttpRequest', 'api.groq.com', 'googleapis.com'):
+        for bad in ('GEMINI_API_KEY', 'GROQ_API_KEY', 'XMLHttpRequest', 'api.groq.com', 'googleapis.com'):
             self.assertNotIn(bad, html, bad)
+        for call in re.findall(r'fetch\(([^)]*)\)', html):      # the only requests are for the page's own model files (meaning-based search)
+            self.assertTrue(call.startswith("'model/"), call)
 
     def test_unreviewed_claims_are_labelled(self):
         from ledger import verify

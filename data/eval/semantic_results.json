@@ -1,0 +1,231 @@
+{
+ "state": "ready",
+ "min": 0.62,
+ "para": [
+  {
+   "q": "is rubber-like silicone less likely to catch fire without gravity",
+   "expect": "C-8c4946ce67",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": 1,
+   "semTop": [
+    "C-8c4946ce67",
+    0.744
+   ]
+  },
+  {
+   "q": "what air pressure is the new astronaut suit tested at",
+   "expect": "C-da02ecf3c2",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": 1,
+   "semTop": [
+    "C-da02ecf3c2",
+    0.756
+   ]
+  },
+  {
+   "q": "how large were the real-size blazes set in uncrewed cabins",
+   "expect": "C-93ae8672b7",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": 3,
+   "semTop": [
+    "C-a9852ebe04-b",
+    0.593
+   ]
+  },
+  {
+   "q": "how long did it take for the smoke detector to sound in the Saffire fire",
+   "expect": "C-3a58e8c51e",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": 1,
+   "semTop": [
+    "C-3a58e8c51e",
+    0.689
+   ]
+  },
+  {
+   "q": "on Mars how much less oxygen is needed to sustain flames compared with Earth",
+   "expect": "C-62ef41d72e",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": null,
+   "semTop": [
+    "C-73997e494a",
+    0.768
+   ]
+  },
+  {
+   "q": "does richer breathing air make materials more dangerous",
+   "expect": "C-cd63a44487",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": 1,
+   "semTop": [
+    "C-cd63a44487",
+    0.773
+   ]
+  },
+  {
+   "q": "does a stronger breeze make fuel harder to light",
+   "expect": "C-aff4bc0482",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": null,
+   "semTop": [
+    "C-a9852ebe04-b",
+    0.712
+   ]
+  },
+  {
+   "q": "what does the upper limit oxygen index mean statistically",
+   "expect": "C-c06496fedf",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": null,
+   "semTop": [
+    "C-3c1ef27637",
+    0.761
+   ]
+  },
+  {
+   "q": "does it take longer to light a sample when air is nearly too thin to burn",
+   "expect": "C-1baa9dd6b1",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": null,
+   "semTop": [
+    "C-6b16070f3a-b",
+    0.737
+   ]
+  },
+  {
+   "q": "do broad strips of fuel catch fire in thinner atmospheres than narrow ones",
+   "expect": "C-cc57d4c263",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": null,
+   "semTop": [
+    "C-622b783802-b",
+    0.734
+   ]
+  },
+  {
+   "q": "was the oxygen consumed turning almost entirely into carbon dioxide",
+   "expect": "C-bbea4a08d7",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": 1,
+   "semTop": [
+    "C-bbea4a08d7",
+    0.739
+   ]
+  },
+  {
+   "q": "below what oxygen share did fire stop travelling across double-faced fuel strips",
+   "expect": "C-2e4041411e",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": null,
+   "semTop": [
+    "C-1bf80c55ba-b",
+    0.722
+   ]
+  },
+  {
+   "q": "why does stronger gravity make flames die faster",
+   "expect": "C-6f8d6b4ffd",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": 1,
+   "semTop": [
+    "C-6f8d6b4ffd",
+    0.801
+   ]
+  },
+  {
+   "q": "what were the dimensions of the burning strips",
+   "expect": "C-d26da19eb0",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": null,
+   "semTop": [
+    "C-2481b6d0f4",
+    0.646
+   ]
+  },
+  {
+   "q": "how does the brightness and size of a flame change when weight goes up",
+   "expect": "C-a9852ebe04",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": 1,
+   "semTop": [
+    "C-a9852ebe04",
+    0.778
+   ]
+  },
+  {
+   "q": "what is the coolest reading the thermal sensor can pick up",
+   "expect": "C-e52712eefa",
+   "termRank": null,
+   "termHits": 0,
+   "semRank": 1,
+   "semTop": [
+    "C-e52712eefa",
+    0.611
+   ]
+  }
+ ],
+ "off": [
+  {
+   "q": "who won the cricket match",
+   "semTop": 0.448,
+   "termHits": 0,
+   "shownBySemantic": false
+  },
+  {
+   "q": "best pizza recipe in Lahore",
+   "semTop": 0.453,
+   "termHits": 0,
+   "shownBySemantic": false
+  },
+  {
+   "q": "what is the capital of France",
+   "semTop": 0.449,
+   "termHits": 0,
+   "shownBySemantic": false
+  },
+  {
+   "q": "how do I train a puppy",
+   "semTop": 0.418,
+   "termHits": 0,
+   "shownBySemantic": false
+  },
+  {
+   "q": "tesla share price today",
+   "semTop": 0.524,
+   "termHits": 0,
+   "shownBySemantic": false
+  },
+  {
+   "q": "will it rain tomorrow in Karachi",
+   "semTop": 0.495,
+   "termHits": 0,
+   "shownBySemantic": false
+  }
+ ],
+ "summary": {
+  "paraphrases": 16,
+  "term_top3": 0,
+  "term_top8": 0,
+  "semantic_top1": 8,
+  "semantic_top3": 9,
+  "semantic_top5": 9,
+  "off_topic": 6,
+  "off_topic_shown_by_semantic": 0,
+  "off_topic_with_term_hits": 0
+ }
+}

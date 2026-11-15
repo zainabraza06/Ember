@@ -226,11 +226,12 @@ body[data-tab="map"]>footer{display:none}
 <section id="s-interp" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-ask" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-brief" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-mis" role="tabpanel"><div class="state" role="status">Loading…</div></section>
 <section id="s-grav" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-earth" role="tabpanel"><div class="state" role="status">Loading…</div></section><section id="s-limits" role="tabpanel"><div class="state" role="status">Loading&hellip;</div></section><section id="s-about" role="tabpanel"><div class="state" role="status">Loading…</div></section>
 </main>
-<footer>Ember &middot; team of one with AI assistance. <a href="data/tests.csv" download>Download the data</a> (<a href="data/data_dictionary.html">data dictionary</a>, <a href="data/ledger_claims.json" download>ledger claims</a>). Ember explorer. Built from NASA PSI records, NASA technical reports and a reproducible pipeline. No model runs on this page; its text is quoted from NASA records, counted from the data, or taken from the claim ledger and labelled with its review status.</footer>
+<footer>Ember &middot; team of one with AI assistance. <a href="data/tests.csv" download>Download the data</a> (<a href="data/data_dictionary.html">data dictionary</a>, <a href="data/ledger_claims.json" download>ledger claims</a>). Ember explorer. Built from NASA PSI records, NASA technical reports and a reproducible pipeline. The page generates no text: what it shows is quoted from NASA records, counted from the data, or taken from the claim ledger and labelled with its review status. One small embedding model (BGE-small, int8) runs on your device only to rank existing claims by meaning; word matching is the fallback.</footer>
 <div id="caption" role="status" aria-live="polite"><p id="capText"></p><div class="row"><button onclick="storyPause()" id="pauseBtn">Pause</button><button onclick="stopStory()">Stop</button></div></div>
 <noscript><p class="state">This explorer needs JavaScript to draw its tables and map.</p></noscript>
 <script id="data" type="application/json">/*__DATA__*/null</script>
 <script>/*__ASK_PARSER__*/</script>
+<script>/*__SEMANTIC_CORE__*/</script>
 <script>/*__HERO_CUBE__*/</script>
 <script>
 let D;
@@ -278,7 +279,7 @@ function setupMotion(){
   if (land && window.matchMedia && matchMedia('(pointer:fine)').matches) { let raf = 0; addEventListener('pointermove', e => { if (calm() || raf) return; raf = requestAnimationFrame(() => { raf = 0; land.style.setProperty('--mx', (e.clientX / innerWidth - 0.5).toFixed(3)); land.style.setProperty('--my', (e.clientY / innerHeight - 0.5).toFixed(3)); }); }, {passive: true}); }
 }
 /* ---------- shell: tabs, theme ---------- */
-function show(id){ current = id; TABS.forEach(([k]) => { $('#s-'+k).classList.toggle('on', k===id); });
+function show(id){ current = id; if (id==='ask' && typeof semStart==='function') setTimeout(semStart, 300); TABS.forEach(([k]) => { $('#s-'+k).classList.toggle('on', k===id); });
   document.querySelectorAll('#tabs button').forEach(b => { b.setAttribute('aria-selected', String(b.dataset.k===id)); }); toggleMore(false); const inMore = MORE.includes(id), mb = document.getElementById('moreBtn'); document.getElementById('moreLabel').textContent = inMore ? TABS.find(x => x[0]===id)[1] : 'More'; if (inMore) mb.setAttribute('aria-current','page'); else mb.removeAttribute('aria-current');
   if (id==='cmp') safe(renderCmp,'cmp'); document.body.dataset.tab = id; if (id==='map' && window.PLOT) requestAnimationFrame(() => PLOT.refresh()); document.querySelectorAll('.mainnav a').forEach(a => { if (a.dataset.k===id) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); }); const mn = document.getElementById('mainnav'); if (mn) mn.classList.remove('open'); window.scrollTo(0,0); }
 const MORE = ['inv','cmp','rank','interp','brief','mis','grav','earth','about'];
@@ -475,7 +476,7 @@ const STOP = new Set('the a an of in at to and or for with was were is are by on
 const toks = s => (s.toLowerCase().match(/[a-z0-9.]+/g) || []).filter(t => t.length>1 && !STOP.has(t));
 const ALIAS = {moon:'lunar', martian:'mars', microgravity:'microgravity', weightless:'microgravity', extinguish:'extinction', extinguished:'extinction', 'o2':'oxygen'};
 function claimHtml(c){ const lab = c.review_label==='unreviewed' ? '<span class="tag unrev" title="Passed the span and number checks; no independent verifier ran and no person reviewed it">unreviewed</span>' : '<span class="tag ver" title="' + esc(D.review.text.tag_zrm_title) + '">' + esc(D.review.text.tag_zrm) + '</span> ' + (c.review_path==='automatic' ? '<span class="tag" title="' + esc(D.review.text.tag_auto_title) + '">' + esc(D.review.text.tag_auto) + '</span>' : '<span class="tag" title="' + esc(D.review.text.tag_ai_title) + '">' + esc(D.review.text.tag_ai) + '</span>') + (c.override ? ' <span class="tag" title="The code check of the numbers failed; the reviewer approved the claim by hand after reading the source page.">' + esc(D.review.text.tag_override) + '</span>' : '') + (c.corrected ? ' <span class="tag" title="The statement was reworded in review; the quoted span was not replaced">reworded in review</span>' : '');
-  return `<div class="card"><div class="row">${lab} <span class="tag">${esc(c.gravity_label || c.gravity_class)}</span> <span class="tag">${esc(c.evidence_type)}</span>${c.confidence ? ` <span class="tag" title="How sure the extraction step was that the statement matches its quoted span">extraction confidence: ${esc(c.confidence)}</span>` : ''}${c.independent_sources>1 ? `<span class="tag">${c.independent_sources} independent sources</span>`:''}</div>
+  return `<div class="card" data-cid="${esc(c.claim_id)}"><div class="row">${lab} <span class="tag">${esc(c.gravity_label || c.gravity_class)}</span> <span class="tag">${esc(c.evidence_type)}</span>${c.confidence ? ` <span class="tag" title="How sure the extraction step was that the statement matches its quoted span">extraction confidence: ${esc(c.confidence)}</span>` : ''}${c.independent_sources>1 ? `<span class="tag">${c.independent_sources} independent sources</span>`:''}</div>
   <p style="margin:6px 0">${esc(c.statement)}</p>${c.span ? `<blockquote class="small muted" style="margin:6px 0">"${esc(c.span)}"</blockquote>` : '<p class="src">Quotation not shown (the source is not a US Government work).</p>'}
   <div class="src">${esc(c.citation)} | ${link(c.source_url,'NTRS record')} | claim ${esc(c.claim_id)}</div></div>`; }
 const IDX = (() => { const docs = D.claims.map(c => { const t = toks([c.statement, c.variables.join(' '), c.gravity_class, c.gravity_label||'', c.conditions.material||'', c.citation].join(' ').replace(/_/g,' ')).map(w => ALIAS[w]||w); const tf = {}; t.forEach(w => tf[w]=(tf[w]||0)+1); return {c, tf, n:t.length}; });
@@ -499,9 +500,10 @@ function renderAsk(){
   <form class="hsearch" onsubmit="runAsk();return false" role="search"><input type="search" id="askq" placeholder="e.g. which materials burn at 30% oxygen at 10.2 psi" aria-label="Question"><button class="primary" type="submit">Ask</button></form>
   <div class="suggest">${ASK_EXAMPLES.concat(['lunar gravity flammability','oxygen concentration extinction','flame spread rate']).map(x => `<button type="button" onclick="askExample(this.textContent)">${esc(x)}</button>`).join('')}</div>
   <p class="small muted">${esc(D.review.text.ask_note)} <a href="#" onclick="show('limits');return false">Honest limits</a></p>
+  <p class="small muted" id="semStatus" role="status"></p>
   <div id="askOut" aria-live="polite" style="margin-top:12px">${n ? '' : '<div class="state">The claim ledger has no claims yet, so there is nothing to retrieve.</div>'}</div>`;
 }
-/* ---- Ask: condition-aware answers from the unified test table first, then the ledger. Deterministic, no model. ---- */
+/* ---- Ask: condition-aware answers from the unified test table first, then the ledger. Deterministic; the optional meaning-based search below only adds claims. ---- */
 const TVOC = AskParser.vocabFrom(D.tests);
 const OC = {no_ignition:'no ignition', self_extinguished:'self-extinguished', burned_to_completion:'burned to completion', externally_terminated:'externally terminated (censored)', other:'other', unknown:'unknown'};
 let AF = null, ASHOW = false;
@@ -554,7 +556,45 @@ function chipsHtml(f){ if (!f.chips.length) return '';
   return `<div class="row small" style="margin:8px 0" role="group" aria-label="Filters applied">Filters applied: ${f.chips.map(c => `<button type="button" class="tag" title="Remove this filter and answer again" onclick="askDrop('${esc(c.key)}')">${esc(c.label)} &times;</button>`).join(' ')}</div>`; }
 function askDrop(key){ const q = AF.q; AF = AskParser.without(AF, key); AF.q = q; ASHOW = false; askRender(); }
 function scrollAnswer(){ const el = document.getElementById('askOut'); if (!el) return; const top = el.getBoundingClientRect().top + scrollY - 88; if (el.getBoundingClientRect().top > 140) window.scrollTo({top, behavior: document.documentElement.classList.contains('calm') ? 'auto' : 'smooth'}); }
-function runAsk(){ const v = $('#askq').value.trim(), out = $('#askOut'); if (!v) { out.innerHTML = '<div class="state">Type a question first.</div>'; return; } ASHOW = false; AF = AskParser.parseQuery(v, TVOC); AF.q = v; askRender(); scrollAnswer(); }
+/* ---- Meaning-based claim search: BGE-small (int8) runs in this browser only to rank claims by meaning. It generates no text and sends nothing anywhere.
+   Claim vectors were computed offline (data/embeddings). If the model cannot load (for example the page is opened from a file), the word-matching search is used. ---- */
+const SEM = {state: 'idle', note: '', dim: 0, vecs: null, vocab: null, sess: null}, SEM_MIN = 0.60, SEM_MAX = 3; let ASK_N = 0;
+function semStatus(){ const el = $('#semStatus'); if (!el) return;
+  el.textContent = SEM.state==='ready' ? 'Meaning-based search is on: the small BGE-small model (int8) runs on this device, nothing is sent anywhere, and it ranks existing claims only.'
+    : SEM.state==='loading' ? 'Meaning-based search: loading the small BGE-small model (about 35 MB, once)...'
+    : SEM.state==='off' ? 'Meaning-based search is off (' + SEM.note + '); the word-matching search is used.' : 'Meaning-based search starts when this page opens.'; }
+function loadScript(src){ return new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = () => no(new Error('script')); document.head.appendChild(s); }); }
+async function semStart(){
+  if (SEM.state !== 'idle') return;
+  if (!D.semantic || !window.SemanticCore) { SEM.state = 'off'; SEM.note = 'not built into this page'; semStatus(); return; }
+  SEM.state = 'loading'; semStatus();
+  try {
+    if (location.protocol === 'file:') throw new Error('file');
+    await loadScript('model/ort.wasm.min.js'); ort.env.wasm.wasmPaths = 'model/'; ort.env.wasm.numThreads = 1;
+    const [vt, mb] = await Promise.all([fetch('model/vocab.txt').then(x => x.text()), fetch('model/bge-small-en-v1.5-int8.onnx').then(x => x.arrayBuffer())]);
+    SEM.vocab = SemanticCore.parseVocab(vt); SEM.dim = D.semantic.dim; SEM.vecs = SemanticCore.decodeF32(D.semantic.vectors);
+    SEM.sess = await ort.InferenceSession.create(new Uint8Array(mb), {executionProviders: ['wasm']}); SEM.state = 'ready';
+  } catch (e) { SEM.state = 'off'; SEM.note = location.protocol === 'file:' ? 'it needs the page to be served over http(s)' : 'the model could not load'; }
+  semStatus();
+}
+async function semEmbed(text){
+  const ids = SemanticCore.encode(SemanticCore.QUERY_PREFIX + text, SEM.vocab, 128), n = ids.length, T = a => new ort.Tensor('int64', BigInt64Array.from(a, x => BigInt(x)), [1, n]);
+  const o = await SEM.sess.run({input_ids: T(ids), attention_mask: T(ids.map(() => 1)), token_type_ids: T(ids.map(() => 0))});
+  return SemanticCore.normalize(o.last_hidden_state.data.slice(0, SEM.dim));
+}
+async function semRank(text){ const q = await semEmbed(text); return SemanticCore.rank(q, SEM.vecs, SEM.dim).map(r => ({c: D.claims.find(c => c.claim_id === D.semantic.ids[r.i]), s: r.s})).filter(r => r.c); }
+function semBlock(list, title, note){ return `<h3>${title}</h3><p class="small muted">${note}</p>` + list.map(r => `<div class="sem">${claimHtml(r.c)}<p class="small muted semscore">Closeness in meaning: ${r.s.toFixed(2)} (${r.s >= 0.7 ? 'strong' : 'moderate'}). Ranked by the on-device model; the claim and its citation are unchanged.</p></div>`).join(''); }
+async function semAugment(q, n){
+  if (SEM.state !== 'ready') return;
+  let ranked; try { ranked = await semRank(q); } catch (e) { return; }
+  if (n !== ASK_N) return;                       // a newer question was asked meanwhile
+  const out = $('#askOut'), top = ranked.filter(r => r.s >= SEM_MIN).slice(0, SEM_MAX), shown = new Set([...out.querySelectorAll('[data-cid]')].map(e => e.dataset.cid));
+  const refusal = out.querySelector('.refusal');
+  if (refusal) { if (!top.length) return; out.innerHTML = '<div class="card small"><b>No claim shares the words of your question.</b> These are the claims closest to it in meaning; they are shown only because their similarity is at least ' + SEM_MIN.toFixed(2) + '.</div>' + semBlock(top, 'Closest claims by meaning', 'Meaning-based search, on this device. Nothing is generated.'); return; }
+  const extra = top.filter(r => !shown.has(r.c.claim_id)); if (!extra.length) return;
+  out.insertAdjacentHTML('beforeend', semBlock(extra, 'Also related by meaning', 'These claims did not share the question\'s words but are close in meaning (on-device search, similarity of at least ' + SEM_MIN.toFixed(2) + ').'));
+}
+function runAsk(){ const v = $('#askq').value.trim(), out = $('#askOut'); if (!v) { out.innerHTML = '<div class="state">Type a question first.</div>'; return; } ASHOW = false; AF = AskParser.parseQuery(v, TVOC); AF.q = v; askRender(); scrollAnswer(); semAugment(v, ++ASK_N); }
 const ASK_EXAMPLES = ['lunar base at 30% oxygen and 10.2 psi', 'smoke detection in microgravity', 'does CO2 suppress flames', 'Mars gravity flammability'];
 function askExample(q){ $('#askq').value = q; runAsk(); }
 function confLine(rows){ const o = rows.filter(r => r.org!=='psi_table' || r.g==='0.165' || r.g==='0.38').length; return `<p class="small"><b>Evidence and confidence:</b> ${rows.length} row${rows.length===1?'':'s'} read directly from the unified table${o ? ', ' + o + ' of them transcribed from NASA reports outside PSI' : ''}. Each row cites its PSI table row or NTRS PDF page. Nothing is estimated or interpolated.</p>`; }
@@ -677,7 +717,7 @@ function renderAbout(){
   <li><b>Unified test table</b> (${D.build.tests_rows} rows): built from the PSI tables by a reproducible pipeline; original values kept; each row has a source reference and quality flags.</li>
   <li><b>Rows transcribed from NASA NTRS reports</b>: numeric values with citation; NTRS rights determinations are not open licenses, so reports are cited and paraphrased, not redistributed. Labelled outside PSI.</li>
   <li><b>Evidence ledger</b>: ${D.claims.length} claims from ${new Set(D.claims.map(c=>c.doc)).size} of ${srcs.length} reports. Status counts: ${Object.entries(st).map(([k,v]) => esc(k)+' '+v).join(', ') || 'none'}. Verbatim quotations appear only for US Government works.</li></ul>
-  <h3>SI use and limits</h3><p>An AI coding assistant helped write the pipeline, checks and this page. Claim extraction used a language model (Google Gemini); a second model (a different model family on Groq) checked each claim, and code checks the quoted text and its numbers against the report. ${esc(D.review.text.all)} ${esc(D.review.text.auto)} ${esc(D.review.text.ai)} Rankings, summaries and the mission brief are computed by fixed rules from the data; the page itself runs no model and makes no network calls. BASS-II outcome classes proposed by the assistant are not used until a person approves them.</p>`; }
+  <h3>SI use and limits</h3><p>An AI coding assistant helped write the pipeline, checks and this page. Claim extraction used a language model (Google Gemini); a second model (a different model family on Groq) checked each claim, and code checks the quoted text and its numbers against the report. ${esc(D.review.text.all)} ${esc(D.review.text.auto)} ${esc(D.review.text.ai)} Rankings, summaries and the mission brief are computed by fixed rules from the data; the page generates no text. It runs one small embedding model (BGE-small, int8) in your browser only to rank existing claims by meaning, loads it from its own site files, and sends nothing anywhere; word matching is the fallback. BASS-II outcome classes proposed by the assistant are not used until a person approves them.</p>`; }
 
 /* ---------- Judge mode: "Play the story" ---------- */
 let story = {timer:null, i:0, paused:false};

@@ -1,0 +1,22 @@
+{
+ "note": "Hand-written paraphrases of existing public claims, chosen to avoid the claim's own key words, plus off-topic questions that must be refused. 'expect' is the claim the question paraphrases.",
+ "paraphrases": [
+  {"q": "is rubber-like silicone less likely to catch fire without gravity", "expect": "C-8c4946ce67"},
+  {"q": "what air pressure is the new astronaut suit tested at", "expect": "C-da02ecf3c2"},
+  {"q": "how large were the real-size blazes set in uncrewed cabins", "expect": "C-93ae8672b7"},
+  {"q": "how long did it take for the smoke detector to sound in the Saffire fire", "expect": "C-3a58e8c51e"},
+  {"q": "on Mars how much less oxygen is needed to sustain flames compared with Earth", "expect": "C-62ef41d72e"},
+  {"q": "does richer breathing air make materials more dangerous", "expect": "C-cd63a44487"},
+  {"q": "does a stronger breeze make fuel harder to light", "expect": "C-aff4bc0482"},
+  {"q": "what does the upper limit oxygen index mean statistically", "expect": "C-c06496fedf"},
+  {"q": "does it take longer to light a sample when air is nearly too thin to burn", "expect": "C-1baa9dd6b1"},
+  {"q": "do broad strips of fuel catch fire in thinner atmospheres than narrow ones", "expect": "C-cc57d4c263"},
+  {"q": "was the oxygen consumed turning almost entirely into carbon dioxide", "expect": "C-bbea4a08d7"},
+  {"q": "below what oxygen share did fire stop travelling across double-faced fuel strips", "expect": "C-2e4041411e"},
+  {"q": "why does stronger gravity make flames die faster", "expect": "C-6f8d6b4ffd"},
+  {"q": "what were the dimensions of the burning strips", "expect": "C-d26da19eb0"},
+  {"q": "how does the brightness and size of a flame change when weight goes up", "expect": "C-a9852ebe04"},
+  {"q": "what is the coolest reading the thermal sensor can pick up", "expect": "C-e52712eefa"}
+ ],
+ "off_topic": ["who won the cricket match", "best pizza recipe in Lahore", "what is the capital of France", "how do I train a puppy", "tesla share price today", "will it rain tomorrow in Karachi"]
+}

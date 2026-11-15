@@ -1,3 +1,5 @@
 -r requirements.txt
 pypdf
 pymupdf  # development-time extraction only (scripts/extract_bass2_observations.py); AGPL-3.0 or commercial, not a runtime dependency
+onnxruntime  # development-time only: precomputes the claim vectors (scripts/build_embeddings.py)
+numpy        # same
