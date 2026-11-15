@@ -66,20 +66,16 @@ The evidence ledger is already built and committed (`data/ledger/claims.jsonl`),
 
 ## Tech stack
 
-| Layer | Technology | Used for |
-|---|---|---|
-| Language | Python 3 (developed on 3.12), standard library first | pipeline, ledger, site build, tests |
-| Data | CSV, JSONL, JSON, Apache Parquet via `pyarrow` | unified test table, claims, review records |
-| PDF handling | `pypdf` (text layer), `pymupdf` (development only) | page text for quote checks, table transcription |
-| Extraction models | Google Gemini (extractor), gpt-oss-120b on Groq (cross-check) | proposing and cross-checking claims, offline only |
-| Verification | Deterministic Python code | exact quote span, numbers, conditions, gravity words |
-| Front end | One HTML file with vanilla JavaScript, CSS and canvas; no framework or library | map, oxygen dial, Ask, ranking views, 3D plot |
-| Ask engine | `scripts/ask_parser.js` (deterministic parser, term-weighted claim search) | condition-aware retrieval in the browser, no model |
-| Fonts | Sora, IBM Plex Sans, IBM Plex Mono (SIL OFL), embedded | typography |
-| Tests | `unittest` (96 tests), Node.js for the Ask parser | quality gates |
-| Browser checks | headless Chrome | layout, console errors, screenshots |
-| Hosting | GitHub Pages (`gh-pages` branch) | serving the static page |
-| Docs | Markdown with Mermaid diagrams | this README and `docs/` |
+| Layer | Technology |
+|---|---|
+| Pipeline and checks | Python 3 (standard library), `pyarrow` for Parquet |
+| PDF text | `pypdf` |
+| Claim extraction and cross-check | Google Gemini, then a second model family (gpt-oss-120b on Groq) |
+| Claim verification | Deterministic Python code gates |
+| Front end | Vanilla JavaScript, HTML, CSS and canvas in one static page |
+| Ask engine | Deterministic query parser in JavaScript, no model at query time |
+| Tests | `unittest` (96 tests), Node.js for the parser tests |
+| Hosting | GitHub Pages |
 
 ---
 
