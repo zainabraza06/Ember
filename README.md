@@ -1,8 +1,8 @@
 # Ember: a fire-safety evidence explorer for NASA microgravity combustion research
 
 [![Live site](https://img.shields.io/badge/live%20site-zainabraza06.github.io%2FEmber-7CC2FF)](https://zainabraza06.github.io/Ember/)
-![Static site](https://img.shields.io/badge/runtime-static%20page%2C%20no%20server%2C%20no%20model-FF8A5C)
-![Tests](https://img.shields.io/badge/tests-96%20unit%20tests-8CE6B2)
+![Static site](https://img.shields.io/badge/runtime-static%20page%2C%20no%20server%2C%20no%20text%20generation-FF8A5C)
+![Tests](https://img.shields.io/badge/tests-101%20unit%20tests-8CE6B2)
 ![Licence](https://img.shields.io/badge/code-Apache--2.0-lightgrey)
 
 **Live site:** https://zainabraza06.github.io/Ember/ (GitHub Pages, branch `gh-pages`)
@@ -11,7 +11,7 @@
 
 ![Ember home page](docs/screenshots/01-home-hero.jpg)
 
-Ember turns NASA's scattered microgravity fire research into one place where you can **see where NASA has tested fire, where it has not, and what the cited evidence says**. It is a single static web page: no server, no framework at runtime, no network calls, and **no model running in the browser**. Everything it shows is computed from public NASA data by deterministic code, and every statement is tied to a source row or a quoted page of a NASA report.
+Ember turns NASA's scattered microgravity fire research into one place where you can **see where NASA has tested fire, where it has not, and what the cited evidence says**. It is a single static web page: no server and no framework at runtime. **It generates no text.** Everything it shows is computed from public NASA data by deterministic code or taken from a cited claim, and every statement is tied to a source row or a quoted page of a NASA report. The only model in the page is a small embedding model (BGE-small, int8) that runs on the visitor's device to rank existing claims by meaning; it is optional and word matching is the fallback.
 
 It answers three questions for a mission atmosphere such as the planned lunar base (30% oxygen at 10.2 psi):
 
@@ -57,7 +57,7 @@ python -m pipeline                         # harmonized test table (885 rows) an
 python -m pipeline.profiles && python -m pipeline.ranking && python -m pipeline.interpret
 python scripts/build_site.py               # writes site/index.html and site/data/
 python -m http.server -d site 8000         # optional: serve at http://localhost:8000
-python -m unittest discover -s tests -q    # 96 tests
+python -m unittest discover -s tests -q    # 101 tests
 ```
 
 The evidence ledger is already built and committed (`data/ledger/claims.jsonl`), so the commands above need **no API keys**. Re-extracting claims from the NASA reports does need keys; see [section 10](#10-setup-dependencies-and-how-to-run-everything).
@@ -73,8 +73,8 @@ The evidence ledger is already built and committed (`data/ledger/claims.jsonl`),
 | Claim extraction and cross-check | Google Gemini, then a second model family (gpt-oss-120b on Groq) |
 | Claim verification | Deterministic Python code gates |
 | Front end | Vanilla JavaScript, HTML, CSS and canvas in one static page |
-| Ask engine | Deterministic query parser in JavaScript, no model at query time |
-| Tests | `unittest` (96 tests), Node.js for the parser tests |
+| Ask engine | Deterministic query parser in JavaScript, plus optional on-device meaning-based search (BGE-small int8 through onnxruntime-web, precomputed claim vectors) |
+| Tests | `unittest` (101 tests), Node.js for the parser tests |
 | Hosting | GitHub Pages |
 
 ---
@@ -88,7 +88,7 @@ The full line-by-line audit is [`docs/OFFICIAL_ALIGNMENT.md`](docs/OFFICIAL_ALIG
 | Official requirement | Verdict | Where in Ember |
 |---|---|---|
 | **Web-based dashboard** | met | A static page on GitHub Pages; works offline once loaded. |
-| **SI-powered** | partly met | The page runs no model, by design (reproducible, citable, no keys in the browser). SI built the pipeline and extracted and cross-checked the claims it retrieves; the SI use is disclosed in [`docs/SI_USAGE.md`](docs/SI_USAGE.md). |
+| **SI-powered** | partly met | The page generates no text, by design (reproducible, citable, no keys in the browser). A small on-device embedding model only ranks existing claims by meaning. SI built the pipeline and extracted and cross-checked the claims it retrieves; the SI use is disclosed in [`docs/SI_USAGE.md`](docs/SI_USAGE.md). |
 | **Summarizes** investigations | partly met | Investigations view: objective, approach, conditions varied and measurements, verbatim from each PSI record, plus ranges computed from the table. Interpretation view: three computed analyses. |
 | **Ranks** investigations | met (rule-based) | Ranking view: a documented deterministic score for all 24 investigations in four profiles, with the weights shown ([section 7](#7-technical-core-part-3-ranking-interpretation-and-the-data-gap-ranking)). |
 | **Interprets** findings | partly met | Interpretation view: FLEX oxygen and diluent versus extinction, CFI-G oxygen versus how tests ended, Saffire-II 0 g versus 1 g, each with counts, caveats and an evidence-strength label. |
@@ -160,6 +160,8 @@ Retrieval over the evidence ledger and the test table only. Type a question or a
 |---|---|---|
 | ![Cited answer](docs/screenshots/14-ask-cited-answer.jpg) | ![Refusal](docs/screenshots/15-ask-refusal.jpg) | ![Conditions](docs/screenshots/16-ask-conditions-table.jpg) |
 
+A paraphrased question that shares no words with a claim is answered by the on-device meaning-based search ([section 8.1](#81-meaning-based-search-on-device-embeddings)).
+
 ### 3.3 The other views
 
 | Investigations | Compare |
@@ -216,7 +218,7 @@ flowchart LR
   CL --> B
   RV[data/review/<br/>reviewer decisions] --> L
   B --> S[site/index.html<br/>one static page]
-  S --> U((Browser: map, dial, Ask,<br/>no model, no network))
+  S --> U((Browser: map, dial, Ask,<br/>no text generation, on-device<br/>embeddings only))
 ```
 
 Two properties hold the design together:
@@ -369,7 +371,7 @@ Limits: it looks at oxygen and pressure only (not gravity, fuel, flow or sample 
 
 ## 8. Technical core, part 4: the Ask engine
 
-`scripts/ask_parser.js` is a deterministic parser and filter, inlined into the page and unit-tested through Node. **No model, no network.**
+`scripts/ask_parser.js` is a deterministic parser and filter, inlined into the page and unit-tested through Node. The parser, the filters and the test-table answers use no model. Meaning-based claim search (section 8.1) is an optional layer on top.
 
 - **Environment words.** Oxygen (`30% oxygen`, `O2`), pressure with units (`10.2 psi`, `kPa`, `atm`, `mmHg`, `torr`, `bar`, all converted to kPa), gravity (microgravity, lunar, Mars, 1 g) and diluent words (CO2, helium and others).
 - **Operators.** "above", "over", "at least", "no more than", "up to", "30% or more", `>=` and similar map to a minimum or maximum, inclusive or exclusive; an unqualified value matches with a tolerance (oxygen +-0.5 points, pressure +-3%).
@@ -380,13 +382,25 @@ Limits: it looks at oxygen and pressure only (not gravity, fuel, flow or sample 
 
 Tests: `tests/test_ask_parser.py` (20 tests, run through Node) covers units, operators, tolerances, refusals and diluent handling.
 
+### 8.1 Meaning-based search (on-device embeddings)
+
+Word matching misses paraphrases ("how long did the smoke detector take to sound" shares no words with "a typical smoke-alarm threshold was reached only at 981 seconds"). So the Ask page can also rank the 255 public claims by **meaning**:
+
+![Meaning-based result](docs/screenshots/27-ask-meaning-search.jpg)
+
+- **Model:** BAAI `bge-small-en-v1.5` (MIT), int8 ONNX, 34 MB, run in the browser with `onnxruntime-web` (WASM, one thread). Claim vectors (255 x 384, 382 KB) are computed offline by `scripts/build_embeddings.py` and embedded in the page; only the user's question is embedded at query time.
+- **Safe by construction:** it only ranks existing claims. Nothing is generated, every result keeps its review label and page citation, a claim is shown only at a similarity of at least 0.60 (off-topic questions score at most 0.52, so they are still refused), and held-back or rejected claims have no vector.
+- **Fallback:** if the model cannot load (the page opened from a file, no WASM SIMD, a failed download), the page says so and the word-matching search is used unchanged.
+- **Cost, measured:** the model adds about 215 MB of browser memory, loads in about 2 s from a local server and embeds a question in about 0.1 to 0.2 s. Details in [`docs/SEMANTIC_SEARCH.md`](docs/SEMANTIC_SEARCH.md).
+- **Evaluation:** on 16 hand-written paraphrases that avoid the claims' words, the expected claim is in the top 3 for 9 of 16 questions (word matching: 0 of 16 by construction); 0 of 6 off-topic questions show a claim. The set is small and hand-made, so read it as a direction, not a benchmark.
+
 ---
 
 ## 9. Technical core, part 5: the static site build
 
 - `scripts/site_template.html` holds the HTML, CSS and all page JavaScript. `scripts/build_site.py` reads the processed data, the ledger and the official text, then writes **`site/index.html`** (about 1.2 MB) with the data blob, the Ask parser, the 3D plot code and the base64-embedded fonts inlined. It also writes `site/data/` (`tests.csv`, `ledger_claims.json`, the data dictionary).
 - **No third-party JavaScript, CSS framework, icon set or image.** Fonts: Sora, IBM Plex Sans and IBM Plex Mono (SIL OFL), embedded.
-- **No network calls at runtime.** The page works offline once loaded (a test checks that the page has no keys and no network references).
+- **No external requests at runtime.** The page loads only its own files. With meaning-based search it also loads the model from its own `model/` folder, once, and then works offline (a test checks that the page has no keys and that its only `fetch` calls are for `model/` files).
 - **Single source of truth for numbers and review wording.** Counts on the page come from the build data; the review sentences come from `ledger/review_wording.py`.
 - **Accessibility and motion.** Dark and light themes, keyboard navigation, visible focus, text contrast of at least 4.5:1, controls of at least 44 px, charts with shape as well as colour, tables behind "See the numbers", and `prefers-reduced-motion` plus a motion toggle that switches off count-ups, card flips and reveals.
 - **Print.** The Mission brief has a print stylesheet that fits one A4 page.
@@ -404,6 +418,7 @@ Tests: `tests/test_ask_parser.py` (20 tests, run through Node) covers units, ope
 | Node.js | a current release (developed on 24) | the Ask-parser unit tests only |
 | Git | any recent | clone, deploy |
 | `pyarrow` | 14 or newer | parquet output (`requirements.txt`) |
+| `onnxruntime`, `numpy` | latest | development only: precomputing the claim vectors (`scripts/build_embeddings.py`) |
 | `pypdf`, `pymupdf` | latest | development only: PDF text and table extraction (`requirements-dev.txt`; PyMuPDF is AGPL-3.0 or commercial and is **not** a runtime dependency) |
 | Google Chrome | any recent | optional: browser checks and screenshots |
 | API keys | Gemini and Groq | **only** to re-extract claims; never needed to build or run the site |
@@ -424,6 +439,7 @@ python -m pipeline.ranking                  # investigation ranking
 python -m pipeline.interpret                # effect summaries
 python -X utf8 -m ledger all --offline --skip-pilot   # rebuild the ledger from the cache (no API calls)
 python -X utf8 -m ledger report             # regenerate docs/LEDGER_REPORT.md
+python scripts/build_embeddings.py         # only after the ledger changes: claim vectors for the meaning-based search (needs onnxruntime, numpy)
 python scripts/build_site.py                # site/index.html and site/data/
 ```
 
@@ -463,7 +479,8 @@ git push -f origin gh-pages          # GitHub Pages serves it a minute or two la
 | `DATA CHECKS FAILED` | A data check caught a bad row, a unit slip or a changed count. Read the message; if the change is intended, update `pipeline/expected_counts.json` deliberately with `python -m pipeline --write-expected`. |
 | A ledger run stops at a "daily limit" | Free-tier quota. Rerun later; it resumes from the cache. |
 | `UnicodeEncodeError` on Windows | Use `python -X utf8`. |
-| Ask-parser tests fail or are skipped | Node.js is not installed. |
+| Ask-parser or tokenizer-parity tests fail or are skipped | Node.js is not installed. |
+| "Meaning-based search is off" on the Ask page | The page was opened from a file or an old browser without WASM SIMD. Serve `site/` over http(s) (`python -m http.server -d site 8000`). |
 | The site looks stale after a deploy | GitHub Pages caches for a minute or two; hard-refresh. |
 
 ---
@@ -471,7 +488,7 @@ git push -f origin gh-pages          # GitHub Pages serves it a minute or two la
 ## 11. Testing and quality gates
 
 ```bash
-python -m unittest discover -s tests -q      # 96 tests
+python -m unittest discover -s tests -q      # 101 tests
 python -m pipeline.spot_check                # 20 random rows re-read from the sources
 ```
 
@@ -482,6 +499,7 @@ python -m pipeline.spot_check                # 20 random rows re-read from the s
 | `tests/test_ask_parser.py` | 20 | units, operators, tolerances, refusals, diluents (through Node) |
 | `tests/test_site.py` | 11 | kPa computed from the official psi, every row inside the envelope meets it, all 24 investigations with sources, the partial-gravity gap is labelled, ranking weights sum to one and the ranking is deterministic, the evidence-strength rule, interpretation counts match the table, the page script parses, no keys and no network calls, unreviewed claims are labelled |
 | `tests/test_review_wording.py` | 7 | one number everywhere, banned phrases, nothing called checked about rejected or held-back claims |
+| `tests/test_semantic.py` | 5 | Python and JavaScript tokenizers give identical token ids, one unit-length vector per public claim (none for held-back or rejected claims), model and vocabulary hashes match, cosine ranking, the page's only `fetch` calls are for `model/` files |
 | `tests/test_home_blocks.py` | 3 | oxygen-dial rows (numeric limit and stated pressure only) and the spacecraft-fire claims (public only) |
 
 Browser checks used for each release: no JavaScript errors and no sideways scroll at 390 px and 1366 px, the 25 s tour still takes 25 s, and the Mission brief prints on one A4 page.
@@ -503,9 +521,12 @@ Browser checks used for each release: no JavaScript errors and no sideways scrol
 │   ├── transcribed/            hand-transcribed NTRS tables with citations
 │   ├── processed/              tests.csv, tests.parquet, ranking, interpretations, profiles, build report
 │   ├── ledger/                 claims, rejected claims, sources, cache, usage and run logs
+│   ├── embeddings/             precomputed claim vectors for the meaning-based search
+│   ├── eval/                   paraphrase and off-topic questions and results for that search
 │   ├── review/                 reviewer decisions (claims, gravity labels, outcomes)
 │   └── llm/                    AI-proposed outcome classes (not used until approved)
-├── tests/                      96 unit tests
+├── tests/                      101 unit tests
+├── site/model/                 BGE-small int8 model, vocabulary and the onnxruntime-web files (about 45 MB)
 ├── docs/                       challenge text, rules, requirements, alignment, data notes, ledger report,
 │                               ranking rules, SI log, third-party register, screenshots/
 ├── PLAN.md                     original scope, modules, acceptance criteria
@@ -517,7 +538,7 @@ Browser checks used for each release: no JavaScript errors and no sideways scrol
 
 ## 13. SI use, licences and provenance
 
-**SI use and limits.** An AI coding assistant (Claude, via Claude Code) helped write the pipeline, the checks, the tests and this page. Claim extraction used a language model (Google Gemini, free tier); a second model from a different family (OpenAI's open-weight gpt-oss-120b, served by Groq) cross-checked each claim; code checks the quoted text, numbers and conditions against the report. AI-proposed BASS-II outcome classes are not used until a person approves them. A person, Zainab Raza (ZRM), opened and checked each public claim against its source page. **The page itself runs no model and makes no network calls.** Every tool, what it did and what a person reviewed is logged in [`docs/SI_USAGE.md`](docs/SI_USAGE.md).
+**SI use and limits.** An AI coding assistant (Claude, via Claude Code) helped write the pipeline, the checks, the tests and this page. Claim extraction used a language model (Google Gemini, free tier); a second model from a different family (OpenAI's open-weight gpt-oss-120b, served by Groq) cross-checked each claim; code checks the quoted text, numbers and conditions against the report. AI-proposed BASS-II outcome classes are not used until a person approves them. A person, Zainab Raza (ZRM), opened and checked each public claim against its source page. **The page generates no text.** It runs one small embedding model (BGE-small, int8) on the visitor's device only to rank existing claims by meaning, loads it from its own site files and sends nothing anywhere; word matching is the fallback. Every tool, what it did and what a person reviewed is logged in [`docs/SI_USAGE.md`](docs/SI_USAGE.md).
 
 **Licences.** Code: Apache License 2.0. PSI records: CC0 as stated per record. NTRS reports keep their own NASA rights determinations and are cited and linked, not redistributed. Fonts: SIL Open Font License 1.1. The complete register, with licence and source URL for every dataset, library and model, is [`docs/THIRD_PARTY.md`](docs/THIRD_PARTY.md). No NASA logos or imagery are used anywhere.
 
@@ -533,6 +554,7 @@ Browser checks used for each release: no JavaScript errors and no sideways scrol
 - The oxygen dial uses a 1 g test mostly at 14.7 psia: it is a warning, not a design value.
 - Transcribed report values were spot-checked (10 values), not independently verified in full. 126 of 769 tests lack oxygen or pressure and cannot be placed on the map.
 - The ranking weights are judgement and the ISS-like cabin envelope is a team assumption; both are shown on the page.
+- The meaning-based search is small and imperfect: 9 of 16 paraphrases found in the top 3, it needs about 45 MB of downloads and about 215 MB of browser memory, and it may rank a related but different claim first.
 - The ledger covers 11 priority NTRS reports (extraction used free-tier APIs with daily limits), not all of NTRS.
 - **Not met or only partly met against the challenge:** next-generation controls and equipment (objective 3), the history-of-fires background, structured fuels and sensors for the 18 investigations without per-test rows, and no predictive model (the data is exported for one).
 - No user testing was done.
@@ -553,4 +575,5 @@ Browser checks used for each release: no JavaScript errors and no sideways scrol
 | [`docs/LEDGER_SCHEMA.md`](docs/LEDGER_SCHEMA.md), [`docs/LEDGER_REPORT.md`](docs/LEDGER_REPORT.md), [`docs/CLAIM_AUDIT.md`](docs/CLAIM_AUDIT.md) | Ledger design, generated report, random claim audit |
 | [`docs/REVIEW_QUEUE.md`](docs/REVIEW_QUEUE.md), [`docs/SPOT_CHECK.md`](docs/SPOT_CHECK.md), [`docs/HUMAN_SPOT_CHECK.md`](docs/HUMAN_SPOT_CHECK.md) | Review queue and spot checks |
 | [`docs/RANKING.md`](docs/RANKING.md) | Investigation score, evidence strength, data-gap ranking |
+| [`docs/SEMANTIC_SEARCH.md`](docs/SEMANTIC_SEARCH.md) | On-device meaning-based search: design, cost, evaluation |
 | [`docs/SI_USAGE.md`](docs/SI_USAGE.md), [`docs/THIRD_PARTY.md`](docs/THIRD_PARTY.md) | AI tool log, third-party register |
