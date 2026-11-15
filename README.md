@@ -26,6 +26,7 @@ It answers three questions for a mission atmosphere such as the planned lunar ba
 ## Contents
 
 1. [Quick start](#1-quick-start)
+   - [Tech stack](#tech-stack)
 2. [The challenge and how Ember meets it](#2-the-challenge-and-how-ember-meets-it)
 3. [Guided tour with screenshots](#3-guided-tour-with-screenshots)
 4. [Architecture at a glance](#4-architecture-at-a-glance)
@@ -60,6 +61,25 @@ python -m unittest discover -s tests -q    # 96 tests
 ```
 
 The evidence ledger is already built and committed (`data/ledger/claims.jsonl`), so the commands above need **no API keys**. Re-extracting claims from the NASA reports does need keys; see [section 10](#10-setup-dependencies-and-how-to-run-everything).
+
+---
+
+## Tech stack
+
+| Layer | Technology | Used for |
+|---|---|---|
+| Language | Python 3 (developed on 3.12), standard library first | pipeline, ledger, site build, tests |
+| Data | CSV, JSONL, JSON, Apache Parquet via `pyarrow` | unified test table, claims, review records |
+| PDF handling | `pypdf` (text layer), `pymupdf` (development only) | page text for quote checks, table transcription |
+| Extraction models | Google Gemini (extractor), gpt-oss-120b on Groq (cross-check) | proposing and cross-checking claims, offline only |
+| Verification | Deterministic Python code | exact quote span, numbers, conditions, gravity words |
+| Front end | One HTML file with vanilla JavaScript, CSS and canvas; no framework or library | map, oxygen dial, Ask, ranking views, 3D plot |
+| Ask engine | `scripts/ask_parser.js` (deterministic parser, term-weighted claim search) | condition-aware retrieval in the browser, no model |
+| Fonts | Sora, IBM Plex Sans, IBM Plex Mono (SIL OFL), embedded | typography |
+| Tests | `unittest` (96 tests), Node.js for the Ask parser | quality gates |
+| Browser checks | headless Chrome | layout, console errors, screenshots |
+| Hosting | GitHub Pages (`gh-pages` branch) | serving the static page |
+| Docs | Markdown with Mermaid diagrams | this README and `docs/` |
 
 ---
 
