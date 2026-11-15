@@ -111,7 +111,7 @@ Counts here are computed from the ledger files by `ledger/review_wording.py`, th
 
 Claim cards on the site show the path each claim took ("Automatic checks passed" or "AI-assisted page check") plus "Opened and checked by ZRM".
 
-Wording guard: `tests/test_review_wording.py` fails the build if any page or document gives a different number of public claims, uses an overstated phrase ("verified by a person", "peer-reviewed", "expert review"), or calls a rejected or held-back claim checked or verified.
+Wording guard: `tests/test_review_wording.py` fails the build if any page or document states a different number of public claims, uses an overstated review phrase (listed in the test), or describes a rejected or held-back claim with a checked-or-approved word.
 
 The review records are `data/review/claim_review.csv` (every decision, the original wording and the AI suggestion), `data/review/gravity_relabel.csv` and `data/review/outcome_review.csv`.
 
